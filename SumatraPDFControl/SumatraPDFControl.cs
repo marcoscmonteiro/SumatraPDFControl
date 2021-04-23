@@ -34,6 +34,9 @@ namespace SumatraPDFControl
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern void CopyMemory(IntPtr destination, IntPtr source, uint length);
 
+		[DllImport("user32.dll")]
+		static extern bool DestroyWindow(IntPtr hWnd);
+
 		private const int WM_COPYDATA = 74;
         private Process SumatraProcess;
         private string sCurrentFile;
@@ -100,23 +103,20 @@ namespace SumatraPDFControl
 			}
 		}
 
-		private IntPtr ParseSumatraMessage(string sMsg)
+		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
+
+		public class SumatraMessageEventArgs : EventArgs
 		{
-			if (MessageBox.Show("Mensagem: " + sMsg + " - Sim=1, Não=0", "Responda", MessageBoxButtons.YesNo) == DialogResult.Yes)
-			{
-				return (IntPtr)1;
-			}
-			return (IntPtr)0;
+			public int CallBackReturn { get; set; }
+			public string Msg { get; set; }
 		}
 
-		private object[] ParseString(string Format, string FStr)
+		private IntPtr ParseSumatraMessage(string sMsg)
 		{
-			List<object> lObject = new List<object>();
-			int startIndex = 0;
-			while (Format.IndexOf("%", startIndex) != 0)
-			{
-			}
-			return lObject.ToArray();
+			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = sMsg };
+			SumatraMessage(this, e);
+
+			return (IntPtr)e.CallBackReturn;
 		}
 
 		private void SendDDECommand(string strMessage)
@@ -136,17 +136,32 @@ namespace SumatraPDFControl
 			Marshal.FreeHGlobal(pDataStruct);
 		}
 
-		public void LoadFile(string sFile)
-		{
-			if ((pSumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
+		private void RestartSumatra(string sFile)
+        {
+			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
 			{
-				SumatraProcess.Close();
+				// Ver qual o código do comando no arquivo Commands.h: CmdClose
+				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)204, (IntPtr)0);
+				SumatraProcess.Kill();
 				pSumatraWindowHandle = (IntPtr)0;
 			}
-			ProcessStartInfo PSInfo = new ProcessStartInfo();
-			PSInfo.FileName = SumatraPDFPath + "SumatraPDF.exe";
-			PSInfo.Arguments = "-plugin " + base.Handle + " \"" + sFile + "\"";
-			SumatraProcess = Process.Start(PSInfo);
+            var PSInfo = new ProcessStartInfo
+            {
+                FileName = SumatraPDFPath + "SumatraPDF.exe",
+                Arguments = "-plugin " + base.Handle + " \"" + sFile + "\""
+            };
+            SumatraProcess = Process.Start(PSInfo);			
+		}
+
+		public void LoadFile(string sFile)
+		{
+			if (SumatraWindowHandle != (IntPtr)0)
+			{
+				// Ver qual o código do comando no arquivo Commands.h: CmdClose
+				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)204, (IntPtr)0);
+				SendDDECommand("[Open(\"" + sFile + "\")]");				
+			} else RestartSumatra(sFile);
+			SumatraMessage(this, new SumatraMessageEventArgs { CallBackReturn = 0, Msg = "[FileOpen(\"" + sFile + "\")]" });
 			sCurrentFile = sFile;
 		}
 
@@ -162,7 +177,17 @@ namespace SumatraPDFControl
 		{
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				SendMessage(SumatraWindowHandle, 273u, (IntPtr)440, (IntPtr)0);
+				// Ver qual o código do comando no arquivo Commands.h: CmdViewShowHideToolbar
+				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)225, (IntPtr)0);
+			}
+		}
+
+		public void CopySelection()
+		{
+			if (SumatraWindowHandle != (IntPtr)0)
+			{
+				// Ver qual o código do comando no arquivo Commands.h: CmdCopySelection
+				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)228, (IntPtr)0);
 			}
 		}
 

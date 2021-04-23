@@ -30,5 +30,20 @@ namespace SumatraPDFControlTest
         {
             sumatraPDFControl1.GotoPage(int.Parse(toolStripTextBox1.Text));
         }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.CopySelection();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.ToogleToolBar();
+        }
+
+        private void sumatraPDFControl1_SumatraMessage(object sender, SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs e)
+        {
+            textBox1.Text = e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine + textBox1.Text;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace SumatraPDFControl
+﻿using System;
+
+namespace SumatraPDFControl
 {
     partial class SumatraPDFControl
     {
