@@ -99,7 +99,7 @@ namespace SumatraPDFControl
 				byte[] strb = new byte[checked(x.cbData)];
 				Marshal.Copy(x.lpData, strb, 0, x.cbData);
 				string sMsg = Encoding.Default.GetString(strb);
-				m.Result = ParseSumatraMessage(sMsg);
+				m.Result = ParseSumatraMessage(sMsg, x.dwData);
 			}
 		}
 
@@ -111,9 +111,16 @@ namespace SumatraPDFControl
 			public string Msg { get; set; }
 		}
 
-		private IntPtr ParseSumatraMessage(string sMsg)
+		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
-			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = sMsg };
+			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg=sMsg.Substring(0, sMsg.Length - 1) };
+
+			// dwData = (IntPtr)0x4C5255 é a mensagem esperada pelo navegador de internet quando o SumatraPDF está operando em modo de plugin
+			// Sendo assim, no caso de recebimento deste tipo de mensagem, ela é formatada para ficar dentro do padrão das mensagens do tipo 0x1			
+			if (dwData == (IntPtr)0x4C5255) e.Msg = string.Format("[OpenURL(\"{0}\")]", e.Msg);
+			else
+				if (dwData != (IntPtr)0x1) e.Msg = string.Format("[UnknownMessage(\"{0}\")]", e.Msg);
+
 			SumatraMessage(this, e);
 
 			return (IntPtr)e.CallBackReturn;
