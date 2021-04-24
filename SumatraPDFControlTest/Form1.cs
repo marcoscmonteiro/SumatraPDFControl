@@ -43,6 +43,9 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_SumatraMessage(object sender, SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs e)
         {
+            // Ao pressionar 'q' não permite o fechamento da visualização
+            if (e.Msg == "[KeyPressed(113)]") e.CallBackReturn = 1;
+
             textBox1.Text = e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine + textBox1.Text;
         }
     }
