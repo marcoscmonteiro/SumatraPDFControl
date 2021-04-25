@@ -48,5 +48,10 @@ namespace SumatraPDFControlTest
 
             textBox1.Text = e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine + textBox1.Text;
         }
+
+        private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)
+        {
+            toolStripLabel2.Text = e.Page.ToString();
+        }
     }
 }

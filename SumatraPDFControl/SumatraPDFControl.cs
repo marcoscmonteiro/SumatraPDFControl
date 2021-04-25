@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 
 namespace SumatraPDFControl
     {    
@@ -104,24 +105,43 @@ namespace SumatraPDFControl
 		}
 
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
+		public event EventHandler<PageChangedEventArgs> PageChangedMessage;
+
+		public class PageChangedEventArgs : EventArgs
+        {
+			public int Page { get; set; }
+        }
 
 		public class SumatraMessageEventArgs : EventArgs
 		{
 			public int CallBackReturn { get; set; }
 			public string Msg { get; set; }
+			public IntPtr Data { get; set; }
 		}
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
-			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg=sMsg.Substring(0, sMsg.Length - 1) };
+			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg=sMsg.Substring(0, sMsg.Length - 1), Data = dwData};
 
 			// dwData = (IntPtr)0x4C5255 é a mensagem esperada pelo navegador de internet quando o SumatraPDF está operando em modo de plugin
 			// Sendo assim, no caso de recebimento deste tipo de mensagem, ela é formatada para ficar dentro do padrão das mensagens do tipo 0x1			
-			if (dwData == (IntPtr)0x4C5255) e.Msg = string.Format("[OpenURL(\"{0}\")]", e.Msg);
+			if (dwData == (IntPtr)0x4C5255) e.Msg = string.Format("[LinkClicked(\"{0}\")]", e.Msg);
 			else
 				if (dwData != (IntPtr)0x1) e.Msg = string.Format("[UnknownMessage(\"{0}\")]", e.Msg);
 
-			SumatraMessage(this, e);
+			Match m = Regex.Match(e.Msg, @"\[(?<message>\w+)\((?<args>\w+)\)\]");
+			if (m.Success)
+			{
+				switch (m.Result("${message}"))
+                {
+					case "PageChanged":
+						PageChangedMessage(this, new PageChangedEventArgs { Page = int.Parse(m.Result("${args}")) });
+						break;
+					default:
+						SumatraMessage(this, e);
+						break;
+				}
+			}
 
 			return (IntPtr)e.CallBackReturn;
 		}
