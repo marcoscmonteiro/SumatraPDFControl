@@ -35,11 +35,11 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.sumatraPDFControl1 = new SumatraPDFControl.SumatraPDFControl();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,6 +109,17 @@
             this.toolStripButton4.ToolTipText = "Toogle Toolbar";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(33, 22);
+            this.toolStripLabel1.Text = "Pág.:";
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(0, 22);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -134,17 +145,7 @@
             this.sumatraPDFControl1.TabIndex = 0;
             this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
             this.sumatraPDFControl1.PageChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(33, 22);
-            this.toolStripLabel1.Text = "Pág.:";
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(0, 22);
+            this.sumatraPDFControl1.ContextMenuMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
             // 
             // Form1
             // 

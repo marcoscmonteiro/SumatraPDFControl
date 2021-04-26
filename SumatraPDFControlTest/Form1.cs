@@ -53,5 +53,11 @@ namespace SumatraPDFControlTest
         {
             toolStripLabel2.Text = e.Page.ToString();
         }
+
+        private void sumatraPDFControl1_ContextMenuMessage(object sender, SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs e)
+        {
+            e.OpenSumatraContextMenu = true;
+            // To do: alterar para retorno false e criar o próprio menu de contexto customizado
+        }
     }
 }

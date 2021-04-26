@@ -104,20 +104,32 @@ namespace SumatraPDFControl
 			}
 		}
 
-		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
-		public event EventHandler<PageChangedEventArgs> PageChangedMessage;
-
 		public class PageChangedEventArgs : EventArgs
         {
 			public int Page { get; set; }
         }
-
+		public class ContextMenuEventArgs : EventArgs
+        {
+			public int X { get; set; }
+			public int Y { get; set; }
+			public Boolean OpenSumatraContextMenu { get; set; }
+		}
 		public class SumatraMessageEventArgs : EventArgs
 		{
 			public int CallBackReturn { get; set; }
 			public string Msg { get; set; }
 			public IntPtr Data { get; set; }
 		}
+		public class KeyPressedEventArgs : EventArgs
+		{
+			public char Key { get; set; }
+			public Boolean DisallowKeyPress { get; set; }
+		}
+
+		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
+		public event EventHandler<PageChangedEventArgs> PageChangedMessage;
+		public event EventHandler<ContextMenuEventArgs> ContextMenuMessage;
+		public event EventHandler<KeyPressedEventArgs> KeyPressedMessage;
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
@@ -129,13 +141,30 @@ namespace SumatraPDFControl
 			else
 				if (dwData != (IntPtr)0x1) e.Msg = string.Format("[UnknownMessage(\"{0}\")]", e.Msg);
 
-			Match m = Regex.Match(e.Msg, @"\[(?<message>\w+)\((?<args>\w+)\)\]");
+			Match m = Regex.Match(e.Msg, @"\[(?<message>\w+)\((?<args>.+)\)\]");
 			if (m.Success)
 			{
 				switch (m.Result("${message}"))
                 {
 					case "PageChanged":
-						PageChangedMessage(this, new PageChangedEventArgs { Page = int.Parse(m.Result("${args}")) });
+						PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = int.Parse(m.Result("${args}")) });
+						break;
+					case "KeyPressed":
+						var kpe = new KeyPressedEventArgs { Key = (char)int.Parse(m.Result("${args}")), DisallowKeyPress = false };
+                        KeyPressedMessage?.Invoke(this, kpe);
+                        if (kpe.Key == 'q') kpe.DisallowKeyPress = true;
+						if (kpe.DisallowKeyPress) e.CallBackReturn = 1; else e.CallBackReturn = 0;
+						break;
+					case "ContextMenuOpened":
+						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s+(?<y>.+)");
+						var cmoe = new ContextMenuEventArgs {
+							X = int.Parse(m2.Result("${x}")),
+							Y = int.Parse(m2.Result("${y}")),
+							OpenSumatraContextMenu = true
+						};
+						ContextMenuMessage?.Invoke(this, cmoe); 
+						if (cmoe.OpenSumatraContextMenu) e.CallBackReturn = 0; else e.CallBackReturn = 1;
+
 						break;
 					default:
 						SumatraMessage(this, e);
@@ -175,7 +204,7 @@ namespace SumatraPDFControl
             var PSInfo = new ProcessStartInfo
             {
                 FileName = SumatraPDFPath + "SumatraPDF.exe",
-                Arguments = "-plugin " + base.Handle + " \"" + sFile + "\""
+                Arguments = "-invert-colors -plugin " + base.Handle + " \"" + sFile + "\""
             };
             SumatraProcess = Process.Start(PSInfo);			
 		}
