@@ -96,7 +96,7 @@ namespace SumatraPDFControl
 			else if (m.Msg == 74)
 			{
 				object lParam = m.GetLParam(typeof(COPYDATASTRUCT));
-				COPYDATASTRUCT x = (lParam != null) ? ((COPYDATASTRUCT)lParam) : default(COPYDATASTRUCT);
+				COPYDATASTRUCT x = (lParam != null) ? ((COPYDATASTRUCT)lParam) : default;
 				byte[] strb = new byte[checked(x.cbData)];
 				Marshal.Copy(x.lpData, strb, 0, x.cbData);
 				string sMsg = Encoding.Default.GetString(strb);
@@ -150,8 +150,7 @@ namespace SumatraPDFControl
 			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
 			int CallBackReturn = 0;
 
-			// dwData = (IntPtr)0x4C5255 é a mensagem esperada pelo navegador de internet quando o SumatraPDF está operando em modo de plugin
-			// Sendo assim, no caso de recebimento deste tipo de mensagem, ela é formatada para ficar dentro do padrão das mensagens do tipo 0x1			
+			// dwData = (IntPtr)0x4C5255 it's a message to internet browser when SumatraPDF is operating in plugin mode, so raise LinkClickedMessage event			
 			if (dwData == (IntPtr)0x4C5255) { 
 				LinkClickedMessage?.Invoke(this, new LinkClickedEventArgs { LinkText = sMsg0 });
 				return (IntPtr)CallBackReturn;
