@@ -37,6 +37,8 @@
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.sumatraPDFControl1 = new SumatraPDFControl.SumatraPDFControl();
@@ -52,7 +54,9 @@
             this.toolStripButton3,
             this.toolStripButton4,
             this.toolStripLabel1,
-            this.toolStripLabel2});
+            this.toolStripLabel2,
+            this.toolStripLabel3,
+            this.toolStripLabel4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(799, 25);
@@ -120,6 +124,17 @@
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Size = new System.Drawing.Size(0, 22);
             // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(42, 22);
+            this.toolStripLabel3.Text = "Zoom:";
+            // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(0, 22);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -146,6 +161,9 @@
             this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
             this.sumatraPDFControl1.PageChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
             this.sumatraPDFControl1.ContextMenuMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
+            this.sumatraPDFControl1.KeyPressedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.KeyPressedEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
+            this.sumatraPDFControl1.ZoomChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
+            this.sumatraPDFControl1.LinkClickedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
             // 
             // Form1
             // 
@@ -177,6 +195,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel4;
     }
 }
 

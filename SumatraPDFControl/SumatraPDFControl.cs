@@ -125,59 +125,97 @@ namespace SumatraPDFControl
 			public char Key { get; set; }
 			public Boolean DisallowKeyPress { get; set; }
 		}
+		public class ZoomChangedEventArgs : EventArgs
+		{
+			public float ZoomLevel { get; set; }
+			public Boolean MouseWheel { get; set; }
+			public Boolean FitPage { get; set; }
+			public Boolean FitWidth { get; set; }
+			public Boolean FitContent { get; set; }
+		}
+		public class LinkClickedEventArgs : EventArgs
+        {
+			public string LinkText { get; set; }
+        }
 
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
 		public event EventHandler<PageChangedEventArgs> PageChangedMessage;
 		public event EventHandler<ContextMenuEventArgs> ContextMenuMessage;
 		public event EventHandler<KeyPressedEventArgs> KeyPressedMessage;
+		public event EventHandler<ZoomChangedEventArgs> ZoomChangedMessage;
+		public event EventHandler<LinkClickedEventArgs> LinkClickedMessage;
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
-			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg=sMsg.Substring(0, sMsg.Length - 1), Data = dwData};
+			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
+			int CallBackReturn = 0;
 
 			// dwData = (IntPtr)0x4C5255 é a mensagem esperada pelo navegador de internet quando o SumatraPDF está operando em modo de plugin
 			// Sendo assim, no caso de recebimento deste tipo de mensagem, ela é formatada para ficar dentro do padrão das mensagens do tipo 0x1			
-			if (dwData == (IntPtr)0x4C5255) e.Msg = string.Format("[LinkClicked(\"{0}\")]", e.Msg);
-			else
-				if (dwData != (IntPtr)0x1) e.Msg = string.Format("[UnknownMessage(\"{0}\")]", e.Msg);
+			if (dwData == (IntPtr)0x4C5255) { 
+				LinkClickedMessage?.Invoke(this, new LinkClickedEventArgs { LinkText = sMsg0 });
+				return (IntPtr)CallBackReturn;
+			} else
+				if (dwData != (IntPtr)0x1) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
 
-			Match m = Regex.Match(e.Msg, @"\[(?<message>\w+)\((?<args>.+)\)\]");
+			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.+)\)\]");
 			if (m.Success)
 			{
-				switch (m.Result("${message}"))
+				string mmsg = m.Result("${message}");
+				switch (mmsg)
                 {
 					case "PageChanged":
 						PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = int.Parse(m.Result("${args}")) });
 						break;
+
 					case "KeyPressed":
 						var kpe = new KeyPressedEventArgs { Key = (char)int.Parse(m.Result("${args}")), DisallowKeyPress = false };
                         KeyPressedMessage?.Invoke(this, kpe);
-                        if (kpe.Key == 'q') kpe.DisallowKeyPress = true;
-						if (kpe.DisallowKeyPress) e.CallBackReturn = 1; else e.CallBackReturn = 0;
+						kpe.DisallowKeyPress = (kpe.Key == 'q');
+						CallBackReturn = kpe.DisallowKeyPress ? 1 : 0;
 						break;
+
 					case "ContextMenuOpened":
-						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s+(?<y>.+)");
+						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						var cmoe = new ContextMenuEventArgs {
 							X = int.Parse(m2.Result("${x}")),
 							Y = int.Parse(m2.Result("${y}")),
 							OpenSumatraContextMenu = true
 						};
-						ContextMenuMessage?.Invoke(this, cmoe); 
-						if (cmoe.OpenSumatraContextMenu) e.CallBackReturn = 0; else e.CallBackReturn = 1;
-
+						ContextMenuMessage?.Invoke(this, cmoe);
+						CallBackReturn = cmoe.OpenSumatraContextMenu ? 0 : 1;
 						break;
+
+					case "ZoomChanged":
+					case "ZoomChangedMouseWeel":
+
+						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
+						float ZoomReal = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
+						float ZoomVirtual = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
+						ZoomChangedMessage?.Invoke(this, 
+							new ZoomChangedEventArgs { 
+								ZoomLevel= ZoomReal, 
+								MouseWheel = (mmsg!="ZoomChanged"), 
+								FitPage = (ZoomVirtual == -1), 
+								FitWidth = (ZoomVirtual == -2),
+								FitContent = (ZoomVirtual == -3)
+							});
+						break;					
+
 					default:
-						SumatraMessage(this, e);
+						var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = sMsg0, Data = dwData };
+						SumatraMessage?.Invoke(this, e);
+						CallBackReturn = e.CallBackReturn;
 						break;
 				}
 			}
 
-			return (IntPtr)e.CallBackReturn;
+			return (IntPtr)CallBackReturn;
 		}
 
 		private void SendDDECommand(string strMessage)
 		{
-			COPYDATASTRUCT DataStruct = default(COPYDATASTRUCT);
+			COPYDATASTRUCT DataStruct = default;
 			strMessage += "\0";
 			DataStruct.dwData = (IntPtr)1147430231;
 			DataStruct.cbData = checked(strMessage.Length * Marshal.SystemDefaultCharSize);

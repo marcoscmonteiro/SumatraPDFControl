@@ -43,10 +43,7 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_SumatraMessage(object sender, SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs e)
         {
-            // Ao pressionar 'q' não permite o fechamento da visualização
-            if (e.Msg == "[KeyPressed(113)]") e.CallBackReturn = 1;
-
-            textBox1.Text = e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine + textBox1.Text;
+            textBox1.Text += e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine;
         }
 
         private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)
@@ -58,6 +55,22 @@ namespace SumatraPDFControlTest
         {
             e.OpenSumatraContextMenu = true;
             // To do: alterar para retorno false e criar o próprio menu de contexto customizado
+            textBox1.Text += "ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString() + System.Environment.NewLine;
+        }
+
+        private void sumatraPDFControl1_KeyPressedMessage(object sender, SumatraPDFControl.SumatraPDFControl.KeyPressedEventArgs e)
+        {
+            textBox1.Text += "KeyPressed: " + e.Key + System.Environment.NewLine;
+        }
+
+        private void sumatraPDFControl1_ZoomChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs e)
+        {
+            toolStripLabel4.Text = e.ZoomLevel.ToString() + " - Fit Widht: " + e.FitWidth.ToString() + " - Fit Page: " + e.FitPage.ToString() + " - Fit Content:" + e.FitContent.ToString();
+        }
+
+        private void sumatraPDFControl1_LinkClickedMessage(object sender, SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs e)
+        {
+            textBox1.Text += "LinkClicked: " + e.LinkText + System.Environment.NewLine;
         }
     }
 }
