@@ -289,5 +289,15 @@ namespace SumatraPDFControl
 			SendDDECommand("[GotoPage(\"" + sCurrentFile + "\", " + nPage + ")]");
 		}
 
+		public void TextSearch(string searchText, Boolean matchCase)
+		{
+			SendDDECommand("[TextSearch(\"" + sCurrentFile + "\",\"" + searchText + "\", " + (matchCase ? 1 : 0).ToString().Trim() + ")]");
+		}
+
+		public void SearchAgain(Boolean forward)
+        {
+			SendDDECommand("[SearchAgain(\"" + sCurrentFile + "\"," + (forward ? 1 : 0).ToString().Trim() + ")]");
+		}
+
 	}
 }

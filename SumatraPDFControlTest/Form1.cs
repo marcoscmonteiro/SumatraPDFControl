@@ -72,5 +72,20 @@ namespace SumatraPDFControlTest
         {
             textBox1.Text += "LinkClicked: " + e.LinkText + System.Environment.NewLine;
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.TextSearch(toolStripTextBox1.Text, false);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.SearchAgain(false);
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.SearchAgain(true);
+        }
     }
 }
