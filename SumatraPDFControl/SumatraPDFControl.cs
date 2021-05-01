@@ -50,6 +50,8 @@ namespace SumatraPDFControl
         private string sCurrentFile;
         private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
+		public int CurrentPage { get; set; }
+		public string CurrentNamedDest { get; set; }
 
 		public SumatraPDFControl()
         {
@@ -172,11 +174,14 @@ namespace SumatraPDFControl
 				switch (mmsg)
                 {
 					case "PageChanged":
+					case "CurrentPage":
 						Match mPG = Regex.Match(m.Result("${args}"), @"(?<pageNo>.+)\,\s*\u0022(?<namedDest>.*)\u0022");
-						PageChangedMessage?.Invoke(this, new PageChangedEventArgs {
-							Page = int.Parse(mPG.Result("${pageNo}")),
-							NamedDest = mPG.Result("${namedDest}")
-						});
+						CurrentPage = int.Parse(mPG.Result("${pageNo}"));
+						CurrentNamedDest = mPG.Result("${namedDest}");
+						if (mmsg == "PageChanged")
+						{
+							PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = CurrentPage, NamedDest = CurrentNamedDest });
+						};
 						break;
 
 					case "KeyPressed":
@@ -314,6 +319,16 @@ namespace SumatraPDFControl
 		public void TextSearchNext(Boolean forward)
         {
 			SendDDECommand("[TextSearchNext(\"" + sCurrentFile + "\"," + (forward ? 1 : 0).ToString().Trim() + ")]");
+		}
+		/// <summary>
+		/// Exemplo de como buscar informações no SumatraPDF - Futuramente encapsular a troca de páginas (GotoPage) e a recuperação da página corrente (GetCurrentPage)
+		/// na propriedade CurrentPage
+		/// </summary>
+		/// <returns></returns>
+		public int GetCurrentPage()
+		{
+			SendDDECommand("[GetCurrentPage(\"" + sCurrentFile + "\")]");
+			return CurrentPage;
 		}
 
 	}

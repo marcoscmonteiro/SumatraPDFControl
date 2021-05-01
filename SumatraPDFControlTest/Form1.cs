@@ -92,5 +92,10 @@ namespace SumatraPDFControlTest
         {
             sumatraPDFControl1.GotoNamedDest(toolStripTextBox1.Text);
         }
+
+        private void toolStripButton9_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sumatraPDFControl1.GetCurrentPage().ToString());
+        }
     }
 }
