@@ -38,8 +38,15 @@ namespace SumatraPDFControl
 		[DllImport("user32.dll")]
 		static extern bool DestroyWindow(IntPtr hWnd);
 
-		private const int WM_COPYDATA = 74;
-        private Process SumatraProcess;
+		private const int WM_COPYDATA = 0x004A;
+		private const int WM_DESTROY = 0x0002;
+		private const int WM_SETFOCUS = 0x0007;
+		private const int WM_PARENTNOTIFY = 0x0210;
+		private const int WM_LBUTTONDOWN = 0x0201;
+		private const int WM_RBUTTONDOWN = 0x0204;
+
+
+		private Process SumatraProcess;
         private string sCurrentFile;
         private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
@@ -78,22 +85,22 @@ namespace SumatraPDFControl
 		protected override void WndProc(ref Message m)
 		{
 			base.WndProc(ref m);
-			if (m.Msg == 7)
+			if (m.Msg == WM_SETFOCUS)
 			{
 				OnEnter(new EventArgs());
 			}
-			else if (m.Msg == 528 && (m.WParam.ToInt32() == 513 || m.WParam.ToInt32() == 516))
+			else if (m.Msg == WM_PARENTNOTIFY && (m.WParam.ToInt32() == WM_LBUTTONDOWN || m.WParam.ToInt32() == WM_RBUTTONDOWN))
 			{
 				if (!base.ContainsFocus)
 				{
 					OnEnter(new EventArgs());
 				}
 			}
-			else if (m.Msg == 2 && !base.IsDisposed && !base.Disposing)
+			else if (m.Msg == WM_DESTROY && !base.IsDisposed && !base.Disposing)
 			{
 				Dispose();
 			}
-			else if (m.Msg == 74)
+			else if (m.Msg == WM_COPYDATA)
 			{
 				object lParam = m.GetLParam(typeof(COPYDATASTRUCT));
 				COPYDATASTRUCT x = (lParam != null) ? ((COPYDATASTRUCT)lParam) : default;
@@ -241,7 +248,7 @@ namespace SumatraPDFControl
             var PSInfo = new ProcessStartInfo
             {
                 FileName = SumatraPDFPath + "SumatraPDF.exe",
-                Arguments = "-invert-colors -plugin " + base.Handle + " \"" + sFile + "\""
+                Arguments = /*"-invert-colors" + */ "-plugin " + base.Handle + " \"" + sFile + "\""
             };
             SumatraProcess = Process.Start(PSInfo);			
 		}
