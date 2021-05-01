@@ -44,7 +44,7 @@ namespace SumatraPDFControl
 		private const int WM_PARENTNOTIFY = 0x0210;
 		private const int WM_LBUTTONDOWN = 0x0201;
 		private const int WM_RBUTTONDOWN = 0x0204;
-
+		private const int WM_COMMAND = 0x0111;
 
 		private Process SumatraProcess;
         private string sCurrentFile;
@@ -230,7 +230,7 @@ namespace SumatraPDFControl
 			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				SendMessage(SumatraWindowHandle, 74u, (IntPtr)0, pDataStruct);
+				SendMessage(SumatraWindowHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
 			}
 			Marshal.FreeHGlobal(DataStruct.lpData);
 			Marshal.FreeHGlobal(pDataStruct);
@@ -241,7 +241,7 @@ namespace SumatraPDFControl
 			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdClose
-				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)204, (IntPtr)0);
+				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
 				SumatraProcess.Kill();
 				pSumatraWindowHandle = (IntPtr)0;
 			}
@@ -258,7 +258,7 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdClose
-				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)204, (IntPtr)0);
+				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
 				SendDDECommand("[Open(\"" + sFile + "\")]");				
 			} else RestartSumatra(sFile);
 			SumatraMessage(this, new SumatraMessageEventArgs { CallBackReturn = 0, Msg = "[FileOpen(\"" + sFile + "\")]" });
@@ -278,7 +278,7 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdViewShowHideToolbar
-				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)225, (IntPtr)0);
+				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)225, (IntPtr)0);
 			}
 		}
 
@@ -287,7 +287,7 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdCopySelection
-				SendMessage(SumatraWindowHandle, 0x111, (IntPtr)228, (IntPtr)0);
+				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)228, (IntPtr)0);
 			}
 		}
 
