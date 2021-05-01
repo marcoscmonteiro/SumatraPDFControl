@@ -48,7 +48,7 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)
         {
-            toolStripLabel2.Text = e.Page.ToString();
+            toolStripLabel2.Text = e.Page.ToString() + " - " + e.NamedDest;
         }
 
         private void sumatraPDFControl1_ContextMenuMessage(object sender, SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs e)
@@ -75,17 +75,22 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.TextSearch(toolStripTextBox1.Text, false);
+            sumatraPDFControl1.TextSearch(toolStripTextBox1.Text, true);
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.SearchAgain(false);
+            sumatraPDFControl1.TextSearchNext(false);
         }
 
         private void toolStripButton7_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.SearchAgain(true);
+            sumatraPDFControl1.TextSearchNext(true);
+        }
+
+        private void toolStripButton8_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.GotoNamedDest(toolStripTextBox1.Text);
         }
     }
 }

@@ -114,7 +114,8 @@ namespace SumatraPDFControl
 		public class PageChangedEventArgs : EventArgs
         {
 			public int Page { get; set; }
-        }
+			public string NamedDest { get; set; }
+		}
 		public class ContextMenuEventArgs : EventArgs
         {
 			public int X { get; set; }
@@ -171,7 +172,11 @@ namespace SumatraPDFControl
 				switch (mmsg)
                 {
 					case "PageChanged":
-						PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = int.Parse(m.Result("${args}")) });
+						Match mPG = Regex.Match(m.Result("${args}"), @"(?<pageNo>.+)\,\s*\u0022(?<namedDest>.*)\u0022");
+						PageChangedMessage?.Invoke(this, new PageChangedEventArgs {
+							Page = int.Parse(mPG.Result("${pageNo}")),
+							NamedDest = mPG.Result("${namedDest}")
+						});
 						break;
 
 					case "KeyPressed":
@@ -296,14 +301,19 @@ namespace SumatraPDFControl
 			SendDDECommand("[GotoPage(\"" + sCurrentFile + "\", " + nPage + ")]");
 		}
 
+		public void GotoNamedDest(string namedDest)
+        {
+			SendDDECommand("[GotoNamedDest(\"" + sCurrentFile + "\", \"" + namedDest + "\")]");
+		}
+
 		public void TextSearch(string searchText, Boolean matchCase)
 		{
 			SendDDECommand("[TextSearch(\"" + sCurrentFile + "\",\"" + searchText + "\", " + (matchCase ? 1 : 0).ToString().Trim() + ")]");
 		}
 
-		public void SearchAgain(Boolean forward)
+		public void TextSearchNext(Boolean forward)
         {
-			SendDDECommand("[SearchAgain(\"" + sCurrentFile + "\"," + (forward ? 1 : 0).ToString().Trim() + ")]");
+			SendDDECommand("[TextSearchNext(\"" + sCurrentFile + "\"," + (forward ? 1 : 0).ToString().Trim() + ")]");
 		}
 
 	}
