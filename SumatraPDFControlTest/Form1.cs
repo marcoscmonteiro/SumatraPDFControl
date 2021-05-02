@@ -21,7 +21,7 @@ namespace SumatraPDFControlTest
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                sumatraPDFControl1.LoadFile(openFileDialog1.FileName);
+                sumatraPDFControl1.LoadFile(openFileDialog1.FileName, int.Parse(toolStripTextBox1.Text=="" ? "1" : toolStripTextBox1.Text));
             }
 
         }
@@ -44,6 +44,8 @@ namespace SumatraPDFControlTest
         private void sumatraPDFControl1_SumatraMessage(object sender, SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs e)
         {
             textBox1.Text += e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine;
+            if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpen()]") 
+                toolStripLabel2.Text = sumatraPDFControl1.CurrentPage.ToString() + " - " + sumatraPDFControl1.CurrentNamedDest;
         }
 
         private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)

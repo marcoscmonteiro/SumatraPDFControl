@@ -167,7 +167,7 @@ namespace SumatraPDFControl
 			} else
 				if (dwData != (IntPtr)0x1) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
 
-			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.+)\)\]");
+			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.*)\)\]");
 			if (m.Success)
 			{
 				string mmsg = m.Result("${message}");
@@ -216,17 +216,28 @@ namespace SumatraPDFControl
 								FitWidth = (ZoomVirtual == -2),
 								FitContent = (ZoomVirtual == -3)
 							});
-						break;					
+						break;
+
+					case "StartupFinished":
+					case "FileOpen":
+						GetCurrentPage();
+						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
+						break;
 
 					default:
-						var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = sMsg0, Data = dwData };
-						SumatraMessage?.Invoke(this, e);
-						CallBackReturn = e.CallBackReturn;
+						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
 				}
 			}
 
 			return (IntPtr)CallBackReturn;
+		}
+
+		private int RaiseDefaultSumatraEvent(string msg, IntPtr dwData) 
+        {
+			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = msg, Data = dwData };
+			SumatraMessage?.Invoke(this, e);
+			return e.CallBackReturn;
 		}
 
 		private void SendDDECommand(string strMessage)
@@ -246,7 +257,7 @@ namespace SumatraPDFControl
 			Marshal.FreeHGlobal(pDataStruct);
 		}
 
-		private void RestartSumatra(string sFile)
+		private void RestartSumatra(string sFile, int page = 1)
         {
 			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
 			{
@@ -255,24 +266,30 @@ namespace SumatraPDFControl
 				SumatraProcess.Kill();
 				pSumatraWindowHandle = (IntPtr)0;
 			}
-            var PSInfo = new ProcessStartInfo
-            {
-                FileName = SumatraPDFPath + "SumatraPDF.exe",
-                Arguments = /*"-invert-colors" + */ "-plugin " + base.Handle + " \"" + sFile + "\""
-            };
+			var PSInfo = new ProcessStartInfo
+			{
+				FileName = SumatraPDFPath + "SumatraPDF.exe",
+				Arguments = /*"-invert-colors" + */ "-plugin " + base.Handle + " \"" + sFile + "\"" + " -page " + page.ToString()
+			};
             SumatraProcess = Process.Start(PSInfo);			
 		}
 
-		public void LoadFile(string sFile)
+		public void LoadFile(string sFile, int page = 1)
 		{
+			sCurrentFile = sFile;
+			CurrentPage = page;
+			CurrentNamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdClose
 				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
-				SendDDECommand("[Open(\"" + sFile + "\")]");				
-			} else RestartSumatra(sFile);
-			SumatraMessage(this, new SumatraMessageEventArgs { CallBackReturn = 0, Msg = "[FileOpen(\"" + sFile + "\")]" });
-			sCurrentFile = sFile;
+				SendDDECommand("[Open(\"" + sFile + "\")]");
+				GotoPage(page);
+			}
+			else
+			{				
+				RestartSumatra(sFile, page);
+			}
 		}
 
 		private void SumatraPDFControl_Resize(object sender, EventArgs e)
