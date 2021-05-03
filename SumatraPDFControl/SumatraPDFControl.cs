@@ -45,6 +45,7 @@ namespace SumatraPDFControl
 		private const int WM_LBUTTONDOWN = 0x0201;
 		private const int WM_RBUTTONDOWN = 0x0204;
 		private const int WM_COMMAND = 0x0111;
+		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 
 		private Process SumatraProcess;
         private string sCurrentFile;
@@ -165,7 +166,7 @@ namespace SumatraPDFControl
 				LinkClickedMessage?.Invoke(this, new LinkClickedEventArgs { LinkText = sMsg0 });
 				return (IntPtr)CallBackReturn;
 			} else
-				if (dwData != (IntPtr)0x1) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
+				if (dwData != DDEW) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
 
 			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.*)\)\]");
 			if (m.Success)
@@ -240,13 +241,35 @@ namespace SumatraPDFControl
 			return e.CallBackReturn;
 		}
 
-		private void SendDDECommand(string strMessage)
+		private void SendDDECommand(string strMessage, params Object[] parr)
 		{
+			string DDEMessage = string.Empty;
+			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr); else
+            {
+				DDEMessage = "[" + strMessage + "(";
+				int count = 0;
+				foreach (Object p in parr)
+				{
+					if (count > 0) DDEMessage += ",";
+					switch (p.GetType().FullName)
+					{
+						case "System.String":
+							DDEMessage += "\"" + p.ToString() + "\"";
+							break;
+						default:
+							DDEMessage += p.ToString();
+							break;
+					}
+					count++;
+				}
+				DDEMessage += ")]";
+			}
+
 			COPYDATASTRUCT DataStruct = default;
-			strMessage += "\0";
-			DataStruct.dwData = (IntPtr)1147430231;
-			DataStruct.cbData = checked(strMessage.Length * Marshal.SystemDefaultCharSize);
-			DataStruct.lpData = Marshal.StringToHGlobalAuto(strMessage);
+			DDEMessage += "\0";
+			DataStruct.dwData = DDEW;
+			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
+			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
 			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
 			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
 			if (SumatraWindowHandle != (IntPtr)0)
@@ -269,7 +292,13 @@ namespace SumatraPDFControl
 			var PSInfo = new ProcessStartInfo
 			{
 				FileName = SumatraPDFPath + "SumatraPDF.exe",
-				Arguments = /*"-invert-colors" + */ "-plugin " + base.Handle + " \"" + sFile + "\"" + " -page " + page.ToString()
+				Arguments =
+					"-plugin " + base.Handle +
+					//" -invert-colors" +
+					//" -appdata \"c:\\users\\marco\\Downloads\"" +
+					" -page " + page.ToString() +										
+					" \"" + sFile + "\""
+					
 			};
             SumatraProcess = Process.Start(PSInfo);			
 		}
@@ -283,7 +312,7 @@ namespace SumatraPDFControl
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdClose
 				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
-				SendDDECommand("[Open(\"" + sFile + "\")]");
+				SendDDECommand("Open", sFile);
 				GotoPage(page);
 			}
 			else
@@ -320,22 +349,22 @@ namespace SumatraPDFControl
 
 		public void GotoPage(int nPage)
 		{
-			SendDDECommand("[GotoPage(\"" + sCurrentFile + "\", " + nPage + ")]");
+			SendDDECommand("GotoPage", sCurrentFile, nPage);
 		}
 
 		public void GotoNamedDest(string namedDest)
         {
-			SendDDECommand("[GotoNamedDest(\"" + sCurrentFile + "\", \"" + namedDest + "\")]");
+			SendDDECommand("GotoNamedDest", sCurrentFile, namedDest);
 		}
 
 		public void TextSearch(string searchText, Boolean matchCase)
 		{
-			SendDDECommand("[TextSearch(\"" + sCurrentFile + "\",\"" + searchText + "\", " + (matchCase ? 1 : 0).ToString().Trim() + ")]");
+			SendDDECommand("TextSearch", sCurrentFile, searchText, (matchCase ? 1 : 0));
 		}
 
 		public void TextSearchNext(Boolean forward)
         {
-			SendDDECommand("[TextSearchNext(\"" + sCurrentFile + "\"," + (forward ? 1 : 0).ToString().Trim() + ")]");
+			SendDDECommand("TextSearchNext", sCurrentFile, (forward ? 1 : 0));
 		}
 		/// <summary>
 		/// Exemplo de como buscar informações no SumatraPDF - Futuramente encapsular a troca de páginas (GotoPage) e a recuperação da página corrente (GetCurrentPage)
@@ -344,7 +373,7 @@ namespace SumatraPDFControl
 		/// <returns></returns>
 		public int GetCurrentPage()
 		{
-			SendDDECommand("[GetCurrentPage(\"" + sCurrentFile + "\")]");
+			SendDDECommand("GetProperty", sCurrentFile, "CurrentPage");
 			return CurrentPage;
 		}
 
