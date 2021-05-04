@@ -494,10 +494,18 @@ namespace SumatraPDFControl
 		}
 
 		/* TODO: 
-		 * Set and Get ScrollPosition properties
-		 * Set Zoom
-		 * Set DisplayMode
-		 * Dont call Get property after events changing them (optimization)
+		 * ScrollPosition - Set and Get properties
+		 * Zoom - Set and Get properties
+		 * DisplayMode - Set and Get properties
+		 * Show TOC - Set and Get properties
+		 * Show Toolbar - Set and Get properties
+		 * Special kys - events
+		 * Global Config - auto update,  etc
+		 * Print - Show Dialog and direct print
+		 * Page Rotation - Set and Get properties
+		 * Page: first, previous, next, last 
+		 * Dont call Get property after raising changing events (optimization)
+		 * Do a revision in GEDVISA PDFXChange used properties
 		*/
 
 	}
