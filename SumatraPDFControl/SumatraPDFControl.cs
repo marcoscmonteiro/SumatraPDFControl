@@ -13,15 +13,15 @@ using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
 namespace SumatraPDFControl
-    {    
-    public partial class SumatraPDFControl: UserControl
-    {
-        public struct COPYDATASTRUCT
-        {
-            public IntPtr dwData;
-            public int cbData;
-            public IntPtr lpData;
-        }
+{
+	public partial class SumatraPDFControl : UserControl
+	{
+		public struct COPYDATASTRUCT
+		{
+			public IntPtr dwData;
+			public int cbData;
+			public IntPtr lpData;
+		}
 
 		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		private static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
@@ -48,11 +48,91 @@ namespace SumatraPDFControl
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 
 		private Process SumatraProcess;
-        private string sCurrentFile;
-        private string pSumatraPDFPath;
+		private string sCurrentFile;
+		private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
-		public int CurrentPage { get; set; }
-		public string CurrentNamedDest { get; set; }
+
+
+		public enum DisplayModeEnum
+		{
+			// automatic means: the continuous form of single page, facing or
+			// book view - depending on the document's desired PageLayout
+			Automatic = 0,
+			SinglePage,
+			Facing,
+			BookView,
+			Continuous,
+			ContinuousFacing,
+			ContinuousBookView,
+		};
+
+		public enum ZoomVirtuamEnum
+        {
+			None = 0,
+			FitPage, // ZoomVirtual = -1
+			FitWidth, // ZoomVirtual = -2
+			FitContent // ZoomVirtual = -3
+		}
+
+		private float fZoom;
+		public float Zoom
+        {
+			get
+            {
+				GetZoom();
+				return fZoom;
+            }
+        }
+
+		private ZoomVirtuamEnum fZoomVirtual;
+		public ZoomVirtuamEnum ZoomVirtual
+		{
+			get
+			{
+				GetZoom();
+				return fZoomVirtual;
+			}
+		}
+
+		private DisplayModeEnum eDisplayMode;
+		public DisplayModeEnum DisplayMode {
+			get {
+				GetDisplayMode();
+				return eDisplayMode;
+			}
+		}
+
+		private Boolean bContinuousDisplayMode;
+		public Boolean ContinuousDisplayMode
+        {
+			get
+            {
+				GetDisplayMode();
+				return bContinuousDisplayMode;
+			}
+        }
+
+		private int nPage;
+		public int Page {
+			get {
+				GetPage();
+				return nPage;
+			}
+			set {
+				SetPage(value);
+			} 
+		}
+
+		private string sNamedDest;
+		public string NamedDest {
+			get {
+				GetPage();
+				return sNamedDest;
+			}
+			set {
+				SetNamedDest(value);
+			} 
+		}
 
 		public SumatraPDFControl()
         {
@@ -138,15 +218,19 @@ namespace SumatraPDFControl
 		}
 		public class ZoomChangedEventArgs : EventArgs
 		{
-			public float ZoomLevel { get; set; }
+			public float Zoom { get; set; }
+			public ZoomVirtuamEnum ZoomVirtual { get; set; }
 			public Boolean MouseWheel { get; set; }
-			public Boolean FitPage { get; set; }
-			public Boolean FitWidth { get; set; }
-			public Boolean FitContent { get; set; }
 		}
 		public class LinkClickedEventArgs : EventArgs
         {
 			public string LinkText { get; set; }
+        }
+
+		public class DisplayModeChangedEventArgs : EventArgs
+        {
+			public DisplayModeEnum DisplayMode { get; set; }
+			public Boolean Continuous { get; set; }
         }
 
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
@@ -155,6 +239,7 @@ namespace SumatraPDFControl
 		public event EventHandler<KeyPressedEventArgs> KeyPressedMessage;
 		public event EventHandler<ZoomChangedEventArgs> ZoomChangedMessage;
 		public event EventHandler<LinkClickedEventArgs> LinkClickedMessage;
+		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChangedMessage;
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
@@ -175,14 +260,12 @@ namespace SumatraPDFControl
 				switch (mmsg)
                 {
 					case "PageChanged":
-					case "CurrentPage":
+					case "Page":
 						Match mPG = Regex.Match(m.Result("${args}"), @"(?<pageNo>.+)\,\s*\u0022(?<namedDest>.*)\u0022");
-						CurrentPage = int.Parse(mPG.Result("${pageNo}"));
-						CurrentNamedDest = mPG.Result("${namedDest}");
-						if (mmsg == "PageChanged")
-						{
-							PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = CurrentPage, NamedDest = CurrentNamedDest });
-						};
+						nPage = int.Parse(mPG.Result("${pageNo}"));
+						sNamedDest = mPG.Result("${namedDest}");
+						if (mmsg.Contains("Changed"))
+							PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = Page, NamedDest = NamedDest });
 						break;
 
 					case "KeyPressed":
@@ -205,23 +288,51 @@ namespace SumatraPDFControl
 
 					case "ZoomChanged":
 					case "ZoomChangedMouseWeel":
+					case "Zoom":
 
 						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-						float ZoomReal = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
-						float ZoomVirtual = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
-						ZoomChangedMessage?.Invoke(this, 
-							new ZoomChangedEventArgs { 
-								ZoomLevel= ZoomReal, 
-								MouseWheel = (mmsg!="ZoomChanged"), 
-								FitPage = (ZoomVirtual == -1), 
-								FitWidth = (ZoomVirtual == -2),
-								FitContent = (ZoomVirtual == -3)
-							});
+						fZoom = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
+						float fZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
+						switch (fZoomVirtual0)
+                        {
+							case -1:
+								fZoomVirtual = ZoomVirtuamEnum.FitPage;
+								break;
+							case -2:
+								fZoomVirtual = ZoomVirtuamEnum.FitWidth;
+								break;
+							case -3:
+								fZoomVirtual = ZoomVirtuamEnum.FitContent;
+								break;
+							default:
+								fZoomVirtual = ZoomVirtuamEnum.None;
+								break;
+						}
+						if (mmsg.Contains("Changed"))
+							ZoomChangedMessage?.Invoke(this, 
+								new ZoomChangedEventArgs { 
+									Zoom = fZoom, 
+									ZoomVirtual = fZoomVirtual,
+									MouseWheel = (mmsg!="ZoomChanged")
+								});
 						break;
 
+					case "DisplayModeChanged":
+					case "DisplayMode":
+						Match mDM = Regex.Match(m.Result("${args}"), @"(?<dm>.+)\,\s*(?<kc>.+)");
+						eDisplayMode = (DisplayModeEnum)int.Parse(mDM.Result("${dm}"));
+						bContinuousDisplayMode = (int.Parse(mDM.Result("${kc}"))!=0);
+						if (mmsg.Contains("Changed"))
+							DisplayModeChangedMessage?.Invoke(this,
+								new DisplayModeChangedEventArgs
+								{
+									DisplayMode = eDisplayMode,
+									Continuous = bContinuousDisplayMode
+								});
+							break;
 					case "StartupFinished":
 					case "FileOpen":
-						GetCurrentPage();
+						GetPage();
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
 
@@ -306,14 +417,14 @@ namespace SumatraPDFControl
 		public void LoadFile(string sFile, int page = 1)
 		{
 			sCurrentFile = sFile;
-			CurrentPage = page;
-			CurrentNamedDest = string.Empty;
+			Page = page;
+			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdClose
 				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
 				SendDDECommand("Open", sFile);
-				GotoPage(page);
+				SetPage(page);
 			}
 			else
 			{				
@@ -347,14 +458,29 @@ namespace SumatraPDFControl
 			}
 		}
 
-		public void GotoPage(int nPage)
+		private void SetPage(int nPage)
 		{
 			SendDDECommand("GotoPage", sCurrentFile, nPage);
 		}
 
-		public void GotoNamedDest(string namedDest)
+		private void GetPage()
+		{
+			SendDDECommand("GetProperty", sCurrentFile, "Page");
+		}
+
+		private void SetNamedDest(string namedDest)
         {
 			SendDDECommand("GotoNamedDest", sCurrentFile, namedDest);
+		}
+
+		private void GetDisplayMode()
+        {
+			SendDDECommand("GetProperty", sCurrentFile, "DisplayMode");
+		}
+
+		private void GetZoom()
+        {
+			SendDDECommand("GetProperty", sCurrentFile, "Zoom");
 		}
 
 		public void TextSearch(string searchText, Boolean matchCase)
@@ -366,16 +492,13 @@ namespace SumatraPDFControl
         {
 			SendDDECommand("TextSearchNext", sCurrentFile, (forward ? 1 : 0));
 		}
-		/// <summary>
-		/// Exemplo de como buscar informações no SumatraPDF - Futuramente encapsular a troca de páginas (GotoPage) e a recuperação da página corrente (GetCurrentPage)
-		/// na propriedade CurrentPage
-		/// </summary>
-		/// <returns></returns>
-		public int GetCurrentPage()
-		{
-			SendDDECommand("GetProperty", sCurrentFile, "CurrentPage");
-			return CurrentPage;
-		}
+
+		/* TODO: 
+		 * Set and Get ScrollPosition properties
+		 * Set Zoom
+		 * Set DisplayMode
+		 * Dont call Get property after events changing them (optimization)
+		*/
 
 	}
 }

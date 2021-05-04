@@ -28,7 +28,7 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.GotoPage(int.Parse(toolStripTextBox1.Text));
+            sumatraPDFControl1.Page = int.Parse(toolStripTextBox1.Text);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace SumatraPDFControlTest
         {
             textBox1.Text += e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine;
             if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpen()]") 
-                toolStripLabel2.Text = sumatraPDFControl1.CurrentPage.ToString() + " - " + sumatraPDFControl1.CurrentNamedDest;
+                toolStripLabel2.Text = sumatraPDFControl1.Page.ToString() + " - " + sumatraPDFControl1.NamedDest;
         }
 
         private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)
@@ -67,7 +67,7 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_ZoomChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs e)
         {
-            toolStripLabel4.Text = e.ZoomLevel.ToString() + " - Fit Widht: " + e.FitWidth.ToString() + " - Fit Page: " + e.FitPage.ToString() + " - Fit Content:" + e.FitContent.ToString();
+            toolStripLabel4.Text = e.Zoom.ToString() + " - Zoom Virtual: " + e.ZoomVirtual.ToString();
         }
 
         private void sumatraPDFControl1_LinkClickedMessage(object sender, SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs e)
@@ -92,12 +92,12 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.GotoNamedDest(toolStripTextBox1.Text);
+            sumatraPDFControl1.NamedDest = toolStripTextBox1.Text;
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(sumatraPDFControl1.GetCurrentPage().ToString());
+            MessageBox.Show(sumatraPDFControl1.Page.ToString());
         }
     }
 }
