@@ -38,7 +38,8 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.ToogleToolBar();
+            //sumatraPDFControl1.ToogleToolBar();
+            sumatraPDFControl1.ToolBarVisible = !sumatraPDFControl1.ToolBarVisible;
         }
 
         private void sumatraPDFControl1_SumatraMessage(object sender, SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs e)

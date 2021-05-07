@@ -134,6 +134,20 @@ namespace SumatraPDFControl
 			} 
 		}
 
+		private Boolean bToolbarVisible;
+		public Boolean ToolBarVisible
+        {
+			get
+            {
+				SendDDECommand("GetProperty", sCurrentFile, "ToolbarVisible");
+				return bToolbarVisible;
+            }
+			set
+            {
+				SendDDECommand("SetProperty", sCurrentFile, "ToolbarVisible", value ? "1" : "0");
+            }
+        }
+
 		public SumatraPDFControl()
         {
 			pSumatraWindowHandle = (IntPtr)0;
@@ -336,6 +350,10 @@ namespace SumatraPDFControl
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
 
+					case "ToolbarVisible":
+						bToolbarVisible = (int.Parse(m.Result("${args}")) == 1);
+						break;
+
 					default:
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
@@ -440,15 +458,6 @@ namespace SumatraPDFControl
 			}
 		}
 
-		public void ToogleToolBar()
-		{
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				// Ver qual o código do comando no arquivo Commands.h: CmdViewShowHideToolbar
-				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)225, (IntPtr)0);
-			}
-		}
-
 		public void CopySelection()
 		{
 			if (SumatraWindowHandle != (IntPtr)0)
@@ -498,7 +507,6 @@ namespace SumatraPDFControl
 		 * Zoom - Set and Get properties
 		 * DisplayMode - Set and Get properties
 		 * Show TOC - Set and Get properties
-		 * Show Toolbar - Set and Get properties
 		 * Special kys - events
 		 * Global Config - auto update,  etc
 		 * Print - Show Dialog and direct print
