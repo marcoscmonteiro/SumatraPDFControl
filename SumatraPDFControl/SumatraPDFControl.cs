@@ -440,9 +440,8 @@ namespace SumatraPDFControl
 		private void RestartSumatra(string sFile, int page = 1)
         {
 			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
-			{
-				// Ver qual o código do comando no arquivo Commands.h: CmdClose
-				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
+			{				
+				CloseDocument();
 				SumatraProcess.Kill();
 				pSumatraWindowHandle = (IntPtr)0;
 			}
@@ -467,8 +466,7 @@ namespace SumatraPDFControl
 			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				// Ver qual o código do comando no arquivo Commands.h: CmdClose
-				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
+				CloseDocument();
 				SendDDECommand("Open", sFile);
 				SetPage(page);
 			}
@@ -476,6 +474,12 @@ namespace SumatraPDFControl
 			{				
 				RestartSumatra(sFile, page);
 			}
+		}
+
+		private void CloseDocument()
+        {
+			// Ver qual o código do comando no arquivo Commands.h: CmdClose
+			SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
 		}
 
 		private void SumatraPDFControl_Resize(object sender, EventArgs e)
@@ -506,13 +510,20 @@ namespace SumatraPDFControl
 		}
 
 		/* TODO: 
-		 * ScrollPosition - Set and Get properties
-		 * Zoom - Set and Get properties+
-		 * Special keys - events
+		 * 
+		 * ScrollPosition - Set and Get properties / event
+		 * Zoom - Set and Get properties
+		 * ZoomVirtual - Set and Get properties
+		 * Special keys - events		 		 
+		 * Page Rotation - Set and Get properties /event		 
+		 * LastPage - Get property
+		 * Commands call
+		 * - Page first, previous, next, last 
+		 * - Close Document
+		 * - Copy Selection
+		 * - Select All
+		 * - Print - Show Dialog and direct print
 		 * Global Config - auto update,  etc
-		 * Print - Show Dialog and direct print
-		 * Page Rotation - Set and Get properties
-		 * Page: first, previous, next, last 
 		 * Dont call Get property after raising changing events (optimization)
 		 * Do a revision in GEDVISA PDFXChange used properties
 		*/
