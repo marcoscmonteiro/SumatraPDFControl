@@ -100,5 +100,31 @@ namespace SumatraPDFControlTest
         {
             MessageBox.Show(sumatraPDFControl1.Page.ToString());
         }
+
+        private void toolStripButton10_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.TocVisible = !sumatraPDFControl1.TocVisible;
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
+        private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripComboBox1.Text != String.Empty)
+                sumatraPDFControl1.DisplayMode = (SumatraPDFControl.SumatraPDFControl.DisplayModeEnum)int.Parse(toolStripComboBox1.Text.Split('-')[0]);
+
+        }
+
+        private void toolStripButton11_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(sumatraPDFControl1.DisplayMode.ToString());
+        }
     }
 }

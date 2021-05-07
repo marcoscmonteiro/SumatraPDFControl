@@ -74,6 +74,11 @@ namespace SumatraPDFControl
 			FitContent // ZoomVirtual = -3
 		}
 
+		private void GetZoom()
+		{
+			SendDDECommand("GetProperty", sCurrentFile, "Zoom");
+		}
+
 		private float fZoom;
 		public float Zoom
         {
@@ -94,24 +99,31 @@ namespace SumatraPDFControl
 			}
 		}
 
+		private void GetDisplayMode()
+		{
+			SendDDECommand("GetProperty", sCurrentFile, "DisplayMode");
+		}
 		private DisplayModeEnum eDisplayMode;
 		public DisplayModeEnum DisplayMode {
 			get {
 				GetDisplayMode();
 				return eDisplayMode;
 			}
+			set
+            {
+				SendDDECommand("SetProperty", sCurrentFile, "DisplayMode", ((int)value).ToString());
+			}
 		}
 
-		private Boolean bContinuousDisplayMode;
-		public Boolean ContinuousDisplayMode
-        {
-			get
-            {
-				GetDisplayMode();
-				return bContinuousDisplayMode;
-			}
-        }
+		private void GetPage()
+		{
+			SendDDECommand("GetProperty", sCurrentFile, "Page");
+		}
 
+		private void SetPage(int page)
+		{
+			SendDDECommand("GotoPage", sCurrentFile, page);
+		}
 		private int nPage;
 		public int Page {
 			get {
@@ -130,7 +142,7 @@ namespace SumatraPDFControl
 				return sNamedDest;
 			}
 			set {
-				SetNamedDest(value);
+				SendDDECommand("GotoNamedDest", sCurrentFile, value);
 			} 
 		}
 
@@ -147,6 +159,20 @@ namespace SumatraPDFControl
 				SendDDECommand("SetProperty", sCurrentFile, "ToolbarVisible", value ? "1" : "0");
             }
         }
+
+		private Boolean bTocVisible;
+		public Boolean TocVisible
+		{
+			get
+			{
+				SendDDECommand("GetProperty", sCurrentFile, "TocVisible");
+				return bTocVisible;
+			}
+			set
+			{
+				SendDDECommand("SetProperty", sCurrentFile, "TocVisible", value ? "1" : "0");
+			}
+		}
 
 		public SumatraPDFControl()
         {
@@ -244,7 +270,6 @@ namespace SumatraPDFControl
 		public class DisplayModeChangedEventArgs : EventArgs
         {
 			public DisplayModeEnum DisplayMode { get; set; }
-			public Boolean Continuous { get; set; }
         }
 
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
@@ -333,15 +358,12 @@ namespace SumatraPDFControl
 
 					case "DisplayModeChanged":
 					case "DisplayMode":
-						Match mDM = Regex.Match(m.Result("${args}"), @"(?<dm>.+)\,\s*(?<kc>.+)");
-						eDisplayMode = (DisplayModeEnum)int.Parse(mDM.Result("${dm}"));
-						bContinuousDisplayMode = (int.Parse(mDM.Result("${kc}"))!=0);
+						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
 						if (mmsg.Contains("Changed"))
 							DisplayModeChangedMessage?.Invoke(this,
 								new DisplayModeChangedEventArgs
 								{
 									DisplayMode = eDisplayMode,
-									Continuous = bContinuousDisplayMode
 								});
 							break;
 					case "StartupFinished":
@@ -352,6 +374,10 @@ namespace SumatraPDFControl
 
 					case "ToolbarVisible":
 						bToolbarVisible = (int.Parse(m.Result("${args}")) == 1);
+						break;
+
+					case "TocVisible":
+						bTocVisible = (int.Parse(m.Result("${args}")) == 1);
 						break;
 
 					default:
@@ -372,6 +398,8 @@ namespace SumatraPDFControl
 
 		private void SendDDECommand(string strMessage, params Object[] parr)
 		{
+			if (SumatraWindowHandle == (IntPtr)0) return;
+
 			string DDEMessage = string.Empty;
 			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr); else
             {
@@ -467,31 +495,6 @@ namespace SumatraPDFControl
 			}
 		}
 
-		private void SetPage(int nPage)
-		{
-			SendDDECommand("GotoPage", sCurrentFile, nPage);
-		}
-
-		private void GetPage()
-		{
-			SendDDECommand("GetProperty", sCurrentFile, "Page");
-		}
-
-		private void SetNamedDest(string namedDest)
-        {
-			SendDDECommand("GotoNamedDest", sCurrentFile, namedDest);
-		}
-
-		private void GetDisplayMode()
-        {
-			SendDDECommand("GetProperty", sCurrentFile, "DisplayMode");
-		}
-
-		private void GetZoom()
-        {
-			SendDDECommand("GetProperty", sCurrentFile, "Zoom");
-		}
-
 		public void TextSearch(string searchText, Boolean matchCase)
 		{
 			SendDDECommand("TextSearch", sCurrentFile, searchText, (matchCase ? 1 : 0));
@@ -504,10 +507,8 @@ namespace SumatraPDFControl
 
 		/* TODO: 
 		 * ScrollPosition - Set and Get properties
-		 * Zoom - Set and Get properties
-		 * DisplayMode - Set and Get properties
-		 * Show TOC - Set and Get properties
-		 * Special kys - events
+		 * Zoom - Set and Get properties+
+		 * Special keys - events
 		 * Global Config - auto update,  etc
 		 * Print - Show Dialog and direct print
 		 * Page Rotation - Set and Get properties

@@ -43,10 +43,13 @@
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel4 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton10 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.sumatraPDFControl1 = new SumatraPDFControl.SumatraPDFControl();
-            this.toolStripButton9 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton11 = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,12 +69,16 @@
             this.toolStripLabel2,
             this.toolStripLabel3,
             this.toolStripLabel4,
-            this.toolStripButton9});
+            this.toolStripButton9,
+            this.toolStripButton10,
+            this.toolStripComboBox1,
+            this.toolStripButton11});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(799, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // toolStripButton1
             // 
@@ -189,6 +196,43 @@
             this.toolStripLabel4.Name = "toolStripLabel4";
             this.toolStripLabel4.Size = new System.Drawing.Size(0, 22);
             // 
+            // toolStripButton9
+            // 
+            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
+            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton9.Name = "toolStripButton9";
+            this.toolStripButton9.Size = new System.Drawing.Size(58, 22);
+            this.toolStripButton9.Text = "Get Page";
+            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            // 
+            // toolStripButton10
+            // 
+            this.toolStripButton10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton10.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton10.Image")));
+            this.toolStripButton10.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton10.Name = "toolStripButton10";
+            this.toolStripButton10.Size = new System.Drawing.Size(66, 22);
+            this.toolStripButton10.Text = "Toc Visible";
+            this.toolStripButton10.ToolTipText = "Toc Visible";
+            this.toolStripButton10.Click += new System.EventHandler(this.toolStripButton10_Click);
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.Items.AddRange(new object[] {
+            "0 - Automatic",
+            "1 - SinglePage",
+            "2 - Facing",
+            "3 - BookView",
+            "4 - Continuous",
+            "5 - ContinuousFacing",
+            "6 - ContinuousBookView"});
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox1.ToolTipText = "Page Mode";
+            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
+            this.toolStripComboBox1.Click += new System.EventHandler(this.toolStripComboBox1_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -207,11 +251,16 @@
             this.sumatraPDFControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sumatraPDFControl1.DisplayMode = SumatraPDFControl.SumatraPDFControl.DisplayModeEnum.Automatic;
             this.sumatraPDFControl1.Location = new System.Drawing.Point(0, 113);
             this.sumatraPDFControl1.Name = "sumatraPDFControl1";
+            this.sumatraPDFControl1.NamedDest = null;
+            this.sumatraPDFControl1.Page = 0;
             this.sumatraPDFControl1.Size = new System.Drawing.Size(799, 405);
             this.sumatraPDFControl1.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\dbg64\\";
             this.sumatraPDFControl1.TabIndex = 0;
+            this.sumatraPDFControl1.TocVisible = false;
+            this.sumatraPDFControl1.ToolBarVisible = false;
             this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
             this.sumatraPDFControl1.PageChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
             this.sumatraPDFControl1.ContextMenuMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
@@ -219,15 +268,15 @@
             this.sumatraPDFControl1.ZoomChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
             this.sumatraPDFControl1.LinkClickedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
             // 
-            // toolStripButton9
+            // toolStripButton11
             // 
-            this.toolStripButton9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton9.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton9.Image")));
-            this.toolStripButton9.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton9.Name = "toolStripButton9";
-            this.toolStripButton9.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton9.Text = "toolStripButton9";
-            this.toolStripButton9.Click += new System.EventHandler(this.toolStripButton9_Click);
+            this.toolStripButton11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton11.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton11.Image")));
+            this.toolStripButton11.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton11.Name = "toolStripButton11";
+            this.toolStripButton11.Size = new System.Drawing.Size(83, 22);
+            this.toolStripButton11.Text = "Display Mode";
+            this.toolStripButton11.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
             // Form1
             // 
@@ -266,6 +315,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripButton toolStripButton8;
         private System.Windows.Forms.ToolStripButton toolStripButton9;
+        private System.Windows.Forms.ToolStripButton toolStripButton10;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.ToolStripButton toolStripButton11;
     }
 }
 
