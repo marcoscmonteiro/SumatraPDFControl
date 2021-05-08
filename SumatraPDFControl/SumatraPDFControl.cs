@@ -79,6 +79,11 @@ namespace SumatraPDFControl
 			SendDDECommand("GetProperty", sCurrentFile, "Zoom");
 		}
 
+		private void SetZoom(float value)
+        {
+			SendDDECommand("SetProperty", sCurrentFile, "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
+		}
+
 		private float fZoom;
 		public float Zoom
         {
@@ -87,6 +92,10 @@ namespace SumatraPDFControl
 				GetZoom();
 				return fZoom;
             }
+			set
+            {
+				SetZoom(value);
+			}
         }
 
 		private ZoomVirtuamEnum fZoomVirtual;
@@ -96,6 +105,25 @@ namespace SumatraPDFControl
 			{
 				GetZoom();
 				return fZoomVirtual;
+			}
+			set
+            {
+				float fZoomVirtual;
+				switch (value)
+				{
+					case ZoomVirtuamEnum.FitPage:
+						fZoomVirtual = -1;
+						break;
+					case ZoomVirtuamEnum.FitWidth:
+						fZoomVirtual = -2;
+						break;
+					case ZoomVirtuamEnum.FitContent:
+						fZoomVirtual = -3;
+						break;
+					default:
+						return;
+				}
+				SetZoom(fZoomVirtual);
 			}
 		}
 
@@ -512,8 +540,6 @@ namespace SumatraPDFControl
 		/* TODO: 
 		 * 
 		 * ScrollPosition - Set and Get properties / event
-		 * Zoom - Set and Get properties
-		 * ZoomVirtual - Set and Get properties
 		 * Special keys - events		 		 
 		 * Page Rotation - Set and Get properties /event		 
 		 * LastPage - Get property
@@ -524,6 +550,7 @@ namespace SumatraPDFControl
 		 * - Select All
 		 * - Print - Show Dialog and direct print
 		 * Global Config - auto update,  etc
+		 * Bookmarks - Context Menu event
 		 * Dont call Get property after raising changing events (optimization)
 		 * Do a revision in GEDVISA PDFXChange used properties
 		*/

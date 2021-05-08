@@ -21,14 +21,14 @@ namespace SumatraPDFControlTest
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                sumatraPDFControl1.LoadFile(openFileDialog1.FileName, int.Parse(toolStripTextBox1.Text=="" ? "1" : toolStripTextBox1.Text));
+                sumatraPDFControl1.LoadFile(openFileDialog1.FileName, int.Parse(toolText.Text=="" ? "1" : toolText.Text));
             }
 
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.Page = int.Parse(toolStripTextBox1.Text);
+            sumatraPDFControl1.Page = int.Parse(toolText.Text);
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -46,12 +46,12 @@ namespace SumatraPDFControlTest
         {
             textBox1.Text += e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine;
             if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpen()]") 
-                toolStripLabel2.Text = sumatraPDFControl1.Page.ToString() + " - " + sumatraPDFControl1.NamedDest;
+                toolPage.Text = sumatraPDFControl1.Page.ToString() + " - " + sumatraPDFControl1.NamedDest;
         }
 
         private void sumatraPDFControl1_PageChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs e)
         {
-            toolStripLabel2.Text = e.Page.ToString() + " - " + e.NamedDest;
+            toolPage.Text = e.Page.ToString() + " / " + e.NamedDest;
         }
 
         private void sumatraPDFControl1_ContextMenuMessage(object sender, SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs e)
@@ -68,7 +68,8 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_ZoomChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs e)
         {
-            toolStripLabel4.Text = e.Zoom.ToString() + " - Zoom Virtual: " + e.ZoomVirtual.ToString();
+            toolZoom.Text = e.Zoom.ToString();
+            toolZoomVirtual.Text = e.ZoomVirtual.ToString();
         }
 
         private void sumatraPDFControl1_LinkClickedMessage(object sender, SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs e)
@@ -78,7 +79,7 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.TextSearch(toolStripTextBox1.Text, true);
+            sumatraPDFControl1.TextSearch(toolText.Text, true);
         }
 
         private void toolStripButton6_Click(object sender, EventArgs e)
@@ -93,12 +94,12 @@ namespace SumatraPDFControlTest
 
         private void toolStripButton8_Click(object sender, EventArgs e)
         {
-            sumatraPDFControl1.NamedDest = toolStripTextBox1.Text;
+            sumatraPDFControl1.NamedDest = toolText.Text;
         }
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(sumatraPDFControl1.Page.ToString());
+            toolText.Text = sumatraPDFControl1.Page.ToString();
         }
 
         private void toolStripButton10_Click(object sender, EventArgs e)
@@ -117,14 +118,29 @@ namespace SumatraPDFControlTest
 
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (toolStripComboBox1.Text != String.Empty)
-                sumatraPDFControl1.DisplayMode = (SumatraPDFControl.SumatraPDFControl.DisplayModeEnum)int.Parse(toolStripComboBox1.Text.Split('-')[0]);
+            if (toolPageMode.Text != String.Empty)
+                sumatraPDFControl1.DisplayMode = (SumatraPDFControl.SumatraPDFControl.DisplayModeEnum)toolPageMode.SelectedIndex; // int.Parse(toolPageMode.Text.Split('-')[0]);
 
         }
 
         private void toolStripButton11_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(sumatraPDFControl1.DisplayMode.ToString());
+            toolPageMode.Text = sumatraPDFControl1.DisplayMode.ToString();
+        }
+
+        private void toolSetZoom_Click(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.Zoom = float.Parse(toolText.Text);
+        }
+
+        private void toolZoomVirtualSet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sumatraPDFControl1.ZoomVirtual = (SumatraPDFControl.SumatraPDFControl.ZoomVirtuamEnum)toolZoomVirtualSet.SelectedIndex;
+        }
+
+        private void toolGetZoomVirtual_Click(object sender, EventArgs e)
+        {
+            toolZoomVirtualSet.Text = sumatraPDFControl1.ZoomVirtual.ToString();
         }
     }
 }
