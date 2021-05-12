@@ -15,6 +15,11 @@ namespace SumatraPDFControl
         /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
         protected override void Dispose(bool disposing)
         {
+            if (pSumatraWindowHandle != (IntPtr)0)
+            {
+                CloseDocument();
+                pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
+            }
             if (disposing && (components != null))
             {
                 components.Dispose();

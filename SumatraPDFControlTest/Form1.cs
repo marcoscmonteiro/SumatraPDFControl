@@ -12,6 +12,8 @@ namespace SumatraPDFControlTest
 {
     public partial class Form1 : Form
     {
+        public string sFilename;
+
         public Form1()
         {
             InitializeComponent();
@@ -141,6 +143,15 @@ namespace SumatraPDFControlTest
         private void toolGetZoomVirtual_Click(object sender, EventArgs e)
         {
             toolZoomVirtualSet.Text = sumatraPDFControl1.ZoomVirtual.ToString();
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            if (sFilename!=string.Empty)
+            {
+                sumatraPDFControl1.LoadFile(sFilename);
+                sFilename = string.Empty;
+            }
         }
     }
 }

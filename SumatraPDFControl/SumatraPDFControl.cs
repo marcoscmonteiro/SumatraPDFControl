@@ -38,6 +38,7 @@ namespace SumatraPDFControl
 		[DllImport("user32.dll")]
 		static extern bool DestroyWindow(IntPtr hWnd);
 
+		// Windows constants and default pointers
 		private const int WM_COPYDATA = 0x004A;
 		private const int WM_DESTROY = 0x0002;
 		private const int WM_SETFOCUS = 0x0007;
@@ -47,11 +48,17 @@ namespace SumatraPDFControl
 		private const int WM_COMMAND = 0x0111;
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 
+		// Sumatra Commands (get and update them from sumatra Commands.h)
+		private readonly IntPtr SumatraCmdCopySelection = (IntPtr)228;
+		private readonly IntPtr SumatraCmdClose = (IntPtr)204;
+
+
 		private Process SumatraProcess;
-		private string sCurrentFile;
+		private string sCurrentFile = string.Empty;
 		private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
 
+		static List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
 		public enum DisplayModeEnum
 		{
@@ -76,12 +83,12 @@ namespace SumatraPDFControl
 
 		private void GetZoom()
 		{
-			SendDDECommand("GetProperty", sCurrentFile, "Zoom");
+			SendSumatraCommand("GetProperty", "Zoom");
 		}
 
 		private void SetZoom(float value)
         {
-			SendDDECommand("SetProperty", sCurrentFile, "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
+			SendSumatraCommand("SetProperty", "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
 		}
 
 		private float fZoom;
@@ -129,7 +136,7 @@ namespace SumatraPDFControl
 
 		private void GetDisplayMode()
 		{
-			SendDDECommand("GetProperty", sCurrentFile, "DisplayMode");
+			SendSumatraCommand("GetProperty", "DisplayMode");
 		}
 		private DisplayModeEnum eDisplayMode;
 		public DisplayModeEnum DisplayMode {
@@ -139,18 +146,18 @@ namespace SumatraPDFControl
 			}
 			set
             {
-				SendDDECommand("SetProperty", sCurrentFile, "DisplayMode", ((int)value).ToString());
+				SendSumatraCommand("SetProperty", "DisplayMode", ((int)value).ToString());
 			}
 		}
 
 		private void GetPage()
 		{
-			SendDDECommand("GetProperty", sCurrentFile, "Page");
+			SendSumatraCommand("GetProperty", "Page");
 		}
 
 		private void SetPage(int page)
 		{
-			SendDDECommand("GotoPage", sCurrentFile, page);
+			SendSumatraCommand("GotoPage", page);
 		}
 		private int nPage;
 		public int Page {
@@ -170,7 +177,7 @@ namespace SumatraPDFControl
 				return sNamedDest;
 			}
 			set {
-				SendDDECommand("GotoNamedDest", sCurrentFile, value);
+				SendSumatraCommand("GotoNamedDest", value);
 			} 
 		}
 
@@ -179,12 +186,12 @@ namespace SumatraPDFControl
         {
 			get
             {
-				SendDDECommand("GetProperty", sCurrentFile, "ToolbarVisible");
+				SendSumatraCommand("GetProperty", "ToolbarVisible");
 				return bToolbarVisible;
             }
 			set
             {
-				SendDDECommand("SetProperty", sCurrentFile, "ToolbarVisible", value ? "1" : "0");
+				SendSumatraCommand("SetProperty", "ToolbarVisible", value ? "1" : "0");
             }
         }
 
@@ -193,12 +200,12 @@ namespace SumatraPDFControl
 		{
 			get
 			{
-				SendDDECommand("GetProperty", sCurrentFile, "TocVisible");
+				SendSumatraCommand("GetProperty", "TocVisible");
 				return bTocVisible;
 			}
 			set
 			{
-				SendDDECommand("SetProperty", sCurrentFile, "TocVisible", value ? "1" : "0");
+				SendSumatraCommand("SetProperty", "TocVisible", value ? "1" : "0");
 			}
 		}
 
@@ -215,7 +222,9 @@ namespace SumatraPDFControl
 				if (pSumatraWindowHandle == (IntPtr)0)
 				{
 					pSumatraWindowHandle = FindWindowEx(base.Handle, default(IntPtr), null, null);
-				}
+					if (pSumatraWindowHandle != (IntPtr)0) 
+						pSumatraWindowHandleList.Add(pSumatraWindowHandle);
+				}		
 				return pSumatraWindowHandle;
 			}
 		}
@@ -424,18 +433,21 @@ namespace SumatraPDFControl
 			return e.CallBackReturn;
 		}
 
-		private void SendDDECommand(string strMessage, params Object[] parr)
+		private void SendSumatraCommand(string strMessage, params Object[] parr)
 		{
-			if (SumatraWindowHandle == (IntPtr)0) return;
+			// Without define current file commands cannot be send to sumatra
+			if (sCurrentFile == string.Empty) return;
+
+			if (SumatraWindowHandle == (IntPtr)0 && pSumatraWindowHandleList.Count==0) return;
+			IntPtr SumatraCurrentHandle = SumatraWindowHandle == (IntPtr)0 ? pSumatraWindowHandleList[0] : SumatraWindowHandle;
 
 			string DDEMessage = string.Empty;
 			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr); else
             {
-				DDEMessage = "[" + strMessage + "(";
-				int count = 0;
+				DDEMessage = "[" + strMessage + "(\"" + sCurrentFile + "\"";
 				foreach (Object p in parr)
 				{
-					if (count > 0) DDEMessage += ",";
+					DDEMessage += ",";
 					switch (p.GetType().FullName)
 					{
 						case "System.String":
@@ -445,7 +457,6 @@ namespace SumatraPDFControl
 							DDEMessage += p.ToString();
 							break;
 					}
-					count++;
 				}
 				DDEMessage += ")]";
 			}
@@ -457,10 +468,7 @@ namespace SumatraPDFControl
 			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
 			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
 			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				SendMessage(SumatraWindowHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
-			}
+			SendMessage(SumatraCurrentHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
 			Marshal.FreeHGlobal(DataStruct.lpData);
 			Marshal.FreeHGlobal(pDataStruct);
 		}
@@ -471,13 +479,14 @@ namespace SumatraPDFControl
 			{				
 				CloseDocument();
 				SumatraProcess.Kill();
-				pSumatraWindowHandle = (IntPtr)0;
+				pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
+				pSumatraWindowHandle = (IntPtr)0;				
 			}
 			var PSInfo = new ProcessStartInfo
 			{
 				FileName = SumatraPDFPath + "SumatraPDF.exe",
 				Arguments =
-					"-plugin " + base.Handle +
+					"-plugin " + base.Handle.ToString() +
 					//" -invert-colors" +
 					//" -appdata \"c:\\users\\marco\\Downloads\"" +
 					" -page " + page.ToString() +										
@@ -495,19 +504,23 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				CloseDocument();
-				SendDDECommand("Open", sFile);
+				SendSumatraCommand("Open");
 				SetPage(page);
 			}
 			else
-			{				
-				RestartSumatra(sFile, page);
+			{	
+				if (pSumatraWindowHandleList.Count==0) RestartSumatra(sFile, page); else
+                {
+					SendSumatraCommand("OpenPluginWindow", base.Handle.ToString());
+                }
+
 			}
 		}
 
 		private void CloseDocument()
         {
 			// Ver qual o código do comando no arquivo Commands.h: CmdClose
-			SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)204, (IntPtr)0);
+			SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdClose, (IntPtr)0);
 		}
 
 		private void SumatraPDFControl_Resize(object sender, EventArgs e)
@@ -523,22 +536,23 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				// Ver qual o código do comando no arquivo Commands.h: CmdCopySelection
-				SendMessage(SumatraWindowHandle, WM_COMMAND, (IntPtr)228, (IntPtr)0);
+				SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdCopySelection, (IntPtr)0);
 			}
 		}
 
 		public void TextSearch(string searchText, Boolean matchCase)
 		{
-			SendDDECommand("TextSearch", sCurrentFile, searchText, (matchCase ? 1 : 0));
+			SendSumatraCommand("TextSearch", searchText, (matchCase ? 1 : 0));
 		}
 
 		public void TextSearchNext(Boolean forward)
         {
-			SendDDECommand("TextSearchNext", sCurrentFile, (forward ? 1 : 0));
+			SendSumatraCommand("TextSearchNext", (forward ? 1 : 0));
 		}
 
 		/* TODO: 
-		 * 
+		 * Reusing SumatraPDF.exe open files. Create parameter to reuse (or not) an existing sumatra process
+		 * Separate Plugin funcions in another SumatraPDF sources files (cpp/h) and use frame handle and not pdf filename to comunication with SumatraPDF
 		 * ScrollPosition - Set and Get properties / event
 		 * Special keys - events		 		 
 		 * Page Rotation - Set and Get properties /event		 
