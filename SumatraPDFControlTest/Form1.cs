@@ -12,7 +12,8 @@ namespace SumatraPDFControlTest
 {
     public partial class Form1 : Form
     {
-        public string sFilename;
+        public string Filename = string.Empty;
+        public Boolean NewSumatraPDFProcess = false;
 
         public Form1()
         {
@@ -147,10 +148,10 @@ namespace SumatraPDFControlTest
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            if (sFilename!=string.Empty)
+            if (Filename!=string.Empty)
             {
-                sumatraPDFControl1.LoadFile(sFilename);
-                sFilename = string.Empty;
+                sumatraPDFControl1.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
+                Filename = string.Empty;
             }
         }
     }

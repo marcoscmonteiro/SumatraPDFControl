@@ -405,6 +405,7 @@ namespace SumatraPDFControl
 							break;
 					case "StartupFinished":
 					case "FileOpen":
+					case "FileOpenPluginWindow":
 						GetPage();
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
@@ -496,24 +497,21 @@ namespace SumatraPDFControl
             SumatraProcess = Process.Start(PSInfo);			
 		}
 
-		public void LoadFile(string sFile, int page = 1)
+		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
 		{
-			sCurrentFile = sFile;
-			Page = page;
+			sCurrentFile = PDFFile;
+			this.Page = Page;
 			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				CloseDocument();
 				SendSumatraCommand("Open");
-				SetPage(page);
+				SetPage(Page);
 			}
 			else
-			{	
-				if (pSumatraWindowHandleList.Count==0) RestartSumatra(sFile, page); else
-                {
-					SendSumatraCommand("OpenPluginWindow", base.Handle.ToString());
-                }
-
+			{					
+				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, Page); 
+				else SendSumatraCommand("OpenPluginWindow", base.Handle.ToString());				
 			}
 		}
 
@@ -551,7 +549,10 @@ namespace SumatraPDFControl
 		}
 
 		/* TODO: 
-		 * Reusing SumatraPDF.exe open files. Create parameter to reuse (or not) an existing sumatra process
+		 * Reusing SumatraPDF.exe open files. 
+		 * - Bug: after open, sumatra toolbar miss a blank line in window top
+		 * - Bug: toolbar/toc visible cannot be changed when open a same file name in 2 diferent control instances
+		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * Separate Plugin funcions in another SumatraPDF sources files (cpp/h) and use frame handle and not pdf filename to comunication with SumatraPDF
 		 * ScrollPosition - Set and Get properties / event
 		 * Special keys - events		 		 

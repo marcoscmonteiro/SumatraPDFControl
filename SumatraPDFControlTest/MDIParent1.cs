@@ -32,10 +32,11 @@ namespace SumatraPDFControlTest
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
             openFileDialog.Filter = "Portable Document Format (*.pdf)|*.pdf|All Files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\Downloads";
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
-                var form = new Form1 { sFilename = FileName };
+                var form = new Form1 { Filename = FileName, NewSumatraPDFProcess = checkBox1.Checked };
                 form.MdiParent = this;
                 form.Show();
             }
