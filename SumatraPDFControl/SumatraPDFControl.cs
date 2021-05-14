@@ -47,6 +47,7 @@ namespace SumatraPDFControl
 		private const int WM_RBUTTONDOWN = 0x0204;
 		private const int WM_COMMAND = 0x0111;
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
+		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
 
 		// Sumatra Commands (get and update them from sumatra Commands.h)
 		private readonly IntPtr SumatraCmdCopySelection = (IntPtr)228;
@@ -57,6 +58,7 @@ namespace SumatraPDFControl
 		private string sCurrentFile = string.Empty;
 		private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
+		private IntPtr SUMATRAMESSAGETYPE;
 
 		static List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
@@ -327,7 +329,7 @@ namespace SumatraPDFControl
 				LinkClickedMessage?.Invoke(this, new LinkClickedEventArgs { LinkText = sMsg0 });
 				return (IntPtr)CallBackReturn;
 			} else
-				if (dwData != DDEW) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
+				if (dwData != SUMATRAPLUGIN) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
 
 			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.*)\)\]");
 			if (m.Success)
@@ -445,10 +447,11 @@ namespace SumatraPDFControl
 			string DDEMessage = string.Empty;
 			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr); else
             {
-				DDEMessage = "[" + strMessage + "(\"" + sCurrentFile + "\"";
+				DDEMessage = "[" + strMessage + "("; //\"" + sCurrentFile + "\"";
+				Boolean FirstParam = true;
 				foreach (Object p in parr)
 				{
-					DDEMessage += ",";
+					if (!FirstParam) DDEMessage += ","; else FirstParam = false;
 					switch (p.GetType().FullName)
 					{
 						case "System.String":
@@ -464,7 +467,7 @@ namespace SumatraPDFControl
 
 			COPYDATASTRUCT DataStruct = default;
 			DDEMessage += "\0";
-			DataStruct.dwData = DDEW;
+			DataStruct.dwData = SUMATRAMESSAGETYPE;
 			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
 			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
 			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
@@ -505,13 +508,13 @@ namespace SumatraPDFControl
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
 				CloseDocument();
-				SendSumatraCommand("Open");
+				SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());
 				SetPage(Page);
 			}
 			else
 			{					
 				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, Page); 
-				else SendSumatraCommand("OpenPluginWindow", base.Handle.ToString());				
+				else SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());				
 			}
 		}
 
@@ -548,10 +551,15 @@ namespace SumatraPDFControl
 			SendSumatraCommand("TextSearchNext", (forward ? 1 : 0));
 		}
 
-		/* TODO: 
+        private void SumatraPDFControl_Load(object sender, EventArgs e)
+        {
+			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
+		}
+
+        /* TODO: 
 		 * Reusing SumatraPDF.exe open files. 
 		 * - Bug: after open, sumatra toolbar miss a blank line in window top
-		 * - Bug: toolbar/toc visible cannot be changed when open a same file name in 2 diferent control instances
+		 * - Bug: LoadFile do not work in a second chance
 		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * Separate Plugin funcions in another SumatraPDF sources files (cpp/h) and use frame handle and not pdf filename to comunication with SumatraPDF
 		 * ScrollPosition - Set and Get properties / event
@@ -570,5 +578,5 @@ namespace SumatraPDFControl
 		 * Do a revision in GEDVISA PDFXChange used properties
 		*/
 
-	}
+    }
 }

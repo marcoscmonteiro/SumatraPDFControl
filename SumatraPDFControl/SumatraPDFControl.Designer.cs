@@ -43,6 +43,7 @@ namespace SumatraPDFControl
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "SumatraPDFControl";
             this.Size = new System.Drawing.Size(460, 334);
+            this.Load += new System.EventHandler(this.SumatraPDFControl_Load);
             this.Resize += new System.EventHandler(this.SumatraPDFControl_Resize);
             this.ResumeLayout(false);
 
