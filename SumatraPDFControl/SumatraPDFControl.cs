@@ -518,9 +518,6 @@ namespace SumatraPDFControl
 			}
 			SetPage(Page);
 
-			// Force refresh of sumatracontrol (solution to bypass a bug in sumatrapdf redering window in plugin mode)
-			Width -= 1;
-			Width += 1;
 		}
 
 		private void CloseDocument()
@@ -562,7 +559,6 @@ namespace SumatraPDFControl
 		}
 
         /* TODO: 
-		 * Bug (bypassed): When open new window using the same sumatrapdf process do not resize correctly
 		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * ScrollPosition - Set and Get properties / event
 		 * Special keys - events		 		 
