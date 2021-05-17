@@ -562,9 +562,8 @@ namespace SumatraPDFControl
 		}
 
         /* TODO: 
-		 * Reusing SumatraPDF.exe open files. 
+		 * Bug (bypassed): When open new window using the same sumatrapdf process do not resize correctly
 		 * Bug: Toc window title is not being repainted after another window pass over it
-		 * Separate Plugin funcions in another SumatraPDF sources files (cpp/h) and use frame handle and not pdf filename to comunication with SumatraPDF
 		 * ScrollPosition - Set and Get properties / event
 		 * Special keys - events		 		 
 		 * Page Rotation - Set and Get properties /event		 
