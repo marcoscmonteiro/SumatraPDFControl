@@ -518,9 +518,9 @@ namespace SumatraPDFControl
 			}
 			SetPage(Page);
 
-			// Force refresh of sumatracontrol (solution to contour bug in sumatrapdf redering window sometimes)
-			this.Width = this.Width - 1;
-			this.Width = this.Width + 1;
+			// Force refresh of sumatracontrol (solution to bypass a bug in sumatrapdf redering window in plugin mode)
+			Width -= 1;
+			Width += 1;
 		}
 
 		private void CloseDocument()
