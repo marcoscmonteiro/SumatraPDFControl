@@ -507,15 +507,20 @@ namespace SumatraPDFControl
 			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				CloseDocument();
 				SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());
-				SetPage(Page);
+				pSumatraWindowHandleList.Remove(SumatraWindowHandle);
+				pSumatraWindowHandle = (IntPtr)0;				
 			}
 			else
 			{					
 				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, Page); 
 				else SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());				
 			}
+			SetPage(Page);
+
+			// Force refresh of sumatracontrol (solution to contour bug in sumatrapdf redering window sometimes)
+			this.Width = this.Width - 1;
+			this.Width = this.Width + 1;
 		}
 
 		private void CloseDocument()
@@ -558,8 +563,6 @@ namespace SumatraPDFControl
 
         /* TODO: 
 		 * Reusing SumatraPDF.exe open files. 
-		 * - Bug: after open, sumatra toolbar miss a blank line in window top
-		 * - Bug: LoadFile do not work in a second chance
 		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * Separate Plugin funcions in another SumatraPDF sources files (cpp/h) and use frame handle and not pdf filename to comunication with SumatraPDF
 		 * ScrollPosition - Set and Get properties / event
