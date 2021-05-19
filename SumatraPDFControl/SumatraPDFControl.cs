@@ -529,7 +529,7 @@ namespace SumatraPDFControl
 			}
 			var PSInfo = new ProcessStartInfo
 			{
-				FileName = SumatraPDFPath + "SumatraPDF.exe",
+				FileName = SumatraPDFPath,
 				Arguments =
 					"-plugin " + base.Handle.ToString() +
 					//" -invert-colors" +
