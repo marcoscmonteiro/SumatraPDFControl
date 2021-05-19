@@ -53,7 +53,6 @@ namespace SumatraPDFControl
 		private readonly IntPtr SumatraCmdCopySelection = (IntPtr)228;
 		private readonly IntPtr SumatraCmdClose = (IntPtr)204;
 
-
 		private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
 		private string pSumatraPDFPath;
@@ -61,6 +60,31 @@ namespace SumatraPDFControl
 		private IntPtr SUMATRAMESSAGETYPE;
 
 		static List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
+
+		public struct ScrollPositionStruct
+		{
+			public ScrollPositionStruct(int page, double x, double y)
+			{
+				Page = page;
+				X = x;
+				Y = y;
+			}
+			public double X { get; }
+			public double Y { get; }
+			public int Page { get; }
+			public override string ToString() => $"{Page},{X},{Y}";
+		}
+		
+		private ScrollPositionStruct pScrollPosition;
+		public ScrollPositionStruct ScrollPosition { 
+			get {
+				SendSumatraCommand("GetProperty", "ScrollPosition");
+				return pScrollPosition;
+			} 
+			set {
+				SendSumatraCommand("SetProperty", "ScrollPosition", value.ToString());
+			} 
+		}
 
 		public enum DisplayModeEnum
 		{
@@ -318,6 +342,7 @@ namespace SumatraPDFControl
 		public event EventHandler<ZoomChangedEventArgs> ZoomChangedMessage;
 		public event EventHandler<LinkClickedEventArgs> LinkClickedMessage;
 		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChangedMessage;
+		public event EventHandler<EventArgs> ScrollPositionMessage;
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
@@ -420,6 +445,19 @@ namespace SumatraPDFControl
 						bTocVisible = (int.Parse(m.Result("${args}")) == 1);
 						break;
 
+					case "ScrollPosition":
+						Match mSP = Regex.Match(m.Result("${args}"), @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
+						pScrollPosition = new ScrollPositionStruct(
+							int.Parse(mSP.Result("${page}")),
+							Double.Parse(mSP.Result("${x}"), new System.Globalization.CultureInfo("en-US")), 
+							Double.Parse(mSP.Result("${y}"), new System.Globalization.CultureInfo("en-US"))
+						);
+						break;
+
+					case "ScrollPositionChanged":
+						ScrollPositionMessage?.Invoke(this, new EventArgs());
+						break;
+
 					default:
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
@@ -456,6 +494,9 @@ namespace SumatraPDFControl
 					{
 						case "System.String":
 							DDEMessage += "\"" + p.ToString() + "\"";
+							break;
+						case "System.Double":
+							DDEMessage += ((Double)p).ToString(new System.Globalization.CultureInfo("en-US"));
 							break;
 						default:
 							DDEMessage += p.ToString();
@@ -561,6 +602,7 @@ namespace SumatraPDFControl
         /* TODO: 
 		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * ScrollPosition - Set and Get properties / event
+		 *   bug: changing zoom or setting ScrollPosition property does not raise SumatraPDF ScrollPositionChange (nug in sumatrapdf)
 		 * Special keys - events		 		 
 		 * Page Rotation - Set and Get properties /event		 
 		 * LastPage - Get property

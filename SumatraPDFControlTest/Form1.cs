@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -153,6 +154,24 @@ namespace SumatraPDFControlTest
                 sumatraPDFControl1.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
                 Filename = string.Empty;
             }
+        }
+
+        private void sumatraPDFControl1_ScrollPositionMessage(object sender, EventArgs e)
+        {
+            toolScrollPosX.Text = sumatraPDFControl1.ScrollPosition.X.ToString();
+            toolScrollPosY.Text = sumatraPDFControl1.ScrollPosition.Y.ToString();
+            toolScrollPosPage.Text = sumatraPDFControl1.ScrollPosition.Page.ToString();
+        }
+
+        private void toolSetScrollPos_Click(object sender, EventArgs e)
+        {
+            Match mSP = Regex.Match(toolText.Text, @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
+            var pScrollPosition = new SumatraPDFControl.SumatraPDFControl.ScrollPositionStruct(
+                int.Parse(mSP.Result("${page}")),
+                Double.Parse(mSP.Result("${x}")),
+                Double.Parse(mSP.Result("${y}"))
+            );
+            sumatraPDFControl1.ScrollPosition = pScrollPosition;            
         }
     }
 }
