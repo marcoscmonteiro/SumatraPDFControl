@@ -58,22 +58,24 @@ namespace SumatraPDFControlTest
             toolPage.Text = e.Page.ToString() + " / " + e.NamedDest;
         }
 
-        private void sumatraPDFControl1_ContextMenuMessage(object sender, SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs e)
+        private void sumatraPDFControl1_ContextMenuMessage(object sender, SumatraPDFControl.SumatraPDFControl.ContextMenuOpenEventArgs e)
         {
-            e.OpenSumatraContextMenu = true;
+            e.Handled = true;
             // To do: alterar para retorno false e criar o próprio menu de contexto customizado
             textBox1.Text += "ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString() + System.Environment.NewLine;
         }
 
-        private void sumatraPDFControl1_KeyPressedMessage(object sender, SumatraPDFControl.SumatraPDFControl.KeyPressedEventArgs e)
+        private void sumatraPDFControl1_KeyPressedMessage(object sender, KeyPressEventArgs e)
         {
-            textBox1.Text += "KeyPressed: " + e.Key + System.Environment.NewLine;
+            textBox1.Text += "KeyPressed: " + e.KeyChar + System.Environment.NewLine;
         }
 
         private void sumatraPDFControl1_ZoomChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs e)
         {
             toolZoom.Text = e.Zoom.ToString();
             toolZoomVirtual.Text = e.ZoomVirtual.ToString();
+            // Example limiting zoom in 300%
+            if (e.Zoom > 300) sumatraPDFControl1.Zoom = 300;
         }
 
         private void sumatraPDFControl1_LinkClickedMessage(object sender, SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs e)
@@ -139,7 +141,7 @@ namespace SumatraPDFControlTest
 
         private void toolZoomVirtualSet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sumatraPDFControl1.ZoomVirtual = (SumatraPDFControl.SumatraPDFControl.ZoomVirtuamEnum)toolZoomVirtualSet.SelectedIndex;
+            sumatraPDFControl1.ZoomVirtual = (SumatraPDFControl.SumatraPDFControl.ZoomVirtualEnum)toolZoomVirtualSet.SelectedIndex;
         }
 
         private void toolGetZoomVirtual_Click(object sender, EventArgs e)
@@ -172,6 +174,16 @@ namespace SumatraPDFControlTest
                 Double.Parse(mSP.Result("${y}"))
             );
             sumatraPDFControl1.ScrollPosition = pScrollPosition;            
+        }
+
+        private void sumatraPDFControl1_DisplayModeChangedMessage(object sender, SumatraPDFControl.SumatraPDFControl.DisplayModeChangedEventArgs e)
+        {
+            toolDisplayMode.Text = e.DisplayMode.ToString();
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }

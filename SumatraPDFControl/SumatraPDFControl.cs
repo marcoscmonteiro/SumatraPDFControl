@@ -99,7 +99,7 @@ namespace SumatraPDFControl
 			ContinuousBookView,
 		};
 
-		public enum ZoomVirtuamEnum
+		public enum ZoomVirtualEnum
         {
 			None = 0,
 			FitPage, // ZoomVirtual = -1
@@ -131,8 +131,8 @@ namespace SumatraPDFControl
 			}
         }
 
-		private ZoomVirtuamEnum fZoomVirtual;
-		public ZoomVirtuamEnum ZoomVirtual
+		private ZoomVirtualEnum fZoomVirtual;
+		public ZoomVirtualEnum ZoomVirtual
 		{
 			get
 			{
@@ -144,13 +144,13 @@ namespace SumatraPDFControl
 				float fZoomVirtual;
 				switch (value)
 				{
-					case ZoomVirtuamEnum.FitPage:
+					case ZoomVirtualEnum.FitPage:
 						fZoomVirtual = -1;
 						break;
-					case ZoomVirtuamEnum.FitWidth:
+					case ZoomVirtualEnum.FitWidth:
 						fZoomVirtual = -2;
 						break;
-					case ZoomVirtuamEnum.FitContent:
+					case ZoomVirtualEnum.FitContent:
 						fZoomVirtual = -3;
 						break;
 					default:
@@ -181,9 +181,9 @@ namespace SumatraPDFControl
 			SendSumatraCommand("GetProperty", "Page");
 		}
 
-		private void SetPage(int page)
+		private void SetPage(int Page)
 		{
-			SendSumatraCommand("GotoPage", page);
+			SendSumatraCommand("SetProperty", "Page", Page.ToString());
 		}
 		private int nPage;
 		public int Page {
@@ -299,14 +299,26 @@ namespace SumatraPDFControl
 
 		public class PageChangedEventArgs : EventArgs
         {
-			public int Page { get; set; }
-			public string NamedDest { get; set; }
+			public PageChangedEventArgs(int Page, string NamedDest)
+            {
+				this.Page = Page;
+				this.NamedDest = NamedDest;
+            }
+
+			public int Page { get; }
+			public string NamedDest { get; }
 		}
-		public class ContextMenuEventArgs : EventArgs
+		public class ContextMenuOpenEventArgs : EventArgs
         {
-			public int X { get; set; }
-			public int Y { get; set; }
-			public Boolean OpenSumatraContextMenu { get; set; }
+			public ContextMenuOpenEventArgs(int X, int Y)
+            {
+				this.X = X;
+				this.Y = Y;
+				Handled = false;
+			}
+			public int X { get; }
+			public int Y { get; }
+			public Boolean Handled { get; set; }
 		}
 		public class SumatraMessageEventArgs : EventArgs
 		{
@@ -314,35 +326,62 @@ namespace SumatraPDFControl
 			public string Msg { get; set; }
 			public IntPtr Data { get; set; }
 		}
-		public class KeyPressedEventArgs : EventArgs
-		{
-			public char Key { get; set; }
-			public Boolean DisallowKeyPress { get; set; }
-		}
+
 		public class ZoomChangedEventArgs : EventArgs
 		{
-			public float Zoom { get; set; }
-			public ZoomVirtuamEnum ZoomVirtual { get; set; }
-			public Boolean MouseWheel { get; set; }
+			public ZoomChangedEventArgs(float Zoom, ZoomVirtualEnum ZoomVirtual, Boolean MouseWheel)
+            {
+				this.Zoom = Zoom;
+				this.ZoomVirtual = ZoomVirtual;
+				this.MouseWheel = MouseWheel;
+            }
+			public float Zoom { get; }
+			public ZoomVirtualEnum ZoomVirtual { get; }
+			public Boolean MouseWheel { get; }
 		}
 		public class LinkClickedEventArgs : EventArgs
         {
-			public string LinkText { get; set; }
+			public LinkClickedEventArgs(string LinkText)
+            {
+				this.LinkText = LinkText;
+			}
+			public string LinkText { get; }
         }
 
 		public class DisplayModeChangedEventArgs : EventArgs
         {
-			public DisplayModeEnum DisplayMode { get; set; }
+			public DisplayModeChangedEventArgs(DisplayModeEnum DisplayMode)
+            {
+				this.DisplayMode = DisplayMode;
+            }
+			public DisplayModeEnum DisplayMode { get; }
         }
 
+		[Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
-		public event EventHandler<PageChangedEventArgs> PageChangedMessage;
-		public event EventHandler<ContextMenuEventArgs> ContextMenuMessage;
-		public event EventHandler<KeyPressedEventArgs> KeyPressedMessage;
-		public event EventHandler<ZoomChangedEventArgs> ZoomChangedMessage;
-		public event EventHandler<LinkClickedEventArgs> LinkClickedMessage;
-		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChangedMessage;
-		public event EventHandler<EventArgs> ScrollPositionMessage;
+
+		[Description("Current visible page was changed"), Category("SumatraPDF")]
+		public event EventHandler<PageChangedEventArgs> PageChanged;
+
+		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
+		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
+
+		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' can not be changed)"), Category("SumatraPDF")]
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+        public event EventHandler<KeyPressEventArgs> KeyPress;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
+        [Description("Zoom factor was changed"), Category("SumatraPDF")]
+		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
+
+		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
+		public event EventHandler<LinkClickedEventArgs> LinkClick;
+
+		[Description("Display mode was changed"), Category("SumatraPDF")]
+		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
+
+		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
+		public event EventHandler<EventArgs> ScrollPositionChanged;
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
@@ -351,7 +390,7 @@ namespace SumatraPDFControl
 
 			// dwData = (IntPtr)0x4C5255 it's a message to internet browser when SumatraPDF is operating in plugin mode, so raise LinkClickedMessage event			
 			if (dwData == (IntPtr)0x4C5255) { 
-				LinkClickedMessage?.Invoke(this, new LinkClickedEventArgs { LinkText = sMsg0 });
+				LinkClick?.Invoke(this, new LinkClickedEventArgs(sMsg0));
 				return (IntPtr)CallBackReturn;
 			} else
 				if (dwData != SUMATRAPLUGIN) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
@@ -368,25 +407,22 @@ namespace SumatraPDFControl
 						nPage = int.Parse(mPG.Result("${pageNo}"));
 						sNamedDest = mPG.Result("${namedDest}");
 						if (mmsg.Contains("Changed"))
-							PageChangedMessage?.Invoke(this, new PageChangedEventArgs { Page = Page, NamedDest = NamedDest });
+							PageChanged?.Invoke(this, new PageChangedEventArgs(nPage, sNamedDest));
 						break;
 
 					case "KeyPressed":
-						var kpe = new KeyPressedEventArgs { Key = (char)int.Parse(m.Result("${args}")), DisallowKeyPress = false };
-                        KeyPressedMessage?.Invoke(this, kpe);
-						kpe.DisallowKeyPress = (kpe.Key == 'q');
-						CallBackReturn = kpe.DisallowKeyPress ? 1 : 0;
+						var kpe = new KeyPressEventArgs((char)int.Parse(m.Result("${args}")));
+						// Prevents end of SumatraPDF if 'q' is pressed
+						kpe.Handled = (kpe.KeyChar == 'q');
+						KeyPress?.Invoke(this, kpe);						
+						CallBackReturn = kpe.Handled ? 1 : 0;
 						break;
 
 					case "ContextMenuOpened":
 						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-						var cmoe = new ContextMenuEventArgs {
-							X = int.Parse(m2.Result("${x}")),
-							Y = int.Parse(m2.Result("${y}")),
-							OpenSumatraContextMenu = true
-						};
-						ContextMenuMessage?.Invoke(this, cmoe);
-						CallBackReturn = cmoe.OpenSumatraContextMenu ? 0 : 1;
+						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
+						ContextMenuOpen?.Invoke(this, cmoe);
+						CallBackReturn = cmoe.Handled ? 0 : 1;
 						break;
 
 					case "ZoomChanged":
@@ -395,40 +431,32 @@ namespace SumatraPDFControl
 
 						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						fZoom = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
-						float fZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
-						switch (fZoomVirtual0)
+						float ZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
+
+						switch (ZoomVirtual0)
                         {
 							case -1:
-								fZoomVirtual = ZoomVirtuamEnum.FitPage;
+								fZoomVirtual = ZoomVirtualEnum.FitPage;
 								break;
 							case -2:
-								fZoomVirtual = ZoomVirtuamEnum.FitWidth;
+								fZoomVirtual = ZoomVirtualEnum.FitWidth;
 								break;
 							case -3:
-								fZoomVirtual = ZoomVirtuamEnum.FitContent;
+								fZoomVirtual = ZoomVirtualEnum.FitContent;
 								break;
 							default:
-								fZoomVirtual = ZoomVirtuamEnum.None;
+								fZoomVirtual = ZoomVirtualEnum.None;
 								break;
 						}
 						if (mmsg.Contains("Changed"))
-							ZoomChangedMessage?.Invoke(this, 
-								new ZoomChangedEventArgs { 
-									Zoom = fZoom, 
-									ZoomVirtual = fZoomVirtual,
-									MouseWheel = (mmsg!="ZoomChanged")
-								});
+							ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(fZoom, fZoomVirtual, (mmsg != "ZoomChanged")));
 						break;
 
 					case "DisplayModeChanged":
 					case "DisplayMode":
 						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
 						if (mmsg.Contains("Changed"))
-							DisplayModeChangedMessage?.Invoke(this,
-								new DisplayModeChangedEventArgs
-								{
-									DisplayMode = eDisplayMode,
-								});
+							DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
 							break;
 					case "StartupFinished":
 					case "FileOpen":
@@ -455,7 +483,7 @@ namespace SumatraPDFControl
 						break;
 
 					case "ScrollPositionChanged":
-						ScrollPositionMessage?.Invoke(this, new EventArgs());
+						ScrollPositionChanged?.Invoke(this, new EventArgs());
 						break;
 
 					default:
@@ -599,10 +627,8 @@ namespace SumatraPDFControl
 			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
 		}
 
-        /* TODO: 
+		/* TODO: 
 		 * Bug: Toc window title is not being repainted after another window pass over it
-		 * ScrollPosition - Set and Get properties / event
-		 *   bug: changing zoom or setting ScrollPosition property does not raise SumatraPDF ScrollPositionChange (nug in sumatrapdf)
 		 * Special keys - events		 		 
 		 * Page Rotation - Set and Get properties /event		 
 		 * LastPage - Get property
@@ -614,9 +640,9 @@ namespace SumatraPDFControl
 		 * - Print - Show Dialog and direct print
 		 * Global Config - auto update,  etc
 		 * Bookmarks - Context Menu event
-		 * Dont call Get property after raising changing events (optimization)
 		 * Do a revision in GEDVISA PDFXChange used properties
+		 * Commenting all methods, properties and events
 		*/
 
-    }
+	}
 }

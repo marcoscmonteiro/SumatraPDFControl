@@ -51,6 +51,8 @@
             this.toolZoom = new System.Windows.Forms.ToolStripLabel();
             this.toolZoomVirtualLbl = new System.Windows.Forms.ToolStripLabel();
             this.toolZoomVirtual = new System.Windows.Forms.ToolStripLabel();
+            this.toolDisplayModeLbl = new System.Windows.Forms.ToolStripLabel();
+            this.toolDisplayMode = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolPageModeLbl = new System.Windows.Forms.ToolStripLabel();
             this.toolPageMode = new System.Windows.Forms.ToolStripComboBox();
@@ -93,6 +95,8 @@
             this.toolZoom,
             this.toolZoomVirtualLbl,
             this.toolZoomVirtual,
+            this.toolDisplayModeLbl,
+            this.toolDisplayMode,
             this.toolStripSeparator3,
             this.toolPageModeLbl,
             this.toolPageMode,
@@ -107,7 +111,7 @@
             this.toolSumatraControl.Location = new System.Drawing.Point(0, 0);
             this.toolSumatraControl.Name = "toolSumatraControl";
             this.toolSumatraControl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolSumatraControl.Size = new System.Drawing.Size(105, 692);
+            this.toolSumatraControl.Size = new System.Drawing.Size(125, 692);
             this.toolSumatraControl.TabIndex = 1;
             this.toolSumatraControl.Text = "toolStrip1";
             this.toolSumatraControl.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -118,7 +122,7 @@
             this.toolOpen.Image = ((System.Drawing.Image)(resources.GetObject("toolOpen.Image")));
             this.toolOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolOpen.Name = "toolOpen";
-            this.toolOpen.Size = new System.Drawing.Size(102, 19);
+            this.toolOpen.Size = new System.Drawing.Size(122, 19);
             this.toolOpen.Text = "Open";
             this.toolOpen.ToolTipText = "Open";
             this.toolOpen.Click += new System.EventHandler(this.toolStripButton1_Click);
@@ -127,7 +131,7 @@
             // 
             this.toolText.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolText.Name = "toolText";
-            this.toolText.Size = new System.Drawing.Size(100, 23);
+            this.toolText.Size = new System.Drawing.Size(120, 23);
             // 
             // toolGotoPage
             // 
@@ -135,7 +139,7 @@
             this.toolGotoPage.Image = ((System.Drawing.Image)(resources.GetObject("toolGotoPage.Image")));
             this.toolGotoPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolGotoPage.Name = "toolGotoPage";
-            this.toolGotoPage.Size = new System.Drawing.Size(102, 19);
+            this.toolGotoPage.Size = new System.Drawing.Size(122, 19);
             this.toolGotoPage.Text = "GotoPage";
             this.toolGotoPage.ToolTipText = "Goto Page";
             this.toolGotoPage.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -146,7 +150,7 @@
             this.toolGetPage.Image = ((System.Drawing.Image)(resources.GetObject("toolGetPage.Image")));
             this.toolGetPage.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolGetPage.Name = "toolGetPage";
-            this.toolGetPage.Size = new System.Drawing.Size(102, 19);
+            this.toolGetPage.Size = new System.Drawing.Size(122, 19);
             this.toolGetPage.Text = "Get Page";
             this.toolGetPage.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
@@ -156,7 +160,7 @@
             this.toolGotoNamedDest.Image = ((System.Drawing.Image)(resources.GetObject("toolGotoNamedDest.Image")));
             this.toolGotoNamedDest.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolGotoNamedDest.Name = "toolGotoNamedDest";
-            this.toolGotoNamedDest.Size = new System.Drawing.Size(102, 19);
+            this.toolGotoNamedDest.Size = new System.Drawing.Size(122, 19);
             this.toolGotoNamedDest.Tag = "";
             this.toolGotoNamedDest.Text = "GotoNamedDest";
             this.toolGotoNamedDest.ToolTipText = "Goto Named Destination";
@@ -168,7 +172,7 @@
             this.toolSearchText.Image = ((System.Drawing.Image)(resources.GetObject("toolSearchText.Image")));
             this.toolSearchText.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSearchText.Name = "toolSearchText";
-            this.toolSearchText.Size = new System.Drawing.Size(102, 19);
+            this.toolSearchText.Size = new System.Drawing.Size(122, 19);
             this.toolSearchText.Text = "SearchText";
             this.toolSearchText.ToolTipText = "Search Text";
             this.toolSearchText.Click += new System.EventHandler(this.toolStripButton5_Click);
@@ -179,7 +183,7 @@
             this.toolSearchForward.Image = ((System.Drawing.Image)(resources.GetObject("toolSearchForward.Image")));
             this.toolSearchForward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSearchForward.Name = "toolSearchForward";
-            this.toolSearchForward.Size = new System.Drawing.Size(102, 19);
+            this.toolSearchForward.Size = new System.Drawing.Size(122, 19);
             this.toolSearchForward.Text = "SearchForward";
             this.toolSearchForward.ToolTipText = "Search Forward";
             this.toolSearchForward.Click += new System.EventHandler(this.toolStripButton7_Click);
@@ -190,7 +194,7 @@
             this.toolSearchBackward.Image = ((System.Drawing.Image)(resources.GetObject("toolSearchBackward.Image")));
             this.toolSearchBackward.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSearchBackward.Name = "toolSearchBackward";
-            this.toolSearchBackward.Size = new System.Drawing.Size(102, 19);
+            this.toolSearchBackward.Size = new System.Drawing.Size(122, 19);
             this.toolSearchBackward.Text = "SearchBackward";
             this.toolSearchBackward.ToolTipText = "Search Backward";
             this.toolSearchBackward.Click += new System.EventHandler(this.toolStripButton6_Click);
@@ -201,7 +205,7 @@
             this.toolSetScrollPos.Image = ((System.Drawing.Image)(resources.GetObject("toolSetScrollPos.Image")));
             this.toolSetScrollPos.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSetScrollPos.Name = "toolSetScrollPos";
-            this.toolSetScrollPos.Size = new System.Drawing.Size(102, 19);
+            this.toolSetScrollPos.Size = new System.Drawing.Size(122, 19);
             this.toolSetScrollPos.Text = "Set ScrollPos";
             this.toolSetScrollPos.Click += new System.EventHandler(this.toolSetScrollPos_Click);
             // 
@@ -211,7 +215,7 @@
             this.toolSetZoom.Image = ((System.Drawing.Image)(resources.GetObject("toolSetZoom.Image")));
             this.toolSetZoom.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolSetZoom.Name = "toolSetZoom";
-            this.toolSetZoom.Size = new System.Drawing.Size(102, 19);
+            this.toolSetZoom.Size = new System.Drawing.Size(122, 19);
             this.toolSetZoom.Text = "Set Zoom";
             this.toolSetZoom.ToolTipText = "Set Zoom";
             this.toolSetZoom.Click += new System.EventHandler(this.toolSetZoom_Click);
@@ -219,7 +223,7 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(102, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(122, 6);
             // 
             // toolCopySelection
             // 
@@ -227,7 +231,7 @@
             this.toolCopySelection.Image = ((System.Drawing.Image)(resources.GetObject("toolCopySelection.Image")));
             this.toolCopySelection.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolCopySelection.Name = "toolCopySelection";
-            this.toolCopySelection.Size = new System.Drawing.Size(102, 19);
+            this.toolCopySelection.Size = new System.Drawing.Size(122, 19);
             this.toolCopySelection.Text = "CopySelection";
             this.toolCopySelection.ToolTipText = "Copy Selection";
             this.toolCopySelection.Click += new System.EventHandler(this.toolStripButton3_Click);
@@ -238,7 +242,7 @@
             this.toolToogleToolbar.Image = ((System.Drawing.Image)(resources.GetObject("toolToogleToolbar.Image")));
             this.toolToogleToolbar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolToogleToolbar.Name = "toolToogleToolbar";
-            this.toolToogleToolbar.Size = new System.Drawing.Size(102, 19);
+            this.toolToogleToolbar.Size = new System.Drawing.Size(122, 19);
             this.toolToogleToolbar.Text = "ToogleToolbar";
             this.toolToogleToolbar.ToolTipText = "Toogle Toolbar";
             this.toolToogleToolbar.Click += new System.EventHandler(this.toolStripButton4_Click);
@@ -249,7 +253,7 @@
             this.toolToogleToc.Image = ((System.Drawing.Image)(resources.GetObject("toolToogleToc.Image")));
             this.toolToogleToc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolToogleToc.Name = "toolToogleToc";
-            this.toolToogleToc.Size = new System.Drawing.Size(102, 19);
+            this.toolToogleToc.Size = new System.Drawing.Size(122, 19);
             this.toolToogleToc.Text = "ToogleToc";
             this.toolToogleToc.ToolTipText = "Toogle Toc";
             this.toolToogleToc.Click += new System.EventHandler(this.toolStripButton10_Click);
@@ -257,53 +261,67 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(102, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(122, 6);
             // 
             // toolPageLbl
             // 
             this.toolPageLbl.Name = "toolPageLbl";
-            this.toolPageLbl.Size = new System.Drawing.Size(102, 15);
+            this.toolPageLbl.Size = new System.Drawing.Size(122, 15);
             this.toolPageLbl.Text = "Pág./Named Dest:";
             // 
             // toolPage
             // 
             this.toolPage.Name = "toolPage";
-            this.toolPage.Size = new System.Drawing.Size(102, 15);
+            this.toolPage.Size = new System.Drawing.Size(122, 15);
             this.toolPage.Text = "---";
             // 
             // toolZoomLbl
             // 
             this.toolZoomLbl.Name = "toolZoomLbl";
-            this.toolZoomLbl.Size = new System.Drawing.Size(102, 15);
+            this.toolZoomLbl.Size = new System.Drawing.Size(122, 15);
             this.toolZoomLbl.Text = "Zoom:";
             // 
             // toolZoom
             // 
             this.toolZoom.Name = "toolZoom";
-            this.toolZoom.Size = new System.Drawing.Size(102, 15);
+            this.toolZoom.Size = new System.Drawing.Size(122, 15);
             this.toolZoom.Text = "---";
             // 
             // toolZoomVirtualLbl
             // 
             this.toolZoomVirtualLbl.Name = "toolZoomVirtualLbl";
-            this.toolZoomVirtualLbl.Size = new System.Drawing.Size(102, 15);
+            this.toolZoomVirtualLbl.Size = new System.Drawing.Size(122, 15);
             this.toolZoomVirtualLbl.Text = "Zoom Virtual:";
             // 
             // toolZoomVirtual
             // 
             this.toolZoomVirtual.Name = "toolZoomVirtual";
-            this.toolZoomVirtual.Size = new System.Drawing.Size(102, 15);
+            this.toolZoomVirtual.Size = new System.Drawing.Size(122, 15);
             this.toolZoomVirtual.Text = "---";
+            // 
+            // toolDisplayModeLbl
+            // 
+            this.toolDisplayModeLbl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolDisplayModeLbl.Name = "toolDisplayModeLbl";
+            this.toolDisplayModeLbl.Size = new System.Drawing.Size(122, 15);
+            this.toolDisplayModeLbl.Text = "Display Mode:";
+            // 
+            // toolDisplayMode
+            // 
+            this.toolDisplayMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolDisplayMode.Name = "toolDisplayMode";
+            this.toolDisplayMode.Size = new System.Drawing.Size(122, 15);
+            this.toolDisplayMode.Text = "---";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(102, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(122, 6);
             // 
             // toolPageModeLbl
             // 
             this.toolPageModeLbl.Name = "toolPageModeLbl";
-            this.toolPageModeLbl.Size = new System.Drawing.Size(102, 15);
+            this.toolPageModeLbl.Size = new System.Drawing.Size(122, 15);
             this.toolPageModeLbl.Text = "Display Mode:";
             // 
             // toolPageMode
@@ -317,7 +335,7 @@
             "5 - ContinuousFacing",
             "6 - ContinuousBookView"});
             this.toolPageMode.Name = "toolPageMode";
-            this.toolPageMode.Size = new System.Drawing.Size(100, 23);
+            this.toolPageMode.Size = new System.Drawing.Size(120, 23);
             this.toolPageMode.ToolTipText = "Page Mode";
             this.toolPageMode.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             this.toolPageMode.Click += new System.EventHandler(this.toolStripComboBox1_Click);
@@ -328,14 +346,14 @@
             this.toolGetDisplayMode.Image = ((System.Drawing.Image)(resources.GetObject("toolGetDisplayMode.Image")));
             this.toolGetDisplayMode.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolGetDisplayMode.Name = "toolGetDisplayMode";
-            this.toolGetDisplayMode.Size = new System.Drawing.Size(102, 19);
+            this.toolGetDisplayMode.Size = new System.Drawing.Size(122, 19);
             this.toolGetDisplayMode.Text = "Get Display Mode";
             this.toolGetDisplayMode.Click += new System.EventHandler(this.toolStripButton11_Click);
             // 
             // toolZoomVirtualSetLbl
             // 
             this.toolZoomVirtualSetLbl.Name = "toolZoomVirtualSetLbl";
-            this.toolZoomVirtualSetLbl.Size = new System.Drawing.Size(102, 15);
+            this.toolZoomVirtualSetLbl.Size = new System.Drawing.Size(122, 15);
             this.toolZoomVirtualSetLbl.Text = "Zoom Virtual:";
             // 
             // toolZoomVirtualSet
@@ -346,7 +364,7 @@
             "2 - FitWidth",
             "3 - FitContent"});
             this.toolZoomVirtualSet.Name = "toolZoomVirtualSet";
-            this.toolZoomVirtualSet.Size = new System.Drawing.Size(100, 23);
+            this.toolZoomVirtualSet.Size = new System.Drawing.Size(120, 23);
             this.toolZoomVirtualSet.SelectedIndexChanged += new System.EventHandler(this.toolZoomVirtualSet_SelectedIndexChanged);
             // 
             // toolGetZoomVirtual
@@ -355,32 +373,32 @@
             this.toolGetZoomVirtual.Image = ((System.Drawing.Image)(resources.GetObject("toolGetZoomVirtual.Image")));
             this.toolGetZoomVirtual.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolGetZoomVirtual.Name = "toolGetZoomVirtual";
-            this.toolGetZoomVirtual.Size = new System.Drawing.Size(102, 19);
+            this.toolGetZoomVirtual.Size = new System.Drawing.Size(122, 19);
             this.toolGetZoomVirtual.Text = "Get Zoom Virtual";
             this.toolGetZoomVirtual.Click += new System.EventHandler(this.toolGetZoomVirtual_Click);
             // 
             // toolScrollPosLbl
             // 
             this.toolScrollPosLbl.Name = "toolScrollPosLbl";
-            this.toolScrollPosLbl.Size = new System.Drawing.Size(102, 15);
-            this.toolScrollPosLbl.Text = "Scroll Pos:";
+            this.toolScrollPosLbl.Size = new System.Drawing.Size(122, 15);
+            this.toolScrollPosLbl.Text = "Scroll Pos (X, Y, Page):";
             // 
             // toolScrollPosX
             // 
             this.toolScrollPosX.Name = "toolScrollPosX";
-            this.toolScrollPosX.Size = new System.Drawing.Size(102, 15);
+            this.toolScrollPosX.Size = new System.Drawing.Size(122, 15);
             this.toolScrollPosX.Text = "---";
             // 
             // toolScrollPosY
             // 
             this.toolScrollPosY.Name = "toolScrollPosY";
-            this.toolScrollPosY.Size = new System.Drawing.Size(102, 15);
+            this.toolScrollPosY.Size = new System.Drawing.Size(122, 15);
             this.toolScrollPosY.Text = "---";
             // 
             // toolScrollPosPage
             // 
             this.toolScrollPosPage.Name = "toolScrollPosPage";
-            this.toolScrollPosPage.Size = new System.Drawing.Size(102, 15);
+            this.toolScrollPosPage.Size = new System.Drawing.Size(122, 15);
             this.toolScrollPosPage.Text = "---";
             // 
             // openFileDialog1
@@ -414,14 +432,15 @@
             this.sumatraPDFControl1.TocVisible = false;
             this.sumatraPDFControl1.ToolBarVisible = false;
             this.sumatraPDFControl1.Zoom = 0F;
-            this.sumatraPDFControl1.ZoomVirtual = SumatraPDFControl.SumatraPDFControl.ZoomVirtuamEnum.None;
+            this.sumatraPDFControl1.ZoomVirtual = SumatraPDFControl.SumatraPDFControl.ZoomVirtualEnum.None;
             this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
-            this.sumatraPDFControl1.PageChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
-            this.sumatraPDFControl1.ContextMenuMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
-            this.sumatraPDFControl1.KeyPressedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.KeyPressedEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
-            this.sumatraPDFControl1.ZoomChangedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
-            this.sumatraPDFControl1.LinkClickedMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
-            this.sumatraPDFControl1.ScrollPositionMessage += new System.EventHandler<System.EventArgs>(this.sumatraPDFControl1_ScrollPositionMessage);
+            this.sumatraPDFControl1.PageChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
+            this.sumatraPDFControl1.ContextMenuOpen += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuOpenEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
+            this.sumatraPDFControl1.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
+            this.sumatraPDFControl1.ZoomChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
+            this.sumatraPDFControl1.LinkClick += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
+            this.sumatraPDFControl1.DisplayModeChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.DisplayModeChangedEventArgs>(this.sumatraPDFControl1_DisplayModeChangedMessage);
+            this.sumatraPDFControl1.ScrollPositionChanged += new System.EventHandler<System.EventArgs>(this.sumatraPDFControl1_ScrollPositionMessage);
             // 
             // Form1
             // 
@@ -434,6 +453,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.toolSumatraControl.ResumeLayout(false);
             this.toolSumatraControl.PerformLayout();
             this.ResumeLayout(false);
@@ -479,6 +499,8 @@
         private System.Windows.Forms.ToolStripLabel toolScrollPosY;
         private System.Windows.Forms.ToolStripLabel toolScrollPosPage;
         private System.Windows.Forms.ToolStripButton toolSetScrollPos;
+        private System.Windows.Forms.ToolStripLabel toolDisplayModeLbl;
+        private System.Windows.Forms.ToolStripLabel toolDisplayMode;
     }
 }
 
