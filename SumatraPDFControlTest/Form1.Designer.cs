@@ -33,13 +33,16 @@
             this.toolOpen = new System.Windows.Forms.ToolStripButton();
             this.toolText = new System.Windows.Forms.ToolStripTextBox();
             this.toolGotoPage = new System.Windows.Forms.ToolStripButton();
-            this.toolGetPage = new System.Windows.Forms.ToolStripButton();
             this.toolGotoNamedDest = new System.Windows.Forms.ToolStripButton();
             this.toolSearchText = new System.Windows.Forms.ToolStripButton();
             this.toolSearchForward = new System.Windows.Forms.ToolStripButton();
             this.toolSearchBackward = new System.Windows.Forms.ToolStripButton();
             this.toolSetScrollPos = new System.Windows.Forms.ToolStripButton();
             this.toolSetZoom = new System.Windows.Forms.ToolStripButton();
+            this.toolSetRotation = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolGetRotation = new System.Windows.Forms.ToolStripButton();
+            this.toolGetPage = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolCopySelection = new System.Windows.Forms.ToolStripButton();
             this.toolToogleToolbar = new System.Windows.Forms.ToolStripButton();
@@ -77,13 +80,16 @@
             this.toolOpen,
             this.toolText,
             this.toolGotoPage,
-            this.toolGetPage,
             this.toolGotoNamedDest,
             this.toolSearchText,
             this.toolSearchForward,
             this.toolSearchBackward,
             this.toolSetScrollPos,
             this.toolSetZoom,
+            this.toolSetRotation,
+            this.toolStripSeparator4,
+            this.toolGetRotation,
+            this.toolGetPage,
             this.toolStripSeparator1,
             this.toolCopySelection,
             this.toolToogleToolbar,
@@ -111,7 +117,7 @@
             this.toolSumatraControl.Location = new System.Drawing.Point(0, 0);
             this.toolSumatraControl.Name = "toolSumatraControl";
             this.toolSumatraControl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolSumatraControl.Size = new System.Drawing.Size(125, 692);
+            this.toolSumatraControl.Size = new System.Drawing.Size(125, 735);
             this.toolSumatraControl.TabIndex = 1;
             this.toolSumatraControl.Text = "toolStrip1";
             this.toolSumatraControl.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -143,16 +149,6 @@
             this.toolGotoPage.Text = "GotoPage";
             this.toolGotoPage.ToolTipText = "Goto Page";
             this.toolGotoPage.Click += new System.EventHandler(this.toolStripButton2_Click);
-            // 
-            // toolGetPage
-            // 
-            this.toolGetPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolGetPage.Image = ((System.Drawing.Image)(resources.GetObject("toolGetPage.Image")));
-            this.toolGetPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolGetPage.Name = "toolGetPage";
-            this.toolGetPage.Size = new System.Drawing.Size(122, 19);
-            this.toolGetPage.Text = "Get Page";
-            this.toolGetPage.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // toolGotoNamedDest
             // 
@@ -219,6 +215,43 @@
             this.toolSetZoom.Text = "Set Zoom";
             this.toolSetZoom.ToolTipText = "Set Zoom";
             this.toolSetZoom.Click += new System.EventHandler(this.toolSetZoom_Click);
+            // 
+            // toolSetRotation
+            // 
+            this.toolSetRotation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolSetRotation.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.toolSetRotation.Image = ((System.Drawing.Image)(resources.GetObject("toolSetRotation.Image")));
+            this.toolSetRotation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolSetRotation.Name = "toolSetRotation";
+            this.toolSetRotation.Size = new System.Drawing.Size(122, 19);
+            this.toolSetRotation.Text = "Rotate By";
+            this.toolSetRotation.Click += new System.EventHandler(this.toolSetRotation_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(122, 6);
+            // 
+            // toolGetRotation
+            // 
+            this.toolGetRotation.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolGetRotation.Image = ((System.Drawing.Image)(resources.GetObject("toolGetRotation.Image")));
+            this.toolGetRotation.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolGetRotation.Name = "toolGetRotation";
+            this.toolGetRotation.Size = new System.Drawing.Size(122, 19);
+            this.toolGetRotation.Text = "Get Rotation";
+            this.toolGetRotation.ToolTipText = "Get Rotation";
+            this.toolGetRotation.Click += new System.EventHandler(this.toolGetRotation_Click);
+            // 
+            // toolGetPage
+            // 
+            this.toolGetPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolGetPage.Image = ((System.Drawing.Image)(resources.GetObject("toolGetPage.Image")));
+            this.toolGetPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolGetPage.Name = "toolGetPage";
+            this.toolGetPage.Size = new System.Drawing.Size(122, 19);
+            this.toolGetPage.Text = "Get Page";
+            this.toolGetPage.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
             // toolStripSeparator1
             // 
@@ -426,7 +459,7 @@
             this.sumatraPDFControl1.Name = "sumatraPDFControl1";
             this.sumatraPDFControl1.NamedDest = null;
             this.sumatraPDFControl1.Page = 0;
-            this.sumatraPDFControl1.Size = new System.Drawing.Size(1291, 628);
+            this.sumatraPDFControl1.Size = new System.Drawing.Size(1291, 671);
             this.sumatraPDFControl1.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\dbg64\\SumatraPDF-dll.exe";
             this.sumatraPDFControl1.TabIndex = 0;
             this.sumatraPDFControl1.TocVisible = false;
@@ -446,7 +479,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1418, 692);
+            this.ClientSize = new System.Drawing.Size(1418, 735);
             this.Controls.Add(this.sumatraPDFControl1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolSumatraControl);
@@ -501,6 +534,9 @@
         private System.Windows.Forms.ToolStripButton toolSetScrollPos;
         private System.Windows.Forms.ToolStripLabel toolDisplayModeLbl;
         private System.Windows.Forms.ToolStripLabel toolDisplayMode;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolGetRotation;
+        private System.Windows.Forms.ToolStripButton toolSetRotation;
     }
 }
 

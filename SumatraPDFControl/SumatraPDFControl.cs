@@ -107,6 +107,14 @@ namespace SumatraPDFControl
 			FitContent // ZoomVirtual = -3
 		}
 
+		public enum RotationEnum
+        {			
+			RotNone = 0,
+			Rot90 = 90,			
+			Rot180 = 180,
+			Rot270 = 270
+		}
+
 		private void GetZoom()
 		{
 			SendSumatraCommand("GetProperty", "Zoom");
@@ -194,6 +202,20 @@ namespace SumatraPDFControl
 			set {
 				SetPage(value);
 			} 
+		}
+
+		private RotationEnum eRotation;
+		public RotationEnum Rotation
+        {
+			get {
+				SendSumatraCommand("GetProperty", "Rotation");
+				return eRotation;
+            }
+        }
+
+		public void RotateBy(RotationEnum Rotation)
+        {
+			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
 		}
 
 		private string sNamedDest;
@@ -452,6 +474,12 @@ namespace SumatraPDFControl
 							ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(fZoom, fZoomVirtual, (mmsg != "ZoomChanged")));
 						break;
 
+					case "Rotation":
+					case "RotationChanged":
+						Match mRotation = Regex.Match(m.Result("${args}"), @"(?<rot>.+)");
+						eRotation = (RotationEnum)int.Parse(mRotation.Result("${rot}"));
+						break;
+
 					case "DisplayModeChanged":
 					case "DisplayMode":
 						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
@@ -628,9 +656,8 @@ namespace SumatraPDFControl
 		}
 
 		/* TODO: 
-		 * Bug: Toc window title is not being repainted after another window pass over it
+		 * Bug: Toc window title is not being repainted after another window pass over it		 
 		 * Special keys - events		 		 
-		 * Page Rotation - Set and Get properties /event		 
 		 * LastPage - Get property
 		 * Commands call
 		 * - Page first, previous, next, last 
@@ -642,6 +669,8 @@ namespace SumatraPDFControl
 		 * Bookmarks - Context Menu event
 		 * Do a revision in GEDVISA PDFXChange used properties
 		 * Commenting all methods, properties and events
+		 * Page rotation event is more complicated to implement because current Window information does not exists in DisplayModel sumatrapdf object. So its impossible 
+		 *   to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
 		*/
 
 	}
