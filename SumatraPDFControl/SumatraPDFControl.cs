@@ -657,7 +657,10 @@ namespace SumatraPDFControl
 
 		/* TODO: 
 		 * Bug: Toc window title is not being repainted after another window pass over it		 
-		 * Special keys - events		 		 
+		 * Special keys events 
+		 *   1. Raise events on WM_KEYDOWN messages that is handled by function FrameOnKeydown on SumatraPDF.cpp. Maps it to KeyDown control event
+		 *   2. Raise events on WM_KEYUP (not used by SumatraPDF) to be captured by control. Have to change WndProcFrame function on SumatraPDF.cpp 
+		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
 		 * LastPage - Get property
 		 * Commands call
 		 * - Page first, previous, next, last 
@@ -669,8 +672,8 @@ namespace SumatraPDFControl
 		 * Bookmarks - Context Menu event
 		 * Do a revision in GEDVISA PDFXChange used properties
 		 * Commenting all methods, properties and events
-		 * Page rotation event is more complicated to implement because current Window information does not exists in DisplayModel sumatrapdf object. So its impossible 
-		 *   to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
+		 * Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
+		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
 		*/
 
 	}

@@ -182,10 +182,6 @@ namespace SumatraPDFControlTest
             toolDisplayMode.Text = e.DisplayMode.ToString();
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-        }
 
         private void toolGetRotation_Click(object sender, EventArgs e)
         {
@@ -195,6 +191,16 @@ namespace SumatraPDFControlTest
         private void toolSetRotation_Click(object sender, EventArgs e)
         {
             sumatraPDFControl1.RotateBy((RotationEnum)int.Parse(toolText.Text));
+        }
+
+        private void sumatraPDFControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            textBox1.Text += "KeyDown: " + e.KeyData.ToString() + System.Environment.NewLine;
+        }
+
+        private void sumatraPDFControl1_KeyUp(object sender, KeyEventArgs e)
+        {
+            textBox1.Text += "KeyUp: " + e.KeyData.ToString() + System.Environment.NewLine;
         }
     }
 }

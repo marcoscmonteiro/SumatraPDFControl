@@ -474,6 +474,8 @@
             this.sumatraPDFControl1.LinkClick += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
             this.sumatraPDFControl1.DisplayModeChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.DisplayModeChangedEventArgs>(this.sumatraPDFControl1_DisplayModeChangedMessage);
             this.sumatraPDFControl1.ScrollPositionChanged += new System.EventHandler<System.EventArgs>(this.sumatraPDFControl1_ScrollPositionMessage);
+            this.sumatraPDFControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyDown);
+            this.sumatraPDFControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyUp);
             // 
             // Form1
             // 
@@ -486,7 +488,6 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Shown += new System.EventHandler(this.Form1_Shown);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form1_KeyPress);
             this.toolSumatraControl.ResumeLayout(false);
             this.toolSumatraControl.PerformLayout();
             this.ResumeLayout(false);
