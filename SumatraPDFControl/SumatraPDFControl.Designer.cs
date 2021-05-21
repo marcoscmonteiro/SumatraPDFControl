@@ -41,6 +41,11 @@ namespace SumatraPDFControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackgroundImage = global::SumatraPDFControl.Properties.Resources.SumatraPDF_48x48x32;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.Cursor = System.Windows.Forms.Cursors.Default;
+            this.DoubleBuffered = true;
             this.Name = "SumatraPDFControl";
             this.Size = new System.Drawing.Size(460, 334);
             this.Load += new System.EventHandler(this.SumatraPDFControl_Load);

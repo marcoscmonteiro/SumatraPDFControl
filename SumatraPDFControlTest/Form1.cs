@@ -49,8 +49,8 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_SumatraMessage(object sender, SumatraMessageEventArgs e)
         {
-            textBox1.Text += e.Msg + " - " + e.CallBackReturn + System.Environment.NewLine;
-            if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpen()]") 
+            AddText(e.Msg + " - " + e.CallBackReturn);
+            if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpened()]") 
                 toolPage.Text = sumatraPDFControl1.Page.ToString() + " - " + sumatraPDFControl1.NamedDest;
         }
 
@@ -63,12 +63,7 @@ namespace SumatraPDFControlTest
         {
             e.Handled = true;
             // To do: alterar para retorno false e criar o próprio menu de contexto customizado
-            textBox1.Text += "ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString() + System.Environment.NewLine;
-        }
-
-        private void sumatraPDFControl1_KeyPressedMessage(object sender, KeyPressEventArgs e)
-        {
-            textBox1.Text += "KeyPressed: " + e.KeyChar + System.Environment.NewLine;
+            AddText("ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString());
         }
 
         private void sumatraPDFControl1_ZoomChangedMessage(object sender, ZoomChangedEventArgs e)
@@ -81,7 +76,7 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_LinkClickedMessage(object sender, SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs e)
         {
-            textBox1.Text += "LinkClicked: " + e.LinkText + System.Environment.NewLine;
+            AddText("LinkClicked: " + e.LinkText);
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -114,19 +109,10 @@ namespace SumatraPDFControlTest
             sumatraPDFControl1.TocVisible = !sumatraPDFControl1.TocVisible;
         }
 
-        private void toolStripComboBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-        }
-
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (toolPageMode.Text != String.Empty)
-                sumatraPDFControl1.DisplayMode = (DisplayModeEnum)toolPageMode.SelectedIndex; // int.Parse(toolPageMode.Text.Split('-')[0]);
+                sumatraPDFControl1.DisplayMode = (DisplayModeEnum)toolPageMode.SelectedIndex; 
 
         }
 
@@ -142,7 +128,7 @@ namespace SumatraPDFControlTest
 
         private void toolZoomVirtualSet_SelectedIndexChanged(object sender, EventArgs e)
         {
-            sumatraPDFControl1.ZoomVirtual = (ZoomVirtualEnum)toolZoomVirtualSet.SelectedIndex;
+            sumatraPDFControl1.ZoomVirtual = (ZoomVirtualEnum)(toolZoomVirtualSet.SelectedIndex*-1);
         }
 
         private void toolGetZoomVirtual_Click(object sender, EventArgs e)
@@ -195,12 +181,25 @@ namespace SumatraPDFControlTest
 
         private void sumatraPDFControl1_KeyDown(object sender, KeyEventArgs e)
         {
-            textBox1.Text += "KeyDown: " + e.KeyData.ToString() + System.Environment.NewLine;
+            AddText("KeyDown: " + e.KeyData.ToString());
+            e.Handled = false;
+            e.SuppressKeyPress = false;
+        }
+        private void sumatraPDFControl1_KeyPressedMessage(object sender, KeyPressEventArgs e)
+        {
+            AddText("KeyPressed: " + e.KeyChar);
         }
 
         private void sumatraPDFControl1_KeyUp(object sender, KeyEventArgs e)
         {
-            textBox1.Text += "KeyUp: " + e.KeyData.ToString() + System.Environment.NewLine;
+            AddText("KeyUp: " + e.KeyData.ToString());
         }
+
+        private void AddText(string text)
+        {
+            textBox1.Text = DateTime.Now.ToLongTimeString() + ": " + text + System.Environment.NewLine + textBox1.Text;
+            textBox1.SelectionStart = 0;
+        }
+
     }
 }

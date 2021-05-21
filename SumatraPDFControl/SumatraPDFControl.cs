@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -14,6 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace SumatraPDFControl
 {
+	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
 	public partial class SumatraPDFControl : UserControl
 	{
 		public struct COPYDATASTRUCT
@@ -46,6 +44,10 @@ namespace SumatraPDFControl
 		private const int WM_LBUTTONDOWN = 0x0201;
 		private const int WM_RBUTTONDOWN = 0x0204;
 		private const int WM_COMMAND = 0x0111;
+		private const int WM_KEYDOWN = 0x0100;
+		private const int WM_KEYUP = 0x0101;
+		private const int WM_CHAR = 0x0102; // for use by event KeyPress
+
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
 
@@ -102,9 +104,9 @@ namespace SumatraPDFControl
 		public enum ZoomVirtualEnum
         {
 			None = 0,
-			FitPage, // ZoomVirtual = -1
-			FitWidth, // ZoomVirtual = -2
-			FitContent // ZoomVirtual = -3
+			FitPage = -1, // ZoomVirtual = -1
+			FitWidth = -2, // ZoomVirtual = -2
+			FitContent = -3  // ZoomVirtual = -3
 		}
 
 		public enum RotationEnum
@@ -149,22 +151,8 @@ namespace SumatraPDFControl
 			}
 			set
             {
-				float fZoomVirtual;
-				switch (value)
-				{
-					case ZoomVirtualEnum.FitPage:
-						fZoomVirtual = -1;
-						break;
-					case ZoomVirtualEnum.FitWidth:
-						fZoomVirtual = -2;
-						break;
-					case ZoomVirtualEnum.FitContent:
-						fZoomVirtual = -3;
-						break;
-					default:
-						return;
-				}
-				SetZoom(fZoomVirtual);
+				float fZoomVirtual = (int)value;
+				if (fZoomVirtual < 0) SetZoom(fZoomVirtual);
 			}
 		}
 
@@ -292,7 +280,13 @@ namespace SumatraPDFControl
 		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
+			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) { 
+				m.Result = (IntPtr)0; 
+				return; 
+			}
+			
 			base.WndProc(ref m);
+
 			if (m.Msg == WM_SETFOCUS)
 			{
 				OnEnter(new EventArgs());
@@ -316,6 +310,18 @@ namespace SumatraPDFControl
 				Marshal.Copy(x.lpData, strb, 0, x.cbData);
 				string sMsg = Encoding.Default.GetString(strb);
 				m.Result = ParseSumatraMessage(sMsg, x.dwData);
+			}
+			else if (m.Msg == WM_KEYDOWN )
+			{			
+				m.Result = LastKeyDownEventArgs.Handled ? (IntPtr) 0 : (IntPtr) 1;
+            }
+			else if (m.Msg == WM_CHAR ) // KeyPress event
+			{
+				m.Result = LastKeyPressEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
+			}
+			else if (m.Msg == WM_KEYUP)
+            {
+				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
 		}
 
@@ -388,12 +394,9 @@ namespace SumatraPDFControl
 		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
 		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
 
-		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' can not be changed)"), Category("SumatraPDF")]
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
-        public event EventHandler<KeyPressEventArgs> KeyPress;
-#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
-        [Description("Zoom factor was changed"), Category("SumatraPDF")]
+
+		[Description("Zoom factor was changed"), Category("SumatraPDF")]
 		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
 
 		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
@@ -404,6 +407,16 @@ namespace SumatraPDFControl
 
 		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
 		public event EventHandler<EventArgs> ScrollPositionChanged;
+
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
+		public event EventHandler<KeyPressEventArgs> KeyPress;
+		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
+		public event KeyEventHandler KeyDown;
+		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
+		public event KeyEventHandler KeyUp;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
 
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
@@ -432,14 +445,6 @@ namespace SumatraPDFControl
 							PageChanged?.Invoke(this, new PageChangedEventArgs(nPage, sNamedDest));
 						break;
 
-					case "KeyPressed":
-						var kpe = new KeyPressEventArgs((char)int.Parse(m.Result("${args}")));
-						// Prevents end of SumatraPDF if 'q' is pressed
-						kpe.Handled = (kpe.KeyChar == 'q');
-						KeyPress?.Invoke(this, kpe);						
-						CallBackReturn = kpe.Handled ? 1 : 0;
-						break;
-
 					case "ContextMenuOpened":
 						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
@@ -454,22 +459,7 @@ namespace SumatraPDFControl
 						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						fZoom = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
 						float ZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
-
-						switch (ZoomVirtual0)
-                        {
-							case -1:
-								fZoomVirtual = ZoomVirtualEnum.FitPage;
-								break;
-							case -2:
-								fZoomVirtual = ZoomVirtualEnum.FitWidth;
-								break;
-							case -3:
-								fZoomVirtual = ZoomVirtualEnum.FitContent;
-								break;
-							default:
-								fZoomVirtual = ZoomVirtualEnum.None;
-								break;
-						}
+						if (ZoomVirtual0 < 0) fZoomVirtual = (ZoomVirtualEnum)ZoomVirtual0; else fZoomVirtual = ZoomVirtualEnum.None;
 						if (mmsg.Contains("Changed"))
 							ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(fZoom, fZoomVirtual, (mmsg != "ZoomChanged")));
 						break;
@@ -487,8 +477,7 @@ namespace SumatraPDFControl
 							DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
 							break;
 					case "StartupFinished":
-					case "FileOpen":
-					case "FileOpenPluginWindow":
+					case "FileOpened":
 						GetPage();
 						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
 						break;
@@ -597,6 +586,11 @@ namespace SumatraPDFControl
             SumatraProcess = Process.Start(PSInfo);			
 		}
 
+		private void OpenFile()
+        {
+			SendSumatraCommand("OpenFile", sCurrentFile, Handle.ToString());
+		}
+
 		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
 		{
 			sCurrentFile = PDFFile;
@@ -604,14 +598,14 @@ namespace SumatraPDFControl
 			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());
+				OpenFile();
 				pSumatraWindowHandleList.Remove(SumatraWindowHandle);
 				pSumatraWindowHandle = (IntPtr)0;				
 			}
 			else
 			{					
 				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, Page); 
-				else SendSumatraCommand("OpenPluginWindow", sCurrentFile, base.Handle.ToString());				
+				else OpenFile();
 			}
 			SetPage(Page);
 
@@ -653,14 +647,40 @@ namespace SumatraPDFControl
         private void SumatraPDFControl_Load(object sender, EventArgs e)
         {
 			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
+			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
+			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
+			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
+		}
+
+		private KeyEventArgs LastKeyDownEventArgs;
+		private void SumatraPDFControl_KeyDown(object sender, KeyEventArgs e)
+		{
+			this.KeyDown?.Invoke(this, e);
+			LastKeyDownEventArgs = e;
+		}
+
+		private KeyEventArgs LastKeyUpEventArgs;
+		private void SumatraPDFControl_KeyUp(object sender, KeyEventArgs e)
+		{
+			this.KeyUp?.Invoke(this, e);
+			LastKeyUpEventArgs = e;
+		}
+
+		private KeyPressEventArgs LastKeyPressEventArgs;
+		private void SumatraPDFControl_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			this.KeyPress?.Invoke(this, e);
+			// Do not end SumatraPDF process when pressing 'q' key
+			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
+			LastKeyPressEventArgs = e;
+			
 		}
 
 		/* TODO: 
 		 * Bug: Toc window title is not being repainted after another window pass over it		 
 		 * Special keys events 
-		 *   1. Raise events on WM_KEYDOWN messages that is handled by function FrameOnKeydown on SumatraPDF.cpp. Maps it to KeyDown control event
-		 *   2. Raise events on WM_KEYUP (not used by SumatraPDF) to be captured by control. Have to change WndProcFrame function on SumatraPDF.cpp 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
+		 *   4. Treat ALT key
 		 * LastPage - Get property
 		 * Commands call
 		 * - Page first, previous, next, last 
@@ -672,6 +692,8 @@ namespace SumatraPDFControl
 		 * Bookmarks - Context Menu event
 		 * Do a revision in GEDVISA PDFXChange used properties
 		 * Commenting all methods, properties and events
+		 * Implement FileOpened and StartupFinished events
+		 * Maps UserControl Scroll event to SumatraPDF Scroll 
 		 * Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
 		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
 		*/

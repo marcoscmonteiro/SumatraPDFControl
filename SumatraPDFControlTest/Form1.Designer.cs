@@ -120,7 +120,6 @@
             this.toolSumatraControl.Size = new System.Drawing.Size(125, 735);
             this.toolSumatraControl.TabIndex = 1;
             this.toolSumatraControl.Text = "toolStrip1";
-            this.toolSumatraControl.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // toolOpen
             // 
@@ -371,7 +370,6 @@
             this.toolPageMode.Size = new System.Drawing.Size(120, 23);
             this.toolPageMode.ToolTipText = "Page Mode";
             this.toolPageMode.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
-            this.toolPageMode.Click += new System.EventHandler(this.toolStripComboBox1_Click);
             // 
             // toolGetDisplayMode
             // 
@@ -393,9 +391,9 @@
             // 
             this.toolZoomVirtualSet.Items.AddRange(new object[] {
             "0 - None",
-            "1 - FitPage",
-            "2 - FitWidth",
-            "3 - FitContent"});
+            "-1 - FitPage",
+            "-2 - FitWidth",
+            "-3 - FitContent"});
             this.toolZoomVirtualSet.Name = "toolZoomVirtualSet";
             this.toolZoomVirtualSet.Size = new System.Drawing.Size(120, 23);
             this.toolZoomVirtualSet.SelectedIndexChanged += new System.EventHandler(this.toolZoomVirtualSet_SelectedIndexChanged);
@@ -454,6 +452,10 @@
             this.sumatraPDFControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.sumatraPDFControl1.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.sumatraPDFControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sumatraPDFControl1.BackgroundImage")));
+            this.sumatraPDFControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.sumatraPDFControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.sumatraPDFControl1.DisplayMode = SumatraPDFControl.SumatraPDFControl.DisplayModeEnum.Automatic;
             this.sumatraPDFControl1.Location = new System.Drawing.Point(127, 64);
             this.sumatraPDFControl1.Name = "sumatraPDFControl1";
@@ -469,11 +471,11 @@
             this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
             this.sumatraPDFControl1.PageChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
             this.sumatraPDFControl1.ContextMenuOpen += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuOpenEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
-            this.sumatraPDFControl1.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
             this.sumatraPDFControl1.ZoomChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
             this.sumatraPDFControl1.LinkClick += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
             this.sumatraPDFControl1.DisplayModeChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.DisplayModeChangedEventArgs>(this.sumatraPDFControl1_DisplayModeChangedMessage);
             this.sumatraPDFControl1.ScrollPositionChanged += new System.EventHandler<System.EventArgs>(this.sumatraPDFControl1_ScrollPositionMessage);
+            this.sumatraPDFControl1.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
             this.sumatraPDFControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyDown);
             this.sumatraPDFControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyUp);
             // 
