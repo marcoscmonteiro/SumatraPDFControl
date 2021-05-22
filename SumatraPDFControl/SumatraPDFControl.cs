@@ -692,6 +692,7 @@ namespace SumatraPDF
 		/* TODO: 		 
 		 * Bug: ContextMenu event position does not consider if toolbar is visible
 		 * Bug: Customized ContextMenu in plugin mode does not disapear on left mouse click 
+		 * Bug: MouseClick events does not occurs
 		 * Bug: Toc window title is not being repainted after another window pass over it	
 		 * Special keys events 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
