@@ -14,7 +14,7 @@ namespace SumatraPDFControl
 	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
 	public partial class SumatraPDFControl : UserControl
 	{
-		public struct COPYDATASTRUCT
+		private struct COPYDATASTRUCT
 		{
 			public IntPtr dwData;
 			public int cbData;
@@ -394,8 +394,6 @@ namespace SumatraPDFControl
 		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
 		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
 
-
-
 		[Description("Zoom factor was changed"), Category("SumatraPDF")]
 		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
 
@@ -411,8 +409,10 @@ namespace SumatraPDFControl
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
 		public event EventHandler<KeyPressEventArgs> KeyPress;
+
 		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyDown;
+
 		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyUp;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
@@ -473,9 +473,8 @@ namespace SumatraPDFControl
 					case "DisplayModeChanged":
 					case "DisplayMode":
 						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
-						if (mmsg.Contains("Changed"))
-							DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
-							break;
+						if (mmsg.Contains("Changed")) DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
+						break;
 					case "StartupFinished":
 					case "FileOpened":
 						GetPage();
@@ -670,7 +669,7 @@ namespace SumatraPDFControl
 		private void SumatraPDFControl_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			this.KeyPress?.Invoke(this, e);
-			// Do not end SumatraPDF process when pressing 'q' key
+			// Do not allow SumatraPDF close current window when pressing 'q' key
 			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
 			LastKeyPressEventArgs = e;
 			
