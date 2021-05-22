@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolSumatraControl = new System.Windows.Forms.ToolStrip();
             this.toolOpen = new System.Windows.Forms.ToolStripButton();
@@ -69,8 +70,13 @@
             this.toolScrollPosPage = new System.Windows.Forms.ToolStripLabel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.sumatraPDFControl1 = new SumatraPDFControl.SumatraPDFControl();
+            this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolSumatraControl.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolSumatraControl
@@ -447,51 +453,80 @@
             this.textBox1.Size = new System.Drawing.Size(1291, 58);
             this.textBox1.TabIndex = 2;
             // 
-            // sumatraPDFControl1
+            // SumatraPDFControl
             // 
-            this.sumatraPDFControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.SumatraPDFControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.sumatraPDFControl1.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.sumatraPDFControl1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("sumatraPDFControl1.BackgroundImage")));
-            this.sumatraPDFControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.sumatraPDFControl1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.sumatraPDFControl1.DisplayMode = SumatraPDFControl.SumatraPDFControl.DisplayModeEnum.Automatic;
-            this.sumatraPDFControl1.Location = new System.Drawing.Point(127, 64);
-            this.sumatraPDFControl1.Name = "sumatraPDFControl1";
-            this.sumatraPDFControl1.NamedDest = null;
-            this.sumatraPDFControl1.Page = 0;
-            this.sumatraPDFControl1.Size = new System.Drawing.Size(1291, 671);
-            this.sumatraPDFControl1.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\dbg64\\SumatraPDF-dll.exe";
-            this.sumatraPDFControl1.TabIndex = 0;
-            this.sumatraPDFControl1.TocVisible = false;
-            this.sumatraPDFControl1.ToolBarVisible = false;
-            this.sumatraPDFControl1.Zoom = 0F;
-            this.sumatraPDFControl1.ZoomVirtual = SumatraPDFControl.SumatraPDFControl.ZoomVirtualEnum.None;
-            this.sumatraPDFControl1.SumatraMessage += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.SumatraMessageEventArgs>(this.sumatraPDFControl1_SumatraMessage);
-            this.sumatraPDFControl1.PageChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.PageChangedEventArgs>(this.sumatraPDFControl1_PageChangedMessage);
-            this.sumatraPDFControl1.ContextMenuOpen += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ContextMenuOpenEventArgs>(this.sumatraPDFControl1_ContextMenuMessage);
-            this.sumatraPDFControl1.ZoomChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.ZoomChangedEventArgs>(this.sumatraPDFControl1_ZoomChangedMessage);
-            this.sumatraPDFControl1.LinkClick += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.LinkClickedEventArgs>(this.sumatraPDFControl1_LinkClickedMessage);
-            this.sumatraPDFControl1.DisplayModeChanged += new System.EventHandler<SumatraPDFControl.SumatraPDFControl.DisplayModeChangedEventArgs>(this.sumatraPDFControl1_DisplayModeChangedMessage);
-            this.sumatraPDFControl1.ScrollPositionChanged += new System.EventHandler<System.EventArgs>(this.sumatraPDFControl1_ScrollPositionMessage);
-            this.sumatraPDFControl1.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.sumatraPDFControl1_KeyPressedMessage);
-            this.sumatraPDFControl1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyDown);
-            this.sumatraPDFControl1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.sumatraPDFControl1_KeyUp);
+            this.SumatraPDFControl.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.SumatraPDFControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SumatraPDFControl.BackgroundImage")));
+            this.SumatraPDFControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.SumatraPDFControl.ContextMenuStrip = this.contextMenuStrip1;
+            this.SumatraPDFControl.Cursor = System.Windows.Forms.Cursors.Default;
+            this.SumatraPDFControl.DisplayMode = SumatraPDF.SumatraPDFControl.DisplayModeEnum.Automatic;
+            this.SumatraPDFControl.Location = new System.Drawing.Point(127, 64);
+            this.SumatraPDFControl.Name = "SumatraPDFControl";
+            this.SumatraPDFControl.NamedDest = null;
+            this.SumatraPDFControl.Page = 0;
+            this.SumatraPDFControl.Size = new System.Drawing.Size(1291, 671);
+            this.SumatraPDFControl.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\rel64\\SumatraPDF.exe";
+            this.SumatraPDFControl.TabIndex = 0;
+            this.SumatraPDFControl.TocVisible = false;
+            this.SumatraPDFControl.ToolBarVisible = false;
+            this.SumatraPDFControl.Zoom = 0F;
+            this.SumatraPDFControl.ZoomVirtual = SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None;
+            this.SumatraPDFControl.SumatraMessage += new System.EventHandler<SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs>(this.SumatraPDFControl_SumatraMessage);
+            this.SumatraPDFControl.PageChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.PageChangedEventArgs>(this.SumatraPDFControl_PageChangedMessage);
+            this.SumatraPDFControl.ContextMenuOpen += new System.EventHandler<SumatraPDF.SumatraPDFControl.ContextMenuOpenEventArgs>(this.SumatraPDFControl_ContextMenuMessage);
+            this.SumatraPDFControl.ZoomChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs>(this.SumatraPDFControl_ZoomChangedMessage);
+            this.SumatraPDFControl.LinkClick += new System.EventHandler<SumatraPDF.SumatraPDFControl.LinkClickedEventArgs>(this.SumatraPDFControl_LinkClickedMessage);
+            this.SumatraPDFControl.DisplayModeChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs>(this.SumatraPDFControl_DisplayModeChangedMessage);
+            this.SumatraPDFControl.ScrollPositionChanged += new System.EventHandler<System.EventArgs>(this.SumatraPDFControl_ScrollPositionMessage);
+            this.SumatraPDFControl.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.SumatraPDFControl_KeyPressedMessage);
+            this.SumatraPDFControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
+            this.SumatraPDFControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem3.Text = "toolStripMenuItem3";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 735);
-            this.Controls.Add(this.sumatraPDFControl1);
+            this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolSumatraControl);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "SumatraPDFControl Test Window";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.toolSumatraControl.ResumeLayout(false);
             this.toolSumatraControl.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -499,7 +534,7 @@
 
         #endregion
 
-        private SumatraPDFControl.SumatraPDFControl sumatraPDFControl1;
+        private SumatraPDF.SumatraPDFControl SumatraPDFControl;
         private System.Windows.Forms.ToolStrip toolSumatraControl;
         private System.Windows.Forms.ToolStripButton toolOpen;
         private System.Windows.Forms.ToolStripTextBox toolText;
@@ -540,6 +575,10 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolGetRotation;
         private System.Windows.Forms.ToolStripButton toolSetRotation;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }
 

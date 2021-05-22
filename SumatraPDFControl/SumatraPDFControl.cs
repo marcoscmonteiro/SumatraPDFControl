@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
 
-namespace SumatraPDFControl
+namespace SumatraPDF
 {
 	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
 	public partial class SumatraPDFControl : UserControl
@@ -47,6 +47,7 @@ namespace SumatraPDFControl
 		private const int WM_KEYDOWN = 0x0100;
 		private const int WM_KEYUP = 0x0101;
 		private const int WM_CHAR = 0x0102; // for use by event KeyPress
+		private const int WM_CONTEXTMENU = 0x007B;
 
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
@@ -323,6 +324,7 @@ namespace SumatraPDFControl
             {
 				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
+
 		}
 
 		public class PageChangedEventArgs : EventArgs
@@ -449,7 +451,7 @@ namespace SumatraPDFControl
 						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
 						ContextMenuOpen?.Invoke(this, cmoe);
-						CallBackReturn = cmoe.Handled ? 0 : 1;
+						CallBackReturn = cmoe.Handled ? 1 : 0;
 						break;
 
 					case "ZoomChanged":
@@ -675,8 +677,10 @@ namespace SumatraPDFControl
 			
 		}
 
-		/* TODO: 
-		 * Bug: Toc window title is not being repainted after another window pass over it		 
+		/* TODO: 		 
+		 * Bug: ContextMenu event position does not consider if toolbar is visible
+		 * Bug: Customized ContextMenu in plugin mode does not disapear on left mouse click 
+		 * Bug: Toc window title is not being repainted after another window pass over it	
 		 * Special keys events 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
 		 *   4. Treat ALT key
