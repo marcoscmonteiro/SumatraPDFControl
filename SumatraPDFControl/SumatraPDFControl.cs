@@ -42,7 +42,11 @@ namespace SumatraPDF
 		private const int WM_SETFOCUS = 0x0007;
 		private const int WM_PARENTNOTIFY = 0x0210;
 		private const int WM_LBUTTONDOWN = 0x0201;
+		private const int WM_LBUTTONUP = 0x0202;
+		private const int WM_LBUTTONDBLCLK = 0x0203;
 		private const int WM_RBUTTONDOWN = 0x0204;
+		private const int WM_RBUTTONUP = 0x0205;
+		private const int WM_RBUTTONDBLCLK = 0x0206;
 		private const int WM_COMMAND = 0x0111;
 		private const int WM_KEYDOWN = 0x0100;
 		private const int WM_KEYUP = 0x0101;
@@ -285,7 +289,7 @@ namespace SumatraPDF
 				m.Result = (IntPtr)0; 
 				return; 
 			}
-			
+
 			base.WndProc(ref m);
 
 			if (m.Msg == WM_SETFOCUS)
@@ -323,6 +327,14 @@ namespace SumatraPDF
 			else if (m.Msg == WM_KEYUP)
             {
 				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
+			}
+			else if (m.Msg == WM_RBUTTONDBLCLK || m.Msg == WM_LBUTTONDBLCLK)
+            {
+				IntPtr xy = m.LParam;
+				int x = unchecked((short)(long)xy);
+				int y = unchecked((short)((long)xy >> 16));
+
+				OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
 			}
 
 		}
