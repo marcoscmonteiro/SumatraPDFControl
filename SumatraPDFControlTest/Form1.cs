@@ -214,10 +214,6 @@ namespace SumatraPDFControlTest
         private void SumatraPDFControl_MouseDown(object sender, MouseEventArgs e)
         {
             AddText("MouseDown: " + e.Button.ToString());
-            if (SumatraPDFControl.ContextMenuStrip != null)
-            {
-                if (SumatraPDFControl.ContextMenuStrip.Visible) SumatraPDFControl.ContextMenuStrip.Close();
-            }
         }
 
         private void SumatraPDFControl_MouseUp(object sender, MouseEventArgs e)

@@ -328,16 +328,16 @@ namespace SumatraPDF
 				string sMsg = Encoding.Default.GetString(strb);
 				m.Result = ParseSumatraMessage(sMsg, x.dwData);
 			}
-			else if (m.Msg == WM_KEYDOWN )
+			else if (m.Msg == WM_KEYDOWN) // UserControl maps as MouseDown event
 			{			
 				m.Result = LastKeyDownEventArgs.Handled ? (IntPtr) 0 : (IntPtr) 1;
             }
-			else if (m.Msg == WM_CHAR ) // KeyPress event
+			else if (m.Msg == WM_CHAR ) // UserControl maps as KeyPress event
 			{
 				m.Result = LastKeyPressEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
-			else if (m.Msg == WM_KEYUP)
-            {
+			else if (m.Msg == WM_KEYUP) // UserControl maps as MouseDown event
+			{
 				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
 			else if (m.Msg == WM_RBUTTONDBLCLK || m.Msg == WM_LBUTTONDBLCLK)
@@ -348,7 +348,20 @@ namespace SumatraPDF
 
 				OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
 			}
-
+			else if (m.Msg == WM_LBUTTONDOWN)
+            {
+				if (ContextMenuStrip != null && ContextMenuStrip.Visible)
+				{
+					ContextMenuStrip.Close();
+				}
+			}
+			else if (m.Msg == WM_RBUTTONUP)
+			{
+				if (ContextMenuStrip != null && ContextMenuStrip.Visible)
+				{
+					ContextMenuStrip.Focus();
+				}
+			}
 		}
 
 		public class PageChangedEventArgs : EventArgs
@@ -452,7 +465,6 @@ namespace SumatraPDF
 		public event KeyEventHandler KeyUp;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
-
 		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
 			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
@@ -483,8 +495,13 @@ namespace SumatraPDF
 					case "ContextMenuOpened":
 						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
-						ContextMenuOpen?.Invoke(this, cmoe);
+						ContextMenuOpen?.Invoke(this, cmoe);						
 						CallBackReturn = cmoe.Handled ? 1 : 0;
+						if (!cmoe.Handled && ContextMenuStrip != null)
+						{
+							ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);							
+							CallBackReturn = 1;
+						}
 						break;
 
 					case "ZoomChanged":
@@ -709,11 +726,10 @@ namespace SumatraPDF
 		}
 
 		/* TODO: 
-		 * If ContextMenuStrip property is set use it in place of SumatraPDF inne ContextMenu
-		 *	 Bug: ContextMenu event position does not consider if toolbar is visible
-		 *   Bug: Customized ContextMenu in plugin mode does not disapear on left mouse click 
+		 * Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
+		 *	 Treat if event is Handled by SumatraPDFControl or not
+		 *   Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl *	 
 		 * Bug: Toc window title is not being repainted after another window pass over it
-		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
 		 * Hide properites and events not used and implement others
 		 * Special keys events 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 

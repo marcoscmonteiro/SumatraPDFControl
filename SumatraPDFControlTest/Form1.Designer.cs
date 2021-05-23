@@ -485,7 +485,7 @@
             this.SumatraPDFControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumatraPDFControl.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
+            this.SumatraPDFControl.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.SumatraPDFControl.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.SumatraPDFControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SumatraPDFControl.BackgroundImage")));
             this.SumatraPDFControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
