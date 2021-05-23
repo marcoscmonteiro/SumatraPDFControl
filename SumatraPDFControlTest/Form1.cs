@@ -150,22 +150,22 @@ namespace SumatraPDFControlTest
             }
         }
 
-        private void SumatraPDFControl_ScrollPositionMessage(object sender, EventArgs e)
+        private void SumatraPDFControl_ScrollStateChanged(object sender, ScrollStateEventArgs e)
         {
-            toolScrollPosX.Text = SumatraPDFControl.ScrollPosition.X.ToString();
-            toolScrollPosY.Text = SumatraPDFControl.ScrollPosition.Y.ToString();
-            toolScrollPosPage.Text = SumatraPDFControl.ScrollPosition.Page.ToString();
+            toolScrollPosX.Text = e.ScrollState.X.ToString();
+            toolScrollPosY.Text = e.ScrollState.Y.ToString();
+            toolScrollPosPage.Text = e.ScrollState.Page.ToString();
         }
 
         private void toolSetScrollPos_Click(object sender, EventArgs e)
         {
             Match mSP = Regex.Match(toolText.Text, @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
-            var pScrollPosition = new ScrollPositionStruct(
+            var pScrollPosition = new ScrollStateStruct(
                 int.Parse(mSP.Result("${page}")),
                 Double.Parse(mSP.Result("${x}")),
                 Double.Parse(mSP.Result("${y}"))
             );
-            SumatraPDFControl.ScrollPosition = pScrollPosition;
+            SumatraPDFControl.ScrollState = pScrollPosition;
         }
 
         private void SumatraPDFControl_DisplayModeChangedMessage(object sender, DisplayModeChangedEventArgs e)
@@ -229,5 +229,11 @@ namespace SumatraPDFControlTest
         {
             AddText("MouseDoubleClick: " + e.Button.ToString() + string.Format(" - ({0},{1})", e.X, e.Y));
         }
+
+        private void SumatraPDFControl_Scroll(object sender, ScrollEventArgs e)
+        {
+            AddText("Scroll: " + e.OldValue.ToString() + " - " + e.NewValue.ToString() + " - " + e.Type.ToString() + " - " + e.ScrollOrientation.ToString());
+        }
+    
     }
 }

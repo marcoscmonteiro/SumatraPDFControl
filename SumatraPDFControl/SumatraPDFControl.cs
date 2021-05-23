@@ -66,11 +66,23 @@ namespace SumatraPDF
 		private IntPtr pSumatraWindowHandle;
 		private IntPtr SUMATRAMESSAGETYPE;
 
+		// Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		new public event EventHandler<MouseEventArgs> MouseClick;
+
+		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public override System.Drawing.Image BackgroundImage
+		{
+			get { return base.BackgroundImage; }
+			set { base.BackgroundImage = value; }
+		}
+
 		static List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
-		public struct ScrollPositionStruct
+		public struct ScrollStateStruct
 		{
-			public ScrollPositionStruct(int page, double x, double y)
+			public ScrollStateStruct(int page, double x, double y)
 			{
 				Page = page;
 				X = x;
@@ -82,14 +94,14 @@ namespace SumatraPDF
 			public override string ToString() => $"{Page},{X},{Y}";
 		}
 		
-		private ScrollPositionStruct pScrollPosition;
-		public ScrollPositionStruct ScrollPosition { 
+		private ScrollStateStruct pScrollState;
+		public ScrollStateStruct ScrollState { 
 			get {
-				SendSumatraCommand("GetProperty", "ScrollPosition");
-				return pScrollPosition;
+				SendSumatraCommand("GetProperty", "ScrollState");
+				return pScrollState;
 			} 
 			set {
-				SendSumatraCommand("SetProperty", "ScrollPosition", value.ToString());
+				SendSumatraCommand("SetProperty", "ScrollState", value.ToString());
 			} 
 		}
 
@@ -399,6 +411,15 @@ namespace SumatraPDF
 			public DisplayModeEnum DisplayMode { get; }
         }
 
+		public class ScrollStateEventArgs : EventArgs
+        {
+			public ScrollStateEventArgs(ScrollStateStruct ScrollState)
+            {
+				this.ScrollState = ScrollState;
+            }
+			public ScrollStateStruct ScrollState { get; }
+		}
+
 		[Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
 
@@ -418,7 +439,7 @@ namespace SumatraPDF
 		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
 
 		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
-		public event EventHandler<EventArgs> ScrollPositionChanged;
+		public event EventHandler<ScrollStateEventArgs> ScrollStateChanged;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
@@ -503,17 +524,15 @@ namespace SumatraPDF
 						bTocVisible = (int.Parse(m.Result("${args}")) == 1);
 						break;
 
-					case "ScrollPosition":
+					case "ScrollState":
+					case "ScrollStateChanged":
 						Match mSP = Regex.Match(m.Result("${args}"), @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
-						pScrollPosition = new ScrollPositionStruct(
+						pScrollState = new ScrollStateStruct(
 							int.Parse(mSP.Result("${page}")),
 							Double.Parse(mSP.Result("${x}"), new System.Globalization.CultureInfo("en-US")), 
 							Double.Parse(mSP.Result("${y}"), new System.Globalization.CultureInfo("en-US"))
 						);
-						break;
-
-					case "ScrollPositionChanged":
-						ScrollPositionChanged?.Invoke(this, new EventArgs());
+						if (mmsg.Contains("Changed")) ScrollStateChanged?.Invoke(this, new ScrollStateEventArgs(pScrollState));
 						break;
 
 					default:
@@ -689,11 +708,13 @@ namespace SumatraPDF
 			
 		}
 
-		/* TODO: 		 
-		 * Bug: ContextMenu event position does not consider if toolbar is visible
-		 * Bug: Customized ContextMenu in plugin mode does not disapear on left mouse click 
-		 * Bug: MouseClick events does not occurs
-		 * Bug: Toc window title is not being repainted after another window pass over it	
+		/* TODO: 
+		 * If ContextMenuStrip property is set use it in place of SumatraPDF inne ContextMenu
+		 *	 Bug: ContextMenu event position does not consider if toolbar is visible
+		 *   Bug: Customized ContextMenu in plugin mode does not disapear on left mouse click 
+		 * Bug: Toc window title is not being repainted after another window pass over it
+		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
+		 * Hide properites and events not used and implement others
 		 * Special keys events 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
 		 *   4. Treat ALT key
