@@ -14,7 +14,10 @@ namespace SumatraPDF
 	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
 	public partial class SumatraPDFControl : UserControl
 	{
-		private struct COPYDATASTRUCT
+
+        #region Interop
+
+        private struct COPYDATASTRUCT
 		{
 			public IntPtr dwData;
 			public int cbData;
@@ -66,207 +69,11 @@ namespace SumatraPDF
 		private IntPtr pSumatraWindowHandle;
 		private IntPtr SUMATRAMESSAGETYPE;
 
-		// Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		new public event EventHandler<MouseEventArgs> MouseClick;
+        #endregion
 
-		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public override System.Drawing.Image BackgroundImage
-		{
-			get { return base.BackgroundImage; }
-			set { base.BackgroundImage = value; }
-		}
+        #region SumatraPDF Communication
 
-		static List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
-
-		public struct ScrollStateStruct
-		{
-			public ScrollStateStruct(int page, double x, double y)
-			{
-				Page = page;
-				X = x;
-				Y = y;
-			}
-			public double X { get; }
-			public double Y { get; }
-			public int Page { get; }
-			public override string ToString() => $"{Page},{X},{Y}";
-		}
-		
-		private ScrollStateStruct pScrollState;
-		public ScrollStateStruct ScrollState { 
-			get {
-				SendSumatraCommand("GetProperty", "ScrollState");
-				return pScrollState;
-			} 
-			set {
-				SendSumatraCommand("SetProperty", "ScrollState", value.ToString());
-			} 
-		}
-
-		public enum DisplayModeEnum
-		{
-			// automatic means: the continuous form of single page, facing or
-			// book view - depending on the document's desired PageLayout
-			Automatic = 0,
-			SinglePage,
-			Facing,
-			BookView,
-			Continuous,
-			ContinuousFacing,
-			ContinuousBookView,
-		};
-
-		public enum ZoomVirtualEnum
-        {
-			None = 0,
-			FitPage = -1, // ZoomVirtual = -1
-			FitWidth = -2, // ZoomVirtual = -2
-			FitContent = -3  // ZoomVirtual = -3
-		}
-
-		public enum RotationEnum
-        {			
-			RotNone = 0,
-			Rot90 = 90,			
-			Rot180 = 180,
-			Rot270 = 270
-		}
-
-		private void GetZoom()
-		{
-			SendSumatraCommand("GetProperty", "Zoom");
-		}
-
-		private void SetZoom(float value)
-        {
-			SendSumatraCommand("SetProperty", "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
-		}
-
-		private float fZoom;
-		public float Zoom
-        {
-			get
-            {
-				GetZoom();
-				return fZoom;
-            }
-			set
-            {
-				SetZoom(value);
-			}
-        }
-
-		private ZoomVirtualEnum fZoomVirtual;
-		public ZoomVirtualEnum ZoomVirtual
-		{
-			get
-			{
-				GetZoom();
-				return fZoomVirtual;
-			}
-			set
-            {
-				float fZoomVirtual = (int)value;
-				if (fZoomVirtual < 0) SetZoom(fZoomVirtual);
-			}
-		}
-
-		private void GetDisplayMode()
-		{
-			SendSumatraCommand("GetProperty", "DisplayMode");
-		}
-		private DisplayModeEnum eDisplayMode;
-		public DisplayModeEnum DisplayMode {
-			get {
-				GetDisplayMode();
-				return eDisplayMode;
-			}
-			set
-            {
-				SendSumatraCommand("SetProperty", "DisplayMode", ((int)value).ToString());
-			}
-		}
-
-		private void GetPage()
-		{
-			SendSumatraCommand("GetProperty", "Page");
-		}
-
-		private void SetPage(int Page)
-		{
-			SendSumatraCommand("SetProperty", "Page", Page.ToString());
-		}
-		private int nPage;
-		public int Page {
-			get {
-				GetPage();
-				return nPage;
-			}
-			set {
-				SetPage(value);
-			} 
-		}
-
-		private RotationEnum eRotation;
-		public RotationEnum Rotation
-        {
-			get {
-				SendSumatraCommand("GetProperty", "Rotation");
-				return eRotation;
-            }
-        }
-
-		public void RotateBy(RotationEnum Rotation)
-        {
-			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
-		}
-
-		private string sNamedDest;
-		public string NamedDest {
-			get {
-				GetPage();
-				return sNamedDest;
-			}
-			set {
-				SendSumatraCommand("GotoNamedDest", value);
-			} 
-		}
-
-		private Boolean bToolbarVisible;
-		public Boolean ToolBarVisible
-        {
-			get
-            {
-				SendSumatraCommand("GetProperty", "ToolbarVisible");
-				return bToolbarVisible;
-            }
-			set
-            {
-				SendSumatraCommand("SetProperty", "ToolbarVisible", value ? "1" : "0");
-            }
-        }
-
-		private Boolean bTocVisible;
-		public Boolean TocVisible
-		{
-			get
-			{
-				SendSumatraCommand("GetProperty", "TocVisible");
-				return bTocVisible;
-			}
-			set
-			{
-				SendSumatraCommand("SetProperty", "TocVisible", value ? "1" : "0");
-			}
-		}
-
-		public SumatraPDFControl()
-        {
-			pSumatraWindowHandle = (IntPtr)0;
-			InitializeComponent();
-        }
+        static private List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
 		private IntPtr SumatraWindowHandle
 		{
@@ -282,16 +89,102 @@ namespace SumatraPDF
 			}
 		}
 
-		public string SumatraPDFPath
+		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
 		{
-			get
+			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
+			int CallBackReturn = 0;
+
+			// dwData = (IntPtr)0x4C5255 it's a message to internet browser when SumatraPDF is operating in plugin mode, so raise LinkClickedMessage event			
+			if (dwData == (IntPtr)0x4C5255)
 			{
-				return pSumatraPDFPath;
+				LinkClick?.Invoke(this, new LinkClickedEventArgs(sMsg0));
+				return (IntPtr)CallBackReturn;
 			}
-			set
+			else
+				if (dwData != SUMATRAPLUGIN) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
+
+			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.*)\)\]");
+			if (m.Success)
 			{
-				pSumatraPDFPath = value;
+				string mmsg = m.Result("${message}");
+				switch (mmsg)
+				{
+					case "PageChanged":
+					case "Page":
+						Match mPG = Regex.Match(m.Result("${args}"), @"(?<pageNo>.+)\,\s*\u0022(?<namedDest>.*)\u0022");
+						nPage = int.Parse(mPG.Result("${pageNo}"));
+						sNamedDest = mPG.Result("${namedDest}");
+						if (mmsg.Contains("Changed"))
+							PageChanged?.Invoke(this, new PageChangedEventArgs(nPage, sNamedDest));
+						break;
+
+					case "ContextMenuOpened":
+						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
+						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
+						ContextMenuOpen?.Invoke(this, cmoe);
+						CallBackReturn = cmoe.Handled ? 1 : 0;
+						if (!cmoe.Handled && ContextMenuStrip != null)
+						{
+							ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);
+							CallBackReturn = 1;
+						}
+						break;
+
+					case "ZoomChanged":
+					case "ZoomChangedMouseWeel":
+					case "Zoom":
+
+						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
+						fZoom = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
+						float ZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
+						if (ZoomVirtual0 < 0) fZoomVirtual = (ZoomVirtualEnum)ZoomVirtual0; else fZoomVirtual = ZoomVirtualEnum.None;
+						if (mmsg.Contains("Changed"))
+							ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(fZoom, fZoomVirtual, (mmsg != "ZoomChanged")));
+						break;
+
+					case "Rotation":
+					case "RotationChanged":
+						Match mRotation = Regex.Match(m.Result("${args}"), @"(?<rot>.+)");
+						eRotation = (RotationEnum)int.Parse(mRotation.Result("${rot}"));
+						break;
+
+					case "DisplayModeChanged":
+					case "DisplayMode":
+						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
+						if (mmsg.Contains("Changed")) DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
+						break;
+					case "StartupFinished":
+					case "FileOpened":
+						GetPage();
+						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
+						break;
+
+					case "ToolbarVisible":
+						bToolbarVisible = (int.Parse(m.Result("${args}")) == 1);
+						break;
+
+					case "TocVisible":
+						bTocVisible = (int.Parse(m.Result("${args}")) == 1);
+						break;
+
+					case "ScrollState":
+					case "ScrollStateChanged":
+						Match mSP = Regex.Match(m.Result("${args}"), @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
+						pScrollState = new ScrollStateStruct(
+							int.Parse(mSP.Result("${page}")),
+							Double.Parse(mSP.Result("${x}"), new System.Globalization.CultureInfo("en-US")),
+							Double.Parse(mSP.Result("${y}"), new System.Globalization.CultureInfo("en-US"))
+						);
+						if (mmsg.Contains("Changed")) ScrollStateChanged?.Invoke(this, new ScrollStateEventArgs(pScrollState));
+						break;
+
+					default:
+						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
+						break;
+				}
 			}
+
+			return (IntPtr)CallBackReturn;
 		}
 
 		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
@@ -363,6 +256,290 @@ namespace SumatraPDF
 				}
 			}
 		}
+		private void SendSumatraCommand(string strMessage, params Object[] parr)
+		{
+			// Without define current file commands cannot be send to sumatra
+			if (sCurrentFile == string.Empty) return;
+
+			if (SumatraWindowHandle == (IntPtr)0 && pSumatraWindowHandleList.Count == 0) return;
+			IntPtr SumatraCurrentHandle = SumatraWindowHandle == (IntPtr)0 ? pSumatraWindowHandleList[0] : SumatraWindowHandle;
+
+			string DDEMessage = string.Empty;
+			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr);
+			else
+			{
+				DDEMessage = "[" + strMessage + "("; //\"" + sCurrentFile + "\"";
+				Boolean FirstParam = true;
+				foreach (Object p in parr)
+				{
+					if (!FirstParam) DDEMessage += ","; else FirstParam = false;
+					switch (p.GetType().FullName)
+					{
+						case "System.String":
+							DDEMessage += "\"" + p.ToString() + "\"";
+							break;
+						case "System.Double":
+							DDEMessage += ((Double)p).ToString(new System.Globalization.CultureInfo("en-US"));
+							break;
+						default:
+							DDEMessage += p.ToString();
+							break;
+					}
+				}
+				DDEMessage += ")]";
+			}
+
+			COPYDATASTRUCT DataStruct = default;
+			DDEMessage += "\0";
+			DataStruct.dwData = SUMATRAMESSAGETYPE;
+			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
+			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
+			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
+			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
+			SendMessage(SumatraCurrentHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
+			Marshal.FreeHGlobal(DataStruct.lpData);
+			Marshal.FreeHGlobal(pDataStruct);
+		}
+
+        #endregion
+
+        #region Hide UserControl base members
+
+        // Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		new public event EventHandler<MouseEventArgs> MouseClick;
+
+		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		public override System.Drawing.Image BackgroundImage
+		{
+			get { return base.BackgroundImage; }
+			set { base.BackgroundImage = value; }
+		}
+
+        #endregion
+
+        #region Public Types and Enums
+
+        public struct ScrollStateStruct
+		{
+			public ScrollStateStruct(int page, double x, double y)
+			{
+				Page = page;
+				X = x;
+				Y = y;
+			}
+			public double X { get; }
+			public double Y { get; }
+			public int Page { get; }
+			public override string ToString() => $"{Page},{X},{Y}";
+		}
+
+		public enum DisplayModeEnum
+		{
+			// automatic means: the continuous form of single page, facing or
+			// book view - depending on the document's desired PageLayout
+			Automatic = 0,
+			SinglePage,
+			Facing,
+			BookView,
+			Continuous,
+			ContinuousFacing,
+			ContinuousBookView,
+		};
+
+		public enum ZoomVirtualEnum
+		{
+			None = 0,
+			FitPage = -1, // ZoomVirtual = -1
+			FitWidth = -2, // ZoomVirtual = -2
+			FitContent = -3  // ZoomVirtual = -3
+		}
+
+		public enum RotationEnum
+		{
+			RotNone = 0,
+			Rot90 = 90,
+			Rot180 = 180,
+			Rot270 = 270
+		}
+
+		#endregion
+
+		#region Public Properties
+
+		public string SumatraPDFPath
+		{
+			get
+			{
+				return pSumatraPDFPath;
+			}
+			set
+			{
+				pSumatraPDFPath = value;
+			}
+		}
+
+		private ScrollStateStruct pScrollState;
+		public ScrollStateStruct ScrollState
+		{
+			get
+			{
+				SendSumatraCommand("GetProperty", "ScrollState");
+				return pScrollState;
+			}
+			set
+			{
+				SendSumatraCommand("SetProperty", "ScrollState", value.ToString());
+			}
+		}
+
+		private void GetZoom()
+		{
+			SendSumatraCommand("GetProperty", "Zoom");
+		}
+
+		private void SetZoom(float value)
+		{
+			SendSumatraCommand("SetProperty", "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
+		}
+
+		private float fZoom;
+		public float Zoom
+		{
+			get
+			{
+				GetZoom();
+				return fZoom;
+			}
+			set
+			{
+				SetZoom(value);
+			}
+		}
+
+		private ZoomVirtualEnum fZoomVirtual;
+		public ZoomVirtualEnum ZoomVirtual
+		{
+			get
+			{
+				GetZoom();
+				return fZoomVirtual;
+			}
+			set
+			{
+				float fZoomVirtual = (int)value;
+				if (fZoomVirtual < 0) SetZoom(fZoomVirtual);
+			}
+		}
+
+		private void GetDisplayMode()
+		{
+			SendSumatraCommand("GetProperty", "DisplayMode");
+		}
+		private DisplayModeEnum eDisplayMode;
+		public DisplayModeEnum DisplayMode
+		{
+			get
+			{
+				GetDisplayMode();
+				return eDisplayMode;
+			}
+			set
+			{
+				SendSumatraCommand("SetProperty", "DisplayMode", ((int)value).ToString());
+			}
+		}
+
+		private void GetPage()
+		{
+			SendSumatraCommand("GetProperty", "Page");
+		}
+
+		private void SetPage(int Page)
+		{
+			SendSumatraCommand("SetProperty", "Page", Page.ToString());
+		}
+		private int nPage;
+		public int Page
+		{
+			get
+			{
+				GetPage();
+				return nPage;
+			}
+			set
+			{
+				SetPage(value);
+			}
+		}
+
+		private RotationEnum eRotation;
+		public RotationEnum Rotation
+		{
+			get
+			{
+				SendSumatraCommand("GetProperty", "Rotation");
+				return eRotation;
+			}
+		}
+
+		public void RotateBy(RotationEnum Rotation)
+		{
+			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
+		}
+
+		private string sNamedDest;
+		public string NamedDest
+		{
+			get
+			{
+				GetPage();
+				return sNamedDest;
+			}
+			set
+			{
+				SendSumatraCommand("GotoNamedDest", value);
+			}
+		}
+
+		private Boolean bToolbarVisible;
+		public Boolean ToolBarVisible
+		{
+			get
+			{
+				SendSumatraCommand("GetProperty", "ToolbarVisible");
+				return bToolbarVisible;
+			}
+			set
+			{
+				SendSumatraCommand("SetProperty", "ToolbarVisible", value ? "1" : "0");
+			}
+		}
+
+		private Boolean bTocVisible;
+		public Boolean TocVisible
+		{
+			get
+			{
+				SendSumatraCommand("GetProperty", "TocVisible");
+				return bTocVisible;
+			}
+			set
+			{
+				SendSumatraCommand("SetProperty", "TocVisible", value ? "1" : "0");
+			}
+		}
+
+		public SumatraPDFControl()
+		{
+			pSumatraWindowHandle = (IntPtr)0;
+			InitializeComponent();
+		}
+
+		#endregion
+
+		#region EventArgs Subclasses
 
 		public class PageChangedEventArgs : EventArgs
         {
@@ -433,7 +610,11 @@ namespace SumatraPDF
 			public ScrollStateStruct ScrollState { get; }
 		}
 
-		[Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
+        #endregion
+
+        #region Event Handlers
+
+        [Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
 
 		[Description("Current visible page was changed"), Category("SumatraPDF")]
@@ -465,100 +646,22 @@ namespace SumatraPDF
 		public event KeyEventHandler KeyUp;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
-		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
+		#endregion
+
+		#region Private Methods
+
+		private void CloseDocument()
 		{
-			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
-			int CallBackReturn = 0;
+			// Ver qual o código do comando no arquivo Commands.h: CmdClose
+			SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdClose, (IntPtr)0);
+		}
 
-			// dwData = (IntPtr)0x4C5255 it's a message to internet browser when SumatraPDF is operating in plugin mode, so raise LinkClickedMessage event			
-			if (dwData == (IntPtr)0x4C5255) { 
-				LinkClick?.Invoke(this, new LinkClickedEventArgs(sMsg0));
-				return (IntPtr)CallBackReturn;
-			} else
-				if (dwData != SUMATRAPLUGIN) sMsg0 = string.Format("[UnknownMessage(\"{0}\")]", sMsg0);
-
-			Match m = Regex.Match(sMsg0, @"\[(?<message>\w+)\((?<args>.*)\)\]");
-			if (m.Success)
+		private void SumatraPDFControl_Resize(object sender, EventArgs e)
+		{
+			if (SumatraWindowHandle != (IntPtr)0)
 			{
-				string mmsg = m.Result("${message}");
-				switch (mmsg)
-                {
-					case "PageChanged":
-					case "Page":
-						Match mPG = Regex.Match(m.Result("${args}"), @"(?<pageNo>.+)\,\s*\u0022(?<namedDest>.*)\u0022");
-						nPage = int.Parse(mPG.Result("${pageNo}"));
-						sNamedDest = mPG.Result("${namedDest}");
-						if (mmsg.Contains("Changed"))
-							PageChanged?.Invoke(this, new PageChangedEventArgs(nPage, sNamedDest));
-						break;
-
-					case "ContextMenuOpened":
-						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
-						ContextMenuOpen?.Invoke(this, cmoe);						
-						CallBackReturn = cmoe.Handled ? 1 : 0;
-						if (!cmoe.Handled && ContextMenuStrip != null)
-						{
-							ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);							
-							CallBackReturn = 1;
-						}
-						break;
-
-					case "ZoomChanged":
-					case "ZoomChangedMouseWeel":
-					case "Zoom":
-
-						Match mZoom = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-						fZoom = float.Parse(mZoom.Result("${x}"), new System.Globalization.CultureInfo("en-US"));
-						float ZoomVirtual0 = float.Parse(mZoom.Result("${y}"), new System.Globalization.CultureInfo("en-US"));
-						if (ZoomVirtual0 < 0) fZoomVirtual = (ZoomVirtualEnum)ZoomVirtual0; else fZoomVirtual = ZoomVirtualEnum.None;
-						if (mmsg.Contains("Changed"))
-							ZoomChanged?.Invoke(this, new ZoomChangedEventArgs(fZoom, fZoomVirtual, (mmsg != "ZoomChanged")));
-						break;
-
-					case "Rotation":
-					case "RotationChanged":
-						Match mRotation = Regex.Match(m.Result("${args}"), @"(?<rot>.+)");
-						eRotation = (RotationEnum)int.Parse(mRotation.Result("${rot}"));
-						break;
-
-					case "DisplayModeChanged":
-					case "DisplayMode":
-						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
-						if (mmsg.Contains("Changed")) DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
-						break;
-					case "StartupFinished":
-					case "FileOpened":
-						GetPage();
-						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
-						break;
-
-					case "ToolbarVisible":
-						bToolbarVisible = (int.Parse(m.Result("${args}")) == 1);
-						break;
-
-					case "TocVisible":
-						bTocVisible = (int.Parse(m.Result("${args}")) == 1);
-						break;
-
-					case "ScrollState":
-					case "ScrollStateChanged":
-						Match mSP = Regex.Match(m.Result("${args}"), @"(?<page>.+)\,(?<x>.+)\,\s*(?<y>.+)");
-						pScrollState = new ScrollStateStruct(
-							int.Parse(mSP.Result("${page}")),
-							Double.Parse(mSP.Result("${x}"), new System.Globalization.CultureInfo("en-US")), 
-							Double.Parse(mSP.Result("${y}"), new System.Globalization.CultureInfo("en-US"))
-						);
-						if (mmsg.Contains("Changed")) ScrollStateChanged?.Invoke(this, new ScrollStateEventArgs(pScrollState));
-						break;
-
-					default:
-						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
-						break;
-				}
+				MoveWindow(SumatraWindowHandle, 0, 0, base.Width, base.Height, 0);
 			}
-
-			return (IntPtr)CallBackReturn;
 		}
 
 		private int RaiseDefaultSumatraEvent(string msg, IntPtr dwData) 
@@ -566,50 +669,6 @@ namespace SumatraPDF
 			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = msg, Data = dwData };
 			SumatraMessage?.Invoke(this, e);
 			return e.CallBackReturn;
-		}
-
-		private void SendSumatraCommand(string strMessage, params Object[] parr)
-		{
-			// Without define current file commands cannot be send to sumatra
-			if (sCurrentFile == string.Empty) return;
-
-			if (SumatraWindowHandle == (IntPtr)0 && pSumatraWindowHandleList.Count==0) return;
-			IntPtr SumatraCurrentHandle = SumatraWindowHandle == (IntPtr)0 ? pSumatraWindowHandleList[0] : SumatraWindowHandle;
-
-			string DDEMessage = string.Empty;
-			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr); else
-            {
-				DDEMessage = "[" + strMessage + "("; //\"" + sCurrentFile + "\"";
-				Boolean FirstParam = true;
-				foreach (Object p in parr)
-				{
-					if (!FirstParam) DDEMessage += ","; else FirstParam = false;
-					switch (p.GetType().FullName)
-					{
-						case "System.String":
-							DDEMessage += "\"" + p.ToString() + "\"";
-							break;
-						case "System.Double":
-							DDEMessage += ((Double)p).ToString(new System.Globalization.CultureInfo("en-US"));
-							break;
-						default:
-							DDEMessage += p.ToString();
-							break;
-					}
-				}
-				DDEMessage += ")]";
-			}
-
-			COPYDATASTRUCT DataStruct = default;
-			DDEMessage += "\0";
-			DataStruct.dwData = SUMATRAMESSAGETYPE;
-			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
-			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
-			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
-			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
-			SendMessage(SumatraCurrentHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
-			Marshal.FreeHGlobal(DataStruct.lpData);
-			Marshal.FreeHGlobal(pDataStruct);
 		}
 
 		private void RestartSumatra(string sFile, int page = 1)
@@ -635,12 +694,16 @@ namespace SumatraPDF
             SumatraProcess = Process.Start(PSInfo);			
 		}
 
-		private void OpenFile()
+        private void OpenFile()
         {
 			SendSumatraCommand("OpenFile", sCurrentFile, Handle.ToString());
 		}
 
-		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
+        #endregion
+
+        #region Public Methods
+
+        public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
 		{
 			sCurrentFile = PDFFile;
 			this.Page = Page;
@@ -658,20 +721,6 @@ namespace SumatraPDF
 			}
 			SetPage(Page);
 
-		}
-
-		private void CloseDocument()
-        {
-			// Ver qual o código do comando no arquivo Commands.h: CmdClose
-			SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdClose, (IntPtr)0);
-		}
-
-		private void SumatraPDFControl_Resize(object sender, EventArgs e)
-		{
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				MoveWindow(SumatraWindowHandle, 0, 0, base.Width, base.Height, 0);
-			}
 		}
 
 		public void CopySelection()
@@ -692,6 +741,10 @@ namespace SumatraPDF
         {
 			SendSumatraCommand("TextSearchNext", (forward ? 1 : 0));
 		}
+
+        #endregion
+
+        #region Mapped UserControl events
 
         private void SumatraPDFControl_Load(object sender, EventArgs e)
         {
@@ -721,11 +774,12 @@ namespace SumatraPDF
 			this.KeyPress?.Invoke(this, e);
 			// Do not allow SumatraPDF close current window when pressing 'q' key
 			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
-			LastKeyPressEventArgs = e;
-			
+			LastKeyPressEventArgs = e;	
 		}
 
-		/* TODO: 
+        #endregion
+
+        /* TODO: 
 		 * Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
 		 *	 Treat if event is Handled by SumatraPDFControl or not
 		 *   Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl *	 
@@ -751,5 +805,5 @@ namespace SumatraPDF
 		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
 		*/
 
-	}
+    }
 }

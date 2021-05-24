@@ -13,21 +13,21 @@ using static SumatraPDF.SumatraPDFControl;
 
 namespace SumatraPDFControlTest
 {
-    public partial class Form1 : Form
+    public partial class FormTest : Form
     {
         public string Filename = string.Empty;
         public Boolean NewSumatraPDFProcess = false;
 
-        public Form1()
+        public FormTest()
         {
             InitializeComponent();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SumatraPDFControl.LoadFile(openFileDialog1.FileName, int.Parse(toolText.Text == "" ? "1" : toolText.Text));
+                SumatraPDFControl.LoadFile(openFileDialog.FileName, int.Parse(toolText.Text == "" ? "1" : toolText.Text));
             }
 
         }
@@ -37,12 +37,12 @@ namespace SumatraPDFControlTest
             SumatraPDFControl.Page = int.Parse(toolText.Text);
         }
 
-        private void toolStripButton3_Click(object sender, EventArgs e)
+        private void toolStripCopySelection_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.CopySelection();
         }
 
-        private void toolStripButton4_Click(object sender, EventArgs e)
+        private void toolStripToogleToolbar_Click(object sender, EventArgs e)
         {
             //SumatraPDFControl.ToogleToolBar();
             SumatraPDFControl.ToolBarVisible = !SumatraPDFControl.ToolBarVisible;
@@ -109,7 +109,7 @@ namespace SumatraPDFControlTest
             toolText.Text = SumatraPDFControl.Page.ToString();
         }
 
-        private void toolStripButton10_Click(object sender, EventArgs e)
+        private void toolStripToogleToc_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.TocVisible = !SumatraPDFControl.TocVisible;
         }
@@ -152,9 +152,12 @@ namespace SumatraPDFControlTest
 
         private void SumatraPDFControl_ScrollStateChanged(object sender, ScrollStateEventArgs e)
         {
-            toolScrollPosX.Text = e.ScrollState.X.ToString();
-            toolScrollPosY.Text = e.ScrollState.Y.ToString();
-            toolScrollPosPage.Text = e.ScrollState.Page.ToString();
+            if (cbShowScrollState.Checked)
+            {
+                toolScrollPosX.Text = e.ScrollState.X.ToString();
+                toolScrollPosY.Text = e.ScrollState.Y.ToString();
+                toolScrollPosPage.Text = e.ScrollState.Page.ToString();
+            }
         }
 
         private void toolSetScrollPos_Click(object sender, EventArgs e)
@@ -228,8 +231,9 @@ namespace SumatraPDFControlTest
 
         private void SumatraPDFControl_Scroll(object sender, ScrollEventArgs e)
         {
-            AddText("Scroll: " + e.OldValue.ToString() + " - " + e.NewValue.ToString() + " - " + e.Type.ToString() + " - " + e.ScrollOrientation.ToString());
+            if (cbShowScrollState.Checked)
+                AddText("Scroll: " + e.OldValue.ToString() + " - " + e.NewValue.ToString() + " - " + e.Type.ToString() + " - " + e.ScrollOrientation.ToString());
         }
-    
+
     }
 }

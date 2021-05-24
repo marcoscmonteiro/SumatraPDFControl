@@ -1,6 +1,6 @@
 ﻿namespace SumatraPDFControlTest
 {
-    partial class Form1
+    partial class FormTest
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTest));
             this.toolSumatraControl = new System.Windows.Forms.ToolStrip();
             this.toolOpen = new System.Windows.Forms.ToolStripButton();
             this.toolText = new System.Windows.Forms.ToolStripTextBox();
@@ -68,15 +68,16 @@
             this.toolScrollPosX = new System.Windows.Forms.ToolStripLabel();
             this.toolScrollPosY = new System.Windows.Forms.ToolStripLabel();
             this.toolScrollPosPage = new System.Windows.Forms.ToolStripLabel();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuSumatraPDF = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tootStripCopySelection = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripToogleToolbar = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripToogleToc = new System.Windows.Forms.ToolStripMenuItem();
             this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
+            this.cbShowScrollState = new System.Windows.Forms.CheckBox();
             this.toolSumatraControl.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolSumatraControl
@@ -272,7 +273,7 @@
             this.toolCopySelection.Size = new System.Drawing.Size(123, 19);
             this.toolCopySelection.Text = "CopySelection";
             this.toolCopySelection.ToolTipText = "Copy Selection";
-            this.toolCopySelection.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.toolCopySelection.Click += new System.EventHandler(this.toolStripCopySelection_Click);
             // 
             // toolToogleToolbar
             // 
@@ -283,7 +284,7 @@
             this.toolToogleToolbar.Size = new System.Drawing.Size(123, 19);
             this.toolToogleToolbar.Text = "ToogleToolbar";
             this.toolToogleToolbar.ToolTipText = "Toogle Toolbar";
-            this.toolToogleToolbar.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.toolToogleToolbar.Click += new System.EventHandler(this.toolStripToogleToolbar_Click);
             // 
             // toolToogleToc
             // 
@@ -294,7 +295,7 @@
             this.toolToogleToc.Size = new System.Drawing.Size(123, 19);
             this.toolToogleToc.Text = "ToogleToc";
             this.toolToogleToc.ToolTipText = "Toogle Toc";
-            this.toolToogleToc.Click += new System.EventHandler(this.toolStripButton10_Click);
+            this.toolToogleToc.Click += new System.EventHandler(this.toolStripToogleToc_Click);
             // 
             // toolStripSeparator2
             // 
@@ -438,47 +439,50 @@
             this.toolScrollPosPage.Size = new System.Drawing.Size(123, 15);
             this.toolScrollPosPage.Text = "---";
             // 
-            // openFileDialog1
+            // openFileDialog
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // textBox1
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(127, 0);
+            this.textBox1.Location = new System.Drawing.Point(127, 23);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(1291, 82);
+            this.textBox1.Size = new System.Drawing.Size(1291, 59);
             this.textBox1.TabIndex = 2;
             // 
-            // contextMenuStrip1
+            // contextMenuSumatraPDF
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
-            this.toolStripMenuItem2,
-            this.toolStripMenuItem3});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            this.contextMenuSumatraPDF.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tootStripCopySelection,
+            this.toolStripToogleToolbar,
+            this.toolStripToogleToc});
+            this.contextMenuSumatraPDF.Name = "contextMenuStrip1";
+            this.contextMenuSumatraPDF.Size = new System.Drawing.Size(154, 70);
             // 
-            // toolStripMenuItem1
+            // tootStripCopySelection
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            this.tootStripCopySelection.Name = "tootStripCopySelection";
+            this.tootStripCopySelection.Size = new System.Drawing.Size(153, 22);
+            this.tootStripCopySelection.Text = "Copy Selection";
+            this.tootStripCopySelection.Click += new System.EventHandler(this.toolStripCopySelection_Click);
             // 
-            // toolStripMenuItem2
+            // toolStripToogleToolbar
             // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            this.toolStripToogleToolbar.Name = "toolStripToogleToolbar";
+            this.toolStripToogleToolbar.Size = new System.Drawing.Size(153, 22);
+            this.toolStripToogleToolbar.Text = "Toogle Toolbar";
+            this.toolStripToogleToolbar.Click += new System.EventHandler(this.toolStripToogleToolbar_Click);
             // 
-            // toolStripMenuItem3
+            // toolStripToogleToc
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
-            this.toolStripMenuItem3.Text = "toolStripMenuItem3";
+            this.toolStripToogleToc.Name = "toolStripToogleToc";
+            this.toolStripToogleToc.Size = new System.Drawing.Size(153, 22);
+            this.toolStripToogleToc.Text = "Toogle Toc";
+            this.toolStripToogleToc.Click += new System.EventHandler(this.toolStripToogleToc_Click);
             // 
             // SumatraPDFControl
             // 
@@ -489,7 +493,7 @@
             this.SumatraPDFControl.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.SumatraPDFControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SumatraPDFControl.BackgroundImage")));
             this.SumatraPDFControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.SumatraPDFControl.ContextMenuStrip = this.contextMenuStrip1;
+            this.SumatraPDFControl.ContextMenuStrip = this.contextMenuSumatraPDF;
             this.SumatraPDFControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.SumatraPDFControl.DisplayMode = SumatraPDF.SumatraPDFControl.DisplayModeEnum.Automatic;
             this.SumatraPDFControl.Location = new System.Drawing.Point(127, 88);
@@ -518,20 +522,31 @@
             this.SumatraPDFControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseDown);
             this.SumatraPDFControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseUp);
             // 
-            // Form1
+            // cbShowScrollState
+            // 
+            this.cbShowScrollState.AutoSize = true;
+            this.cbShowScrollState.Location = new System.Drawing.Point(130, 6);
+            this.cbShowScrollState.Name = "cbShowScrollState";
+            this.cbShowScrollState.Size = new System.Drawing.Size(110, 17);
+            this.cbShowScrollState.TabIndex = 3;
+            this.cbShowScrollState.Text = "Show Scroll State";
+            this.cbShowScrollState.UseVisualStyleBackColor = true;
+            // 
+            // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 735);
+            this.Controls.Add(this.cbShowScrollState);
             this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolSumatraControl);
-            this.Name = "Form1";
+            this.Name = "FormTest";
             this.Text = "SumatraPDFControl Test Window";
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.toolSumatraControl.ResumeLayout(false);
             this.toolSumatraControl.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuSumatraPDF.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,7 +559,7 @@
         private System.Windows.Forms.ToolStripButton toolOpen;
         private System.Windows.Forms.ToolStripTextBox toolText;
         private System.Windows.Forms.ToolStripButton toolGotoPage;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.ToolStripButton toolCopySelection;
         private System.Windows.Forms.ToolStripButton toolToogleToolbar;
         private System.Windows.Forms.TextBox textBox1;
@@ -580,10 +595,11 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolGetRotation;
         private System.Windows.Forms.ToolStripButton toolSetRotation;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.ContextMenuStrip contextMenuSumatraPDF;
+        private System.Windows.Forms.ToolStripMenuItem tootStripCopySelection;
+        private System.Windows.Forms.ToolStripMenuItem toolStripToogleToolbar;
+        private System.Windows.Forms.ToolStripMenuItem toolStripToogleToc;
+        private System.Windows.Forms.CheckBox cbShowScrollState;
     }
 }
 
