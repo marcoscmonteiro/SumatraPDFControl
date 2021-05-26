@@ -50,11 +50,18 @@ namespace SumatraPDF
 		private const int WM_RBUTTONDOWN = 0x0204;
 		private const int WM_RBUTTONUP = 0x0205;
 		private const int WM_RBUTTONDBLCLK = 0x0206;
+		private const int WM_MBUTTONDOWN = 0x0207;
 		private const int WM_COMMAND = 0x0111;
 		private const int WM_KEYDOWN = 0x0100;
 		private const int WM_KEYUP = 0x0101;
 		private const int WM_CHAR = 0x0102; // for use by event KeyPress
 		private const int WM_CONTEXTMENU = 0x007B;
+		private const int WM_HSCROLL = 0x0114;
+		private const int WM_VSCROLL = 0x0115;
+		private const int WM_MOUSEHWHEEL = 0x020E;
+		private const int WM_MOUSEWHEEL = 0x020A;
+
+
 
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
@@ -119,18 +126,21 @@ namespace SumatraPDF
 						break;
 
 					case "ContextMenuOpened":
-						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-						var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
-						ContextMenuOpen?.Invoke(this, cmoe);
-						CallBackReturn = cmoe.Handled ? 1 : 0;
-						if (!cmoe.Handled && ContextMenuStrip != null)
-						{
-							ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);
-							CallBackReturn = 1;
-						}
-						break;
 
-					case "ZoomChanged":
+						if (ContextMenuStrip != null)
+						{
+							CallBackReturn = 1;
+							if (!ContextMenuStrip.Visible)
+                            {
+								Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
+								var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
+								ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);
+								ContextMenuStrip.Focus();
+							}
+						}
+                        break;
+ 
+                    case "ZoomChanged":
 					case "ZoomChangedMouseWeel":
 					case "Zoom":
 
@@ -195,8 +205,27 @@ namespace SumatraPDF
 				return; 
 			}
 
-			base.WndProc(ref m);
+			if (ContextMenuStrip != null) {
+				if (m.Msg == WM_RBUTTONUP)
+				{
+					IntPtr xy = m.LParam;
+					int x = unchecked((short)(long)xy);
+					int y = unchecked((short)((long)xy >> 16));
+					//ContextMenuStrip.Show(this, x, y);
+					//ContextMenuStrip.Focus();
+					OnMouseUp(new MouseEventArgs(MouseButtons.Right, 1, x, y, 0));
+					return;
+				} else
+                {
+					if (ContextMenuStrip.Visible && (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDBLCLK ||
+						m.Msg == WM_MBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_RBUTTONDBLCLK ||
+						m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL || m.Msg == WM_MOUSEHWHEEL))
+						ContextMenuStrip.Close();
+				}
+			}			
 
+			base.WndProc(ref m);
+			
 			if (m.Msg == WM_SETFOCUS)
 			{
 				OnEnter(new EventArgs());
@@ -240,20 +269,6 @@ namespace SumatraPDF
 				int y = unchecked((short)((long)xy >> 16));
 
 				OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
-			}
-			else if (m.Msg == WM_LBUTTONDOWN)
-            {
-				if (ContextMenuStrip != null && ContextMenuStrip.Visible)
-				{
-					ContextMenuStrip.Close();
-				}
-			}
-			else if (m.Msg == WM_RBUTTONUP)
-			{
-				if (ContextMenuStrip != null && ContextMenuStrip.Visible)
-				{
-					ContextMenuStrip.Focus();
-				}
 			}
 		}
 		private void SendSumatraCommand(string strMessage, params Object[] parr)
@@ -777,11 +792,13 @@ namespace SumatraPDF
 			LastKeyPressEventArgs = e;	
 		}
 
-        #endregion
+		#endregion
 
-        /* TODO: 
-		 * Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
-		 *	 Treat if event is Handled by SumatraPDFControl or not
+		/* TODO: 
+		 * Create function to get Canvas position in Frame position
+		 * Send WndProc messages from toc to SumatraPDFControl
+		 * OK - Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
+		 * OK - Treat if event is Handled by SumatraPDFControl or not
 		 *   Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl *	 
 		 * Bug: Toc window title is not being repainted after another window pass over it
 		 * Hide properites and events not used and implement others
@@ -805,5 +822,5 @@ namespace SumatraPDF
 		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
 		*/
 
-    }
+	}
 }
