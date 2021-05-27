@@ -501,7 +501,8 @@
             this.SumatraPDFControl.NamedDest = null;
             this.SumatraPDFControl.Page = 0;
             this.SumatraPDFControl.Size = new System.Drawing.Size(1291, 647);
-            this.SumatraPDFControl.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\rel64\\SumatraPDF.exe";
+            this.SumatraPDFControl.SumatraPDFExe = "SumatraPDF.exe";
+            this.SumatraPDFControl.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\dbg64";
             this.SumatraPDFControl.TabIndex = 0;
             this.SumatraPDFControl.TocVisible = false;
             this.SumatraPDFControl.ToolBarVisible = false;

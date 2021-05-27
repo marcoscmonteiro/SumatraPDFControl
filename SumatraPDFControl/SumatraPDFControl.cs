@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
+using System.IO;
+using System.Reflection;
 
 namespace SumatraPDF
 {
@@ -61,8 +63,6 @@ namespace SumatraPDF
 		private const int WM_MOUSEHWHEEL = 0x020E;
 		private const int WM_MOUSEWHEEL = 0x020A;
 
-
-
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
 
@@ -72,7 +72,6 @@ namespace SumatraPDF
 
 		private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
-		private string pSumatraPDFPath;
 		private IntPtr pSumatraWindowHandle;
 		private IntPtr SUMATRAMESSAGETYPE;
 
@@ -134,8 +133,10 @@ namespace SumatraPDF
                             {
 								Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 								var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
+								ContextMenuStrip.LostFocus -= ContextMenuStrip_LostFocus;
 								ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);
 								ContextMenuStrip.Focus();
+								ContextMenuStrip.LostFocus += ContextMenuStrip_LostFocus;
 							}
 						}
                         break;
@@ -197,7 +198,12 @@ namespace SumatraPDF
 			return (IntPtr)CallBackReturn;
 		}
 
-		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        private void ContextMenuStrip_LostFocus(object sender, EventArgs e)
+        {
+			if (((ContextMenuStrip)sender).Visible) ((ContextMenuStrip)sender).Close();
+		}
+
+        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
 			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) { 
@@ -205,6 +211,8 @@ namespace SumatraPDF
 				return; 
 			}
 
+			// Handle Right Mouse Click so dont allow Conext Menu show by base WndProc 
+			// ContextMenu is shown when SumatraPDF send [ContextMenuOpened(...)] WM_COPYDATA message
 			if (ContextMenuStrip != null) {
 				if (m.Msg == WM_RBUTTONUP)
 				{
@@ -217,10 +225,11 @@ namespace SumatraPDF
 					return;
 				} else
                 {
-					if (ContextMenuStrip.Visible && (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDBLCLK ||
-						m.Msg == WM_MBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_RBUTTONDBLCLK ||
-						m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL || m.Msg == WM_MOUSEHWHEEL))
-						ContextMenuStrip.Close();
+					// More natural to close when ContextMenuStrip lost focus
+					//if (ContextMenuStrip.Visible && (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDBLCLK ||
+					//    m.Msg == WM_MBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_RBUTTONDBLCLK ||
+					//    m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL || m.Msg == WM_MOUSEHWHEEL))
+					//    ContextMenuStrip.Close();
 				}
 			}			
 
@@ -383,17 +392,9 @@ namespace SumatraPDF
 
 		#region Public Properties
 
-		public string SumatraPDFPath
-		{
-			get
-			{
-				return pSumatraPDFPath;
-			}
-			set
-			{
-				pSumatraPDFPath = value;
-			}
-		}
+		public string SumatraPDFPath { get; set; }
+
+		public string SumatraPDFExe { get; set; }
 
 		private ScrollStateStruct pScrollState;
 		public ScrollStateStruct ScrollState
@@ -546,11 +547,6 @@ namespace SumatraPDF
 			}
 		}
 
-		public SumatraPDFControl()
-		{
-			pSumatraWindowHandle = (IntPtr)0;
-			InitializeComponent();
-		}
 
 		#endregion
 
@@ -695,9 +691,25 @@ namespace SumatraPDF
 				pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
 				pSumatraWindowHandle = (IntPtr)0;				
 			}
+
+			string SumatraComplete;
+			string SumatraExe = (SumatraPDFExe == null || SumatraPDFExe == String.Empty) ? "SumatraPDF.exe" : SumatraPDFExe;
+			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
+            {
+				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraExe);				
+			} else
+            {
+				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraExe);
+			}
+
+			if (!File.Exists(SumatraComplete))
+            {
+				throw new Exception("SumatraPDF exe not found");
+            }
+
 			var PSInfo = new ProcessStartInfo
 			{
-				FileName = SumatraPDFPath,
+				FileName = SumatraComplete,
 				Arguments =
 					"-plugin " + base.Handle.ToString() +
 					//" -invert-colors" +
@@ -714,11 +726,17 @@ namespace SumatraPDF
 			SendSumatraCommand("OpenFile", sCurrentFile, Handle.ToString());
 		}
 
-        #endregion
+		#endregion
 
-        #region Public Methods
+		#region Public Methods
 
-        public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
+		public SumatraPDFControl()
+		{
+			pSumatraWindowHandle = (IntPtr)0;
+			InitializeComponent();
+		}
+
+		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
 		{
 			sCurrentFile = PDFFile;
 			this.Page = Page;
@@ -795,12 +813,15 @@ namespace SumatraPDF
 		#endregion
 
 		/* TODO: 
-		 * Create function to get Canvas position in Frame position
-		 * Send WndProc messages from toc to SumatraPDFControl
+		 * ContextMenu problem when Toc context menu is shown and user select an item
+		 * Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
+		 * Send WndProc messages from Toc Label with close button (into toc) to SumatraPDFControl. Simple SendMessage to parent dont works well: 
+		 *   close button does not work.
+		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
+		 * OK - Send WndProc messages from toc to SumatraPDFControl
 		 * OK - Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
 		 * OK - Treat if event is Handled by SumatraPDFControl or not
-		 *   Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl *	 
-		 * Bug: Toc window title is not being repainted after another window pass over it
+		 * OK - Bug: Toc window title is not being repainted after another MDI window pass over it
 		 * Hide properites and events not used and implement others
 		 * Special keys events 
 		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
