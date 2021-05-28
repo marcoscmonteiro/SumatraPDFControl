@@ -141,7 +141,6 @@
             // 
             // toolText
             // 
-            this.toolText.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolText.Name = "toolText";
             this.toolText.Size = new System.Drawing.Size(121, 23);
             // 

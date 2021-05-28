@@ -373,11 +373,26 @@ namespace SumatraPDF
 
 		#region Public Properties
 
+		/// <summary>
+		/// Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory
+		/// </summary>
+		[Description("Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory"), 
+			Category("SumatraPDF")]
 		public string SumatraPDFPath { get; set; }
 
-		public string SumatraPDFExe { get; set; }
+		private string pSumatraPDFEXE = "SumatraPDF.exe";
+		/// <summary>
+		/// SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe
+		/// </summary>
+		[Description("SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe"), 
+			Category("SumatraPDF")]
+		public string SumatraPDFExe { get { return pSumatraPDFEXE; } set { pSumatraPDFEXE = value; } }
 
 		private ScrollStateStruct pScrollState;
+		/// <summary>
+		/// Get or set current PDF scroll state (X and Y units from visible PDF page)
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public ScrollStateStruct ScrollState
 		{
 			get
@@ -402,6 +417,10 @@ namespace SumatraPDF
 		}
 
 		private float fZoom;
+		/// <summary>
+		/// Get or set current numeric PDF zoom scale. See ZoomVirtual property to get or set zoom mode like fit width, fit page etc
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public float Zoom
 		{
 			get
@@ -416,6 +435,10 @@ namespace SumatraPDF
 		}
 
 		private ZoomVirtualEnum fZoomVirtual;
+		/// <summary>
+		/// Get or set currrent PDF virtual zoom mode (Fit width, Fit Page, Fit Content or None). See Zoom property to get or set numeric scale
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public ZoomVirtualEnum ZoomVirtual
 		{
 			get
@@ -434,7 +457,12 @@ namespace SumatraPDF
 		{
 			SendSumatraCommand("GetProperty", "DisplayMode");
 		}
+
 		private DisplayModeEnum eDisplayMode;
+		/// <summary>
+		/// Get or set mode to display PDF pages (SinglePage, Facing, BookView, Continuous, ContinuousFacing, ContinuousBookView, Automatic)
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public DisplayModeEnum DisplayMode
 		{
 			get
@@ -457,7 +485,12 @@ namespace SumatraPDF
 		{
 			SendSumatraCommand("SetProperty", "Page", Page.ToString());
 		}
+
 		private int nPage;
+		/// <summary>
+		/// Get or set current PDF page viewing position
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public int Page
 		{
 			get
@@ -472,6 +505,10 @@ namespace SumatraPDF
 		}
 
 		private RotationEnum eRotation;
+		/// <summary>
+		/// Get current PDF rotation (see RotateBy method to change rotation state)
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public RotationEnum Rotation
 		{
 			get
@@ -481,12 +518,11 @@ namespace SumatraPDF
 			}
 		}
 
-		public void RotateBy(RotationEnum Rotation)
-		{
-			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
-		}
-
 		private string sNamedDest;
+		/// <summary>
+		/// Get or set current PDF NamedDest viewing position
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public string NamedDest
 		{
 			get
@@ -496,11 +532,15 @@ namespace SumatraPDF
 			}
 			set
 			{
-				SendSumatraCommand("GotoNamedDest", value);
+				SendSumatraCommand("SetProperty", "NamedDest", value);
 			}
 		}
 
 		private Boolean bToolbarVisible;
+		/// <summary>
+		/// Get or set if SumatraPDF default toolbar is visible
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public Boolean ToolBarVisible
 		{
 			get
@@ -513,8 +553,12 @@ namespace SumatraPDF
 				SendSumatraCommand("SetProperty", "ToolbarVisible", value ? "1" : "0");
 			}
 		}
-
+		
 		private Boolean bTocVisible;
+		/// <summary>
+		/// Get or set if SumatraPDF Table of contents (Toc) sidebar is visible (if document doesn't have Toc it always will be false)
+		/// </summary>
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		public Boolean TocVisible
 		{
 			get
@@ -673,14 +717,13 @@ namespace SumatraPDF
 				pSumatraWindowHandle = (IntPtr)0;				
 			}
 
-			string SumatraComplete;
-			string SumatraExe = (SumatraPDFExe == null || SumatraPDFExe == String.Empty) ? "SumatraPDF.exe" : SumatraPDFExe;
+			string SumatraComplete;			
 			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
             {
-				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraExe);				
+				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraPDFExe);				
 			} else
             {
-				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraExe);
+				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
 			}
 
 			if (!File.Exists(SumatraComplete))
@@ -710,6 +753,11 @@ namespace SumatraPDF
 		#endregion
 
 		#region Public Methods
+
+		public void RotateBy(RotationEnum Rotation)
+		{
+			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
+		}
 
 		public SumatraPDFControl()
 		{
