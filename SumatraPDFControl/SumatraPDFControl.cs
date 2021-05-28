@@ -17,9 +17,9 @@ namespace SumatraPDF
 	public partial class SumatraPDFControl : UserControl
 	{
 
-        #region Interop
+		#region Interop
 
-        private struct COPYDATASTRUCT
+		private struct COPYDATASTRUCT
 		{
 			public IntPtr dwData;
 			public int cbData;
@@ -75,11 +75,11 @@ namespace SumatraPDF
 		private IntPtr pSumatraWindowHandle;
 		private IntPtr SUMATRAMESSAGETYPE;
 
-        #endregion
+		#endregion
 
-        #region SumatraPDF Communication
+		#region SumatraPDF Communication
 
-        static private List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
+		static private List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
 		private IntPtr SumatraWindowHandle
 		{
@@ -88,9 +88,9 @@ namespace SumatraPDF
 				if (pSumatraWindowHandle == (IntPtr)0)
 				{
 					pSumatraWindowHandle = FindWindowEx(base.Handle, default(IntPtr), null, null);
-					if (pSumatraWindowHandle != (IntPtr)0) 
+					if (pSumatraWindowHandle != (IntPtr)0)
 						pSumatraWindowHandleList.Add(pSumatraWindowHandle);
-				}		
+				}
 				return pSumatraWindowHandle;
 			}
 		}
@@ -130,7 +130,7 @@ namespace SumatraPDF
 						{
 							CallBackReturn = 1;
 							if (!ContextMenuStrip.Visible)
-                            {
+							{
 								Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 								var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
 								ContextMenuStrip.LostFocus -= ContextMenuStrip_LostFocus;
@@ -139,9 +139,9 @@ namespace SumatraPDF
 								ContextMenuStrip.LostFocus += ContextMenuStrip_LostFocus;
 							}
 						}
-                        break;
- 
-                    case "ZoomChanged":
+						break;
+
+					case "ZoomChanged":
 					case "ZoomChangedMouseWeel":
 					case "Zoom":
 
@@ -198,43 +198,21 @@ namespace SumatraPDF
 			return (IntPtr)CallBackReturn;
 		}
 
-        private void ContextMenuStrip_LostFocus(object sender, EventArgs e)
-        {
+		private void ContextMenuStrip_LostFocus(object sender, EventArgs e)
+		{
 			if (((ContextMenuStrip)sender).Visible) ((ContextMenuStrip)sender).Close();
 		}
 
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
-			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) { 
-				m.Result = (IntPtr)0; 
-				return; 
+			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) {
+				m.Result = (IntPtr)0;
+				return;
 			}
 
-			// Handle Right Mouse Click so dont allow Conext Menu show by base WndProc 
-			// ContextMenu is shown when SumatraPDF send [ContextMenuOpened(...)] WM_COPYDATA message
-			if (ContextMenuStrip != null) {
-				if (m.Msg == WM_RBUTTONUP)
-				{
-					IntPtr xy = m.LParam;
-					int x = unchecked((short)(long)xy);
-					int y = unchecked((short)((long)xy >> 16));
-					//ContextMenuStrip.Show(this, x, y);
-					//ContextMenuStrip.Focus();
-					OnMouseUp(new MouseEventArgs(MouseButtons.Right, 1, x, y, 0));
-					return;
-				} else
-                {
-					// More natural to close when ContextMenuStrip lost focus
-					//if (ContextMenuStrip.Visible && (m.Msg == WM_LBUTTONDOWN || m.Msg == WM_LBUTTONUP || m.Msg == WM_LBUTTONDBLCLK ||
-					//    m.Msg == WM_MBUTTONDOWN || m.Msg == WM_RBUTTONDOWN || m.Msg == WM_RBUTTONDBLCLK ||
-					//    m.Msg == WM_VSCROLL || m.Msg == WM_HSCROLL || m.Msg == WM_MOUSEWHEEL || m.Msg == WM_MOUSEHWHEEL))
-					//    ContextMenuStrip.Close();
-				}
-			}			
-
 			base.WndProc(ref m);
-			
+
 			if (m.Msg == WM_SETFOCUS)
 			{
 				OnEnter(new EventArgs());
@@ -260,10 +238,10 @@ namespace SumatraPDF
 				m.Result = ParseSumatraMessage(sMsg, x.dwData);
 			}
 			else if (m.Msg == WM_KEYDOWN) // UserControl maps as MouseDown event
-			{			
-				m.Result = LastKeyDownEventArgs.Handled ? (IntPtr) 0 : (IntPtr) 1;
-            }
-			else if (m.Msg == WM_CHAR ) // UserControl maps as KeyPress event
+			{
+				m.Result = LastKeyDownEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
+			}
+			else if (m.Msg == WM_CHAR) // UserControl maps as KeyPress event
 			{
 				m.Result = LastKeyPressEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
@@ -271,15 +249,15 @@ namespace SumatraPDF
 			{
 				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
-			else if (m.Msg == WM_RBUTTONDBLCLK || m.Msg == WM_LBUTTONDBLCLK)
+            else if (m.Msg == WM_RBUTTONDBLCLK || m.Msg == WM_LBUTTONDBLCLK)
             {
-				IntPtr xy = m.LParam;
-				int x = unchecked((short)(long)xy);
-				int y = unchecked((short)((long)xy >> 16));
+                IntPtr xy = m.LParam;
+                int x = unchecked((short)(long)xy);
+                int y = unchecked((short)((long)xy >> 16));
 
-				OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
-			}
-		}
+                OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
+            }
+        }
 		private void SendSumatraCommand(string strMessage, params Object[] parr)
 		{
 			// Without define current file commands cannot be send to sumatra
@@ -325,20 +303,23 @@ namespace SumatraPDF
 			Marshal.FreeHGlobal(pDataStruct);
 		}
 
-        #endregion
+		#endregion
 
-        #region Hide UserControl base members
+		#region Hide UserControl base members
 
-        // Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		// Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
+		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		new public event EventHandler<MouseEventArgs> MouseClick;
+
+		//[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		new public ContextMenuStrip ContextMenuStrip { get; set; }
 
 		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		public override System.Drawing.Image BackgroundImage
+		new public System.Drawing.Image BackgroundImage
 		{
 			get { return base.BackgroundImage; }
-			set { base.BackgroundImage = value; }
+			set { }
 		}
 
         #endregion
@@ -734,6 +715,7 @@ namespace SumatraPDF
 		{
 			pSumatraWindowHandle = (IntPtr)0;
 			InitializeComponent();
+			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDF_48x48x32;
 		}
 
 		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
@@ -813,10 +795,8 @@ namespace SumatraPDF
 		#endregion
 
 		/* TODO: 
-		 * ContextMenu problem when Toc context menu is shown and user select an item
+		 * ContextMenu SumatraPDFControl for toc
 		 * Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
-		 * Send WndProc messages from Toc Label with close button (into toc) to SumatraPDFControl. Simple SendMessage to parent dont works well: 
-		 *   close button does not work.
 		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
 		 * OK - Send WndProc messages from toc to SumatraPDFControl
 		 * OK - Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 

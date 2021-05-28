@@ -64,11 +64,11 @@ namespace SumatraPDFControlTest
         {
             // To do: alterar para retorno false e criar o próprio menu de contexto customizado
             AddText("ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString());
-            if (SumatraPDFControl.ContextMenuStrip != null)
-            {
-                SumatraPDFControl.ContextMenuStrip.Show(SumatraPDFControl, e.X, e.Y);
-                e.Handled = true;
-            }
+            //if (SumatraPDFControl.ContextMenuStrip != null)
+            //{
+            //    SumatraPDFControl.ContextMenuStrip.Show(SumatraPDFControl, e.X, e.Y);
+            //    e.Handled = true;
+            //}
         }
 
         private void SumatraPDFControl_ZoomChangedMessage(object sender, ZoomChangedEventArgs e)
