@@ -125,6 +125,7 @@ namespace SumatraPDF
 						break;
 
 					case "ContextMenuOpened":
+					case "TocContextMenuOpened":
 
 						if (ContextMenuStrip != null)
 						{
@@ -843,7 +844,8 @@ namespace SumatraPDF
 		#endregion
 
 		/* TODO: 
-		 * ContextMenu SumatraPDFControl for toc
+		 * Create Nuget Package
+		 *   Push Nuget Pacjage on Github repo to teste		 
 		 * Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
 		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
 		 * OK - Send WndProc messages from toc to SumatraPDFControl
@@ -869,6 +871,9 @@ namespace SumatraPDF
 		 * Maps UserControl Scroll event to SumatraPDF Scroll 
 		 * Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
 		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
+		 * ContextMenu SumatraPDFControl for toc
+		 *    Create a property for tocContextMenu
+
 		*/
 
 	}
