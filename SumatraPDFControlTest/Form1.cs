@@ -235,5 +235,9 @@ namespace SumatraPDFControlTest
                 AddText("Scroll: " + e.OldValue.ToString() + " - " + e.NewValue.ToString() + " - " + e.Type.ToString() + " - " + e.ScrollOrientation.ToString());
         }
 
+        private void toolOpenPrintDialog_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.OpenPrintDialog(false);
+        }
     }
 }

@@ -76,6 +76,7 @@
             this.toolStripToogleToc = new System.Windows.Forms.ToolStripMenuItem();
             this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
             this.cbShowScrollState = new System.Windows.Forms.CheckBox();
+            this.toolOpenPrintDialog = new System.Windows.Forms.ToolStripButton();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -120,11 +121,12 @@
             this.toolScrollPosLbl,
             this.toolScrollPosX,
             this.toolScrollPosY,
-            this.toolScrollPosPage});
+            this.toolScrollPosPage,
+            this.toolOpenPrintDialog});
             this.toolSumatraControl.Location = new System.Drawing.Point(0, 0);
             this.toolSumatraControl.Name = "toolSumatraControl";
             this.toolSumatraControl.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolSumatraControl.Size = new System.Drawing.Size(126, 735);
+            this.toolSumatraControl.Size = new System.Drawing.Size(126, 741);
             this.toolSumatraControl.TabIndex = 1;
             this.toolSumatraControl.Text = "toolStrip1";
             // 
@@ -141,6 +143,7 @@
             // 
             // toolText
             // 
+            this.toolText.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolText.Name = "toolText";
             this.toolText.Size = new System.Drawing.Size(121, 23);
             // 
@@ -499,7 +502,7 @@
             this.SumatraPDFControl.Name = "SumatraPDFControl";
             this.SumatraPDFControl.NamedDest = null;
             this.SumatraPDFControl.Page = 0;
-            this.SumatraPDFControl.Size = new System.Drawing.Size(1291, 647);
+            this.SumatraPDFControl.Size = new System.Drawing.Size(1291, 653);
             this.SumatraPDFControl.SumatraPDFExe = "SumatraPDF.exe";
             this.SumatraPDFControl.SumatraPDFPath = "C:\\Users\\marco\\source\\repos\\sumatrapdf\\out\\dbg64";
             this.SumatraPDFControl.TabIndex = 0;
@@ -532,11 +535,21 @@
             this.cbShowScrollState.Text = "Show Scroll State";
             this.cbShowScrollState.UseVisualStyleBackColor = true;
             // 
+            // toolOpenPrintDialog
+            // 
+            this.toolOpenPrintDialog.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolOpenPrintDialog.Image = ((System.Drawing.Image)(resources.GetObject("toolOpenPrintDialog.Image")));
+            this.toolOpenPrintDialog.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolOpenPrintDialog.Name = "toolOpenPrintDialog";
+            this.toolOpenPrintDialog.Size = new System.Drawing.Size(105, 19);
+            this.toolOpenPrintDialog.Text = "Open Print Dialog";
+            this.toolOpenPrintDialog.Click += new System.EventHandler(this.toolOpenPrintDialog_Click);
+            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1418, 735);
+            this.ClientSize = new System.Drawing.Size(1418, 741);
             this.Controls.Add(this.cbShowScrollState);
             this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
@@ -600,6 +613,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripToogleToolbar;
         private System.Windows.Forms.ToolStripMenuItem toolStripToogleToc;
         private System.Windows.Forms.CheckBox cbShowScrollState;
+        private System.Windows.Forms.ToolStripButton toolOpenPrintDialog;
     }
 }
 

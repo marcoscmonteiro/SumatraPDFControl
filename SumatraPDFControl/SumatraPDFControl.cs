@@ -806,6 +806,20 @@ namespace SumatraPDF
 			SendSumatraCommand("TextSearchNext", (forward ? 1 : 0));
 		}
 
+		/// <summary>
+		/// Show dialog to print current document 
+		/// </summary>
+		/// <remarks>
+		/// The following only applies for printing as image
+		/// Creates a new dummy page for each page with a large zoom factor,
+		/// and then uses StretchDIBits to copy this to the printer's dc.
+		/// </remarks>
+		/// <param name="WaitForCompletion">Wait for print completion before return window control to user</param>
+		public void OpenPrintDialog(Boolean WaitForCompletion)
+        {
+			SendSumatraCommand("OpenPrintDialog", (WaitForCompletion ? 1 : 0));
+		}
+
         #endregion
 
         #region Mapped UserControl events
@@ -844,25 +858,27 @@ namespace SumatraPDF
 		#endregion
 
 		/* TODO: 
+		 * OpenPrintDialog method
+		 *	 Bug: Dialog do not have input focus after show (even when clicks on mouse)
+		 *	 Bug: When Dialog is open with WaitForCompletion = false trying to close window show message to confirm print cancel. 
+		 *	      Even if "no" is choosen the window is close.
+		 *	 ???: WaitForCompletion = true have to show a message to inform print state (perhaps the best solution is to ommit this parameter 
+		 *	       and force WaitForCompletion=false witch already show printing progress)
+		 * Print - Direct
 		 * Create Nuget Package
 		 *   Push Nuget Pacjage on Github repo to teste		 
 		 * Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
 		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
-		 * OK - Send WndProc messages from toc to SumatraPDFControl
-		 * OK - Concentrate call to SendPluginWndProcMessage in WndProcCanvas instead of WndProcCanvasFixedPageUI. 
-		 * OK - Treat if event is Handled by SumatraPDFControl or not
-		 * OK - Bug: Toc window title is not being repainted after another MDI window pass over it
 		 * Hide properites and events not used and implement others
 		 * Special keys events 
-		 *   3. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
-		 *   4. Treat ALT key
+		 *   1. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
+		 *   2. Treat ALT key
 		 * LastPage - Get property
 		 * Commands call
 		 * - Page first, previous, next, last 
 		 * - Close Document
 		 * - Copy Selection
 		 * - Select All
-		 * - Print - Show Dialog and direct print
 		 * Global Config - auto update,  etc
 		 * Bookmarks - Context Menu event
 		 * Do a revision in GEDVISA PDFXChange used properties
