@@ -29,6 +29,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>SumatraPDF.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,13 +69,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\SumatraPDFControlMini.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\SumatraPDFControl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\SumatraPDF-48x48x32.png" />
+    <EmbeddedResource Include="SumatraPDF.ico" />
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TODO.txt" />
+    <None Include="SumatraPDFControl.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

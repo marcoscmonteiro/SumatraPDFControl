@@ -13,7 +13,16 @@ using System.Reflection;
 
 namespace SumatraPDF
 {
-	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
+	/// <summary>
+	/// Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)
+	/// </summary>
+	/// <remarks>
+	/// This control allows you to open and read PDF files with most features present in great SumatraPDF reader (https://www.sumatrapdfreader.org/).
+	/// It requires an specific compiled Sumatra code version (https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF
+	/// working in an enhanced plugin mode. 
+	/// It's forked from original SumatraPDF code (https://github.com/sumatrapdfreader/sumatrapdf)
+	/// </remarks>
+	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControlMini.png")]
     [Guid("E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C")]
     public partial class SumatraPDFControl : UserControl
 	{
@@ -131,7 +140,7 @@ namespace SumatraPDF
 			Marshal.FreeHGlobal(pDataStruct);
 		}
 
-		private void SumatraPDFMessage(uint Msg, int Cmd = 0, Boolean Async = false)
+		private void SumatraPDFMsg(uint Msg, int Cmd = 0, Boolean Async = false)
         {
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
@@ -142,7 +151,7 @@ namespace SumatraPDF
 
 		private void SumatraPDFFrameCmd(int Cmd, Boolean Async = false)
 		{
-			SumatraPDFMessage(WM_COMMAND, Cmd, Async);
+			SumatraPDFMsg(WM_COMMAND, Cmd, Async);
 		}
 
 		private IntPtr SumatraWindowHandle
@@ -159,7 +168,7 @@ namespace SumatraPDF
 			}
 		}
 
-		private IntPtr ParseSumatraMessage(string sMsg, IntPtr dwData)
+		private IntPtr ParseSumatraMsg(string sMsg, IntPtr dwData)
 		{
 			string sMsg0 = sMsg.Substring(0, sMsg.Length - 1);
 			int CallBackReturn = 0;
@@ -263,11 +272,6 @@ namespace SumatraPDF
 			return (IntPtr)CallBackReturn;
 		}
 
-		private void ContextMenuStrip_LostFocus(object sender, EventArgs e)
-		{
-			if (((ContextMenuStrip)sender).Visible) ((ContextMenuStrip)sender).Close();
-		}
-
 		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
@@ -300,7 +304,7 @@ namespace SumatraPDF
 				byte[] strb = new byte[checked(x.cbData)];
 				Marshal.Copy(x.lpData, strb, 0, x.cbData);
 				string sMsg = Encoding.Default.GetString(strb);
-				m.Result = ParseSumatraMessage(sMsg, x.dwData);
+				m.Result = ParseSumatraMsg(sMsg, x.dwData);
 			}
 			else if (m.Msg == WM_KEYDOWN) // UserControl maps as MouseDown event
 			{
@@ -343,11 +347,119 @@ namespace SumatraPDF
 			set { }
 		}
 
-        #endregion
+		#endregion
 
-        #region Public Types and Enums
+		#region Private Mapped UserControl events
 
-        public struct ScrollStateStruct
+		private void SumatraPDFControl_Load(object sender, EventArgs e)
+		{
+			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
+			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
+			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
+			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
+		}
+
+		private KeyEventArgs LastKeyDownEventArgs;
+		private void SumatraPDFControl_KeyDown(object sender, KeyEventArgs e)
+		{
+			this.KeyDown?.Invoke(this, e);
+			LastKeyDownEventArgs = e;
+		}
+
+		private KeyEventArgs LastKeyUpEventArgs;
+		private void SumatraPDFControl_KeyUp(object sender, KeyEventArgs e)
+		{
+			this.KeyUp?.Invoke(this, e);
+			LastKeyUpEventArgs = e;
+		}
+
+		private KeyPressEventArgs LastKeyPressEventArgs;
+		private void SumatraPDFControl_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			this.KeyPress?.Invoke(this, e);
+			// Do not allow SumatraPDF close current window when pressing 'q' key
+			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
+			LastKeyPressEventArgs = e;
+		}
+
+		private void SumatraPDFControl_Resize(object sender, EventArgs e)
+		{
+			if (SumatraWindowHandle != (IntPtr)0)
+			{
+				MoveWindow(SumatraWindowHandle, 0, 0, base.Width, base.Height, 0);
+			}
+		}
+
+		private void ContextMenuStrip_LostFocus(object sender, EventArgs e)
+		{
+			if (((ContextMenuStrip)sender).Visible) ((ContextMenuStrip)sender).Close();
+		}
+
+		#endregion
+
+		#region Private Methods
+
+		private void CloseDocument()
+		{
+			SumatraPDFMsg(WM_DESTROY);
+		}
+
+		private int RaiseDefaultSumatraEvent(string msg, IntPtr dwData)
+		{
+			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = msg, Data = dwData };
+			SumatraMessage?.Invoke(this, e);
+			return e.CallBackReturn;
+		}
+
+		private void RestartSumatra(string sFile, int page = 1)
+		{
+			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
+			{
+				CloseDocument();
+				SumatraProcess.Kill();
+				pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
+				pSumatraWindowHandle = (IntPtr)0;
+			}
+
+			string SumatraComplete;
+			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
+			{
+				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraPDFExe);
+			}
+			else
+			{
+				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
+			}
+
+			if (!File.Exists(SumatraComplete))
+			{
+				throw new Exception("SumatraPDF exe not found");
+			}
+
+			var PSInfo = new ProcessStartInfo
+			{
+				FileName = SumatraComplete,
+				Arguments =
+					"-plugin " + base.Handle.ToString() +
+					//" -invert-colors" +
+					//" -appdata \"c:\\users\\marco\\Downloads\"" +
+					" -page " + page.ToString() +
+					" \"" + sFile + "\""
+
+			};
+			SumatraProcess = Process.Start(PSInfo);
+		}
+
+		private void OpenFile()
+		{
+			SumatraPDFCopyDataMsg("OpenFile", sCurrentFile, Handle.ToString());
+		}
+
+		#endregion
+
+		#region Public Types and Enums (miss documentation)
+
+		public struct ScrollStateStruct
 		{
 			public ScrollStateStruct(int page, double x, double y)
 			{
@@ -392,12 +504,121 @@ namespace SumatraPDF
 
 		#endregion
 
+		#region Public EventArgs Subclasses (miss documentation)
+
+		public class PageChangedEventArgs : EventArgs
+        {
+			public PageChangedEventArgs(int Page, string NamedDest)
+            {
+				this.Page = Page;
+				this.NamedDest = NamedDest;
+            }
+
+			public int Page { get; }
+			public string NamedDest { get; }
+		}
+		public class ContextMenuOpenEventArgs : EventArgs
+        {
+			public ContextMenuOpenEventArgs(int X, int Y)
+            {
+				this.X = X;
+				this.Y = Y;
+				Handled = false;
+			}
+			public int X { get; }
+			public int Y { get; }
+			public Boolean Handled { get; set; }
+		}
+		public class SumatraMessageEventArgs : EventArgs
+		{
+			public int CallBackReturn { get; set; }
+			public string Msg { get; set; }
+			public IntPtr Data { get; set; }
+		}
+
+		public class ZoomChangedEventArgs : EventArgs
+		{
+			public ZoomChangedEventArgs(float Zoom, ZoomVirtualEnum ZoomVirtual, Boolean MouseWheel)
+            {
+				this.Zoom = Zoom;
+				this.ZoomVirtual = ZoomVirtual;
+				this.MouseWheel = MouseWheel;
+            }
+			public float Zoom { get; }
+			public ZoomVirtualEnum ZoomVirtual { get; }
+			public Boolean MouseWheel { get; }
+		}
+		public class LinkClickedEventArgs : EventArgs
+        {
+			public LinkClickedEventArgs(string LinkText)
+            {
+				this.LinkText = LinkText;
+			}
+			public string LinkText { get; }
+        }
+
+		public class DisplayModeChangedEventArgs : EventArgs
+        {
+			public DisplayModeChangedEventArgs(DisplayModeEnum DisplayMode)
+            {
+				this.DisplayMode = DisplayMode;
+            }
+			public DisplayModeEnum DisplayMode { get; }
+        }
+
+		public class ScrollStateEventArgs : EventArgs
+        {
+			public ScrollStateEventArgs(ScrollStateStruct ScrollState)
+            {
+				this.ScrollState = ScrollState;
+            }
+			public ScrollStateStruct ScrollState { get; }
+		}
+
+        #endregion
+
+        #region Public Event Handlers
+
+        [Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
+		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
+
+		[Description("Current visible page was changed"), Category("SumatraPDF")]
+		public event EventHandler<PageChangedEventArgs> PageChanged;
+
+		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
+		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
+
+		[Description("Zoom factor was changed"), Category("SumatraPDF")]
+		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
+
+		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
+		public event EventHandler<LinkClickedEventArgs> LinkClick;
+
+		[Description("Display mode was changed"), Category("SumatraPDF")]
+		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
+
+		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
+		public event EventHandler<ScrollStateEventArgs> ScrollStateChanged;
+
+#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
+		public event EventHandler<KeyPressEventArgs> KeyPress;
+
+		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
+		public event KeyEventHandler KeyDown;
+
+		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
+		public event KeyEventHandler KeyUp;
+#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
+
+		#endregion
+
 		#region Public Properties
 
 		/// <summary>
 		/// Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory
 		/// </summary>
-		[Description("Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory"), 
+		[Description("Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory"),
 			Category("SumatraPDF")]
 		public string SumatraPDFPath { get; set; }
 
@@ -405,7 +626,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe
 		/// </summary>
-		[Description("SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe"), 
+		[Description("SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe"),
 			Category("SumatraPDF")]
 		public string SumatraPDFExe { get { return pSumatraPDFEXE; } set { pSumatraPDFEXE = value; } }
 
@@ -574,7 +795,7 @@ namespace SumatraPDF
 				SumatraPDFCopyDataMsg("SetProperty", "ToolbarVisible", value ? "1" : "0");
 			}
 		}
-		
+
 		private Boolean bTocVisible;
 		/// <summary>
 		/// Get or set if SumatraPDF Table of contents (Toc) sidebar is visible (if document doesn't have Toc it always will be false)
@@ -596,192 +817,7 @@ namespace SumatraPDF
 
 		#endregion
 
-		#region EventArgs Subclasses
-
-		public class PageChangedEventArgs : EventArgs
-        {
-			public PageChangedEventArgs(int Page, string NamedDest)
-            {
-				this.Page = Page;
-				this.NamedDest = NamedDest;
-            }
-
-			public int Page { get; }
-			public string NamedDest { get; }
-		}
-		public class ContextMenuOpenEventArgs : EventArgs
-        {
-			public ContextMenuOpenEventArgs(int X, int Y)
-            {
-				this.X = X;
-				this.Y = Y;
-				Handled = false;
-			}
-			public int X { get; }
-			public int Y { get; }
-			public Boolean Handled { get; set; }
-		}
-		public class SumatraMessageEventArgs : EventArgs
-		{
-			public int CallBackReturn { get; set; }
-			public string Msg { get; set; }
-			public IntPtr Data { get; set; }
-		}
-
-		public class ZoomChangedEventArgs : EventArgs
-		{
-			public ZoomChangedEventArgs(float Zoom, ZoomVirtualEnum ZoomVirtual, Boolean MouseWheel)
-            {
-				this.Zoom = Zoom;
-				this.ZoomVirtual = ZoomVirtual;
-				this.MouseWheel = MouseWheel;
-            }
-			public float Zoom { get; }
-			public ZoomVirtualEnum ZoomVirtual { get; }
-			public Boolean MouseWheel { get; }
-		}
-		public class LinkClickedEventArgs : EventArgs
-        {
-			public LinkClickedEventArgs(string LinkText)
-            {
-				this.LinkText = LinkText;
-			}
-			public string LinkText { get; }
-        }
-
-		public class DisplayModeChangedEventArgs : EventArgs
-        {
-			public DisplayModeChangedEventArgs(DisplayModeEnum DisplayMode)
-            {
-				this.DisplayMode = DisplayMode;
-            }
-			public DisplayModeEnum DisplayMode { get; }
-        }
-
-		public class ScrollStateEventArgs : EventArgs
-        {
-			public ScrollStateEventArgs(ScrollStateStruct ScrollState)
-            {
-				this.ScrollState = ScrollState;
-            }
-			public ScrollStateStruct ScrollState { get; }
-		}
-
-        #endregion
-
-        #region Event Handlers
-
-        [Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
-		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
-
-		[Description("Current visible page was changed"), Category("SumatraPDF")]
-		public event EventHandler<PageChangedEventArgs> PageChanged;
-
-		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
-		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
-
-		[Description("Zoom factor was changed"), Category("SumatraPDF")]
-		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
-
-		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
-		public event EventHandler<LinkClickedEventArgs> LinkClick;
-
-		[Description("Display mode was changed"), Category("SumatraPDF")]
-		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
-
-		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
-		public event EventHandler<ScrollStateEventArgs> ScrollStateChanged;
-
-#pragma warning disable CS0108 // Member hides inherited member; missing new keyword
-		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
-		public event EventHandler<KeyPressEventArgs> KeyPress;
-
-		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
-		public event KeyEventHandler KeyDown;
-
-		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
-		public event KeyEventHandler KeyUp;
-#pragma warning restore CS0108 // Member hides inherited member; missing new keyword
-
-		#endregion
-
-		#region Private Methods
-
-		private void CloseDocument()
-		{
-			SumatraPDFMessage(WM_DESTROY);
-		}
-
-		private void SumatraPDFControl_Resize(object sender, EventArgs e)
-		{
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				MoveWindow(SumatraWindowHandle, 0, 0, base.Width, base.Height, 0);
-			}
-		}
-
-		private int RaiseDefaultSumatraEvent(string msg, IntPtr dwData) 
-        {
-			var e = new SumatraMessageEventArgs { CallBackReturn = 0, Msg = msg, Data = dwData };
-			SumatraMessage?.Invoke(this, e);
-			return e.CallBackReturn;
-		}
-
-		private void RestartSumatra(string sFile, int page = 1)
-        {
-			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
-			{				
-				CloseDocument();
-				SumatraProcess.Kill();
-				pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
-				pSumatraWindowHandle = (IntPtr)0;				
-			}
-
-			string SumatraComplete;			
-			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
-            {
-				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraPDFExe);				
-			} else
-            {
-				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
-			}
-
-			if (!File.Exists(SumatraComplete))
-            {
-				throw new Exception("SumatraPDF exe not found");
-            }
-
-			var PSInfo = new ProcessStartInfo
-			{
-				FileName = SumatraComplete,
-				Arguments =
-					"-plugin " + base.Handle.ToString() +
-					//" -invert-colors" +
-					//" -appdata \"c:\\users\\marco\\Downloads\"" +
-					" -page " + page.ToString() +										
-					" \"" + sFile + "\""
-					
-			};
-            SumatraProcess = Process.Start(PSInfo);			
-		}
-
-        private void OpenFile()
-        {
-			SumatraPDFCopyDataMsg("OpenFile", sCurrentFile, Handle.ToString());
-		}
-
-		#endregion
-
 		#region Public Methods
-
-		/// <summary>
-		/// Rotate current document
-		/// </summary>
-		/// <param name="Rotation">Degrees do Rotation</param>
-		public void RotateBy(RotationEnum Rotation)
-		{
-			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
-		}
 
 		/// <summary>
 		/// Default constructor
@@ -790,7 +826,7 @@ namespace SumatraPDF
 		{
 			pSumatraWindowHandle = (IntPtr)0;
 			InitializeComponent();
-			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDF_48x48x32;
+			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControlMini;
 		}
 
 		/// <summary>
@@ -866,39 +902,13 @@ namespace SumatraPDF
 			SumatraPDFFrameCmd(SumatraCmdPrint, true);
 		}
 
-        #endregion
-
-        #region Mapped privated UserControl events
-
-        private void SumatraPDFControl_Load(object sender, EventArgs e)
-        {
-			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
-			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
-			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
-			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
-		}
-
-		private KeyEventArgs LastKeyDownEventArgs;
-		private void SumatraPDFControl_KeyDown(object sender, KeyEventArgs e)
+		/// <summary>
+		/// Rotate current document
+		/// </summary>
+		/// <param name="Rotation">Degrees do Rotation</param>
+		public void RotateBy(RotationEnum Rotation)
 		{
-			this.KeyDown?.Invoke(this, e);
-			LastKeyDownEventArgs = e;
-		}
-
-		private KeyEventArgs LastKeyUpEventArgs;
-		private void SumatraPDFControl_KeyUp(object sender, KeyEventArgs e)
-		{
-			this.KeyUp?.Invoke(this, e);
-			LastKeyUpEventArgs = e;
-		}
-
-		private KeyPressEventArgs LastKeyPressEventArgs;
-		private void SumatraPDFControl_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			this.KeyPress?.Invoke(this, e);
-			// Do not allow SumatraPDF close current window when pressing 'q' key
-			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
-			LastKeyPressEventArgs = e;	
+			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
 		}
 
 		#endregion

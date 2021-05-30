@@ -1,13 +1,17 @@
 ﻿TODO (First version):
 
+Nuget Package
+  - Create nuspec
+  - Push Nuget Package on Github repo to teste		 
+  - Compile 32bit and 64bits version of SumatraPDF to include on package
+Choose correct version of SumatraPDF.exe (32bits / 64bits) based on:
+    string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
 Print - Direct
 Throw exception on error loading document
 Test ContextMenu Control events
 Review control inherited properties / events to hide those are not used and implement others* 
-Create Nuget Package
-  - Push Nuget Package on Github repo to teste		 
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
-  - Page first, previous, next, last 
+  - Page: first, previous, next, last 
   - Select All
   - Others?
 Special keys events 
@@ -16,7 +20,7 @@ Special keys events
 LastPage get property
 Global Config - auto update, etc
 Documentation
-  - Commenting all public methods, properties and events
+  - Commenting all public methods, properties and events, etc
   - Generate documentation using https://github.com/EWSoftware/SHFB
   - Publish documentation on github like http://ewsoftware.github.io/SHFB did
 Do a revision in GEDVISA PDFXChange used properties

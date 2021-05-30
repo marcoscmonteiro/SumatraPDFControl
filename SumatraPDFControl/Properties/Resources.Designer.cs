@@ -63,9 +63,9 @@ namespace SumatraPDF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SumatraPDF_48x48x32 {
+        internal static System.Drawing.Bitmap SumatraPDFControl {
             get {
-                object obj = ResourceManager.GetObject("SumatraPDF_48x48x32", resourceCulture);
+                object obj = ResourceManager.GetObject("SumatraPDFControl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace SumatraPDF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap SumatraPDFControl_png {
+        internal static System.Drawing.Bitmap SumatraPDFControlMini {
             get {
-                object obj = ResourceManager.GetObject("SumatraPDFControl.png", resourceCulture);
+                object obj = ResourceManager.GetObject("SumatraPDFControlMini", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

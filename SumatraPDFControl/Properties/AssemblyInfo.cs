@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associadas a um assembly.
-[assembly: AssemblyTitle("SumatraPDFControl")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SumatraPDF Control for Windows Forms")]
+[assembly: AssemblyDescription("Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("MarcosCMonteiro")]
 [assembly: AssemblyProduct("SumatraPDFControl")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright © 2021")]
+[assembly: AssemblyTrademark("SumatraPDF is registered trademark from Krzysztof Kowalczyk (https://www.sumatrapdfreader.org/)")]
 [assembly: AssemblyCulture("")]
 
 // Definir ComVisible como false torna os tipos neste assembly invisíveis

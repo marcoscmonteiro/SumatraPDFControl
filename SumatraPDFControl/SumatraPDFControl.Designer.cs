@@ -43,7 +43,7 @@ namespace SumatraPDF
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDF_48x48x32;
+            this.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.DoubleBuffered = true;
