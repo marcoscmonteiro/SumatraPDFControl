@@ -1,0 +1,35 @@
+﻿TODO (First version):
+
+Print - Direct
+Throw exception on error loading document
+Test ContextMenu Control events
+Review control inherited properties / events to hide those are not used and implement others* 
+Create Nuget Package
+  - Push Nuget Package on Github repo to teste		 
+Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
+  - Page first, previous, next, last 
+  - Select All
+  - Others?
+Special keys events 
+  - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
+  - Treat ALT key
+LastPage get property
+Global Config - auto update, etc
+Documentation
+  - Commenting all public methods, properties and events
+  - Generate documentation using https://github.com/EWSoftware/SHFB
+  - Publish documentation on github like http://ewsoftware.github.io/SHFB did
+Do a revision in GEDVISA PDFXChange used properties
+   
+TODO (Future versions):
+
+Print Control:
+ - Events: onPrint, onPrintEnd
+ - Methods: AbortPrint, MayCloseWindow
+Toc:
+  - ContextMenu SumatraPDFControl for toc - Create a property for tocContextMenu
+Others:
+  - Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
+  - Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
+    So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
+  - Implement FileOpened and StartupFinished events

@@ -71,5 +71,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\SumatraPDF-48x48x32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

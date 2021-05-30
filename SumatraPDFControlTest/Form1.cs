@@ -237,7 +237,7 @@ namespace SumatraPDFControlTest
 
         private void toolOpenPrintDialog_Click(object sender, EventArgs e)
         {
-            SumatraPDFControl.OpenPrintDialog(false);
+            SumatraPDFControl.OpenPrintDialog();
         }
     }
 }

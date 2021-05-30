@@ -35,6 +35,9 @@ namespace SumatraPDF
 		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
+		[DllImport("user32.dll")]
+		public extern static int SendNotifyMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern void CopyMemory(IntPtr destination, IntPtr source, uint length);
 
@@ -66,9 +69,10 @@ namespace SumatraPDF
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
 
-		// Sumatra Commands (get and update them from sumatra Commands.h)
-		private readonly IntPtr SumatraCmdCopySelection = (IntPtr)228;
-		private readonly IntPtr SumatraCmdClose = (IntPtr)204;
+		// Sumatra Commands (get and update them from sumatra Commands.h)		
+		private readonly int SumatraCmdClose = 204;
+		private readonly int SumatraCmdPrint = 206;
+		private readonly int SumatraCmdCopySelection = 228;
 
 		private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
@@ -80,6 +84,65 @@ namespace SumatraPDF
 		#region SumatraPDF Communication
 
 		static private List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
+
+		private void SumatraPDFCopyDataMsg(string strMessage, params Object[] parr)
+		{
+			// Without define current file commands cannot be send to sumatra
+			if (sCurrentFile == string.Empty) return;
+
+			if (SumatraWindowHandle == (IntPtr)0 && pSumatraWindowHandleList.Count == 0) return;
+			IntPtr SumatraCurrentHandle = SumatraWindowHandle == (IntPtr)0 ? pSumatraWindowHandleList[0] : SumatraWindowHandle;
+
+			string DDEMessage = string.Empty;
+			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr);
+			else
+			{
+				DDEMessage = "[" + strMessage + "("; //\"" + sCurrentFile + "\"";
+				Boolean FirstParam = true;
+				foreach (Object p in parr)
+				{
+					if (!FirstParam) DDEMessage += ","; else FirstParam = false;
+					switch (p.GetType().FullName)
+					{
+						case "System.String":
+							DDEMessage += "\"" + p.ToString() + "\"";
+							break;
+						case "System.Double":
+							DDEMessage += ((Double)p).ToString(new System.Globalization.CultureInfo("en-US"));
+							break;
+						default:
+							DDEMessage += p.ToString();
+							break;
+					}
+				}
+				DDEMessage += ")]";
+			}
+
+			COPYDATASTRUCT DataStruct = default;
+			DDEMessage += "\0";
+			DataStruct.dwData = SUMATRAMESSAGETYPE;
+			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
+			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
+			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
+			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
+			SendMessage(SumatraCurrentHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
+			Marshal.FreeHGlobal(DataStruct.lpData);
+			Marshal.FreeHGlobal(pDataStruct);
+		}
+
+		private void SumatraPDFMessage(uint Msg, int Cmd = 0, Boolean Async = false)
+        {
+			if (SumatraWindowHandle != (IntPtr)0)
+			{
+				if (!Async) SendMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
+				else SendNotifyMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
+			}
+		}
+
+		private void SumatraPDFFrameCmd(int Cmd, Boolean Async = false)
+		{
+			SumatraPDFMessage(WM_COMMAND, Cmd, Async);
+		}
 
 		private IntPtr SumatraWindowHandle
 		{
@@ -259,50 +322,6 @@ namespace SumatraPDF
                 OnMouseDoubleClick(new MouseEventArgs(m.Msg == WM_LBUTTONDBLCLK ? MouseButtons.Left : MouseButtons.Right, 2, x, y, 0));
             }
         }
-		private void SendSumatraCommand(string strMessage, params Object[] parr)
-		{
-			// Without define current file commands cannot be send to sumatra
-			if (sCurrentFile == string.Empty) return;
-
-			if (SumatraWindowHandle == (IntPtr)0 && pSumatraWindowHandleList.Count == 0) return;
-			IntPtr SumatraCurrentHandle = SumatraWindowHandle == (IntPtr)0 ? pSumatraWindowHandleList[0] : SumatraWindowHandle;
-
-			string DDEMessage = string.Empty;
-			if (strMessage.StartsWith("[")) DDEMessage = String.Format(strMessage, parr);
-			else
-			{
-				DDEMessage = "[" + strMessage + "("; //\"" + sCurrentFile + "\"";
-				Boolean FirstParam = true;
-				foreach (Object p in parr)
-				{
-					if (!FirstParam) DDEMessage += ","; else FirstParam = false;
-					switch (p.GetType().FullName)
-					{
-						case "System.String":
-							DDEMessage += "\"" + p.ToString() + "\"";
-							break;
-						case "System.Double":
-							DDEMessage += ((Double)p).ToString(new System.Globalization.CultureInfo("en-US"));
-							break;
-						default:
-							DDEMessage += p.ToString();
-							break;
-					}
-				}
-				DDEMessage += ")]";
-			}
-
-			COPYDATASTRUCT DataStruct = default;
-			DDEMessage += "\0";
-			DataStruct.dwData = SUMATRAMESSAGETYPE;
-			DataStruct.cbData = checked(DDEMessage.Length * Marshal.SystemDefaultCharSize);
-			DataStruct.lpData = Marshal.StringToHGlobalAuto(DDEMessage);
-			IntPtr pDataStruct = Marshal.AllocHGlobal(Marshal.SizeOf(DataStruct));
-			Marshal.StructureToPtr(DataStruct, pDataStruct, fDeleteOld: false);
-			SendMessage(SumatraCurrentHandle, WM_COPYDATA, (IntPtr)0, pDataStruct);
-			Marshal.FreeHGlobal(DataStruct.lpData);
-			Marshal.FreeHGlobal(pDataStruct);
-		}
 
 		#endregion
 
@@ -398,23 +417,23 @@ namespace SumatraPDF
 		{
 			get
 			{
-				SendSumatraCommand("GetProperty", "ScrollState");
+				SumatraPDFCopyDataMsg("GetProperty", "ScrollState");
 				return pScrollState;
 			}
 			set
 			{
-				SendSumatraCommand("SetProperty", "ScrollState", value.ToString());
+				SumatraPDFCopyDataMsg("SetProperty", "ScrollState", value.ToString());
 			}
 		}
 
 		private void GetZoom()
 		{
-			SendSumatraCommand("GetProperty", "Zoom");
+			SumatraPDFCopyDataMsg("GetProperty", "Zoom");
 		}
 
 		private void SetZoom(float value)
 		{
-			SendSumatraCommand("SetProperty", "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
+			SumatraPDFCopyDataMsg("SetProperty", "Zoom", value.ToString(new System.Globalization.CultureInfo("en-US")));
 		}
 
 		private float fZoom;
@@ -456,7 +475,7 @@ namespace SumatraPDF
 
 		private void GetDisplayMode()
 		{
-			SendSumatraCommand("GetProperty", "DisplayMode");
+			SumatraPDFCopyDataMsg("GetProperty", "DisplayMode");
 		}
 
 		private DisplayModeEnum eDisplayMode;
@@ -473,18 +492,18 @@ namespace SumatraPDF
 			}
 			set
 			{
-				SendSumatraCommand("SetProperty", "DisplayMode", ((int)value).ToString());
+				SumatraPDFCopyDataMsg("SetProperty", "DisplayMode", ((int)value).ToString());
 			}
 		}
 
 		private void GetPage()
 		{
-			SendSumatraCommand("GetProperty", "Page");
+			SumatraPDFCopyDataMsg("GetProperty", "Page");
 		}
 
 		private void SetPage(int Page)
 		{
-			SendSumatraCommand("SetProperty", "Page", Page.ToString());
+			SumatraPDFCopyDataMsg("SetProperty", "Page", Page.ToString());
 		}
 
 		private int nPage;
@@ -514,7 +533,7 @@ namespace SumatraPDF
 		{
 			get
 			{
-				SendSumatraCommand("GetProperty", "Rotation");
+				SumatraPDFCopyDataMsg("GetProperty", "Rotation");
 				return eRotation;
 			}
 		}
@@ -533,7 +552,7 @@ namespace SumatraPDF
 			}
 			set
 			{
-				SendSumatraCommand("SetProperty", "NamedDest", value);
+				SumatraPDFCopyDataMsg("SetProperty", "NamedDest", value);
 			}
 		}
 
@@ -546,12 +565,12 @@ namespace SumatraPDF
 		{
 			get
 			{
-				SendSumatraCommand("GetProperty", "ToolbarVisible");
+				SumatraPDFCopyDataMsg("GetProperty", "ToolbarVisible");
 				return bToolbarVisible;
 			}
 			set
 			{
-				SendSumatraCommand("SetProperty", "ToolbarVisible", value ? "1" : "0");
+				SumatraPDFCopyDataMsg("SetProperty", "ToolbarVisible", value ? "1" : "0");
 			}
 		}
 		
@@ -564,12 +583,12 @@ namespace SumatraPDF
 		{
 			get
 			{
-				SendSumatraCommand("GetProperty", "TocVisible");
+				SumatraPDFCopyDataMsg("GetProperty", "TocVisible");
 				return bTocVisible;
 			}
 			set
 			{
-				SendSumatraCommand("SetProperty", "TocVisible", value ? "1" : "0");
+				SumatraPDFCopyDataMsg("SetProperty", "TocVisible", value ? "1" : "0");
 			}
 		}
 
@@ -689,8 +708,7 @@ namespace SumatraPDF
 
 		private void CloseDocument()
 		{
-			// Ver qual o código do comando no arquivo Commands.h: CmdClose
-			SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdClose, (IntPtr)0);
+			SumatraPDFMessage(WM_DESTROY);
 		}
 
 		private void SumatraPDFControl_Resize(object sender, EventArgs e)
@@ -748,7 +766,7 @@ namespace SumatraPDF
 
         private void OpenFile()
         {
-			SendSumatraCommand("OpenFile", sCurrentFile, Handle.ToString());
+			SumatraPDFCopyDataMsg("OpenFile", sCurrentFile, Handle.ToString());
 		}
 
 		#endregion
@@ -757,7 +775,7 @@ namespace SumatraPDF
 
 		public void RotateBy(RotationEnum Rotation)
 		{
-			SendSumatraCommand("SetProperty", "RotateBy", ((int)Rotation).ToString());
+			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
 		}
 
 		public SumatraPDFControl()
@@ -789,35 +807,42 @@ namespace SumatraPDF
 
 		public void CopySelection()
 		{
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				// Ver qual o código do comando no arquivo Commands.h: CmdCopySelection
-				SendMessage(SumatraWindowHandle, WM_COMMAND, SumatraCmdCopySelection, (IntPtr)0);
-			}
-		}
-
-		public void TextSearch(string searchText, Boolean matchCase)
-		{
-			SendSumatraCommand("TextSearch", searchText, (matchCase ? 1 : 0));
-		}
-
-		public void TextSearchNext(Boolean forward)
-        {
-			SendSumatraCommand("TextSearchNext", (forward ? 1 : 0));
+			SumatraPDFFrameCmd(SumatraCmdCopySelection);
 		}
 
 		/// <summary>
-		/// Show dialog to print current document 
+		/// Do a text search on document from beginning
+		/// </summary>
+		/// <seealso cref="TextSearchNext(bool)"/>
+		/// <param name="searchText">Text to search</param>
+		/// <param name="matchCase">Match case</param>
+		public void TextSearch(string searchText, Boolean matchCase)
+		{
+			SumatraPDFCopyDataMsg("TextSearch", searchText, (matchCase ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Do a text search on document after a first search by <see cref="TextSearch(string, bool)>"/>
+		/// </summary>
+		/// <seealso cref="TextSearch(string, bool)"/>
+		/// <param name="forward">True (default) if serching forward, false if backwards</param>
+		public void TextSearchNext(Boolean forward = true)
+        {
+			SumatraPDFCopyDataMsg("TextSearchNext", (forward ? 1 : 0));
+		}
+
+		/// <summary>
+		/// Show dialog to print current document (in background)
 		/// </summary>
 		/// <remarks>
-		/// The following only applies for printing as image
+		/// After proceeding with print it occurs in background and SumatraPDF shows an interface to cancel the whole process.
+		/// The following only applies for printing as image:
 		/// Creates a new dummy page for each page with a large zoom factor,
 		/// and then uses StretchDIBits to copy this to the printer's dc.
 		/// </remarks>
-		/// <param name="WaitForCompletion">Wait for print completion before return window control to user</param>
-		public void OpenPrintDialog(Boolean WaitForCompletion)
+		public void OpenPrintDialog()
         {
-			SendSumatraCommand("OpenPrintDialog", (WaitForCompletion ? 1 : 0));
+			SumatraPDFFrameCmd(SumatraCmdPrint, true);
 		}
 
         #endregion
@@ -856,41 +881,6 @@ namespace SumatraPDF
 		}
 
 		#endregion
-
-		/* TODO: 
-		 * OpenPrintDialog method
-		 *	 Bug: Dialog do not have input focus after show (even when clicks on mouse)
-		 *	 Bug: When Dialog is open with WaitForCompletion = false trying to close window show message to confirm print cancel. 
-		 *	      Even if "no" is choosen the window is close.
-		 *	 ???: WaitForCompletion = true have to show a message to inform print state (perhaps the best solution is to ommit this parameter 
-		 *	       and force WaitForCompletion=false witch already show printing progress)
-		 * Print - Direct
-		 * Create Nuget Package
-		 *   Push Nuget Pacjage on Github repo to teste		 
-		 * Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
-		 * Analyze possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 
-		 * Hide properites and events not used and implement others
-		 * Special keys events 
-		 *   1. Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
-		 *   2. Treat ALT key
-		 * LastPage - Get property
-		 * Commands call
-		 * - Page first, previous, next, last 
-		 * - Close Document
-		 * - Copy Selection
-		 * - Select All
-		 * Global Config - auto update,  etc
-		 * Bookmarks - Context Menu event
-		 * Do a revision in GEDVISA PDFXChange used properties
-		 * Commenting all methods, properties and events
-		 * Implement FileOpened and StartupFinished events
-		 * Maps UserControl Scroll event to SumatraPDF Scroll 
-		 * Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
-		 *   So its impossible to send PluginHostCallBack message without replicate this call in all points of source code calling method DisplayModel::RotateBy.
-		 * ContextMenu SumatraPDFControl for toc
-		 *    Create a property for tocContextMenu
-
-		*/
 
 	}
 }
