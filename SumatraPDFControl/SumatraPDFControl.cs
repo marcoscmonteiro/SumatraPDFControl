@@ -14,7 +14,8 @@ using System.Reflection;
 namespace SumatraPDF
 {
 	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControl.png")]
-	public partial class SumatraPDFControl : UserControl
+    [Guid("E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C")]
+    public partial class SumatraPDFControl : UserControl
 	{
 
 		#region Interop
@@ -773,11 +774,18 @@ namespace SumatraPDF
 
 		#region Public Methods
 
+		/// <summary>
+		/// Rotate current document
+		/// </summary>
+		/// <param name="Rotation">Degrees do Rotation</param>
 		public void RotateBy(RotationEnum Rotation)
 		{
 			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
 		}
 
+		/// <summary>
+		/// Default constructor
+		/// </summary>
 		public SumatraPDFControl()
 		{
 			pSumatraWindowHandle = (IntPtr)0;
@@ -785,10 +793,20 @@ namespace SumatraPDF
 			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDF_48x48x32;
 		}
 
-		public void LoadFile(string PDFFile, int Page = 1, Boolean NewSumatraInstance = false)
+		/// <summary>
+		/// Load sumatra supported file. Current file will be closed.
+		/// </summary>
+		/// <param name="PDFFile">File name with complete path</param>
+		/// <param name="InitialPage">Initial page to show</param>
+		/// <param name="NewSumatraInstance">Open a new SumatraPDF instance (other executable process)</param>
+		/// <remarks>
+		/// In case of multiple instances of SumatraPDFControl <paramref name="NewSumatraInstance"/> indicates if an pre-existing instance 
+		/// will be used or not. If true new SumatraPDF executable will be started. The default is false.
+		/// </remarks>
+		public void LoadFile(string PDFFile, int InitialPage = 1, Boolean NewSumatraInstance = false)
 		{
 			sCurrentFile = PDFFile;
-			this.Page = Page;
+			this.Page = InitialPage;
 			NamedDest = string.Empty;
 			if (SumatraWindowHandle != (IntPtr)0)
 			{
@@ -798,13 +816,16 @@ namespace SumatraPDF
 			}
 			else
 			{					
-				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, Page); 
+				if (NewSumatraInstance || pSumatraWindowHandleList.Count==0) RestartSumatra(PDFFile, InitialPage); 
 				else OpenFile();
 			}
-			SetPage(Page);
+			SetPage(InitialPage);
 
 		}
 
+		/// <summary>
+		/// Copy to clipboard current window text selection
+		/// </summary>
 		public void CopySelection()
 		{
 			SumatraPDFFrameCmd(SumatraCmdCopySelection);
@@ -847,7 +868,7 @@ namespace SumatraPDF
 
         #endregion
 
-        #region Mapped UserControl events
+        #region Mapped privated UserControl events
 
         private void SumatraPDFControl_Load(object sender, EventArgs e)
         {
