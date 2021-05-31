@@ -424,7 +424,11 @@ namespace SumatraPDF
 			string SumatraComplete;
 			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
 			{
-				SumatraComplete = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), SumatraPDFExe);
+				string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
+				SumatraPDFPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+				SumatraPDFPath += (arch == "AMD64") ? @"\x64" : @"\x86";
+
+				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
 			}
 			else
 			{
@@ -433,7 +437,7 @@ namespace SumatraPDF
 
 			if (!File.Exists(SumatraComplete))
 			{
-				throw new Exception("SumatraPDF exe not found");
+				throw new Exception("SumatraPDF executable not found");
 			}
 
 			var PSInfo = new ProcessStartInfo
@@ -622,7 +626,7 @@ namespace SumatraPDF
 			Category("SumatraPDF")]
 		public string SumatraPDFPath { get; set; }
 
-		private string pSumatraPDFEXE = "SumatraPDF.exe";
+		private string pSumatraPDFEXE;
 		/// <summary>
 		/// SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe
 		/// </summary>
@@ -824,9 +828,10 @@ namespace SumatraPDF
 		/// </summary>
 		public SumatraPDFControl()
 		{
+			SumatraPDFExe = "SumatraPDF.exe";
 			pSumatraWindowHandle = (IntPtr)0;
-			InitializeComponent();
-			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControlMini;
+			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
+			InitializeComponent();			
 		}
 
 		/// <summary>

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -143,11 +144,9 @@ namespace SumatraPDFControlTest
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            if (Filename != string.Empty)
-            {
-                SumatraPDFControl.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
-                Filename = string.Empty;
-            }
+            if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty || Filename == string.Empty) return;
+            SumatraPDFControl.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
+            Filename = string.Empty;
         }
 
         private void SumatraPDFControl_ScrollStateChanged(object sender, ScrollStateEventArgs e)
@@ -238,6 +237,42 @@ namespace SumatraPDFControlTest
         private void toolOpenPrintDialog_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.OpenPrintDialog();
+        }
+
+        private void FormTest_Load(object sender, EventArgs e)
+        {
+            // Determine SumatraPDF.exe location
+            string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
+            string SumatraDir = string.Empty, SumatraDir2 = string.Empty, SumatraDir3 = string.Empty, SumatraPDFSubdir = string.Empty;
+
+            if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty) {
+                SumatraPDFSubdir = (arch == "AMD64") ? @"\dbg64\" : @"\dbg32\"; 
+                SumatraDir = @"..\..\..\..\sumatrapdf\out" + SumatraPDFSubdir; 
+                if (System.IO.File.Exists(SumatraDir + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir;
+                if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty)
+                {
+                    SumatraPDFSubdir = (arch == "AMD64") ? @"\SumatraPDF.x64\" : @"\SumatraPDF.x86\";
+                    SumatraDir2 = @"..\..\..\nuget" + SumatraPDFSubdir;
+                    if (System.IO.File.Exists(SumatraDir2 + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir2;
+                }
+
+                if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty)
+                {
+                    SumatraPDFSubdir = (arch == "AMD64") ? @"\x64\" : @"\x86\";
+                    SumatraDir3 = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + SumatraPDFSubdir;
+                    if (System.IO.File.Exists(SumatraDir3 + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir3;
+                }
+            }
+            if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty)
+            {
+                MessageBox.Show(@"Error: " + SumatraPDFControl.SumatraPDFExe + " cannot be found in following dirs: " + Environment.NewLine +
+                    Environment.NewLine + "\"" + System.IO.Path.GetFullPath(SumatraDir) + "\"" +
+                    Environment.NewLine + "\"" + System.IO.Path.GetFullPath(SumatraDir2) + "\"" +
+                    Environment.NewLine + "\"" + System.IO.Path.GetFullPath(SumatraDir3) + "\"" +
+                    Environment.NewLine + Environment.NewLine + 
+                    "GIT clone code and compile it from https://github.com/marcoscmonteiro/sumatrapdf, and put it in one of those dirs.", 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
