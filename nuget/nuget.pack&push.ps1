@@ -183,14 +183,14 @@ function NugetPush {
 
     $s = Read-Host -prompt "Do you want to perform the publication (nuget push) of the components packaged above in the repositories listed (y/n)?"
     if ($s -eq "y") { 
-      Write-Output "Publishing components to repositories" | Tee-Object log\NugetPush.log
+      Write-Output "Publishing projects to repositories" | Tee-Object log\NugetPush.log
       foreach ($repo in $Repositories.Keys) {
-        Write-Output "Publicando componentes em $repo - caso o componente/versão já exista emitirá erro" | Tee-Object log\NugetPush.log -Append
+        Write-Output "Publishing projects in $repo - is version already exists an erro will be throw." | Tee-Object log\NugetPush.log -Append
         $RepoURL = $Repositories[$repo]
         nuget push -Source "$RepoURL" -ApiKey AzureDevOps -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
       }  
-      Write-Output "Finalizada publicação" | Tee-Object log\NugetPush.log -Append
-      Write-Output "Maiores detalhes da publicação em log\NugetPush.log"
+      Write-Output "Published" | Tee-Object log\NugetPush.log -Append
+      Write-Output "Further details can be found in log\NugetPush.log"
     }
 }
 

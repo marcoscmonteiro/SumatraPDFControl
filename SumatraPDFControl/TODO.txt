@@ -1,9 +1,9 @@
 ﻿TODO (First version):
 
 Nuget Package
-  - Create nuspec
-  - Push Nuget Package on Github repo to teste		 
-  - Compile 32bit and 64bits version of SumatraPDF to include on package
+  - SumatraPDFControl version 1.0.0-alpha published on Nuget.org problems:
+    - x86\SumatraPDF and x64\SumatraPDF isn't copy to output host application folder.
+    - include readme.md on package (https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#packagereadmefile)
 Choose correct version of SumatraPDF.exe (32bits / 64bits) based on:
     string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
 Print - Direct

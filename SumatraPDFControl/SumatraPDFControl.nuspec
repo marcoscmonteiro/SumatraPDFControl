@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>$version$</version>
+    <version>1.0.0-alpha</version>
     <title>SumatraPDF Control for Windows Forms</title>
     <authors>Marcos C. Monteiro</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -10,9 +10,9 @@
     <projectUrl>https://github.com/marcoscmonteiro/SumatraPDFControl</projectUrl>    
     <description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</description>
     <releaseNotes>First version</releaseNotes>
-    <copyright>$copyright$</copyright>
+    <copyright>Copyright © 2021</copyright>
     <tags>SumatraPDF PDF Windows Forms</tags>
-    <iconUrl>https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/Resources/SumatraPDFControl.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/SumatraPDFControl/Resources/SumatraPDFControl.png</iconUrl>
     <icon>images\SumatraPDFControl.png</icon>
   </metadata>
   <files>

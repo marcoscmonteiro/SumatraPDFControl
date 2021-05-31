@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/nuget/SumatraPDF.x64/SumatraPDF.exe
+/nuget/SumatraPDF.x86/SumatraPDF.exe
