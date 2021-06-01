@@ -1,8 +1,8 @@
 # SumatraPDFControl
-Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)
+Windows Forms Control based on [SumatraPDF](https://www.sumatrapdfreader.org/) to read and view Portable Document Files (PDF)
 
-This control allows you to open and read PDF files with most features present in great SumatraPDF reader (https://www.sumatrapdfreader.org/).
+Requires [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) 4.5 or greater
 
-It requires an specific compiled Sumatra code version (https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF working in an enhanced plugin mode. 
+This control allows you to open and read PDF files with all features present in great [SumatraPDF](https://www.sumatrapdfreader.org/) made by [Krzysztof Kowalczyk](https://blog.kowalczyk.info/). 
 
-It's forked from original SumatraPDF code (https://github.com/sumatrapdfreader/sumatrapdf)
+It requires a specific compiled SumatraPDF [forked code](https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF working in an enhanced plugin mode. Compiled versions of it (32 and 64 bits) are distributed inside this nuget package.
