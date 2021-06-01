@@ -2,7 +2,7 @@
 
 Nuget Package
   - SumatraPDFControl version 1.0.0-alpha published on Nuget.org problems:
-    - x86\SumatraPDF and x64\SumatraPDF isn't copy to output host application folder.
+    - x86\SumatraPDF and x64\SumatraPDF isn't copy to output host application folder. https://docs.microsoft.com/en-us/nuget/reference/nuspec#specifying-files-to-include-in-the-package
     - include readme.md on package (https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets#packagereadmefile)
 Choose correct version of SumatraPDF.exe (32bits / 64bits) based on:
     string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);

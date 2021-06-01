@@ -172,7 +172,9 @@ function NugetPack {
 # in the $Repositories variable
 function NugetPush {
   param(    
-    [HashTable]$Repositories
+    [HashTable]$Repositories,
+    [String]$ApiKey,
+    [String]$AutoPublish
   )
 
     Write-Output ""
@@ -181,13 +183,20 @@ function NugetPush {
     $Repositories.GetEnumerator() | ForEach-Object -process { $_.Key + " - " + $_.Value }
     Write-Output ""
 
-    $s = Read-Host -prompt "Do you want to perform the publication (nuget push) of the components packaged above in the repositories listed (y/n)?"
+    if ($AutoPublish -eq "")
+    {
+      $s = Read-Host -prompt "Do you want to perform the publication (nuget push) of the components packaged above in the repositories listed (y/n)?"
+    } else 
+    {
+      $s = $AutoPublish.ToLower()
+    }
+
     if ($s -eq "y") { 
       Write-Output "Publishing projects to repositories" | Tee-Object log\NugetPush.log
       foreach ($repo in $Repositories.Keys) {
-        Write-Output "Publishing projects in $repo - is version already exists an erro will be throw." | Tee-Object log\NugetPush.log -Append
+        Write-Output "Publishing projects in $repo ... (if version already exists an error will be throw)" | Tee-Object log\NugetPush.log -Append
         $RepoURL = $Repositories[$repo]
-        nuget push -Source "$RepoURL" -ApiKey AzureDevOps -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
+        nuget push -Source "$RepoURL" -ApiKey $ApiKey -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
       }  
       Write-Output "Published" | Tee-Object log\NugetPush.log -Append
       Write-Output "Further details can be found in log\NugetPush.log"
@@ -201,7 +210,10 @@ function NugetPush {
 function NugetPackAndPush() {
   param(    
     [String]$SolutionPath,
-    [HashTable]$Repositories
+    [HashTable]$Repositories,
+    [String]$ApiKey,
+    [String]$ProjectList,
+    [String]$AutoPublish
   )
 
   Clear-Host
@@ -253,12 +265,19 @@ function NugetPackAndPush() {
   # Ask which components will be packaged:
   Write-Output "Solution: $SolutionDir\$SolutionName"
   Write-Output ""
-  Write-Output "Projects availble to pack:"
+  Write-Output "Projects available to pack:"
   Write-Output ""
   $Components.GetEnumerator() | Sort-Object -Property name | ForEach-Object -process { $_.Key.ToString().PadLeft(3) + " - " + $_.Value[0].PadRight(25) + " (" + $SolutionDir + "\" + $_.Value[1] + ")" }
 
   Write-Output ""
-  $strItens = Read-Host -prompt "Enter project numbers separated by space (* = all)"
+  if ($ProjectList -eq "") 
+  {
+    $strItens = Read-Host -prompt "Enter project numbers separated by space (* = all)"
+  } else 
+  {
+    $strItens = $ProjectList 
+  }
+  
   if ($strItens -eq "") { exit }
 
   if ($strItens -eq "*") 
@@ -307,5 +326,5 @@ function NugetPackAndPush() {
   }
   
   # Proceed with the display of the publishing interface of the packaged projects
-  NugetPush($Repositories)
+  NugetPush -Repositories $Repositories -ApiKey $ApiKey -AutoPublish $AutoPublish
 }

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.0-alpha</version>
+    <version>1.0.3-alpha</version>
     <title>SumatraPDF Control for Windows Forms</title>
     <authors>Marcos C. Monteiro</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
@@ -14,10 +14,14 @@
     <tags>SumatraPDF PDF Windows Forms</tags>
     <iconUrl>https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/SumatraPDFControl/Resources/SumatraPDFControl.png</iconUrl>
     <icon>images\SumatraPDFControl.png</icon>
+    <contentFiles>
+      <files include="any\any\**\*.*" buildAction="Content" copyToOutput="true" flatten="false"/>      
+    </contentFiles>
   </metadata>
   <files>
     <file src="Resources\SumatraPDFControl.png" target="images\" />
-    <file src="..\nuget\SumatraPDF.x86\SumatraPDF.exe" target="lib/net45/x86/" />
-    <file src="..\nuget\SumatraPDF.x64\SumatraPDF.exe" target="lib/net45/x64/" />
+    <file src="..\nuget\SumatraPDF.x86\SumatraPDF.exe" target="contentFiles\any\any\x86\" />
+    <file src="..\nuget\SumatraPDF.x64\SumatraPDF.exe" target="contentFiles\any\any\x64\" />
   </files>
+  <!-- readme.md: https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/README.md -->
 </package>

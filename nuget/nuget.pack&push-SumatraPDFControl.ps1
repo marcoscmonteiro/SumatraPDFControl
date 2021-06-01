@@ -1,4 +1,5 @@
-﻿# Save current dir
+﻿<#
+# Save current dir
 $CurrentDir = Get-Location
 
 # Start Developer Shell Powershell in order to compile SumatraPDF 
@@ -20,6 +21,8 @@ if (-not (Test-Path .\SumatraPDF.x64)) { mkdir .\SumatraPDF.x64 > $null }
 Copy-Item "$SumatraPDFBaseDir\out\Rel32\SumatraPDF.exe" .\SumatraPDF.x86
 Copy-Item "$SumatraPDFBaseDir\out\Rel64\SumatraPDF.exe" .\SumatraPDF.x64
 
+#>
+
 # Includes functions required to package and publish components
 # Read comments at the beginning of the file below witch contains important information
 . ".\nuget.pack&push.ps1"
@@ -29,12 +32,13 @@ $SolutionPath = "..\SumatraPDFControl.sln"
 
 # HashTable containing the repositories and the URL of their location for publishing the components
 $Repositories = @{
-    "SumatraPDFControl_repo1" = "https://REPO_URL1/nuget/v3/index.json"
-    "SumatraPDFControl_repo2" = "https://REPO_URL2/nuget/v3/index.json"
+    "nugetorg" = "https://api.nuget.org/v3/index.json"
 }
 
+$apikey = Get-Content NUGET.ORG.APIKEY.TXT
+
 # Calls function with component packaging and publishing interface
-NugetPackAndPush -SolutionPath $SolutionPath -Repositories $Repositories
+NugetPackAndPush -SolutionPath $SolutionPath -Repositories $Repositories -ApiKey $apikey -ProjectList "*" -AutoPublish "y"
 
 # To be able to read the information if it was run directly by Windows Explorer
-pause
+#pause
