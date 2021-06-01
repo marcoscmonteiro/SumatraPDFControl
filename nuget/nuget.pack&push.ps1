@@ -2,7 +2,7 @@
 .Description
 
 This Script must be executed by PowerShell and allows the packaging (nuget pack) and respective publication (nuget push) of the Nuget packages for the components of a configured solution
-through the -SolutionPath and -Repository parameters of the NugetPackAndPush function. At the end of this comment you can see examples of how to fill in these parameters
+through the -SolutionPath and -Repositories parameters of the NugetPackAndPush function. At the end of this comment you can see examples of how to fill these parameters
 
 The components of the solution can be selected through the interface in order to be packaged in the .\ Nupkg folder.
 The interface will request confirmation for publication of the components generated for the NuGet repositories defined in the -Repositories parameter
@@ -30,28 +30,17 @@ b) You must create a .nuspec file based on a pre-existing project using the
    class library (see manual above for details)
 c) Edit the generated .nuspec file as instructed in the manual above
 
-3) Creation of notes for the TJERJ NUGET repositories (step not required to execute this script)
-
-a) The 2 commands below add references to the remote NuGet component repositories in the workstation's NuGet settings in order to
-   to enable the publication of the components. 
-
-nuget sources Add -Name "SumatraPDFControl_repo1" -Source "https://REPO_URL1/nuget/v3/index.json"
-nuget sources Add -Name "SumatraPDFControl_repo2" -Source "https://REPO_URL2/nuget/v3/index.json"
-
-Note: The above commands only need to be executed once although if repeated they will not cause any problem, only an error message that can be ignored.
-
-4) To upload the package to the repositories mapped in the steps above (done automatically by this script)
+3) To upload the package to the repositories mapped in the steps above (done automatically by this script)
 
 In the last part of the NugetPackAndPush function, you are asked whether packaged packages should be published (push) in the repository configured in the $ Repositories variable.
 If the package has already been uploaded with the same version number, an error similar to the one shown below will occur:
 
-  Package '... .\nuget\.\nupkg\SumatraPDFControl.1.0.0.nupkg' already exists at feed 'https://...'
+  Package '... .\nuget .\nupkg\SumatraPDFControl.1.0.0.nupkg' already exists at feed 'https://...'
 
-If it is still necessary to upload a new version of the component, then the desired project must be edited in order to modify the version of the assembly number ("Assembly Version" and "File Version")
-present in the project properties. Once the changes are saved, a new attempt should be made to execute this script for a new generation (pack) and publication (push)
-components.
+Then it will be necessary to prepare a new version of the component. So, the .nuspec file project must be <version> tag changed to a version not used before.
+Once the changes were saved, a new attempt should be made to execute this script.
 
-5) The following variables must be prepared before executing the NugetPackAndPush function that makes
+4) The following variables must be prepared before executing the NugetPackAndPush function that makes
    packaging and publishing the components: 
 
        . $SolutionPath
@@ -63,10 +52,10 @@ components.
     # Complete path to reach the solution from the location of the execution of this Script.
     $SolutionPath = "..\SumatraPDFControl.sln"    
 
-    # HashTable containing the repositories and the URL of their location for publishing the components
+    # HashTable containing the repositories with URL and APIKEY for publishing the components
     $Repositories = @{
-      "SumatraPDFControl_repo1" = "https://REPO_URL1/nuget/v3/index.json"
-      "SumatraPDFControl_repo1" = "https://REPO_URL2/nuget/v3/index.json"
+      "Component_repo1" = @("https://COMPONENT_REPO_URL1/nuget/.../index.json", "REPO_URL1_APIKEY"),
+      "Component_repo2" = @("https://COMPONENT_REPO_URL2/nuget/.../index.json", "REPO_URL2_APIKEY")
     }
 
     # Calls function with component packaging and publishing interface
@@ -173,7 +162,6 @@ function NugetPack {
 function NugetPush {
   param(    
     [HashTable]$Repositories,
-    [String]$ApiKey,
     [String]$AutoPublish
   )
 
@@ -194,12 +182,13 @@ function NugetPush {
     if ($s -eq "y") { 
       Write-Output "Publishing projects to repositories" | Tee-Object log\NugetPush.log
       foreach ($repo in $Repositories.Keys) {
-        Write-Output "Publishing projects in $repo ... (if version already exists an error will be throw)" | Tee-Object log\NugetPush.log -Append
-        $RepoURL = $Repositories[$repo]
+        $RepoURL = $Repositories[$repo][0]
+        $ApiKey = $Repositories[$repo][1]
+        Write-Output "Publishing projects in $RepoURL (note: if version already exists an error will be logged)" | Tee-Object log\NugetPush.log -Append
         nuget push -Source "$RepoURL" -ApiKey $ApiKey -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
       }  
       Write-Output "Published" | Tee-Object log\NugetPush.log -Append
-      Write-Output "Further details can be found in log\NugetPush.log"
+      Get-Content .\log\NugetPush.log 
     }
 }
 
@@ -209,11 +198,10 @@ function NugetPush {
 # as indicated in the initial comments
 function NugetPackAndPush() {
   param(    
-    [String]$SolutionPath,
-    [HashTable]$Repositories,
-    [String]$ApiKey,
-    [String]$ProjectList,
-    [String]$AutoPublish
+    [String]$SolutionPath, # Complete path solution (.sln file)
+    [HashTable]$Repositories, # Hash table (see example in comments above)
+    [String]$ProjectList, # Numeric list (space separated) with projects to be packed and published or "*" to all projetcs
+    [String]$AutoPublish # String char (y/n) if script will prompt to publish projects
   )
 
   Clear-Host
@@ -315,8 +303,8 @@ function NugetPackAndPush() {
 
   # Summary of quantity of components packaged and ordered for packaging
   Write-Output ""
-  Write-Output "Target project number packaged: $TargetNumber"
-  Write-Output "Real project number packaged  : $RealNumber"
+  Write-Output "# Target packaged projects: $TargetNumber"
+  Write-Output "# Real packaged projects  : $RealNumber"
 
   # If the packaging phase has generated fewer packages than previously requested, issue a warning
   if (-not ($RealNumber -eq $TargetNumber)) {
@@ -326,5 +314,5 @@ function NugetPackAndPush() {
   }
   
   # Proceed with the display of the publishing interface of the packaged projects
-  NugetPush -Repositories $Repositories -ApiKey $ApiKey -AutoPublish $AutoPublish
+  NugetPush -Repositories $Repositories -AutoPublish $AutoPublish
 }
