@@ -84,5 +84,12 @@
   <ItemGroup>
     <None Include="SumatraPDFControl.nuspec" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="docfx.console">
+      <Version>2.57.2</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

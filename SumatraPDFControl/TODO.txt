@@ -21,8 +21,8 @@ LastPage get property
 Global Config - auto update, etc
 Documentation
   - Commenting all public methods, properties and events, etc
-  - Generate documentation using https://github.com/EWSoftware/SHFB
-  - Publish documentation on github like http://ewsoftware.github.io/SHFB did
+  - Generate documentation using https://github.com/EWSoftware/SHFB or https://dotnet.github.io/docfx/
+  - Publish documentation on github pages like http://ewsoftware.github.io/SHFB or https://marcoscmonteiro.github.io/SumatraPDFControl/
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):

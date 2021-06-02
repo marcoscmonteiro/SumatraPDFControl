@@ -46,10 +46,10 @@ namespace SumatraPDF
 		private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
 		[DllImport("user32.dll")]
-		public extern static int SendNotifyMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+		private static extern int SendNotifyMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		public static extern void CopyMemory(IntPtr destination, IntPtr source, uint length);
+		private static extern void CopyMemory(IntPtr destination, IntPtr source, uint length);
 
 		[DllImport("user32.dll")]
 		static extern bool DestroyWindow(IntPtr hWnd);
@@ -334,10 +334,12 @@ namespace SumatraPDF
 
 		// Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		new public event EventHandler<MouseEventArgs> MouseClick;
+#pragma warning disable IDE0051 // Remove unused private members
+        new private event EventHandler<MouseEventArgs> MouseClick;
+#pragma warning restore IDE0051 // Remove unused private members
 
-		//[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-		new public ContextMenuStrip ContextMenuStrip { get; set; }
+        //[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+        new public ContextMenuStrip ContextMenuStrip { get; set; }
 
 		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -883,12 +885,12 @@ namespace SumatraPDF
 			SumatraPDFCopyDataMsg("TextSearch", searchText, (matchCase ? 1 : 0));
 		}
 
-		/// <summary>
-		/// Do a text search on document after a first search by <see cref="TextSearch(string, bool)>"/>
-		/// </summary>
-		/// <seealso cref="TextSearch(string, bool)"/>
-		/// <param name="forward">True (default) if serching forward, false if backwards</param>
-		public void TextSearchNext(Boolean forward = true)
+        /// <summary>
+        /// Do a text search on document after a first search by <see cref="TextSearch(string, bool)"/>
+        /// </summary>
+        /// <seealso cref="TextSearch(string, bool)"/>
+        /// <param name="forward">True (default) if serching forward, false if backwards</param>
+        public void TextSearchNext(Boolean forward = true)
         {
 			SumatraPDFCopyDataMsg("TextSearchNext", (forward ? 1 : 0));
 		}
