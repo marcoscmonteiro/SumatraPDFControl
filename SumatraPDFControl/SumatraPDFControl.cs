@@ -24,7 +24,7 @@ namespace SumatraPDF
 	/// </remarks>
 	[ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControlMini.png")]
     [Guid("E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C")]
-    public partial class SumatraPDFControl : UserControl
+    public partial class SumatraPDFControl : Control
 	{
 
 		#region Interop
@@ -317,15 +317,15 @@ namespace SumatraPDF
 				string sMsg = Encoding.Default.GetString(strb);
 				m.Result = ParseSumatraMsg(sMsg, x.dwData);
 			}
-			else if (m.Msg == WM_KEYDOWN) // UserControl maps as MouseDown event
+			else if (m.Msg == WM_KEYDOWN) // Control maps as MouseDown event
 			{
 				m.Result = LastKeyDownEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
-			else if (m.Msg == WM_CHAR) // UserControl maps as KeyPress event
+			else if (m.Msg == WM_CHAR) // Control maps as KeyPress event
 			{
 				m.Result = LastKeyPressEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
-			else if (m.Msg == WM_KEYUP) // UserControl maps as MouseDown event
+			else if (m.Msg == WM_KEYUP) // Control maps as MouseDown event
 			{
 				m.Result = LastKeyUpEventArgs.Handled ? (IntPtr)0 : (IntPtr)1;
 			}
@@ -341,7 +341,7 @@ namespace SumatraPDF
 
 		#endregion
 
-		#region Hide UserControl base members
+		#region Hide Control base members
 
 		// Do not expose MouseClick event. This event does not exist on Windows API and can be easily substituted by MouseDown and MouseUp events
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
@@ -359,15 +359,7 @@ namespace SumatraPDF
 
 		#endregion
 
-		#region Private Mapped UserControl events
-
-		private void SumatraPDFControl_Load(object sender, EventArgs e)
-		{
-			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
-			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
-			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
-			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
-		}
+		#region Private Mapped Control events
 
 		private KeyEventArgs LastKeyDownEventArgs;
 		private void SumatraPDFControl_KeyDown(object sender, KeyEventArgs e)
@@ -896,7 +888,11 @@ namespace SumatraPDF
 			SumatraPDFExe = "SumatraPDF.exe";
 			pSumatraWindowHandle = (IntPtr)0;
 			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
-			InitializeComponent();			
+			InitializeComponent();
+			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
+			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
+			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
+			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
 		}
 
 		/// <summary>

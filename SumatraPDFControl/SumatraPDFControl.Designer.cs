@@ -39,20 +39,14 @@ namespace SumatraPDF
             // 
             // SumatraPDFControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.DoubleBuffered = true;
             this.Name = "SumatraPDFControl";
             this.Size = new System.Drawing.Size(460, 334);
-            this.Load += new System.EventHandler(this.SumatraPDFControl_Load);
             this.Resize += new System.EventHandler(this.SumatraPDFControl_Resize);
             this.ResumeLayout(false);
-
         }
 
         #endregion

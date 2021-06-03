@@ -223,12 +223,6 @@ namespace SumatraPDFControlTest
             AddText("MouseDoubleClick: " + e.Button.ToString() + string.Format(" - ({0},{1})", e.X, e.Y));
         }
 
-        private void SumatraPDFControl_Scroll(object sender, ScrollEventArgs e)
-        {
-            if (cbShowScrollState.Checked)
-                AddText("Scroll: " + e.OldValue.ToString() + " - " + e.NewValue.ToString() + " - " + e.Type.ToString() + " - " + e.ScrollOrientation.ToString());
-        }
-
         private void toolOpenPrintDialog_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.OpenPrintDialog();

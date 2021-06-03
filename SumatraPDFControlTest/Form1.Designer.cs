@@ -512,7 +512,6 @@
             this.SumatraPDFControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumatraPDFControl.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.SumatraPDFControl.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.SumatraPDFControl.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SumatraPDFControl.BackgroundImage")));
             this.SumatraPDFControl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
@@ -542,7 +541,6 @@
             this.SumatraPDFControl.KeyPress += new System.EventHandler<System.Windows.Forms.KeyPressEventArgs>(this.SumatraPDFControl_KeyPressedMessage);
             this.SumatraPDFControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
             this.SumatraPDFControl.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
-            this.SumatraPDFControl.Scroll += new System.Windows.Forms.ScrollEventHandler(this.SumatraPDFControl_Scroll);
             this.SumatraPDFControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseDoubleClick);
             this.SumatraPDFControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseDown);
             this.SumatraPDFControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseUp);
