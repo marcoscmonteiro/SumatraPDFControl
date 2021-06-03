@@ -349,9 +349,6 @@ namespace SumatraPDF
         new private event EventHandler<MouseEventArgs> MouseClick;
 #pragma warning restore IDE0051 // Remove unused private members
 
-        //[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        new public ContextMenuStrip ContextMenuStrip { get; set; }
-
 		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		new public System.Drawing.Image BackgroundImage
@@ -677,6 +674,15 @@ namespace SumatraPDF
 		#endregion
 
 		#region Public Properties
+
+		/// <summary>
+		/// Gets or sets the ContextMenuStrip associated with this control.
+		/// </summary>
+		/// <remarks>
+		/// The ContextMenuStrip for this control, or null if there is no ContextMenuStrip. The default is null.
+		/// </remarks>
+		[Description("Generic SumatraPDF message, not managed by other events ocurred")]
+		new public ContextMenuStrip ContextMenuStrip { get; set; }
 
 		/// <summary>
 		/// Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory
