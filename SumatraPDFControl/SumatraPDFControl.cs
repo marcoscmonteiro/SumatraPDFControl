@@ -596,70 +596,64 @@ namespace SumatraPDF
 		#region Public Event Handlers
 
 		/// <summary>
-		/// Generic SumatraPDF message, not managed by other events ocurred.
+		/// A generic SumatraPDF message not managed by other events.
 		/// </summary>
-		[Description("Generic SumatraPDF message, not managed by other events ocurred"), Category("SumatraPDF")]
+		[Description("A generic SumatraPDF message not managed by other events"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
 
 		/// <summary>
-		/// Current visible page was changed
+		/// Occurs after changing current visible page
 		/// </summary>
-		[Description("Current visible page was changed"), Category("SumatraPDF")]
+		[Description("Occurs after changing current visible page"), Category("SumatraPDF")]
 		public event EventHandler<PageChangedEventArgs> PageChanged;
 
 		/// <summary>
-		/// Right mouse button was clicked and SumatraPDF is trying to open context menu.
+		/// Occurs before trying to open ContextMenu by right mouse clicking button.
 		/// </summary>
-		/// <remarks>
-		/// Occurs before the context menu is opened.
-		/// </remarks>
-		[Description("Right mouse button was clicked and SumatraPDF is trying to open context menu"), Category("SumatraPDF")]
+		[Description("Occurs before trying to open ContextMenu by right mouse clicking button"), Category("SumatraPDF")]
 		public event EventHandler<ContextMenuOpeningEventArgs> ContextMenuOpening;
 
 		/// <summary>
-		/// Zoom factor was changed.
+		/// Occurs after changing zoom factor.
 		/// </summary>
-		[Description("Zoom factor was changed"), Category("SumatraPDF")]
+		[Description("Occurs after changing zoom factor"), Category("SumatraPDF")]
 		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
 
 		/// <summary>
-		/// Document link on SumatraPDF was clicked.
+		/// Occurs after clicking a document link.
 		/// </summary>
-		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
+		[Description("Occurs after clicking a document link"), Category("SumatraPDF")]
 		public event EventHandler<LinkClickedEventArgs> LinkClick;
 
 		/// <summary>
-		/// Display mode was changed.
+		/// Occurs after changing display mode.
 		/// </summary>
-		[Description("Display mode was changed"), Category("SumatraPDF")]
+		[Description("Occurs after changing display mode"), Category("SumatraPDF")]
 		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
 
 		/// <summary>
-		/// Scroll position (vertical and/or horizontal) was changed.
+		/// Occurs after changing document scroll position (vertical and/or horizontal).
 		/// </summary>
-		/// <remarks>
-		/// Occurs when SumatraPDF was scrolled up or down
-		/// </remarks>
-		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
+		[Description("Occurs after changing document scroll position (vertical and/or horizontal)"), Category("SumatraPDF")]
 		public event EventHandler<ScrollStateEventArgs> ScrollStateChanged;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
 		/// <summary>
-		/// Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed).
+		/// Occurs when a character, space or backspace key is pressed while the control has focus.
 		/// </summary>
-		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
+		[Description("Occurs when a character, space or backspace key is pressed while the control has focus"), Category("SumatraPDF")]
 		public event EventHandler<KeyPressEventArgs> KeyPress;
 
 		/// <summary>
-		/// Key was pressed down on SumatraPDF control.
+		/// Occurs when a key is pressed while the control has focus.
 		/// </summary>
-		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
+		[Description("Occurs when a key is pressed while the control has focus"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyDown;
 
 		/// <summary>
-		/// Key was released up on SumatraPDF control.
+		/// Occurs when a key is released while the control has focus.
 		/// </summary>
-		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
+		[Description("Occurs when a key is released while the control has focus"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyUp;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword
 
