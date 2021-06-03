@@ -10,9 +10,9 @@ namespace SumatraPDF
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// Limpar os recursos que estão sendo usados.
+        /// Cleaning resources being used
         /// </summary>
-        /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
+        /// <param name="disposing">true if necessary to dispose managed resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (pSumatraWindowHandle != (IntPtr)0)

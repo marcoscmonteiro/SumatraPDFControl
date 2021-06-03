@@ -10,9 +10,9 @@
           "src": "."
         }
       ],
-      "dest": "api",
-      "disableGitFeatures": false,
-      "disableDefaultFilter": false
+      "dest": "api"//,
+      //"disableGitFeatures": false,
+      //"disableDefaultFilter": false
     }
   ],
   "build": {

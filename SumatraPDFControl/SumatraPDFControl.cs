@@ -465,18 +465,40 @@ namespace SumatraPDF
 
 		#region Public Types and Enums (miss documentation)
 
+		/// <summary>
+		/// Structure which represents Horizontal and Vertical Scroll position of current SumatraPDF displayed page.
+		/// </summary>
 		public struct ScrollStateStruct
 		{
+			/// <summary>
+			/// ScrollStateStruct Constructor
+			/// </summary>
+			/// <param name="page">Current page</param>
+			/// <param name="x">Horizontal scroll position</param>
+			/// <param name="y">Vertical scroll position</param>
 			public ScrollStateStruct(int page, double x, double y)
 			{
 				Page = page;
 				X = x;
 				Y = y;
 			}
+			/// <summary>
+			/// Horizontal scroll position
+			/// </summary>
 			public double X { get; }
+			/// <summary>
+			/// Vertical scroll position
+			/// </summary>
 			public double Y { get; }
+			/// <summary>
+			/// Current displayed page
+			/// </summary>
 			public int Page { get; }
-			public override string ToString() => $"{Page},{X},{Y}";
+			/// <summary>
+			/// Converts struct to string
+			/// </summary>
+			/// <returns>Struct string representation</returns>
+			public override string ToString() => $"Page: {Page}, X: {X}, Y: {Y}";
 		}
 
 		public enum DisplayModeEnum
@@ -965,7 +987,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Rotate current document
 		/// </summary>
-		/// <param name="Rotation">Degrees do Rotation</param>
+		/// <param name="Rotation">Degrees to Rotation</param>
 		public void RotateBy(RotationEnum Rotation)
 		{
 			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
