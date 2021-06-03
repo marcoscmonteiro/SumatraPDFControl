@@ -200,19 +200,23 @@ namespace SumatraPDF
 					case "ContextMenuOpened":
 					case "TocContextMenuOpened":
 
-						if (ContextMenuStrip != null)
+						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
+						var cmoe = new ContextMenuOpeningEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
+
+						ContextMenuOpening?.Invoke(this, cmoe);
+
+						if (ContextMenuStrip != null && !cmoe.Handled)
 						{
-							CallBackReturn = 1;
+							cmoe.Handled = true;
 							if (!ContextMenuStrip.Visible)
 							{
-								Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
-								var cmoe = new ContextMenuOpenEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));
 								ContextMenuStrip.LostFocus -= ContextMenuStrip_LostFocus;
 								ContextMenuStrip.Show(this, cmoe.X, cmoe.Y);
 								ContextMenuStrip.Focus();
 								ContextMenuStrip.LostFocus += ContextMenuStrip_LostFocus;
 							}
 						}
+						CallBackReturn = cmoe.Handled ? 1 : 0;
 						break;
 
 					case "ZoomChanged":
@@ -272,6 +276,13 @@ namespace SumatraPDF
 			return (IntPtr)CallBackReturn;
 		}
 
+		/// <summary>
+		/// Processes Windows Messages.
+		/// </summary>
+		/// <remarks>
+		/// This method has many customizations in order to process SumatraPDF messages. So, if there is need to override, remember to call base.WndProc.
+		/// </remarks>
+		/// <param name="m">The Windows <see cref="Message"/> to process.</param>
 		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
@@ -523,9 +534,9 @@ namespace SumatraPDF
 			public int Page { get; }
 			public string NamedDest { get; }
 		}
-		public class ContextMenuOpenEventArgs : EventArgs
+		public class ContextMenuOpeningEventArgs : EventArgs
         {
-			public ContextMenuOpenEventArgs(int X, int Y)
+			public ContextMenuOpeningEventArgs(int X, int Y)
             {
 				this.X = X;
 				this.Y = Y;
@@ -572,47 +583,93 @@ namespace SumatraPDF
 			public DisplayModeEnum DisplayMode { get; }
         }
 
+		/// <summary>
+		/// Arguments passed to <see cref="ScrollStateChanged"/> event
+		/// </summary>
 		public class ScrollStateEventArgs : EventArgs
         {
+			/// <summary>
+			/// ScrollStateEventArgs constructor
+			/// </summary>
+			/// <param name="ScrollState">Constructor parameter</param>
 			public ScrollStateEventArgs(ScrollStateStruct ScrollState)
             {
 				this.ScrollState = ScrollState;
             }
+			/// <summary>
+			/// SumatraPDF control scroll state 
+			/// </summary>
 			public ScrollStateStruct ScrollState { get; }
 		}
 
-        #endregion
+		#endregion
 
-        #region Public Event Handlers
+		#region Public Event Handlers
 
-        [Description("Generic SumatraPDF message ocurred"), Category("SumatraPDF")]
+		/// <summary>
+		/// Generic SumatraPDF message, not managed by other events ocurred.
+		/// </summary>
+		[Description("Generic SumatraPDF message, not managed by other events ocurred"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
 
+		/// <summary>
+		/// Current visible page was changed
+		/// </summary>
 		[Description("Current visible page was changed"), Category("SumatraPDF")]
 		public event EventHandler<PageChangedEventArgs> PageChanged;
 
-		[Description("Right mouse button was clicked and SumatraPDF tried to open context menu"), Category("SumatraPDF")]
-		public event EventHandler<ContextMenuOpenEventArgs> ContextMenuOpen;
+		/// <summary>
+		/// Right mouse button was clicked and SumatraPDF is trying to open context menu.
+		/// </summary>
+		/// <remarks>
+		/// Occurs before the context menu is opened.
+		/// </remarks>
+		[Description("Right mouse button was clicked and SumatraPDF is trying to open context menu"), Category("SumatraPDF")]
+		public event EventHandler<ContextMenuOpeningEventArgs> ContextMenuOpening;
 
+		/// <summary>
+		/// Zoom factor was changed.
+		/// </summary>
 		[Description("Zoom factor was changed"), Category("SumatraPDF")]
 		public event EventHandler<ZoomChangedEventArgs> ZoomChanged;
 
+		/// <summary>
+		/// Document link on SumatraPDF was clicked.
+		/// </summary>
 		[Description("Document link on SumatraPDF was clicked"), Category("SumatraPDF")]
 		public event EventHandler<LinkClickedEventArgs> LinkClick;
 
+		/// <summary>
+		/// Display mode was changed.
+		/// </summary>
 		[Description("Display mode was changed"), Category("SumatraPDF")]
 		public event EventHandler<DisplayModeChangedEventArgs> DisplayModeChanged;
 
+		/// <summary>
+		/// Scroll position (vertical and/or horizontal) was changed.
+		/// </summary>
+		/// <remarks>
+		/// Occurs when SumatraPDF was scrolled up or down
+		/// </remarks>
 		[Description("Scroll position (vertical and/or horizontal) was changed"), Category("SumatraPDF")]
 		public event EventHandler<ScrollStateEventArgs> ScrollStateChanged;
 
 #pragma warning disable CS0108 // Member hides inherited member; missing new keyword
+		/// <summary>
+		/// Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed).
+		/// </summary>
 		[Description("Key was pressed on SumatraPDF control (Event arg 'KeyChar' cannot be changed)"), Category("SumatraPDF")]
 		public event EventHandler<KeyPressEventArgs> KeyPress;
 
+		/// <summary>
+		/// Key was pressed down on SumatraPDF control.
+		/// </summary>
 		[Description("Key was pressed down on SumatraPDF control"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyDown;
 
+		/// <summary>
+		/// Key was released up on SumatraPDF control.
+		/// </summary>
 		[Description("Key was released up on SumatraPDF control"), Category("SumatraPDF")]
 		public event KeyEventHandler KeyUp;
 #pragma warning restore CS0108 // Member hides inherited member; missing new keyword

@@ -82,7 +82,10 @@
     <Content Include="TODO.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="docfx.json" />
+    <None Include="index.md" />
     <None Include="SumatraPDFControl.nuspec" />
+    <None Include="toc.yml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="docfx.console">

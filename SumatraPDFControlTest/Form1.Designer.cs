@@ -77,6 +77,7 @@
             this.toolStripToogleToc = new System.Windows.Forms.ToolStripMenuItem();
             this.cbShowScrollState = new System.Windows.Forms.CheckBox();
             this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
+            this.cbHandleContextMenu = new System.Windows.Forms.CheckBox();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -533,7 +534,7 @@
             this.SumatraPDFControl.ZoomVirtual = SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None;
             this.SumatraPDFControl.SumatraMessage += new System.EventHandler<SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs>(this.SumatraPDFControl_SumatraMessage);
             this.SumatraPDFControl.PageChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.PageChangedEventArgs>(this.SumatraPDFControl_PageChangedMessage);
-            this.SumatraPDFControl.ContextMenuOpen += new System.EventHandler<SumatraPDF.SumatraPDFControl.ContextMenuOpenEventArgs>(this.SumatraPDFControl_ContextMenuMessage);
+            this.SumatraPDFControl.ContextMenuOpening += new System.EventHandler<SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs>(this.SumatraPDFControl_ContextMenuMessage);
             this.SumatraPDFControl.ZoomChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs>(this.SumatraPDFControl_ZoomChangedMessage);
             this.SumatraPDFControl.LinkClick += new System.EventHandler<SumatraPDF.SumatraPDFControl.LinkClickedEventArgs>(this.SumatraPDFControl_LinkClickedMessage);
             this.SumatraPDFControl.DisplayModeChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs>(this.SumatraPDFControl_DisplayModeChangedMessage);
@@ -546,11 +547,22 @@
             this.SumatraPDFControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseDown);
             this.SumatraPDFControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseUp);
             // 
+            // cbHandleContextMenu
+            // 
+            this.cbHandleContextMenu.AutoSize = true;
+            this.cbHandleContextMenu.Location = new System.Drawing.Point(246, 6);
+            this.cbHandleContextMenu.Name = "cbHandleContextMenu";
+            this.cbHandleContextMenu.Size = new System.Drawing.Size(129, 17);
+            this.cbHandleContextMenu.TabIndex = 4;
+            this.cbHandleContextMenu.Text = "Handle Context Menu";
+            this.cbHandleContextMenu.UseVisualStyleBackColor = true;
+            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 741);
+            this.Controls.Add(this.cbHandleContextMenu);
             this.Controls.Add(this.cbShowScrollState);
             this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
@@ -616,6 +628,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripToogleToc;
         private System.Windows.Forms.CheckBox cbShowScrollState;
         private System.Windows.Forms.ToolStripButton toolOpenPrintDialog;
+        private System.Windows.Forms.CheckBox cbHandleContextMenu;
     }
 }
 

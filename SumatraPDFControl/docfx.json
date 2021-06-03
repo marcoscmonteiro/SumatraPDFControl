@@ -35,7 +35,9 @@
     "resource": [
       {
         "files": [
-          "images/**"
+          "Resources/SumatraPDFControl.png",
+          "images/**",
+          "SumatraPDF.ico"
         ]
       }
     ],
@@ -61,6 +63,12 @@
     "noLangKeyword": false,
     "keepFileLink": false,
     "cleanupCacheHistory": false,
-    "disableGitFeatures": false
+    "disableGitFeatures": false,
+
+    "globalMetadata": {
+      "_appFaviconPath": "SumatraPDF.ico",
+      "_appLogoPath": "Resources/SumatraPDFControl.png"
+    }
+    
   }
 }
