@@ -10,7 +10,7 @@
           "src": "."
         }
       ],
-      "dest": "api"//,
+      "dest": "api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }
@@ -52,7 +52,7 @@
         ]
       }
     ],
-    "dest": "_site",
+    "dest": "../docs",
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
