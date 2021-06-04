@@ -2,4 +2,4 @@ theme: jekyll-theme-cayman
 show_downloads: true
 github:
   nuget_url: https://www.nuget.org/packages/SumatraPDFControl/
-  doc_url: https://marcoscmonteiro.github.io/SumatraPDFControl/docs/api/index.html
+  doc_url: https://marcoscmonteiro.github.io/SumatraPDFControl/docs/api/SumatraPDF.html
