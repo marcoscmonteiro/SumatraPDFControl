@@ -11,8 +11,8 @@
         }
       ],
       "dest": "api"//,
-      //"disableGitFeatures": false,
-      //"disableDefaultFilter": false
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
     }
   ],
   "build": {

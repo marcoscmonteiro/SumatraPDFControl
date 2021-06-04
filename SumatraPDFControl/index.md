@@ -1,4 +1,15 @@
-# This is the **HOMEPAGE**.
-Refer to [Markdown](http://daringfireball.net/projects/markdown/) for how to write markdown files.
-## Quick Start Notes:
-1. Add images to the *images* folder if the file is referencing an image.
+# SumatraPDFControl Documentation.
+
+### SumatraPDFControl is a Windows Forms Control based on [SumatraPDF](https://www.sumatrapdfreader.org/). 
+
+It allows you to construct Windows Forms application capable to view and read Portable Document Files (PDF)
+
+* Download compiled version from [nuget.org](https://www.nuget.org/packages/SumatraPDFControl/)
+
+* Requires [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) 4.5 or greater
+
+* This control allows you to open and read PDF files with all features present in great [SumatraPDF](https://www.sumatrapdfreader.org/) made by [Krzysztof Kowalczyk](https://blog.kowalczyk.info/). 
+
+* It requires a specific compiled [SumatraPDF forked code](https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF working in an enhanced plugin mode. Compiled versions of it (32 and 64 bits) are distributed inside the [nuget.org package](https://www.nuget.org/packages/SumatraPDFControl/)
+
+* Go to [Api Documentation](api/index.html) to view methods, properties and other documentation.
