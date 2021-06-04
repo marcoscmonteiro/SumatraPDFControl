@@ -1,4 +1,5 @@
 theme: jekyll-theme-cayman
+title: SumatraPDFControl
 show_downloads: true
 github:
   nuget_url: https://www.nuget.org/packages/SumatraPDFControl/
