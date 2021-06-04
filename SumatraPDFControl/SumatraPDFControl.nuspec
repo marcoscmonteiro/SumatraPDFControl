@@ -2,18 +2,20 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.3-alpha</version>
+    <version>1.0.4-alpha</version>
     <title>SumatraPDF Control for Windows Forms</title>
     <authors>Marcos C. Monteiro</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">GPL-3.0-only</license>
-    <projectUrl>https://github.com/marcoscmonteiro/SumatraPDFControl</projectUrl>    
+    <projectUrl>https://marcoscmonteiro.github.io/SumatraPDFControl</projectUrl>    
     <description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</description>
     <releaseNotes>First version</releaseNotes>
     <copyright>Copyright © 2021</copyright>
     <tags>SumatraPDF PDF Windows Forms</tags>
+    <repository type="Git" url="https://github.com/marcoscmonteiro/SumatraPDFControl" branch="master"/>
     <iconUrl>https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/SumatraPDFControl/Resources/SumatraPDFControl.png</iconUrl>
     <icon>images\SumatraPDFControl.png</icon>
+    <readme>docs\readme.md</readme>
     <contentFiles>
       <files include="any\any\**\*.*" buildAction="Content" copyToOutput="true" flatten="false"/>      
     </contentFiles>
@@ -22,6 +24,7 @@
     <file src="Resources\SumatraPDFControl.png" target="images\" />
     <file src="..\nuget\SumatraPDF.x86\SumatraPDF.exe" target="contentFiles\any\any\x86\" />
     <file src="..\nuget\SumatraPDF.x64\SumatraPDF.exe" target="contentFiles\any\any\x64\" />
+    <file src="..\readme.md" target="docs\readme.md" />
   </files>
   <!-- readme.md: https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/README.md -->
 </package>

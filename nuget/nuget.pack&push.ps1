@@ -114,7 +114,8 @@ function NugetPack {
 
   param(
     [Parameter(Mandatory=$True)]
-    [Int[]]$Itens
+    [Int[]]$Itens,
+    [String]$AutoGenPackageConfig
   )
 
   # Cleaning the packaging and log directories to avoid confusion with old packaging
@@ -134,8 +135,8 @@ function NugetPack {
     $ProjectNameWithExtension = $Components[$item][2]
     $PackageConfigFile = $ProjectDir + "\" + "packages.config"    
     
-    # If the packages.config file does not exist, it calls the generation routine
-    if (-not (Test-Path $PackageConfigFile)) {
+    # If the packages.config file does not exist, it calls the generation routine    
+    if (($AutoGenPackageConfig.ToLower() -eq "y") -and -not (Test-Path $PackageConfigFile)) {
         GeneratePackageConfig -ProjectDir $ProjectDir -ProjectNameWithExtension $ProjectNameWithExtension -PackageConfigFile $PackageConfigFile
 
         # If the packages.config file has not been generated, it stops the entire script 
@@ -145,7 +146,7 @@ function NugetPack {
         }
         $ExcludePackageConfig = $True
     }  
-
+ 
     Write-Output ""
     Write-Output "Packaging $ProjectName..."
     nuget pack "$ProjectDir" -IncludeReferencedProjects -OutputDirectory .\nupkg -Build -Prop Configuration=Release -SolutionDirectory "$SolutionDir" > "log\$ProjectName.log"
@@ -201,7 +202,8 @@ function NugetPackAndPush() {
     [String]$SolutionPath, # Complete path solution (.sln file)
     [HashTable]$Repositories, # Hash table (see example in comments above)
     [String]$ProjectList, # Numeric list (space separated) with projects to be packed and published or "*" to all projetcs
-    [String]$AutoPublish # String char (y/n) if script will prompt to publish projects
+    [String]$AutoPublish, # String char (y/n) if script will prompt to publish projects
+    [String]$AutoGenPackageConfig # String char (y/n) if script will generate package.config for each project if is's missing
   )
 
   Clear-Host
@@ -292,7 +294,7 @@ function NugetPackAndPush() {
   Write-Output ""
 
   # Generate (pack) selected projects
-  NugetPack($Itens)
+  NugetPack -Itens $Itens -AutoGenPackageConfig $AutoGenPackageConfig
 
   # Sending packages generated above to Nuget repositories
   Write-Output ""

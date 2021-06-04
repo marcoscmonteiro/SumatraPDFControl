@@ -9,6 +9,9 @@ Write-Output "SumatraPDFControl Nuget Pack and Push script running..."
 
 $s = Read-Host -prompt "Do you want to recompile SumatraPDF.exe (x86/x64) (y/n)?"
 
+# SumatraPDF base dir (git cloned from https://github.com/marcoscmonteiro/sumatrapdf)
+$SumatraPDFBaseDir =  "..\..\sumatrapdf"
+
 if ($s.ToLower() -eq "y") {
     # Save current dir
     $CurrentDir = Get-Location
@@ -26,19 +29,17 @@ if ($s.ToLower() -eq "y") {
     # Restore current dir
     Set-Location $CurrentDir
 
-    # SumatraPDF base dir (git cloned from https://github.com/marcoscmonteiro/sumatrapdf)
-    $SumatraPDFBaseDir =  "..\..\sumatrapdf"
-
     # Compile SumatraPDF (x64 and Win32 plataform)
     msbuild "$SumatraPDFBaseDir\vs2019\SumatraPDF.vcxproj" /p:Configuration=Release /p:Platform=x64
     msbuild "$SumatraPDFBaseDir\vs2019\SumatraPDF.vcxproj" /p:Configuration=Release /p:Platform=Win32
 
-    # Copy x86/x64 executables to be packed bu nuget
-    if (-not (Test-Path .\SumatraPDF.x86)) { mkdir .\SumatraPDF.x86 > $null }
-    if (-not (Test-Path .\SumatraPDF.x64)) { mkdir .\SumatraPDF.x64 > $null }
-    Copy-Item "$SumatraPDFBaseDir\out\Rel32\SumatraPDF.exe" .\SumatraPDF.x86
-    Copy-Item "$SumatraPDFBaseDir\out\Rel64\SumatraPDF.exe" .\SumatraPDF.x64
 }
+
+# Copy x86/x64 executables to be packed bu nuget
+if (-not (Test-Path .\SumatraPDF.x86)) { mkdir .\SumatraPDF.x86 > $null }
+if (-not (Test-Path .\SumatraPDF.x64)) { mkdir .\SumatraPDF.x64 > $null }
+Copy-Item "$SumatraPDFBaseDir\out\Rel32\SumatraPDF.exe" .\SumatraPDF.x86
+Copy-Item "$SumatraPDFBaseDir\out\Rel64\SumatraPDF.exe" .\SumatraPDF.x64
 
 # Includes functions required to package and publish components
 # Read comments at the beginning of the file below witch contains important information
@@ -56,7 +57,7 @@ $Repositories = @{
 }
 
 # Calls function with component packaging and publishing interface
-NugetPackAndPush -SolutionPath $SolutionPath -Repositories $Repositories -ProjectList "*" -AutoPublish ""
+NugetPackAndPush -SolutionPath $SolutionPath -Repositories $Repositories -ProjectList "*" -AutoPublish "" -AutoGenPackageConfig "n"
 
 # To be able to read the information if it was run directly by Windows Explorer
 #pause
