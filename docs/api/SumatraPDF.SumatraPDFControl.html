@@ -1,0 +1,843 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SumatraPDFControl
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SumatraPDFControl
+   ">
+    <meta name="generator" content="docfx 2.57.2.0">
+    
+    <link rel="shortcut icon" href="../SumatraPDF.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../Resources/SumatraPDFControl.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="SumatraPDF.SumatraPDFControl">
+  
+  
+  <h1 id="SumatraPDF_SumatraPDFControl" data-uid="SumatraPDF.SumatraPDFControl" class="text-break">Class SumatraPDFControl
+  </h1>
+  <div class="markdown level0 summary"><p>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">System.MarshalByRefObject</span></div>
+    <div class="level2"><span class="xref">System.ComponentModel.Component</span></div>
+    <div class="level3"><span class="xref">System.Windows.Forms.Control</span></div>
+    <div class="level4"><span class="xref">SumatraPDFControl</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="SumatraPDF.html">SumatraPDF</a></h6>
+  <h6><strong>Assembly</strong>: SumatraPDFControl.dll</h6>
+  <h5 id="SumatraPDF_SumatraPDFControl_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[ToolboxBitmap(typeof(SumatraPDFControl), &quot;Resources.SumatraPDFControlMini.png&quot;)]
+[Guid(&quot;E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C&quot;)]
+public class SumatraPDFControl : Control, IDropTarget, ISynchronizeInvoke, IWin32Window, IArrangedElement, IBindableComponent, IComponent, IDisposable</code></pre>
+  </div>
+  <h5 id="SumatraPDF_SumatraPDFControl_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>This control allows you to open and read PDF files with most features present in great SumatraPDF reader (<a href="https://www.sumatrapdfreader.org/">https://www.sumatrapdfreader.org/</a>).
+It requires an specific compiled Sumatra code version (<a href="https://github.com/marcoscmonteiro/sumatrapdf">https://github.com/marcoscmonteiro/sumatrapdf</a>) which enables SumatraPDF
+working in an enhanced plugin mode.
+It's forked from original SumatraPDF code (<a href="https://github.com/sumatrapdfreader/sumatrapdf">https://github.com/sumatrapdfreader/sumatrapdf</a>)</p>
+</div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl__ctor.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L902">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl__ctor_" data-uid="SumatraPDF.SumatraPDFControl.#ctor*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl__ctor" data-uid="SumatraPDF.SumatraPDFControl.#ctor">SumatraPDFControl()</h4>
+  <div class="markdown level1 summary"><p>Default constructor</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SumatraPDFControl()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_ContextMenuStrip.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.ContextMenuStrip%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L692">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_ContextMenuStrip_" data-uid="SumatraPDF.SumatraPDFControl.ContextMenuStrip*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_ContextMenuStrip" data-uid="SumatraPDF.SumatraPDFControl.ContextMenuStrip">ContextMenuStrip</h4>
+  <div class="markdown level1 summary"><p>Gets or sets the ContextMenuStrip associated with this control.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ContextMenuStrip ContextMenuStrip { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Forms.ContextMenuStrip</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SumatraPDF_SumatraPDFControl_ContextMenuStrip_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The ContextMenuStrip for this control, or null if there is no ContextMenuStrip. The default is null.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_SumatraPDFExe.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.SumatraPDFExe%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L706">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_SumatraPDFExe_" data-uid="SumatraPDF.SumatraPDFControl.SumatraPDFExe*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_SumatraPDFExe" data-uid="SumatraPDF.SumatraPDFControl.SumatraPDFExe">SumatraPDFExe</h4>
+  <div class="markdown level1 summary"><p>SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SumatraPDFExe { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_SumatraPDFPath.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.SumatraPDFPath%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L698">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_SumatraPDFPath_" data-uid="SumatraPDF.SumatraPDFControl.SumatraPDFPath*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_SumatraPDFPath" data-uid="SumatraPDF.SumatraPDFControl.SumatraPDFPath">SumatraPDFPath</h4>
+  <div class="markdown level1 summary"><p>Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SumatraPDFPath { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_CopySelection.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.CopySelection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L947">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_CopySelection_" data-uid="SumatraPDF.SumatraPDFControl.CopySelection*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_CopySelection" data-uid="SumatraPDF.SumatraPDFControl.CopySelection">CopySelection()</h4>
+  <div class="markdown level1 summary"><p>Copy to clipboard current window text selection</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopySelection()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.Designer.cs/#L16">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_Dispose_" data-uid="SumatraPDF.SumatraPDFControl.Dispose*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_Dispose_System_Boolean_" data-uid="SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Cleaning resources being used</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">disposing</span></td>
+        <td><p>true if necessary to dispose managed resources.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Windows.Forms.Control.Dispose(System.Boolean)</span></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_LoadFile_System_String_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.LoadFile(System.String%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L924">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_LoadFile_" data-uid="SumatraPDF.SumatraPDFControl.LoadFile*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_LoadFile_System_String_System_Int32_System_Boolean_" data-uid="SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)">LoadFile(String, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Load sumatra supported file. Current file will be closed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoadFile(string PDFFile, int InitialPage = 1, bool NewSumatraInstance = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">PDFFile</span></td>
+        <td><p>File name with complete path</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">InitialPage</span></td>
+        <td><p>Initial page to show</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">NewSumatraInstance</span></td>
+        <td><p>Open a new SumatraPDF instance (other executable process)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SumatraPDF_SumatraPDFControl_LoadFile_System_String_System_Int32_System_Boolean__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>In case of multiple instances of SumatraPDFControl <code data-dev-comment-type="paramref" class="paramref">NewSumatraInstance</code> indicates if an pre-existing instance
+will be used or not. If true new SumatraPDF executable will be started. The default is false.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_OpenPrintDialog.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.OpenPrintDialog%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L982">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_OpenPrintDialog_" data-uid="SumatraPDF.SumatraPDFControl.OpenPrintDialog*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_OpenPrintDialog" data-uid="SumatraPDF.SumatraPDFControl.OpenPrintDialog">OpenPrintDialog()</h4>
+  <div class="markdown level1 summary"><p>Show dialog to print current document (in background)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OpenPrintDialog()</code></pre>
+  </div>
+  <h5 id="SumatraPDF_SumatraPDFControl_OpenPrintDialog_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>After proceeding with print it occurs in background and SumatraPDF shows an interface to cancel the whole process.
+The following only applies for printing as image:
+Creates a new dummy page for each page with a large zoom factor,
+and then uses StretchDIBits to copy this to the printer's dc.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_RotateBy_SumatraPDF_SumatraPDFControl_RotationEnum_.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L991">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_RotateBy_" data-uid="SumatraPDF.SumatraPDFControl.RotateBy*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_RotateBy_SumatraPDF_SumatraPDFControl_RotationEnum_" data-uid="SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)">RotateBy(SumatraPDFControl.RotationEnum)</h4>
+  <div class="markdown level1 summary"><p>Rotate current document</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RotateBy(SumatraPDFControl.RotationEnum Rotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="SumatraPDF.SumatraPDFControl.RotationEnum.html">SumatraPDFControl.RotationEnum</a></td>
+        <td><span class="parametername">Rotation</span></td>
+        <td><p>Degrees to Rotation</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_TextSearch_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.TextSearch(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L958">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_TextSearch_" data-uid="SumatraPDF.SumatraPDFControl.TextSearch*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_TextSearch_System_String_System_Boolean_" data-uid="SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)">TextSearch(String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Do a text search on document from beginning</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TextSearch(string searchText, bool matchCase)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">searchText</span></td>
+        <td><p>Text to search</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">matchCase</span></td>
+        <td><p>Match case</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SumatraPDF_SumatraPDFControl_TextSearch_System_String_System_Boolean__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_TextSearchNext_System_Boolean_">TextSearchNext(Boolean)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_TextSearchNext_System_Boolean_.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L968">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_TextSearchNext_" data-uid="SumatraPDF.SumatraPDFControl.TextSearchNext*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_TextSearchNext_System_Boolean_" data-uid="SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)">TextSearchNext(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Do a text search on document after a first search by <a class="xref" href="SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_TextSearch_System_String_System_Boolean_">TextSearch(String, Boolean)</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TextSearchNext(bool forward = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">forward</span></td>
+        <td><p>True (default) if serching forward, false if backwards</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="SumatraPDF_SumatraPDFControl_TextSearchNext_System_Boolean__seealso">See Also</h5>
+  <div class="seealso">
+      <div><a class="xref" href="SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_TextSearch_System_String_System_Boolean_">TextSearch(String, Boolean)</a></div>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_WndProc_System_Windows_Forms_Message__.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L286">View Source</a>
+  </span>
+  <a id="SumatraPDF_SumatraPDFControl_WndProc_" data-uid="SumatraPDF.SumatraPDFControl.WndProc*"></a>
+  <h4 id="SumatraPDF_SumatraPDFControl_WndProc_System_Windows_Forms_Message__" data-uid="SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)">WndProc(ref Message)</h4>
+  <div class="markdown level1 summary"><p>Processes Windows Messages.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+protected override void WndProc(ref Message m)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Forms.Message</span></td>
+        <td><span class="parametername">m</span></td>
+        <td><p>The Windows <span class="xref">System.Windows.Forms.Message</span> to process.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message)</span></div>
+  <h5 id="SumatraPDF_SumatraPDFControl_WndProc_System_Windows_Forms_Message___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method has many customizations in order to process SumatraPDF messages. So, if there is need to override, remember to call base.WndProc.</p>
+</div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_ContextMenuOpening.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.ContextMenuOpening%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L636">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_ContextMenuOpening" data-uid="SumatraPDF.SumatraPDFControl.ContextMenuOpening">ContextMenuOpening</h4>
+  <div class="markdown level1 summary"><p>Occurs before trying to open ContextMenu by right mouse clicking button.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.ContextMenuOpeningEventArgs&gt; ContextMenuOpening</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.html">SumatraPDFControl.ContextMenuOpeningEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_DisplayModeChanged.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.DisplayModeChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L654">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_DisplayModeChanged" data-uid="SumatraPDF.SumatraPDFControl.DisplayModeChanged">DisplayModeChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs after changing display mode.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.DisplayModeChangedEventArgs&gt; DisplayModeChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.html">SumatraPDFControl.DisplayModeChangedEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_KeyDown.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.KeyDown%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L673">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_KeyDown" data-uid="SumatraPDF.SumatraPDFControl.KeyDown">KeyDown</h4>
+  <div class="markdown level1 summary"><p>Occurs when a key is pressed while the control has focus.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event KeyEventHandler KeyDown</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Forms.KeyEventHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_KeyPress.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.KeyPress%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L667">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_KeyPress" data-uid="SumatraPDF.SumatraPDFControl.KeyPress">KeyPress</h4>
+  <div class="markdown level1 summary"><p>Occurs when a character, space or backspace key is pressed while the control has focus.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;KeyPressEventArgs&gt; KeyPress</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<span class="xref">System.Windows.Forms.KeyPressEventArgs</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_KeyUp.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.KeyUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L679">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_KeyUp" data-uid="SumatraPDF.SumatraPDFControl.KeyUp">KeyUp</h4>
+  <div class="markdown level1 summary"><p>Occurs when a key is released while the control has focus.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event KeyEventHandler KeyUp</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Windows.Forms.KeyEventHandler</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_LinkClick.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.LinkClick%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L648">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_LinkClick" data-uid="SumatraPDF.SumatraPDFControl.LinkClick">LinkClick</h4>
+  <div class="markdown level1 summary"><p>Occurs after clicking a document link.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.LinkClickedEventArgs&gt; LinkClick</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.html">SumatraPDFControl.LinkClickedEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_PageChanged.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.PageChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L630">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_PageChanged" data-uid="SumatraPDF.SumatraPDFControl.PageChanged">PageChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs after changing current visible page</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.PageChangedEventArgs&gt; PageChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.PageChangedEventArgs.html">SumatraPDFControl.PageChangedEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_ScrollStateChanged.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.ScrollStateChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L660">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_ScrollStateChanged" data-uid="SumatraPDF.SumatraPDFControl.ScrollStateChanged">ScrollStateChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs after changing document scroll position (vertical and/or horizontal).</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.ScrollStateEventArgs&gt; ScrollStateChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.html">SumatraPDFControl.ScrollStateEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_SumatraMessage.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.SumatraMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L624">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_SumatraMessage" data-uid="SumatraPDF.SumatraPDFControl.SumatraMessage">SumatraMessage</h4>
+  <div class="markdown level1 summary"><p>A generic SumatraPDF message not managed by other events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.SumatraMessageEventArgs&gt; SumatraMessage</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.html">SumatraPDFControl.SumatraMessageEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl_ZoomChanged.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl.ZoomChanged%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.cs/#L642">View Source</a>
+  </span>
+  <h4 id="SumatraPDF_SumatraPDFControl_ZoomChanged" data-uid="SumatraPDF.SumatraPDFControl.ZoomChanged">ZoomChanged</h4>
+  <div class="markdown level1 summary"><p>Occurs after changing zoom factor.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;SumatraPDFControl.ZoomChangedEventArgs&gt; ZoomChanged</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.html">SumatraPDFControl.ZoomChangedEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/new/master/apiSpec/new?filename=SumatraPDF_SumatraPDFControl.md&amp;value=---%0Auid%3A%20SumatraPDF.SumatraPDFControl%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/SumatraPDFControl/SumatraPDFControl.Designer.cs/#L5" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

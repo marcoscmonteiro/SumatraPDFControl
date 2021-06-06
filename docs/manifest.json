@@ -1,0 +1,319 @@
+{
+  "homepages": [],
+  "source_base_path": "C:/Users/marco/source/repos/SumatraPDFControl/SumatraPDFControl",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "source_relative_path": "Resources/SumatraPDFControl.png",
+      "output": {
+        "resource": {
+          "relative_path": "Resources/SumatraPDFControl.png"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "SumatraPDF.ico",
+      "output": {
+        "resource": {
+          "relative_path": "SumatraPDF.ico"
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.html",
+          "hash": "/0nURwtOWJ2wrfS2FIq0gw8/kbY3nksbCtVW3Otz1eM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.html",
+          "hash": "t8/LHhVL/oofGOD5d8s92vT4lu08fm9KkAqmP3LT9Z0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeEnum.html",
+          "hash": "20USLKwcktpwybxviSFYym54/dMDIjC4akB3qqn9ahE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.html",
+          "hash": "8a+TNxt5g8UYCtJpECSmCaP2K5xu/v5wLBIaVe9foPE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.PageChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.PageChangedEventArgs.html",
+          "hash": "YO2OEcjzxjn/SkCBnfABliS9FfK9JBRNhbh6owcovO0="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.RotationEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.RotationEnum.html",
+          "hash": "UgzRW/REWTsfqSsQ9OGVq4C3hzdGmaa9no/O6GZGrzs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.html",
+          "hash": "qyWvRWe4IU3P8HTocBq8JL7C/qzK2jvSrY2IpMkUjRU="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateStruct.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateStruct.html",
+          "hash": "dM3d8mifidLnHoOlyZngPck/1GH+/oRLDzMi2hto4V4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.html",
+          "hash": "3nStrNWc+eGTkitAxxgdeY6Xa4oGjhax70tYZxI7Jdo="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.html",
+          "hash": "YUVPcRBEEohyFbfiQN7xqMz72ijkHddW+MampVxExKw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.html",
+          "hash": "3SgycMmySs8JF+q1AQjl/De1y2nPqNmxCcCR9y5FAx8="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.SumatraPDFControl.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.SumatraPDFControl.html",
+          "hash": "u80WJZjmpATHkoIRPylHxmSAk3imK0fmGOt5SVzkOpY="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SumatraPDF.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SumatraPDF.html",
+          "hash": "fnkevwKyoxNfpvoomR7SjLfNChJAtjXJ/jdcBbS6Eyg="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "api/index.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/index.html",
+          "hash": "jsFYa6THfIiNoSymPsxviJdFXL6VmRQyzt0YIlkRTiM="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html",
+          "hash": "Z3lyHx1RNihyg0w+vr8YmI6VeCTY3EV+YPKyxGNzxa4="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "articles/intro.md",
+      "output": {
+        ".html": {
+          "relative_path": "articles/intro.html",
+          "hash": "45fqmB/ItxskIBJSyriAXxdOy/lHOF+STH4qPYReVCE="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html",
+          "hash": "BlPxk5mtl2kgfcZUgkEguqiSAR/EUyUTT4EdebwkQvs="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "log_codes": [
+        "InvalidFileLink"
+      ],
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html",
+          "hash": "a1ni+IMxefFpkpAeAlPIvkIahdgNb+KqdrRxjwvUspw="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html",
+          "hash": "WSuRrYiGwKKMbtdG9z8W9fXmLoCyTnGg9AxbPKLXm2Y="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    }
+  ],
+  "incremental_info": [
+    {
+      "status": {
+        "can_incremental": false,
+        "details": "Cannot build incrementally because config changed.",
+        "incrementalPhase": "build",
+        "total_file_count": 0,
+        "skipped_file_count": 0,
+        "full_build_reason_code": "ConfigChanged"
+      },
+      "processors": {
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 3,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 13,
+          "skipped_file_count": 0
+        },
+        "ResourceDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        }
+      }
+    },
+    {
+      "status": {
+        "can_incremental": true,
+        "details": "Can support incremental post processing.",
+        "incrementalPhase": "postProcessing",
+        "total_file_count": 0,
+        "skipped_file_count": 0
+      },
+      "processors": {}
+    }
+  ],
+  "version_info": {},
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

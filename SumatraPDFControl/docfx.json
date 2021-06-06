@@ -6,11 +6,10 @@
           "files": [
             "**.csproj"
           ],
-          //"src": "C:\\Users\\marco\\source\\repos\\SumatraPDFControl\\SumatraPDFControl"
           "src": "."
         }
       ],
-	   "filter": "filterConfig.yml",
+	  "filter": "filterConfig.yml",
       "dest": "api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
@@ -49,7 +48,8 @@
         ],
         "exclude": [
           "obj/**",
-          "_site/**"
+          "_site/**",
+          "docs/**"		  
         ]
       }
     ],
