@@ -2,7 +2,9 @@
 
 ### Windows Forms Control based on [SumatraPDF](https://www.sumatrapdfreader.org/) to view and read Portable Document Files (PDF)
 
-* Download compiled version from [nuget.org](https://www.nuget.org/packages/SumatraPDFControl/)
+* Download compiled version from [NuGet.org](https://www.nuget.org/packages/SumatraPDFControl/)
+
+* Go to [Api Documentation](https://marcoscmonteiro.github.io/SumatraPDFControl/) to view methods, properties and other documentation.
 
 * Requires [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) 4.5 or greater
 
