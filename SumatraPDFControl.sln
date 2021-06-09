@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumatraPDFControl", "Sumatr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumatraPDFControlTest", "SumatraPDFControlTest\SumatraPDFControlTest.csproj", "{B35D6D29-2068-4BF9-93F9-F18973DB86A9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SumatraPDFControl.net5", "SumatraPDFControl.net5\SumatraPDFControl.net5.csproj", "{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B35D6D29-2068-4BF9-93F9-F18973DB86A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B35D6D29-2068-4BF9-93F9-F18973DB86A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B35D6D29-2068-4BF9-93F9-F18973DB86A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

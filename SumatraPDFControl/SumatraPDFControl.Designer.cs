@@ -40,13 +40,12 @@ namespace SumatraPDF
             // SumatraPDFControl
             // 
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.Cursor = System.Windows.Forms.Cursors.Default;
-            this.Name = "SumatraPDFControl";
             this.Size = new System.Drawing.Size(460, 334);
             this.Resize += new System.EventHandler(this.SumatraPDFControl_Resize);
             this.ResumeLayout(false);
+
         }
 
         #endregion
