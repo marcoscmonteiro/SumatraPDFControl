@@ -11,6 +11,11 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\marco\source\repos\SumatraPDFControl\SumatraPDFControl.net5\SumatraPDFControl.xml</DocumentationFile>
   </PropertyGroup>
  
   <ItemGroup>

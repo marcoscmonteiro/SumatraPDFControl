@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.4-alpha</version>
+    <version>1.0.5-alpha</version>
     <title>SumatraPDF Control for Windows Forms</title>
     <authors>Marcos C. Monteiro</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <license type="expression">GPL-3.0-only</license>
     <projectUrl>https://marcoscmonteiro.github.io/SumatraPDFControl</projectUrl>    
     <description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</description>
-    <releaseNotes>First version</releaseNotes>
+    <releaseNotes>Add .NET Core 5 support</releaseNotes>
     <copyright>Copyright © 2021</copyright>
     <tags>SumatraPDF PDF Windows Forms</tags>
     <repository type="Git" url="https://github.com/marcoscmonteiro/SumatraPDFControl" branch="master"/>
@@ -25,6 +25,9 @@
     <file src="..\nuget\SumatraPDF.x86\SumatraPDF.exe" target="contentFiles\any\any\x86\" />
     <file src="..\nuget\SumatraPDF.x64\SumatraPDF.exe" target="contentFiles\any\any\x64\" />
     <file src="..\readme.md" target="docs\readme.md" />
+    <!-- .NET 5 (Core) -->
+    <file src="..\SumatraPDFControl.net5\bin\Release\net5.0-windows\SumatraPDFControl.dll" target="lib\net5.0-windows7.0" />
+    <file src="..\SumatraPDFControl.net5\bin\Release\net5.0-windows\SumatraPDFControl.xml" target="lib\net5.0-windows7.0" />
   </files>
   <!-- readme.md: https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/README.md -->
 </package>

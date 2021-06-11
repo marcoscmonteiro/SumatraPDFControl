@@ -56,8 +56,15 @@ $Repositories = @{
     "Nuget.Org" = @( "https://api.nuget.org/v3/index.json", $NugetOrgApiKey )
 }
 
+# Build .net 5 SumatraPDFControl component
+msbuild ..\SumatraPDFCOntrol.net5 /t:ReBuild /p:Configuration=Release
+
+Copy-Item ~/Onedrive/Documentos/nuget/NUGET.ORG.APIKEY.TXT . 
+
 # Calls function with component packaging and publishing interface
 NugetPackAndPush -SolutionPath $SolutionPath -Repositories $Repositories -ProjectList "*" -AutoPublish "" -AutoGenPackageConfig "n"
+
+Remove-Item ./NUGET.ORG.APIKEY.TXT
 
 # To be able to read the information if it was run directly by Windows Explorer
 #pause
