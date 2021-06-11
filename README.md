@@ -14,6 +14,6 @@
 
 * It requires a specific compiled [SumatraPDF forked code](https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF working in an enhanced plugin mode. Compiled versions of it (32 and 64 bits) are distributed inside the [nuget.org package](https://www.nuget.org/packages/SumatraPDFControl/)
 
-* Bugs, issues or improvemnts? Create them in [GitHub Project Issues](https://github.com/marcoscmonteiro/SumatraPDFControl/issues)
+* Bugs, issues or improvemnts? Report them in [GitHub Project Issues](https://github.com/marcoscmonteiro/SumatraPDFControl/issues)
 
 
