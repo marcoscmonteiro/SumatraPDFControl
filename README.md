@@ -6,7 +6,7 @@
 
 * Go to [Api Documentation](https://marcoscmonteiro.github.io/SumatraPDFControl/) to view methods, properties and other documentation.
 
-* Requires [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) 4.5 or greater
+* Working with [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) 4.5 or greater or .NET Core 5
 
 * This control allows you to open and read PDF files with all features present in great [SumatraPDF](https://www.sumatrapdfreader.org/) made by [Krzysztof Kowalczyk](https://blog.kowalczyk.info/). 
 
