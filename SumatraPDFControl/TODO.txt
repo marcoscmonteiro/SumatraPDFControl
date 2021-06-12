@@ -16,6 +16,7 @@ Documentation
   - Commenting all public methods, properties and events, etc
   - Include reference to SumatraPDFControlTest in documentation  
   - Separate docfx generation script from SumatraPDFControl compilation?
+  - Include GPLv3 licence file and comments in source code
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):
