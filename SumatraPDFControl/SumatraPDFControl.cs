@@ -350,6 +350,9 @@ namespace SumatraPDF
 #pragma warning restore IDE0051 // Remove unused private members
 
 		// Hide but not destroy BackgroundImage. Because this image do not need to be substituted.
+		/// <summary>
+		/// SumatraPDF logo
+		/// </summary>
 		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
 		new public System.Drawing.Image BackgroundImage
 		{
@@ -501,32 +504,84 @@ namespace SumatraPDF
 			public override string ToString() => $"Page: {Page}, X: {X}, Y: {Y}";
 		}
 
+		/// <summary>
+		/// SumatraPDF available modes displaying pages
+		/// </summary>
 		public enum DisplayModeEnum
 		{
-			// automatic means: the continuous form of single page, facing or
-			// book view - depending on the document's desired PageLayout
+			/// <summary>
+			/// The continuous form of single page, facing or book view depending on the document's desired PageLayout
+			/// </summary>
 			Automatic = 0,
+			/// <summary>
+			/// Single page display not continuous
+			/// </summary>
 			SinglePage,
+			/// <summary>
+			/// Dual page display not continuous
+			/// </summary>
 			Facing,
+			/// <summary>
+			/// Dual page display not continuous
+			/// </summary>
 			BookView,
+			/// <summary>
+			/// Single page display in continuous mode
+			/// </summary>
 			Continuous,
+			/// <summary>
+			/// Dual page display in continuous mode
+			/// </summary>
 			ContinuousFacing,
-			ContinuousBookView,
+			/// <summary>
+			/// Dual page display in continuous mode
+			/// </summary>
+			ContinuousBookView
 		};
 
+		/// <summary>
+		/// Document zoom mode to automatically adjust real zoom
+		/// </summary>
 		public enum ZoomVirtualEnum
 		{
+			/// <summary>
+			/// Default display mode: 100% page size
+			/// </summary>
 			None = 0,
+			/// <summary>
+			/// Adjust zoom to fit complete page on windows control size
+			/// </summary>
 			FitPage = -1, // ZoomVirtual = -1
+			/// <summary>
+			/// Adjust zoom to fit page width on windows control size
+			/// </summary>
 			FitWidth = -2, // ZoomVirtual = -2
+			/// <summary>
+			/// Adjust zoom to fit content on windows control size
+			/// </summary>
 			FitContent = -3  // ZoomVirtual = -3
 		}
 
+		/// <summary>
+		/// Document rotation options
+		/// </summary>
 		public enum RotationEnum
 		{
+			/// <summary>
+			/// No rotation
+			/// </summary>
 			RotNone = 0,
+			/// <summary>
+			/// 90 degrees clockwise rotation
+			/// </summary>
 			Rot90 = 90,
+			/// <summary>
+			/// 180 degrees rotation
+			/// </summary>
 			Rot180 = 180,
+			/// <summary>
+			/// 270 degrees clockwise rotation
+			/// </summary>
 			Rot270 = 270
 		}
 

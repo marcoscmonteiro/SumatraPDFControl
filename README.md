@@ -4,7 +4,7 @@
 
 * Download compiled version from [NuGet.org](https://www.nuget.org/packages/SumatraPDFControl/)
 
-* Go to [Api Documentation](https://marcoscmonteiro.github.io/SumatraPDFControl/) to view methods, properties and other documentation.
+* Go to [Site/Api Documentation](https://sumatrapdfcontrol.mcmonteiro.net) to view methods, properties and other documentation.
 
 * Working with:
   * [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) version 4.5 or greater
@@ -14,6 +14,6 @@
 
 * It requires a specific compiled [SumatraPDF forked code](https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF working in an enhanced plugin mode. Compiled versions of it (32 and 64 bits) are distributed inside the [nuget.org package](https://www.nuget.org/packages/SumatraPDFControl/)
 
-* Bugs, issues or improvemnts? Create them in [GitHub Project Issues](https://github.com/marcoscmonteiro/SumatraPDFControl/issues)
+* Bugs, issues or improvements? Report them in [GitHub Project Issues](https://github.com/marcoscmonteiro/SumatraPDFControl/issues)
 
 

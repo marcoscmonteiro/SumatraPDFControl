@@ -1,0 +1,383 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SumatraPDFControl</name>
+    </assembly>
+    <members>
+        <member name="T:SumatraPDF.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.Properties.Resources.SumatraPDFControl">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.Properties.Resources.SumatraPDFControlMini">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl">
+            <summary>
+            Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)
+            </summary>
+            <remarks>
+            This control allows you to open and read PDF files with most features present in great SumatraPDF reader (https://www.sumatrapdfreader.org/).
+            It requires an specific compiled Sumatra code version (https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF
+            working in an enhanced plugin mode. 
+            It's forked from original SumatraPDF code (https://github.com/sumatrapdfreader/sumatrapdf)
+            </remarks>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)">
+            <summary>
+            Processes Windows Messages.
+            </summary>
+            <remarks>
+            This method has many customizations in order to process SumatraPDF messages. So, if there is need to override, remember to call base.WndProc.
+            </remarks>
+            <param name="m">The Windows <see cref="T:System.Windows.Forms.Message"/> to process.</param>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.BackgroundImage">
+            <summary>
+            SumatraPDF logo
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.ScrollStateStruct">
+            <summary>
+            Structure which represents Horizontal and Vertical Scroll position of current SumatraPDF displayed page.
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ScrollStateStruct.#ctor(System.Int32,System.Double,System.Double)">
+            <summary>
+            ScrollStateStruct Constructor
+            </summary>
+            <param name="page">Current page</param>
+            <param name="x">Horizontal scroll position</param>
+            <param name="y">Vertical scroll position</param>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ScrollStateStruct.X">
+            <summary>
+            Horizontal scroll position
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ScrollStateStruct.Y">
+            <summary>
+            Vertical scroll position
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ScrollStateStruct.Page">
+            <summary>
+            Current displayed page
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ScrollStateStruct.ToString">
+            <summary>
+            Converts struct to string
+            </summary>
+            <returns>Struct string representation</returns>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.DisplayModeEnum">
+            <summary>
+            SumatraPDF available modes displaying pages
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Automatic">
+            <summary>
+            The continuous form of single page, facing or book view depending on the document's desired PageLayout
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.SinglePage">
+            <summary>
+            Single page display not continuous
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Facing">
+            <summary>
+            Dual page display not continuous
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.BookView">
+            <summary>
+            Dual page display not continuous
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Continuous">
+            <summary>
+            Single page display in continuous mode
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.ContinuousFacing">
+            <summary>
+            Dual page display in continuous mode
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.ContinuousBookView">
+            <summary>
+            Dual page display in continuous mode
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum">
+            <summary>
+            Document zoom mode to automatically adjust real zoom
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None">
+            <summary>
+            Default display mode: 100% page size
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage">
+            <summary>
+            Adjust zoom to fit complete page on windows control size
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth">
+            <summary>
+            Adjust zoom to fit page width on windows control size
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent">
+            <summary>
+            Adjust zoom to fit content on windows control size
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.RotationEnum">
+            <summary>
+            Document rotation options
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.RotationEnum.RotNone">
+            <summary>
+            No rotation
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot90">
+            <summary>
+            90 degrees clockwise rotation
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot180">
+            <summary>
+            180 degrees rotation
+            </summary>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot270">
+            <summary>
+            270 degrees clockwise rotation
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs">
+            <summary>
+            Arguments passed to <see cref="E:SumatraPDF.SumatraPDFControl.ScrollStateChanged"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)">
+            <summary>
+            ScrollStateEventArgs constructor
+            </summary>
+            <param name="ScrollState">Constructor parameter</param>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState">
+            <summary>
+            SumatraPDF control scroll state 
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.SumatraMessage">
+            <summary>
+            A generic SumatraPDF message not managed by other events.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.PageChanged">
+            <summary>
+            Occurs after changing current visible page
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.ContextMenuOpening">
+            <summary>
+            Occurs before trying to open ContextMenu by right mouse clicking button.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.ZoomChanged">
+            <summary>
+            Occurs after changing zoom factor.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.LinkClick">
+            <summary>
+            Occurs after clicking a document link.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.DisplayModeChanged">
+            <summary>
+            Occurs after changing display mode.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.ScrollStateChanged">
+            <summary>
+            Occurs after changing document scroll position (vertical and/or horizontal).
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.KeyPress">
+            <summary>
+            Occurs when a character, space or backspace key is pressed while the control has focus.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.KeyDown">
+            <summary>
+            Occurs when a key is pressed while the control has focus.
+            </summary>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.KeyUp">
+            <summary>
+            Occurs when a key is released while the control has focus.
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ContextMenuStrip">
+            <summary>
+            Gets or sets the ContextMenuStrip associated with this control.
+            </summary>
+            <remarks>
+            The ContextMenuStrip for this control, or null if there is no ContextMenuStrip. The default is null.
+            </remarks>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.SumatraPDFPath">
+            <summary>
+            Path where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.SumatraPDFExe">
+            <summary>
+            SumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ScrollState">
+            <summary>
+            Get or set current PDF scroll state (X and Y units from visible PDF page)
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.Zoom">
+            <summary>
+            Get or set current numeric PDF zoom scale. See ZoomVirtual property to get or set zoom mode like fit width, fit page etc
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ZoomVirtual">
+            <summary>
+            Get or set currrent PDF virtual zoom mode (Fit width, Fit Page, Fit Content or None). See Zoom property to get or set numeric scale
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.DisplayMode">
+            <summary>
+            Get or set mode to display PDF pages (SinglePage, Facing, BookView, Continuous, ContinuousFacing, ContinuousBookView, Automatic)
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.Page">
+            <summary>
+            Get or set current PDF page viewing position
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.Rotation">
+            <summary>
+            Get current PDF rotation (see RotateBy method to change rotation state)
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.NamedDest">
+            <summary>
+            Get or set current PDF NamedDest viewing position
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ToolBarVisible">
+            <summary>
+            Get or set if SumatraPDF default toolbar is visible
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.TocVisible">
+            <summary>
+            Get or set if SumatraPDF Table of contents (Toc) sidebar is visible (if document doesn't have Toc it always will be false)
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Load sumatra supported file. Current file will be closed.
+            </summary>
+            <param name="PDFFile">File name with complete path</param>
+            <param name="InitialPage">Initial page to show</param>
+            <param name="NewSumatraInstance">Open a new SumatraPDF instance (other executable process)</param>
+            <remarks>
+            In case of multiple instances of SumatraPDFControl <paramref name="NewSumatraInstance"/> indicates if an pre-existing instance 
+            will be used or not. If true new SumatraPDF executable will be started. The default is false.
+            </remarks>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.CopySelection">
+            <summary>
+            Copy to clipboard current window text selection
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)">
+            <summary>
+            Do a text search on document from beginning
+            </summary>
+            <seealso cref="M:SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)"/>
+            <param name="searchText">Text to search</param>
+            <param name="matchCase">Match case</param>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)">
+            <summary>
+            Do a text search on document after a first search by <see cref="M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)"/>
+            </summary>
+            <seealso cref="M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)"/>
+            <param name="forward">True (default) if serching forward, false if backwards</param>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.OpenPrintDialog">
+            <summary>
+            Show dialog to print current document (in background)
+            </summary>
+            <remarks>
+            After proceeding with print it occurs in background and SumatraPDF shows an interface to cancel the whole process.
+            The following only applies for printing as image:
+            Creates a new dummy page for each page with a large zoom factor,
+            and then uses StretchDIBits to copy this to the printer's dc.
+            </remarks>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)">
+            <summary>
+            Rotate current document
+            </summary>
+            <param name="Rotation">Degrees to Rotation</param>
+        </member>
+        <member name="F:SumatraPDF.SumatraPDFControl.components">
+            <summary>
+            Variável de designer necessária.
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)">
+            <summary>
+            Cleaning resources being used
+            </summary>
+            <param name="disposing">true if necessary to dispose managed resources.</param>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.InitializeComponent">
+            <summary>
+            Método necessário para suporte ao Designer - não modifique 
+            o conteúdo deste método com o editor de código.
+            </summary>
+        </member>
+    </members>
+</doc>
