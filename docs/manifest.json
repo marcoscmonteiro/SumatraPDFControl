@@ -34,7 +34,7 @@
           "hash": "BYIp10wWGK/4gr8nq2wopuvUVwJHqugpjrqSTuwOgg4="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -55,7 +55,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeEnum.html",
-          "hash": "xAYQ//1DXzGjVkg88GKRaihzQRT4FiSNK64OErJUajA="
+          "hash": "TPwcWG141kiyN07QD3EIt4mrZufRIgo8wqw1fyXK1zE="
         }
       },
       "is_incremental": false,
@@ -70,7 +70,7 @@
           "hash": "VC6PFA2AMDufpneGy5ayY1ePdWs94/qJQEEAQZVyJ20="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -82,7 +82,7 @@
           "hash": "9RgE2X5KIced7IRjCiJrNmQGQV6w3p59IO2Iza3mAA0="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -94,7 +94,7 @@
           "hash": "/ejWWmKet+2eflD2GRG1KyQZf6sOzv+3kGki79ix4ZY="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -106,7 +106,7 @@
           "hash": "MVoJE3Tzeal3WmO41OwjRQN59neWXqOG3dB1ZI/ErsI="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -118,7 +118,7 @@
           "hash": "RTT6Qht99RW3sSInV3Hnoe5TP1PfB04aIQhqkWSXRbU="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -130,7 +130,7 @@
           "hash": "EP8nKXQVzvadH6ay8nlFy98oncw4J9bimJKG3IU2yvc="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -151,7 +151,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.html",
-          "hash": "m9sOmEiTVQhFhHI+cYMMoX7dWvre2Ut30/SgKERRW94="
+          "hash": "Q3+Nx/iW1ZVq/9taZG7/hymajCmz4UnH2iMgilZEKac="
         }
       },
       "is_incremental": false,
@@ -166,7 +166,7 @@
           "hash": "bIvvwQWkZY9cYTHupfb5Cpgx9ouTdyHAeYy6IXZCdh0="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -175,7 +175,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.html",
-          "hash": "xnPbkaK9MDsJNHevwyNjnz0yYWWDLYJOzz5z1xqBUvY="
+          "hash": "wdfk1Ng4gsbLy26rtagO3OkKeEJB6xLiDKKRJUaz0j4="
         }
       },
       "is_incremental": false,
@@ -279,7 +279,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 13,
-          "skipped_file_count": 1
+          "skipped_file_count": 11
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,

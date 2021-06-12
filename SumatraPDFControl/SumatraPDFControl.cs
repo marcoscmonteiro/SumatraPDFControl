@@ -504,24 +504,24 @@ namespace SumatraPDF
 		}
 
 		/// <summary>
-		/// SumatraPDF available modes displaying pages
+		/// Document display mode constants
 		/// </summary>
 		public enum DisplayModeEnum
 		{
 			/// <summary>
-			/// The continuous form of single page, facing or book view depending on the document's desired PageLayout
+			/// The continuous form of single page, facing or book view depending on the document's desired page layout
 			/// </summary>
 			Automatic = 0,
 			/// <summary>
-			/// Single page display not continuous
+			/// Single page display (not continuous)
 			/// </summary>
 			SinglePage,
 			/// <summary>
-			/// Dual page display not continuous
+			/// Dual page display (not continuous)
 			/// </summary>
 			Facing,
 			/// <summary>
-			/// Dual page display not continuous
+			/// Dual page display (not continuous)
 			/// </summary>
 			BookView,
 			/// <summary>
@@ -539,24 +539,24 @@ namespace SumatraPDF
 		};
 
 		/// <summary>
-		/// Document zoom virtual enum display modes (fit page, fit width, etc) represented by real zoom factor
+		/// Document zoom virtual enum display constants (fit page, fit width, etc) represented by real zoom factor
 		/// </summary>
 		public enum ZoomVirtualEnum
 		{
 			/// <summary>
-			/// Constant which expresses that no other constants represents the real zoom factor
+			/// Constant expressing that no other constants represents the real zoom factor
 			/// </summary>
 			None = 0,
 			/// <summary>
-			/// Constant that expresses a real zoom factor which allows a complete page display
+			/// Constant to express a real zoom factor representing a complete page display
 			/// </summary>
 			FitPage = -1,
 			/// <summary>
-			/// Constant that expresses a real zoom factor which allows a complete horizontal display
+			/// Constant to express a real zoom factor representing a complete horizontal page display
 			/// </summary>
 			FitWidth = -2,
 			/// <summary>
-			/// Constant that expresses a real zoom factor which allows a complete content display on control
+			/// Constant to express a real zoom factor representing a complete content page display
 			/// </summary>
 			FitContent = -3  
 		}
