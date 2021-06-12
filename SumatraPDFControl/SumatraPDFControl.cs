@@ -160,7 +160,7 @@ namespace SumatraPDF
 			{
 				if (pSumatraWindowHandle == (IntPtr)0)
 				{
-					pSumatraWindowHandle = FindWindowEx(base.Handle, default(IntPtr), null, null);
+					pSumatraWindowHandle = FindWindowEx(base.Handle, default, null, null);
 					if (pSumatraWindowHandle != (IntPtr)0)
 						pSumatraWindowHandleList.Add(pSumatraWindowHandle);
 				}
@@ -283,7 +283,6 @@ namespace SumatraPDF
 		/// This method has many customizations in order to process SumatraPDF messages. So, if there is need to override, remember to call base.WndProc.
 		/// </remarks>
 		/// <param name="m">The Windows <see cref="Message"/> to process.</param>
-		[SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
 		protected override void WndProc(ref Message m)
 		{
 			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) {
@@ -420,7 +419,7 @@ namespace SumatraPDF
 			if ((SumatraWindowHandle != (IntPtr)0) & (SumatraProcess != null))
 			{
 				CloseDocument();
-				SumatraProcess.Kill();
+				SumatraProcess?.Kill();
 				pSumatraWindowHandleList.Remove(pSumatraWindowHandle);
 				pSumatraWindowHandle = (IntPtr)0;
 			}
@@ -428,7 +427,7 @@ namespace SumatraPDF
 			string SumatraComplete;
 			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
 			{
-				string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
+				string arch = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
 				SumatraPDFPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 				SumatraPDFPath += (arch == "AMD64") ? @"\x64" : @"\x86";
 
@@ -1046,9 +1045,9 @@ namespace SumatraPDF
 			base.BackgroundImage = global::SumatraPDF.Properties.Resources.SumatraPDFControl;
 			InitializeComponent();
 			SUMATRAMESSAGETYPE = SUMATRAPLUGIN;
-			base.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyDown);
-			base.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SumatraPDFControl_KeyUp);
-			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SumatraPDFControl_KeyPress);
+			base.KeyDown += new System.Windows.Forms.KeyEventHandler(SumatraPDFControl_KeyDown);
+			base.KeyUp += new System.Windows.Forms.KeyEventHandler(SumatraPDFControl_KeyUp);
+			base.KeyPress += new System.Windows.Forms.KeyPressEventHandler(SumatraPDFControl_KeyPress);
 		}
 
 		/// <summary>
