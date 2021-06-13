@@ -1,6 +1,5 @@
 ﻿TODO (Version 1.3.1):
 
-Print - Direct
 Throw exception on error loading document
 Review control inherited properties / events to hide those are not used and implement others* 
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
@@ -13,19 +12,21 @@ Special keys events
 LastPage get property
 Global Config - auto update, etc
 Documentation
-  - Commenting all public methods, properties and events, etc
-  - Include reference to SumatraPDFControlTest in documentation  
-  - Separate docfx generation script from SumatraPDFControl compilation?
+  - Include reference to SumatraPDFControlTest in documentation
+    * Alter it to download SumatraPDF.exe automatically from Nuget.Org if necessary
   - Include GPLv3 licence file and comments in source code
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):
 
-Print Control:
+Print:
  - Events: onPrint, onPrintEnd
  - Methods: AbortPrint, MayCloseWindow
+ - Direct Print method
+ 
 Toc:
   - ContextMenu SumatraPDFControl for toc - Create a property for tocContextMenu
+  
 Others:
   - Create function to get Canvas, Toc and toolbar positions in Frame position to use by mouse click events 		 
   - Page rotation event is more complicated to implement because current Window information (WindowInfo*) does not exists in DisplayModel sumatrapdf object. 
