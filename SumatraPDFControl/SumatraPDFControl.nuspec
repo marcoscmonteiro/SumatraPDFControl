@@ -11,7 +11,7 @@
     <description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</description>
     <releaseNotes>First release version</releaseNotes>
     <copyright>Copyright © 2021</copyright>
-    <tags>SumatraPDF PDF Windows Forms</tags>
+    <tags>SumatraPDF PDF viewer windows forms windowsforms winforms GPL</tags>
     <repository type="Git" url="https://github.com/marcoscmonteiro/SumatraPDFControl" branch="master"/>
     <iconUrl>https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/SumatraPDFControl/Resources/SumatraPDFControl.png</iconUrl>
     <icon>images\SumatraPDFControl.png</icon>
