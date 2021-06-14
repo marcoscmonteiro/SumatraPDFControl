@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumatraPDFControlTest", "SumatraPDFControlTest\SumatraPDFControlTest.csproj", "{B35D6D29-2068-4BF9-93F9-F18973DB86A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SumatraPDFControl", "SumatraPDFControl.net5\SumatraPDFControl.csproj", "{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SumatraPDFControl", "SumatraPDFControl\SumatraPDFControl.csproj", "{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

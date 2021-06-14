@@ -1,5 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net20;net45;net5.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
@@ -9,6 +9,7 @@
     <RootNamespace>SumatraPDF</RootNamespace>
     <Company>mcmonteiro</Company>
     <PackageId>SumatraPDFControl</PackageId>
+    <ApplicationIcon>SumatraPDF.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

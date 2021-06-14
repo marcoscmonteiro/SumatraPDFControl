@@ -89,7 +89,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SumatraPDFControl.net5\SumatraPDFControl.csproj">
+    <ProjectReference Include="..\SumatraPDFControl\SumatraPDFControl.csproj">
       <Project>{3df6a3d4-2f4d-4708-b92b-fd849e397e91}</Project>
       <Name>SumatraPDFControl</Name>
     </ProjectReference>
