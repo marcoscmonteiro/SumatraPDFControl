@@ -91,27 +91,27 @@
         </member>
         <member name="T:SumatraPDF.SumatraPDFControl.DisplayModeEnum">
             <summary>
-            SumatraPDF available modes displaying pages
+            Document display mode constants
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Automatic">
             <summary>
-            The continuous form of single page, facing or book view depending on the document's desired PageLayout
+            The continuous form of single page, facing or book view depending on the document's desired page layout
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.SinglePage">
             <summary>
-            Single page display not continuous
+            Single page display (not continuous)
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Facing">
             <summary>
-            Dual page display not continuous
+            Dual page display (not continuous)
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.BookView">
             <summary>
-            Dual page display not continuous
+            Dual page display (not continuous)
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.DisplayModeEnum.Continuous">
@@ -131,33 +131,35 @@
         </member>
         <member name="T:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum">
             <summary>
-            Document zoom mode to automatically adjust real zoom
+            Document zoom virtual enum display constants (fit page, fit width, etc) represented by real zoom factor
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None">
             <summary>
-            Default display mode: 100% page size
+            Constant expressing that no other constants represents the real zoom factor
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage">
             <summary>
-            Adjust zoom to fit complete page on windows control size
+            Constant to express a real zoom factor representing a complete page display
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth">
             <summary>
-            Adjust zoom to fit page width on windows control size
+            Constant to express a real zoom factor representing a complete horizontal page display
             </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent">
             <summary>
-            Adjust zoom to fit content on windows control size
+            Constant to express a real zoom factor representing a complete content page display
             </summary>
         </member>
         <member name="T:SumatraPDF.SumatraPDFControl.RotationEnum">
             <summary>
-            Document rotation options
+            Document rotation enum constants
             </summary>
+            <seealso cref="M:SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)"/>
+            <seealso cref="P:SumatraPDF.SumatraPDFControl.Rotation"/>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.RotationEnum.RotNone">
             <summary>
@@ -179,20 +181,145 @@
             270 degrees clockwise rotation
             </summary>
         </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.PageChangedEventArgs">
+            <summary>
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.PageChanged"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor(System.Int32,System.String)">
+            <summary>
+            PageChangedEventArgs constructor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page">
+            <summary>
+            Document page
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest">
+            <summary>
+            Document NamedDest
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs">
+            <summary>
+            Argument class receiced by <see cref="E:SumatraPDF.SumatraPDFControl.ContextMenuOpening"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor(System.Int32,System.Int32)">
+            <summary>
+            ContextMenuOpeningEventArgs constructor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X">
+            <summary>
+            X horizontal position, relative to SumatraPDF control, where context menu is about to open
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y">
+            <summary>
+            Y vertical position, relative to SumatraPDF control, where context menu is about to open
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled">
+            <summary>
+            Indicates wether event will be handled or not (default false)
+            </summary>
+            <remarks>
+            if set to true default context menu will not be displayed
+            </remarks>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs">
+            <summary>
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.SumatraMessage"/> generic event
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.CallBackReturn">
+            <summary>
+            Indicates wether event will be handled or not (default false)
+            </summary>
+            <remarks>
+            if set to true event will not be handled by SumatraPDF
+            </remarks>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.Msg">
+            <summary>
+            Message generated by SumatraPDF
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.Data">
+            <summary>
+            Pointer to extended data message generated by SumatraPDF
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs">
+            <summary>
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.ZoomChanged"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.#ctor(System.Single,SumatraPDF.SumatraPDFControl.ZoomVirtualEnum,System.Boolean)">
+            <summary>
+            ZoomChangedEventArgs constructor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.Zoom">
+            <summary>
+            Document zoom real factor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.ZoomVirtual">
+            <summary>
+            Document zoom virtual display mode
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.MouseWheel">
+            <summary>
+            Indicates wether mouse wheel was responsible for zoom changed event
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs">
+            <summary>
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.LinkClick"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor(System.String)">
+            <summary>
+            LinkClickedEventArgs constructor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText">
+            <summary>
+            Document link text clicked
+            </summary>
+        </member>
+        <member name="T:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs">
+            <summary>
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.DisplayModeChanged"/> event
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor(SumatraPDF.SumatraPDFControl.DisplayModeEnum)">
+            <summary>
+            DisplayModeChangedEventArgs constructor
+            </summary>
+        </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode">
+            <summary>
+            Document display mode
+            </summary>
+        </member>
         <member name="T:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs">
             <summary>
-            Arguments passed to <see cref="E:SumatraPDF.SumatraPDFControl.ScrollStateChanged"/> event
+            Argument class received by <see cref="E:SumatraPDF.SumatraPDFControl.ScrollStateChanged"/> event
             </summary>
         </member>
         <member name="M:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)">
             <summary>
             ScrollStateEventArgs constructor
             </summary>
-            <param name="ScrollState">Constructor parameter</param>
         </member>
         <member name="P:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState">
             <summary>
-            SumatraPDF control scroll state 
+            Document scroll state 
             </summary>
         </member>
         <member name="E:SumatraPDF.SumatraPDFControl.SumatraMessage">
@@ -270,13 +397,19 @@
         </member>
         <member name="P:SumatraPDF.SumatraPDFControl.Zoom">
             <summary>
-            Get or set current numeric PDF zoom scale. See ZoomVirtual property to get or set zoom mode like fit width, fit page etc
+            Get or set current numeric PDF zoom scale.
             </summary>
+            <remarks>
+            <see cref="P:SumatraPDF.SumatraPDFControl.ZoomVirtual"/> property to get or set zoom mode like fit width, fit page etc.
+            </remarks>
         </member>
         <member name="P:SumatraPDF.SumatraPDFControl.ZoomVirtual">
             <summary>
-            Get or set currrent PDF virtual zoom mode (Fit width, Fit Page, Fit Content or None). See Zoom property to get or set numeric scale
+            Get or set currrent PDF virtual zoom mode (Fit width, Fit Page, Fit Content or None).
             </summary>
+            <remarks>
+            <see cref="P:SumatraPDF.SumatraPDFControl.Zoom"/> property to get or set numeric scale
+            </remarks>
         </member>
         <member name="P:SumatraPDF.SumatraPDFControl.DisplayMode">
             <summary>
