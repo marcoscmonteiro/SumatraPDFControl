@@ -7,10 +7,35 @@
     <Version>1.4.0</Version>
     <AssemblyName>SumatraPDFControl</AssemblyName>
     <RootNamespace>SumatraPDF</RootNamespace>
-    <Company>mcmonteiro</Company>
-    <PackageId>SumatraPDFControl</PackageId>
+    <Company>mcmonteiro</Company>    
     <ApplicationIcon>SumatraPDF.ico</ApplicationIcon>
+    
+    <!-- Nuspec properties - https://docs.microsoft.com/en-us/nuget/reference/msbuild-targets -->
+    
+    <PackageId>SumatraPDFControl</PackageId>
+    <Title>SumatraPDF Control for Windows Forms</Title>
+    <Authors>Marcos C. Monteiro</Authors>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
+    <PackageProjectUrl>https://sumatrapdfcontrol.mcmonteiro.net/</PackageProjectUrl>
+    <Description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</Description>
+    <PackageReleaseNotes>Converting project file using multi target frameworks</PackageReleaseNotes>
+    <Copyright>Copyright  Marcos C. Monteiro© 2021</Copyright>
+    <PackageTags>SumatraPDF PDF viewer windows forms windowsforms winforms GPL</PackageTags>
+    <RepositoryType>Master</RepositoryType>
+    <RepositoryUrl>https://github.com/marcoscmonteiro/SumatraPDFControl</RepositoryUrl>
+    <RepositoryBranch>Master</RepositoryBranch>    
+    <PackageIconUrl>https://raw.githubusercontent.com/marcoscmonteiro/SumatraPDFControl/master/SumatraPDFControl/Resources/SumatraPDFControl.png</PackageIconUrl>
+    <PackageIcon>images\SumatraPDFControl.png</PackageIcon>
+    <PackageReadmeFile>docs\readme.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <none Include="Resources\SumatraPDFControl.png" Pack="true" PackagePath="\images" />
+    <none Include="..\readme.md" Pack="true" PackagePath="\docs" />
+    <Content Include="..\nuget\SumatraPDF.x86\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x86\"  PackageCopyToOutput="true"/>
+    <Content Include="..\nuget\SumatraPDF.x64\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x64\" PackageCopyToOutput="true"/>
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +63,6 @@
  
   <ItemGroup Condition=" '$(TargetFramework)' != 'net5.0-windows'">
     <Reference Include="System.Windows.Forms" />
-  </ItemGroup>  
-
+  </ItemGroup>
+ 
 </Project>

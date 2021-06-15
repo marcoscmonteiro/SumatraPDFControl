@@ -7,6 +7,31 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumatraPDFControlTest", "Su
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SumatraPDFControl", "SumatraPDFControl\SumatraPDFControl.csproj", "{3DF6A3D4-2F4D-4708-B92B-FD849E397E91}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{BE94564B-83DD-4B54-8358-3528E854216F}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\docfx.json = Documentation\docfx.json
+		Documentation\filterConfig.yml = Documentation\filterConfig.yml
+		Documentation\index.md = Documentation\index.md
+		Documentation\toc.yml = Documentation\toc.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{ABDA66EF-010B-415B-8F6F-3CC9DBCF9F60}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\api\index.md = Documentation\api\index.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Articles", "Articles", "{2766C3F2-8BEF-4E85-8FED-294C279C4279}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\articles\intro.md = Documentation\articles\intro.md
+		Documentation\articles\toc.yml = Documentation\articles\toc.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9AB36FFF-0532-400B-8A0F-153118679D17}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +49,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BE94564B-83DD-4B54-8358-3528E854216F} = {9AB36FFF-0532-400B-8A0F-153118679D17}
+		{ABDA66EF-010B-415B-8F6F-3CC9DBCF9F60} = {BE94564B-83DD-4B54-8358-3528E854216F}
+		{2766C3F2-8BEF-4E85-8FED-294C279C4279} = {BE94564B-83DD-4B54-8358-3528E854216F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {90D5AB15-14EE-4033-B987-66469015AFDA}
