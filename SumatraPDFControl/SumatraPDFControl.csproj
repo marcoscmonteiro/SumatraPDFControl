@@ -33,8 +33,10 @@
   <ItemGroup>
     <none Include="Resources\SumatraPDFControl.png" Pack="true" PackagePath="\images" />
     <none Include="..\readme.md" Pack="true" PackagePath="\docs" />
-    <Content Include="..\nuget\SumatraPDF.x86\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x86\"  PackageCopyToOutput="true"/>
-    <Content Include="..\nuget\SumatraPDF.x64\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x64\" PackageCopyToOutput="true"/>
+<!--    
+    <Content Include="..\nuget\SumatraPDF.x86\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x86\" PackageCopyToOutput="true" />
+    <Content Include="..\nuget\SumatraPDF.x64\SumatraPDF.exe" Pack="true" PackagePath="contentFiles\any\any\x64\" PackageCopyToOutput="true" />
+-->
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -45,6 +47,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DocumentationFile>SumatraPDFControl.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SumatraPDF.PluginMode.x64" Version="1.0.0" />
+    <PackageReference Include="SumatraPDF.PluginMode.x86" Version="1.0.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -61,8 +68,17 @@
     </EmbeddedResource>
   </ItemGroup>
  
-  <ItemGroup Condition=" '$(TargetFramework)' != 'net5.0-windows'">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net20'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
- 
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+
 </Project>
