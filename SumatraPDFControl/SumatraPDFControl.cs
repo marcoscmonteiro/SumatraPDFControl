@@ -428,14 +428,20 @@ namespace SumatraPDF
 				pSumatraWindowHandle = (IntPtr)0;
 			}
 
-			string SumatraComplete;
+			string SumatraComplete;			
+			string arch = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
+			string assemblyPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			string platform = (arch == "AMD64") ? @"\x64" : @"\x86";
+
 			if (SumatraPDFPath == null || SumatraPDFPath == String.Empty)
 			{
-				string arch = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
-				SumatraPDFPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-				SumatraPDFPath += (arch == "AMD64") ? @"\x64" : @"\x86";
+				SumatraPDFPath = assemblyPath + platform;
 
 				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
+				if (!File.Exists(SumatraComplete) && arch == "AMD64") 
+				{
+					SumatraComplete = assemblyPath + @"\x86";
+				}
 			}
 			else
 			{
@@ -444,7 +450,7 @@ namespace SumatraPDF
 
 			if (!File.Exists(SumatraComplete))
 			{
-				throw new Exception("SumatraPDF executable not found");
+				throw new Exception(@"SumatraPDF executable not found. Download or reference it using NuGet package https://www.nuget.org/packages/SumatraPDF.PluginMode." + platform.Substring(1));
 			}
 
 			var PSInfo = new ProcessStartInfo
