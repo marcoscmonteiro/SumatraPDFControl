@@ -72,13 +72,13 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
+  <!--<ItemGroup Condition=" '$(TargetFramework)' == 'net40'">
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45'">
     <Reference Include="System.Windows.Forms" />
-  </ItemGroup>
+  </ItemGroup>-->
 
 
 </Project>

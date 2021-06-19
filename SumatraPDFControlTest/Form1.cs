@@ -7,17 +7,16 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using SumatraPDF;
 using static SumatraPDF.SumatraPDFControl;
 
 namespace SumatraPDFControlTest
 {
-    public partial class FormTest : Form
+    public partial class Form1 : Form
     {
         public string Filename = string.Empty;
         public Boolean NewSumatraPDFProcess = false;
 
-        public FormTest()
+        public Form1()
         {
             InitializeComponent();
         }

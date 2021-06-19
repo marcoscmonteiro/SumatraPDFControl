@@ -1,6 +1,6 @@
 ﻿namespace SumatraPDFControlTest
 {
-    partial class FormTest
+    partial class Form1
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTest));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.toolSumatraControl = new System.Windows.Forms.ToolStrip();
             this.toolOpen = new System.Windows.Forms.ToolStripButton();
             this.toolText = new System.Windows.Forms.ToolStripTextBox();
@@ -555,7 +555,7 @@
             this.cbHandleContextMenu.Text = "Handle Context Menu";
             this.cbHandleContextMenu.UseVisualStyleBackColor = true;
             // 
-            // FormTest
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -565,7 +565,7 @@
             this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.toolSumatraControl);
-            this.Name = "FormTest";
+            this.Name = "Form1";
             this.Text = "SumatraPDFControl Test Window";
             this.Load += new System.EventHandler(this.FormTest_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);

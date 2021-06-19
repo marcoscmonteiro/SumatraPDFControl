@@ -34,7 +34,7 @@ namespace SumatraPDFControlTest
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
-                var form = new FormTest { Filename = FileName, NewSumatraPDFProcess = checkBox1.Checked };
+                var form = new Form1 { Filename = FileName, NewSumatraPDFProcess = checkBox1.Checked };
                 form.MdiParent = this;
                 form.Show();
             }
