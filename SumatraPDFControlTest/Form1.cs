@@ -233,7 +233,7 @@ namespace SumatraPDFControlTest
                 string SumatraDir = string.Empty, SumatraDir2 = string.Empty, SumatraDir3 = string.Empty, SumatraPDFSubdir = string.Empty;
 
                 SumatraPDFSubdir = (arch == "AMD64") ? @"\dbg64\" : @"\dbg32\"; 
-                SumatraDir = @"..\..\..\..\sumatrapdf\out" + SumatraPDFSubdir; 
+                SumatraDir = @"..\..\..\..\..\sumatrapdf\out" + SumatraPDFSubdir; 
                 if (System.IO.File.Exists(SumatraDir + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir;
             }
             
