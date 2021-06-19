@@ -421,6 +421,11 @@
             Get or set current PDF page viewing position
             </summary>
         </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.PageCount">
+            <summary>
+            Total pages count of loaded document
+            </summary>
+        </member>
         <member name="P:SumatraPDF.SumatraPDFControl.Rotation">
             <summary>
             Get current PDF rotation (see RotateBy method to change rotation state)
@@ -460,7 +465,12 @@
         </member>
         <member name="M:SumatraPDF.SumatraPDFControl.CopySelection">
             <summary>
-            Copy to clipboard current window text selection
+            Copy to clipboard window text selection
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.SelectAll">
+            <summary>
+            Select all document text
             </summary>
         </member>
         <member name="M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)">
@@ -494,6 +504,26 @@
             Rotate current document
             </summary>
             <param name="Rotation">Degrees to Rotation</param>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.GoToNextPage">
+            <summary>
+            Go to next document page
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.GoToPrevPage">
+            <summary>
+            Go to previous document page
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.GoToFirstPage">
+            <summary>
+            Go to first document page
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.GoToLastPage">
+            <summary>
+            Go to last document page
+            </summary>
         </member>
         <member name="F:SumatraPDF.SumatraPDFControl.components">
             <summary>

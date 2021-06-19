@@ -1,19 +1,18 @@
 ﻿TODO (Version 1.3.1):
 
+Review SumatraPDFControle Nuget pack and push
+SumatraPDF automate pack and push
 Throw exception on error loading document
 Review control inherited properties / events to hide those are not used and implement others* 
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
-  - Page: first, previous, next, last 
-  - Select All
-  - Others?
+  - ?
 Special keys events 
   - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
   - Treat ALT key
-LastPage get property
 Global Config - auto update, etc
 Documentation
   - Include reference to SumatraPDFControlTest in documentation
-    * Alter it to download SumatraPDF.exe automatically from Nuget.Org if necessary
+  - Include reference to Sumatra.PluginMode.x86/64 nuget packages
   - Include GPLv3 licence file and comments in source code
 Do a revision in GEDVISA PDFXChange used properties
    

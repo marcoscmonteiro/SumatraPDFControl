@@ -50,12 +50,17 @@ namespace SumatraPDFControlTest
         {
             AddText(e.Msg + " - " + e.CallBackReturn);
             if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpened()]")
+            {
                 toolPage.Text = SumatraPDFControl.Page.ToString() + " - " + SumatraPDFControl.NamedDest;
+                lblCurrPage.Text = SumatraPDFControl.Page.ToString();
+                lblPageCount.Text = SumatraPDFControl.PageCount.ToString();
+            }
         }
 
         private void SumatraPDFControl_PageChangedMessage(object sender, PageChangedEventArgs e)
         {
             toolPage.Text = e.Page.ToString() + " / " + e.NamedDest;
+            lblCurrPage.Text = SumatraPDFControl.Page.ToString();
         }
 
         private void SumatraPDFControl_ContextMenuMessage(object sender, ContextMenuOpeningEventArgs e)
@@ -136,7 +141,6 @@ namespace SumatraPDFControlTest
 
         private void Form1_Shown(object sender, EventArgs e)
         {
-            //if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty || Filename == string.Empty) return;
             SumatraPDFControl.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
             Filename = string.Empty;
         }
@@ -237,6 +241,46 @@ namespace SumatraPDFControlTest
                 if (System.IO.File.Exists(SumatraDir + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir;
             }
             
+        }
+
+        private void toolStripSelectAllText_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.SelectAll();
+        }
+
+        public void SelectAll()
+        {
+            SumatraPDFControl.SelectAll();
+        }
+
+        public void CopySelection()
+        {
+            SumatraPDFControl.CopySelection();
+        }
+
+        public void OpenPrintDialog()
+        {
+            SumatraPDFControl.OpenPrintDialog();
+        }
+
+        private void buttonGotoFirst_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.GoToFirstPage();
+        }
+
+        private void buttonGotoPrev_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.GoToPrevPage();
+        }
+
+        private void buttonGotoNext_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.GoToNextPage();
+        }
+
+        private void buttonGotoLast_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.GoToLastPage();
         }
     }
 }

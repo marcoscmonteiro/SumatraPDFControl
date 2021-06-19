@@ -57,18 +57,6 @@ namespace SumatraPDFControlTest
             this.Close();
         }
 
-        private void CutToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void CopyToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void PasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
-
         private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             toolStrip.Visible = toolBarToolStripMenuItem.Checked;
@@ -105,6 +93,31 @@ namespace SumatraPDFControlTest
             {
                 childForm.Close();
             }
+        }
+
+        private void helpToolStripButton_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://sumatrapdfcontrol.mcmonteiro.net");
+        }
+
+        private void indexToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            helpToolStripButton_Click(sender, e);
+        }
+
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ((Form1)this.ActiveMdiChild)?.CopySelection();
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ((Form1)this.ActiveMdiChild)?.SelectAll();
+        }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ((Form1)this.ActiveMdiChild)?.OpenPrintDialog();
         }
     }
 }

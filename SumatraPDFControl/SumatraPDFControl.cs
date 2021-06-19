@@ -83,6 +83,11 @@ namespace SumatraPDF
 		//private readonly int SumatraCmdClose = 204;
 		private readonly int SumatraCmdPrint = 206;
 		private readonly int SumatraCmdCopySelection = 228;
+		private readonly int CmdSelectAll = 229;
+		private readonly int CmdGoToNextPage = 235;
+		private readonly int CmdGoToPrevPage = 236;
+		private readonly int CmdGoToFirstPage = 237;
+		private readonly int CmdGoToLastPage = 238;
 
 		private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
@@ -265,6 +270,10 @@ namespace SumatraPDF
 							Double.Parse(mSP.Result("${y}"), new System.Globalization.CultureInfo("en-US"))
 						);
 						if (mmsg.Contains("Changed")) ScrollStateChanged?.Invoke(this, new ScrollStateEventArgs(pScrollState));
+						break;
+
+					case "PageCount":
+						nPageCount = int.Parse(m.Result("${args}"));
 						break;
 
 					default:
@@ -972,6 +981,18 @@ namespace SumatraPDF
 			}
 		}
 
+		private int nPageCount;
+		/// <summary>
+		/// Total pages count of loaded document
+		/// </summary>
+		public int PageCount { 
+			get {
+				SumatraPDFCopyDataMsg("GetProperty", "PageCount");
+				return nPageCount;
+			}  
+		}
+
+
 		private RotationEnum eRotation;
 		/// <summary>
 		/// Get current PDF rotation (see RotateBy method to change rotation state)
@@ -1091,11 +1112,19 @@ namespace SumatraPDF
 		}
 
 		/// <summary>
-		/// Copy to clipboard current window text selection
+		/// Copy to clipboard window text selection
 		/// </summary>
 		public void CopySelection()
 		{
 			SumatraPDFFrameCmd(SumatraCmdCopySelection);
+		}
+
+		/// <summary>
+		/// Select all document text
+		/// </summary>
+		public void SelectAll()
+		{
+			SumatraPDFFrameCmd(CmdSelectAll);
 		}
 
 		/// <summary>
@@ -1140,6 +1169,38 @@ namespace SumatraPDF
 		public void RotateBy(RotationEnum Rotation)
 		{
 			SumatraPDFCopyDataMsg("SetProperty", "RotateBy", ((int)Rotation).ToString());
+		}
+
+		/// <summary>
+		/// Go to next document page
+		/// </summary>
+		public void GoToNextPage()
+        {
+			SumatraPDFFrameCmd(CmdGoToNextPage, true);
+		}
+
+		/// <summary>
+		/// Go to previous document page
+		/// </summary>
+		public void GoToPrevPage()
+		{
+			SumatraPDFFrameCmd(CmdGoToPrevPage, true);
+		}
+
+		/// <summary>
+		/// Go to first document page
+		/// </summary>
+		public void GoToFirstPage()
+		{
+			SumatraPDFFrameCmd(CmdGoToFirstPage, true);
+		}
+
+		/// <summary>
+		/// Go to last document page
+		/// </summary>
+		public void GoToLastPage()
+		{
+			SumatraPDFFrameCmd(CmdGoToLastPage, true);
 		}
 
 		#endregion

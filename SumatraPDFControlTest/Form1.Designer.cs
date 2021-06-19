@@ -75,9 +75,17 @@
             this.tootStripCopySelection = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripToogleToolbar = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripToogleToc = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSelectAllText = new System.Windows.Forms.ToolStripMenuItem();
             this.cbShowScrollState = new System.Windows.Forms.CheckBox();
-            this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
             this.cbHandleContextMenu = new System.Windows.Forms.CheckBox();
+            this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
+            this.buttonGotoFirst = new System.Windows.Forms.Button();
+            this.buttonGotoPrev = new System.Windows.Forms.Button();
+            this.buttonGotoNext = new System.Windows.Forms.Button();
+            this.buttonGotoLast = new System.Windows.Forms.Button();
+            this.lblCurrPage = new System.Windows.Forms.Label();
+            this.lblOf = new System.Windows.Forms.Label();
+            this.lblPageCount = new System.Windows.Forms.Label();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -472,9 +480,10 @@
             this.contextMenuSumatraPDF.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tootStripCopySelection,
             this.toolStripToogleToolbar,
-            this.toolStripToogleToc});
+            this.toolStripToogleToc,
+            this.toolStripSelectAllText});
             this.contextMenuSumatraPDF.Name = "contextMenuStrip1";
-            this.contextMenuSumatraPDF.Size = new System.Drawing.Size(154, 70);
+            this.contextMenuSumatraPDF.Size = new System.Drawing.Size(154, 92);
             // 
             // tootStripCopySelection
             // 
@@ -497,6 +506,13 @@
             this.toolStripToogleToc.Text = "Toogle Toc";
             this.toolStripToogleToc.Click += new System.EventHandler(this.toolStripToogleToc_Click);
             // 
+            // toolStripSelectAllText
+            // 
+            this.toolStripSelectAllText.Name = "toolStripSelectAllText";
+            this.toolStripSelectAllText.Size = new System.Drawing.Size(153, 22);
+            this.toolStripSelectAllText.Text = "Select All Text";
+            this.toolStripSelectAllText.Click += new System.EventHandler(this.toolStripSelectAllText_Click);
+            // 
             // cbShowScrollState
             // 
             this.cbShowScrollState.AutoSize = true;
@@ -506,6 +522,16 @@
             this.cbShowScrollState.TabIndex = 3;
             this.cbShowScrollState.Text = "Show Scroll State";
             this.cbShowScrollState.UseVisualStyleBackColor = true;
+            // 
+            // cbHandleContextMenu
+            // 
+            this.cbHandleContextMenu.AutoSize = true;
+            this.cbHandleContextMenu.Location = new System.Drawing.Point(246, 6);
+            this.cbHandleContextMenu.Name = "cbHandleContextMenu";
+            this.cbHandleContextMenu.Size = new System.Drawing.Size(129, 17);
+            this.cbHandleContextMenu.TabIndex = 4;
+            this.cbHandleContextMenu.Text = "Handle Context Menu";
+            this.cbHandleContextMenu.UseVisualStyleBackColor = true;
             // 
             // SumatraPDFControl
             // 
@@ -545,21 +571,87 @@
             this.SumatraPDFControl.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseDown);
             this.SumatraPDFControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SumatraPDFControl_MouseUp);
             // 
-            // cbHandleContextMenu
+            // buttonGotoFirst
             // 
-            this.cbHandleContextMenu.AutoSize = true;
-            this.cbHandleContextMenu.Location = new System.Drawing.Point(246, 6);
-            this.cbHandleContextMenu.Name = "cbHandleContextMenu";
-            this.cbHandleContextMenu.Size = new System.Drawing.Size(129, 17);
-            this.cbHandleContextMenu.TabIndex = 4;
-            this.cbHandleContextMenu.Text = "Handle Context Menu";
-            this.cbHandleContextMenu.UseVisualStyleBackColor = true;
+            this.buttonGotoFirst.Location = new System.Drawing.Point(382, 1);
+            this.buttonGotoFirst.Name = "buttonGotoFirst";
+            this.buttonGotoFirst.Size = new System.Drawing.Size(34, 21);
+            this.buttonGotoFirst.TabIndex = 5;
+            this.buttonGotoFirst.Text = "|<";
+            this.buttonGotoFirst.UseVisualStyleBackColor = true;
+            this.buttonGotoFirst.Click += new System.EventHandler(this.buttonGotoFirst_Click);
+            // 
+            // buttonGotoPrev
+            // 
+            this.buttonGotoPrev.Location = new System.Drawing.Point(422, 1);
+            this.buttonGotoPrev.Name = "buttonGotoPrev";
+            this.buttonGotoPrev.Size = new System.Drawing.Size(34, 21);
+            this.buttonGotoPrev.TabIndex = 6;
+            this.buttonGotoPrev.Text = "<";
+            this.buttonGotoPrev.UseVisualStyleBackColor = true;
+            this.buttonGotoPrev.Click += new System.EventHandler(this.buttonGotoPrev_Click);
+            // 
+            // buttonGotoNext
+            // 
+            this.buttonGotoNext.Location = new System.Drawing.Point(565, 1);
+            this.buttonGotoNext.Name = "buttonGotoNext";
+            this.buttonGotoNext.Size = new System.Drawing.Size(34, 21);
+            this.buttonGotoNext.TabIndex = 7;
+            this.buttonGotoNext.Text = ">";
+            this.buttonGotoNext.UseVisualStyleBackColor = true;
+            this.buttonGotoNext.Click += new System.EventHandler(this.buttonGotoNext_Click);
+            // 
+            // buttonGotoLast
+            // 
+            this.buttonGotoLast.Location = new System.Drawing.Point(605, 1);
+            this.buttonGotoLast.Name = "buttonGotoLast";
+            this.buttonGotoLast.Size = new System.Drawing.Size(34, 21);
+            this.buttonGotoLast.TabIndex = 8;
+            this.buttonGotoLast.Text = ">|";
+            this.buttonGotoLast.UseVisualStyleBackColor = true;
+            this.buttonGotoLast.Click += new System.EventHandler(this.buttonGotoLast_Click);
+            // 
+            // lblCurrPage
+            // 
+            this.lblCurrPage.AutoSize = true;
+            this.lblCurrPage.Location = new System.Drawing.Point(462, 5);
+            this.lblCurrPage.Name = "lblCurrPage";
+            this.lblCurrPage.Size = new System.Drawing.Size(37, 13);
+            this.lblCurrPage.TabIndex = 9;
+            this.lblCurrPage.Text = "00000";
+            this.lblCurrPage.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // lblOf
+            // 
+            this.lblOf.AutoSize = true;
+            this.lblOf.Location = new System.Drawing.Point(500, 5);
+            this.lblOf.Name = "lblOf";
+            this.lblOf.Size = new System.Drawing.Size(16, 13);
+            this.lblOf.TabIndex = 10;
+            this.lblOf.Text = "of";
+            // 
+            // lblPageCount
+            // 
+            this.lblPageCount.AutoSize = true;
+            this.lblPageCount.Location = new System.Drawing.Point(522, 5);
+            this.lblPageCount.Name = "lblPageCount";
+            this.lblPageCount.Size = new System.Drawing.Size(37, 13);
+            this.lblPageCount.TabIndex = 11;
+            this.lblPageCount.Text = "00000";
+            this.lblPageCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 741);
+            this.Controls.Add(this.lblPageCount);
+            this.Controls.Add(this.lblOf);
+            this.Controls.Add(this.lblCurrPage);
+            this.Controls.Add(this.buttonGotoLast);
+            this.Controls.Add(this.buttonGotoNext);
+            this.Controls.Add(this.buttonGotoPrev);
+            this.Controls.Add(this.buttonGotoFirst);
             this.Controls.Add(this.cbHandleContextMenu);
             this.Controls.Add(this.cbShowScrollState);
             this.Controls.Add(this.SumatraPDFControl);
@@ -627,6 +719,14 @@
         private System.Windows.Forms.CheckBox cbShowScrollState;
         private System.Windows.Forms.ToolStripButton toolOpenPrintDialog;
         private System.Windows.Forms.CheckBox cbHandleContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem toolStripSelectAllText;
+        private System.Windows.Forms.Button buttonGotoFirst;
+        private System.Windows.Forms.Button buttonGotoPrev;
+        private System.Windows.Forms.Button buttonGotoNext;
+        private System.Windows.Forms.Button buttonGotoLast;
+        private System.Windows.Forms.Label lblCurrPage;
+        private System.Windows.Forms.Label lblOf;
+        private System.Windows.Forms.Label lblPageCount;
     }
 }
 
