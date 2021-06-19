@@ -197,8 +197,8 @@ namespace SumatraPDF
 							PageChanged?.Invoke(this, new PageChangedEventArgs(nPage, sNamedDest));
 						break;
 
-					case "ContextMenuOpened":
-					case "TocContextMenuOpened":
+					case "ContextMenuOpening":
+					case "TocContextMenuOpening":
 
 						Match m2 = Regex.Match(m.Result("${args}"), @"(?<x>.+)\,\s*(?<y>.+)");
 						var cmoe = new ContextMenuOpeningEventArgs(int.Parse(m2.Result("${x}")), int.Parse(m2.Result("${y}")));

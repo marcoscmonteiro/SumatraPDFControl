@@ -228,11 +228,11 @@ namespace SumatraPDFControlTest
 
         private void FormTest_Load(object sender, EventArgs e)
         {
-            // Use SumatraPDF.exe from SumatraPDF compiled source if avaiable
-            string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
-            string SumatraDir = string.Empty, SumatraDir2 = string.Empty, SumatraDir3 = string.Empty, SumatraPDFSubdir = string.Empty;
-
+            // If SumatraPDFPath was not filled try to use SumatraPDF.exe from SumatraPDF compiled source (if available in same SumatraPDFControl solution dir level).
             if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty) {
+                string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
+                string SumatraDir = string.Empty, SumatraDir2 = string.Empty, SumatraDir3 = string.Empty, SumatraPDFSubdir = string.Empty;
+
                 SumatraPDFSubdir = (arch == "AMD64") ? @"\dbg64\" : @"\dbg32\"; 
                 SumatraDir = @"..\..\..\..\sumatrapdf\out" + SumatraPDFSubdir; 
                 if (System.IO.File.Exists(SumatraDir + SumatraPDFControl.SumatraPDFExe)) SumatraPDFControl.SumatraPDFPath = SumatraDir;
