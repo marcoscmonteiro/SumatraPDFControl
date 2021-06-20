@@ -1,1 +1,0 @@
-[!include[INDEX](../README.md)]
