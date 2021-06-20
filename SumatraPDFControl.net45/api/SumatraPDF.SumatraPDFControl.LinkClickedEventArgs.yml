@@ -1,0 +1,161 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  commentId: T:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  id: SumatraPDFControl.LinkClickedEventArgs
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor(System.String)
+  - SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.LinkClickedEventArgs
+  nameWithType: SumatraPDFControl.LinkClickedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: LinkClickedEventArgs
+    path: SumatraPDFControl.cs
+    startLine: 696
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nArgument class received by <xref href=\"SumatraPDF.SumatraPDFControl.LinkClick\" data-throw-if-not-resolved=\"false\"></xref> event\n"
+  example: []
+  syntax:
+    content: 'public class LinkClickedEventArgs : EventArgs'
+    content.vb: >-
+      Public Class LinkClickedEventArgs
+          Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor(System.String)
+  commentId: M:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor(System.String)
+  id: '#ctor(System.String)'
+  parent: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: LinkClickedEventArgs(String)
+  nameWithType: SumatraPDFControl.LinkClickedEventArgs.LinkClickedEventArgs(String)
+  fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkClickedEventArgs(System.String)
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 701
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nLinkClickedEventArgs constructor\n"
+  example: []
+  syntax:
+    content: public LinkClickedEventArgs(string LinkText)
+    parameters:
+    - id: LinkText
+      type: System.String
+    content.vb: Public Sub New(LinkText As String)
+  overload: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText
+  commentId: P:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText
+  id: LinkText
+  parent: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: LinkText
+  nameWithType: SumatraPDFControl.LinkClickedEventArgs.LinkText
+  fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: LinkText
+    path: SumatraPDFControl.cs
+    startLine: 709
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument link text clicked\n"
+  example: []
+  syntax:
+    content: public string LinkText { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property LinkText As String
+  overload: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+references:
+- uid: SumatraPDF.SumatraPDFControl.LinkClick
+  commentId: E:SumatraPDF.SumatraPDFControl.LinkClick
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.#ctor
+  name: LinkClickedEventArgs
+  nameWithType: SumatraPDFControl.LinkClickedEventArgs.LinkClickedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkClickedEventArgs
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText
+  name: LinkText
+  nameWithType: SumatraPDFControl.LinkClickedEventArgs.LinkText
+  fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.LinkText

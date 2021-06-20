@@ -1,0 +1,213 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  commentId: T:SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  id: SumatraPDFControl.PageChangedEventArgs
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor(System.Int32,System.String)
+  - SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest
+  - SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.PageChangedEventArgs
+  nameWithType: SumatraPDFControl.PageChangedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: PageChangedEventArgs
+    path: SumatraPDFControl.cs
+    startLine: 594
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nArgument class received by <xref href=\"SumatraPDF.SumatraPDFControl.PageChanged\" data-throw-if-not-resolved=\"false\"></xref> event\n"
+  example: []
+  syntax:
+    content: 'public class PageChangedEventArgs : EventArgs'
+    content.vb: >-
+      Public Class PageChangedEventArgs
+          Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor(System.Int32,System.String)
+  commentId: M:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor(System.Int32,System.String)
+  id: '#ctor(System.Int32,System.String)'
+  parent: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: PageChangedEventArgs(Int32, String)
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.PageChangedEventArgs(Int32, String)
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.PageChangedEventArgs(System.Int32, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 599
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nPageChangedEventArgs constructor\n"
+  example: []
+  syntax:
+    content: public PageChangedEventArgs(int Page, string NamedDest)
+    parameters:
+    - id: Page
+      type: System.Int32
+    - id: NamedDest
+      type: System.String
+    content.vb: Public Sub New(Page As Integer, NamedDest As String)
+  overload: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+  commentId: P:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+  id: Page
+  parent: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Page
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.Page
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Page
+    path: SumatraPDFControl.cs
+    startLine: 607
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument page\n"
+  example: []
+  syntax:
+    content: public int Page { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Page As Integer
+  overload: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest
+  commentId: P:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest
+  id: NamedDest
+  parent: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: NamedDest
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.NamedDest
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: NamedDest
+    path: SumatraPDFControl.cs
+    startLine: 611
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument NamedDest\n"
+  example: []
+  syntax:
+    content: public string NamedDest { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property NamedDest As String
+  overload: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+references:
+- uid: SumatraPDF.SumatraPDFControl.PageChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.PageChanged
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.#ctor
+  name: PageChangedEventArgs
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.PageChangedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.PageChangedEventArgs
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+  name: Page
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.Page
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
+- uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest
+  name: NamedDest
+  nameWithType: SumatraPDFControl.PageChangedEventArgs.NamedDest
+  fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.NamedDest

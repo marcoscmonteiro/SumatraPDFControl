@@ -1,0 +1,257 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  commentId: T:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  id: SumatraPDFControl.ContextMenuOpeningEventArgs
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor(System.Int32,System.Int32)
+  - SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  - SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  - SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.ContextMenuOpeningEventArgs
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ContextMenuOpeningEventArgs
+    path: SumatraPDFControl.cs
+    startLine: 616
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nArgument class receiced by <xref href=\"SumatraPDF.SumatraPDFControl.ContextMenuOpening\" data-throw-if-not-resolved=\"false\"></xref> event\n"
+  example: []
+  syntax:
+    content: 'public class ContextMenuOpeningEventArgs : EventArgs'
+    content.vb: >-
+      Public Class ContextMenuOpeningEventArgs
+          Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor(System.Int32,System.Int32)
+  commentId: M:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor(System.Int32,System.Int32)
+  id: '#ctor(System.Int32,System.Int32)'
+  parent: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  langs:
+  - csharp
+  - vb
+  name: ContextMenuOpeningEventArgs(Int32, Int32)
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.ContextMenuOpeningEventArgs(Int32, Int32)
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.ContextMenuOpeningEventArgs(System.Int32, System.Int32)
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 621
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nContextMenuOpeningEventArgs constructor\n"
+  example: []
+  syntax:
+    content: public ContextMenuOpeningEventArgs(int X, int Y)
+    parameters:
+    - id: X
+      type: System.Int32
+    - id: Y
+      type: System.Int32
+    content.vb: Public Sub New(X As Integer, Y As Integer)
+  overload: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  commentId: P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  id: X
+  parent: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  langs:
+  - csharp
+  - vb
+  name: X
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: X
+    path: SumatraPDFControl.cs
+    startLine: 630
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nX horizontal position, relative to SumatraPDF control, where context menu is about to open\n"
+  example: []
+  syntax:
+    content: public int X { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property X As Integer
+  overload: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  commentId: P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  id: Y
+  parent: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Y
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Y
+    path: SumatraPDFControl.cs
+    startLine: 634
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nY vertical position, relative to SumatraPDF control, where context menu is about to open\n"
+  example: []
+  syntax:
+    content: public int Y { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property Y As Integer
+  overload: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  commentId: P:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  id: Handled
+  parent: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  langs:
+  - csharp
+  - vb
+  name: Handled
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Handled
+    path: SumatraPDFControl.cs
+    startLine: 641
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nIndicates wether event will be handled or not (default false)\n"
+  remarks: "\nif set to true default context menu will not be displayed\n"
+  example: []
+  syntax:
+    content: public bool Handled { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property Handled As Boolean
+  overload: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+references:
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  commentId: E:SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.#ctor
+  name: ContextMenuOpeningEventArgs
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.ContextMenuOpeningEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.ContextMenuOpeningEventArgs
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  name: X
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.X
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.X
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  name: Y
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Y
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  name: Handled
+  nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.Handled
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

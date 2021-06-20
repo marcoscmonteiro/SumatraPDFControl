@@ -9,7 +9,15 @@ Analyze and implement possible to send other messages from SumatraPDF Canvas Wnd
 Special keys events 
   - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
   - Treat ALT key
-Global Config - auto update, etc
+Create events for LoadDocument and StartupFinished 
+Raise LoadDocument afaer StartupFinished
+Global Config 
+    - Investigate SetupPluginMode (SumatraStartup.cpp) to:
+    - Disable Sumatra update
+    - Disable Internet access
+    - Disable annotation edit
+    - Property to Enable/Disable auto reload document when external change occurs 
+    - Method to reload document - CmdRefresh - 210 - ("R" key is doing that)
 Documentation
   - Include reference to SumatraPDFControlTest in documentation
   - Include reference to Sumatra.PluginMode.x86/64 nuget packages

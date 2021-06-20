@@ -1,0 +1,1495 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl
+  commentId: T:SumatraPDF.SumatraPDFControl
+  id: SumatraPDFControl
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.#ctor
+  - SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  - SumatraPDF.SumatraPDFControl.ContextMenuStrip
+  - SumatraPDF.SumatraPDFControl.CopySelection
+  - SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  - SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)
+  - SumatraPDF.SumatraPDFControl.KeyDown
+  - SumatraPDF.SumatraPDFControl.KeyPress
+  - SumatraPDF.SumatraPDFControl.KeyUp
+  - SumatraPDF.SumatraPDFControl.LinkClick
+  - SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)
+  - SumatraPDF.SumatraPDFControl.OpenPrintDialog
+  - SumatraPDF.SumatraPDFControl.PageChanged
+  - SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  - SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  - SumatraPDF.SumatraPDFControl.SumatraMessage
+  - SumatraPDF.SumatraPDFControl.SumatraPDFExe
+  - SumatraPDF.SumatraPDFControl.SumatraPDFPath
+  - SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  - SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  - SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)
+  - SumatraPDF.SumatraPDFControl.ZoomChanged
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl
+  nameWithType: SumatraPDFControl
+  fullName: SumatraPDF.SumatraPDFControl
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.Designer.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: SumatraPDFControl
+    path: SumatraPDFControl.Designer.cs
+    startLine: 4
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nWindows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)\n"
+  remarks: "\nThis control allows you to open and read PDF files with most features present in great SumatraPDF reader (https://www.sumatrapdfreader.org/).\nIt requires an specific compiled Sumatra code version (https://github.com/marcoscmonteiro/sumatrapdf) which enables SumatraPDF\nworking in an enhanced plugin mode. \nIt&apos;s forked from original SumatraPDF code (https://github.com/sumatrapdfreader/sumatrapdf)\n"
+  example: []
+  syntax:
+    content: >-
+      [ToolboxBitmap(typeof(SumatraPDFControl), "Resources.SumatraPDFControlMini.png")]
+
+      [Guid("E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C")]
+
+      public class SumatraPDFControl : Control, IDropTarget, ISynchronizeInvoke, IWin32Window, IArrangedElement, IBindableComponent, IComponent, IDisposable
+    content.vb: >-
+      <ToolboxBitmap(GetType(SumatraPDFControl), "Resources.SumatraPDFControlMini.png")>
+
+      <Guid("E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C")>
+
+      Public Class SumatraPDFControl
+          Inherits Control
+          Implements IDropTarget, ISynchronizeInvoke, IWin32Window, IArrangedElement, IBindableComponent, IComponent, IDisposable
+  inheritance:
+  - System.Object
+  - System.MarshalByRefObject
+  - System.ComponentModel.Component
+  - System.Windows.Forms.Control
+  attributes:
+  - type: System.Drawing.ToolboxBitmapAttribute
+    ctor: System.Drawing.ToolboxBitmapAttribute.#ctor(System.Type,System.String)
+    arguments:
+    - type: System.Type
+      value: SumatraPDF.SumatraPDFControl
+    - type: System.String
+      value: Resources.SumatraPDFControlMini.png
+  - type: System.Runtime.InteropServices.GuidAttribute
+    ctor: System.Runtime.InteropServices.GuidAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: E5FDA170-ACF6-4C4D-AAF9-C8F9C70EE09C
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)
+  commentId: M:SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)
+  id: WndProc(System.Windows.Forms.Message@)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: WndProc(ref Message)
+  nameWithType: SumatraPDFControl.WndProc(ref Message)
+  fullName: SumatraPDF.SumatraPDFControl.WndProc(ref System.Windows.Forms.Message)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: WndProc
+    path: SumatraPDFControl.cs
+    startLine: 285
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nProcesses Windows Messages.\n"
+  remarks: "\nThis method has many customizations in order to process SumatraPDF messages. So, if there is need to override, remember to call base.WndProc.\n"
+  example: []
+  syntax:
+    content: protected override void WndProc(ref Message m)
+    parameters:
+    - id: m
+      type: System.Windows.Forms.Message
+      description: The Windows <xref href="System.Windows.Forms.Message" data-throw-if-not-resolved="false"></xref> to process.
+    content.vb: Protected Overrides Sub WndProc(ByRef m As Message)
+  overridden: System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)
+  overload: SumatraPDF.SumatraPDFControl.WndProc*
+  nameWithType.vb: SumatraPDFControl.WndProc(ByRef Message)
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+  fullName.vb: SumatraPDF.SumatraPDFControl.WndProc(ByRef System.Windows.Forms.Message)
+  name.vb: WndProc(ByRef Message)
+- uid: SumatraPDF.SumatraPDFControl.SumatraMessage
+  commentId: E:SumatraPDF.SumatraPDFControl.SumatraMessage
+  id: SumatraMessage
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: SumatraMessage
+  nameWithType: SumatraPDFControl.SumatraMessage
+  fullName: SumatraPDF.SumatraPDFControl.SumatraMessage
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: SumatraMessage
+    path: SumatraPDFControl.cs
+    startLine: 756
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nA generic SumatraPDF message not managed by other events.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.SumatraMessageEventArgs> SumatraMessage
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs}
+    content.vb: Public Event SumatraMessage As EventHandler(Of SumatraPDFControl.SumatraMessageEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.PageChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.PageChanged
+  id: PageChanged
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: PageChanged
+  nameWithType: SumatraPDFControl.PageChanged
+  fullName: SumatraPDF.SumatraPDFControl.PageChanged
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: PageChanged
+    path: SumatraPDFControl.cs
+    startLine: 762
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs after changing current visible page\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.PageChangedEventArgs> PageChanged
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.PageChangedEventArgs}
+    content.vb: Public Event PageChanged As EventHandler(Of SumatraPDFControl.PageChangedEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  commentId: E:SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  id: ContextMenuOpening
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: ContextMenuOpening
+  nameWithType: SumatraPDFControl.ContextMenuOpening
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpening
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ContextMenuOpening
+    path: SumatraPDFControl.cs
+    startLine: 768
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs before trying to open ContextMenu by right mouse clicking button.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.ContextMenuOpeningEventArgs> ContextMenuOpening
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs}
+    content.vb: Public Event ContextMenuOpening As EventHandler(Of SumatraPDFControl.ContextMenuOpeningEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ZoomChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.ZoomChanged
+  id: ZoomChanged
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: ZoomChanged
+  nameWithType: SumatraPDFControl.ZoomChanged
+  fullName: SumatraPDF.SumatraPDFControl.ZoomChanged
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ZoomChanged
+    path: SumatraPDFControl.cs
+    startLine: 774
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs after changing zoom factor.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.ZoomChangedEventArgs> ZoomChanged
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs}
+    content.vb: Public Event ZoomChanged As EventHandler(Of SumatraPDFControl.ZoomChangedEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.LinkClick
+  commentId: E:SumatraPDF.SumatraPDFControl.LinkClick
+  id: LinkClick
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: LinkClick
+  nameWithType: SumatraPDFControl.LinkClick
+  fullName: SumatraPDF.SumatraPDFControl.LinkClick
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: LinkClick
+    path: SumatraPDFControl.cs
+    startLine: 780
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs after clicking a document link.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.LinkClickedEventArgs> LinkClick
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.LinkClickedEventArgs}
+    content.vb: Public Event LinkClick As EventHandler(Of SumatraPDFControl.LinkClickedEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  id: DisplayModeChanged
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: DisplayModeChanged
+  nameWithType: SumatraPDFControl.DisplayModeChanged
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: DisplayModeChanged
+    path: SumatraPDFControl.cs
+    startLine: 786
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs after changing display mode.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.DisplayModeChangedEventArgs> DisplayModeChanged
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs}
+    content.vb: Public Event DisplayModeChanged As EventHandler(Of SumatraPDFControl.DisplayModeChangedEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  id: ScrollStateChanged
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: ScrollStateChanged
+  nameWithType: SumatraPDFControl.ScrollStateChanged
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ScrollStateChanged
+    path: SumatraPDFControl.cs
+    startLine: 792
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs after changing document scroll position (vertical and/or horizontal).\n"
+  example: []
+  syntax:
+    content: public event EventHandler<SumatraPDFControl.ScrollStateEventArgs> ScrollStateChanged
+    return:
+      type: System.EventHandler{SumatraPDF.SumatraPDFControl.ScrollStateEventArgs}
+    content.vb: Public Event ScrollStateChanged As EventHandler(Of SumatraPDFControl.ScrollStateEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.KeyPress
+  commentId: E:SumatraPDF.SumatraPDFControl.KeyPress
+  id: KeyPress
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: KeyPress
+  nameWithType: SumatraPDFControl.KeyPress
+  fullName: SumatraPDF.SumatraPDFControl.KeyPress
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: KeyPress
+    path: SumatraPDFControl.cs
+    startLine: 799
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs when a character, space or backspace key is pressed while the control has focus.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<KeyPressEventArgs> KeyPress
+    return:
+      type: System.EventHandler{System.Windows.Forms.KeyPressEventArgs}
+    content.vb: Public Event KeyPress As EventHandler(Of KeyPressEventArgs)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.KeyDown
+  commentId: E:SumatraPDF.SumatraPDFControl.KeyDown
+  id: KeyDown
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: KeyDown
+  nameWithType: SumatraPDFControl.KeyDown
+  fullName: SumatraPDF.SumatraPDFControl.KeyDown
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: KeyDown
+    path: SumatraPDFControl.cs
+    startLine: 805
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs when a key is pressed while the control has focus.\n"
+  example: []
+  syntax:
+    content: public event KeyEventHandler KeyDown
+    return:
+      type: System.Windows.Forms.KeyEventHandler
+    content.vb: Public Event KeyDown As KeyEventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.KeyUp
+  commentId: E:SumatraPDF.SumatraPDFControl.KeyUp
+  id: KeyUp
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: KeyUp
+  nameWithType: SumatraPDFControl.KeyUp
+  fullName: SumatraPDF.SumatraPDFControl.KeyUp
+  type: Event
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: KeyUp
+    path: SumatraPDFControl.cs
+    startLine: 811
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nOccurs when a key is released while the control has focus.\n"
+  example: []
+  syntax:
+    content: public event KeyEventHandler KeyUp
+    return:
+      type: System.Windows.Forms.KeyEventHandler
+    content.vb: Public Event KeyUp As KeyEventHandler
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuStrip
+  commentId: P:SumatraPDF.SumatraPDFControl.ContextMenuStrip
+  id: ContextMenuStrip
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: ContextMenuStrip
+  nameWithType: SumatraPDFControl.ContextMenuStrip
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuStrip
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ContextMenuStrip
+    path: SumatraPDFControl.cs
+    startLine: 824
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nGets or sets the ContextMenuStrip associated with this control.\n"
+  remarks: "\nThe ContextMenuStrip for this control, or null if there is no ContextMenuStrip. The default is null.\n"
+  example: []
+  syntax:
+    content: public ContextMenuStrip ContextMenuStrip { get; set; }
+    parameters: []
+    return:
+      type: System.Windows.Forms.ContextMenuStrip
+    content.vb: Public Property ContextMenuStrip As ContextMenuStrip
+  overload: SumatraPDF.SumatraPDFControl.ContextMenuStrip*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.SumatraPDFPath
+  commentId: P:SumatraPDF.SumatraPDFControl.SumatraPDFPath
+  id: SumatraPDFPath
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFPath
+  nameWithType: SumatraPDFControl.SumatraPDFPath
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFPath
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: SumatraPDFPath
+    path: SumatraPDFControl.cs
+    startLine: 830
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nPath where SumatraPDF executable is present. If not informed assumes same SumatraPDFControl.dll directory\n"
+  example: []
+  syntax:
+    content: public string SumatraPDFPath { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SumatraPDFPath As String
+  overload: SumatraPDF.SumatraPDFControl.SumatraPDFPath*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.SumatraPDFExe
+  commentId: P:SumatraPDF.SumatraPDFControl.SumatraPDFExe
+  id: SumatraPDFExe
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFExe
+  nameWithType: SumatraPDFControl.SumatraPDFExe
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFExe
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: SumatraPDFExe
+    path: SumatraPDFControl.cs
+    startLine: 838
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nSumatraPDF executable file name. Usually SumatraPDF.exe (default) or SumatraPDF-dll.exe\n"
+  example: []
+  syntax:
+    content: public string SumatraPDFExe { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property SumatraPDFExe As String
+  overload: SumatraPDF.SumatraPDFControl.SumatraPDFExe*
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.#ctor
+  commentId: M:SumatraPDF.SumatraPDFControl.#ctor
+  id: '#ctor'
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl()
+  nameWithType: SumatraPDFControl.SumatraPDFControl()
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFControl()
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 1040
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDefault constructor\n"
+  example: []
+  syntax:
+    content: public SumatraPDFControl()
+    content.vb: Public Sub New
+  overload: SumatraPDF.SumatraPDFControl.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)
+  id: LoadFile(System.String,System.Int32,System.Boolean)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: LoadFile(String, Int32, Boolean)
+  nameWithType: SumatraPDFControl.LoadFile(String, Int32, Boolean)
+  fullName: SumatraPDF.SumatraPDFControl.LoadFile(System.String, System.Int32, System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: LoadFile
+    path: SumatraPDFControl.cs
+    startLine: 1062
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nLoad sumatra supported file. Current file will be closed.\n"
+  remarks: "\nIn case of multiple instances of SumatraPDFControl <code data-dev-comment-type=\"paramref\" class=\"paramref\">NewSumatraInstance</code> indicates if an pre-existing instance \nwill be used or not. If true new SumatraPDF executable will be started. The default is false.\n"
+  example: []
+  syntax:
+    content: public void LoadFile(string PDFFile, int InitialPage = 1, bool NewSumatraInstance = false)
+    parameters:
+    - id: PDFFile
+      type: System.String
+      description: File name with complete path
+    - id: InitialPage
+      type: System.Int32
+      description: Initial page to show
+    - id: NewSumatraInstance
+      type: System.Boolean
+      description: Open a new SumatraPDF instance (other executable process)
+    content.vb: Public Sub LoadFile(PDFFile As String, InitialPage As Integer = 1, NewSumatraInstance As Boolean = False)
+  overload: SumatraPDF.SumatraPDFControl.LoadFile*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.CopySelection
+  commentId: M:SumatraPDF.SumatraPDFControl.CopySelection
+  id: CopySelection
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: CopySelection()
+  nameWithType: SumatraPDFControl.CopySelection()
+  fullName: SumatraPDF.SumatraPDFControl.CopySelection()
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: CopySelection
+    path: SumatraPDFControl.cs
+    startLine: 1085
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nCopy to clipboard current window text selection\n"
+  example: []
+  syntax:
+    content: public void CopySelection()
+    content.vb: Public Sub CopySelection
+  overload: SumatraPDF.SumatraPDFControl.CopySelection*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  id: TextSearch(System.String,System.Boolean)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: TextSearch(String, Boolean)
+  nameWithType: SumatraPDFControl.TextSearch(String, Boolean)
+  fullName: SumatraPDF.SumatraPDFControl.TextSearch(System.String, System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: TextSearch
+    path: SumatraPDFControl.cs
+    startLine: 1096
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDo a text search on document from beginning\n"
+  example: []
+  syntax:
+    content: public void TextSearch(string searchText, bool matchCase)
+    parameters:
+    - id: searchText
+      type: System.String
+      description: Text to search
+    - id: matchCase
+      type: System.Boolean
+      description: Match case
+    content.vb: Public Sub TextSearch(searchText As String, matchCase As Boolean)
+  overload: SumatraPDF.SumatraPDFControl.TextSearch*
+  seealso:
+  - linkId: SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+    commentId: M:SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  id: TextSearchNext(System.Boolean)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: TextSearchNext(Boolean)
+  nameWithType: SumatraPDFControl.TextSearchNext(Boolean)
+  fullName: SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: TextSearchNext
+    path: SumatraPDFControl.cs
+    startLine: 1106
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDo a text search on document after a first search by <xref href=\"SumatraPDF.SumatraPDFControl.TextSearch(System.String%2cSystem.Boolean)\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  example: []
+  syntax:
+    content: public void TextSearchNext(bool forward = true)
+    parameters:
+    - id: forward
+      type: System.Boolean
+      description: True (default) if serching forward, false if backwards
+    content.vb: Public Sub TextSearchNext(forward As Boolean = True)
+  overload: SumatraPDF.SumatraPDFControl.TextSearchNext*
+  seealso:
+  - linkId: SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+    commentId: M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.OpenPrintDialog
+  commentId: M:SumatraPDF.SumatraPDFControl.OpenPrintDialog
+  id: OpenPrintDialog
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: OpenPrintDialog()
+  nameWithType: SumatraPDFControl.OpenPrintDialog()
+  fullName: SumatraPDF.SumatraPDFControl.OpenPrintDialog()
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: OpenPrintDialog
+    path: SumatraPDFControl.cs
+    startLine: 1120
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nShow dialog to print current document (in background)\n"
+  remarks: "\nAfter proceeding with print it occurs in background and SumatraPDF shows an interface to cancel the whole process.\nThe following only applies for printing as image:\nCreates a new dummy page for each page with a large zoom factor,\nand then uses StretchDIBits to copy this to the printer&apos;s dc.\n"
+  example: []
+  syntax:
+    content: public void OpenPrintDialog()
+    content.vb: Public Sub OpenPrintDialog
+  overload: SumatraPDF.SumatraPDFControl.OpenPrintDialog*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  commentId: M:SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  id: RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: RotateBy(SumatraPDFControl.RotationEnum)
+  nameWithType: SumatraPDFControl.RotateBy(SumatraPDFControl.RotationEnum)
+  fullName: SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: RotateBy
+    path: SumatraPDFControl.cs
+    startLine: 1129
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nRotate current document\n"
+  example: []
+  syntax:
+    content: public void RotateBy(SumatraPDFControl.RotationEnum Rotation)
+    parameters:
+    - id: Rotation
+      type: SumatraPDF.SumatraPDFControl.RotationEnum
+      description: Degrees to Rotation
+    content.vb: Public Sub RotateBy(Rotation As SumatraPDFControl.RotationEnum)
+  overload: SumatraPDF.SumatraPDFControl.RotateBy*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: SumatraPDF.SumatraPDFControl
+  langs:
+  - csharp
+  - vb
+  name: Dispose(Boolean)
+  nameWithType: SumatraPDFControl.Dispose(Boolean)
+  fullName: SumatraPDF.SumatraPDFControl.Dispose(System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.Designer.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Dispose
+    path: SumatraPDFControl.Designer.cs
+    startLine: 15
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nCleaning resources being used\n"
+  example: []
+  syntax:
+    content: protected override void Dispose(bool disposing)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+      description: true if necessary to dispose managed resources.
+    content.vb: Protected Overrides Sub Dispose(disposing As Boolean)
+  overridden: System.Windows.Forms.Control.Dispose(System.Boolean)
+  overload: SumatraPDF.SumatraPDFControl.Dispose*
+  modifiers.csharp:
+  - protected
+  - override
+  modifiers.vb:
+  - Protected
+  - Overrides
+references:
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.MarshalByRefObject
+  commentId: T:System.MarshalByRefObject
+  parent: System
+  isExternal: true
+  name: MarshalByRefObject
+  nameWithType: MarshalByRefObject
+  fullName: System.MarshalByRefObject
+- uid: System.ComponentModel.Component
+  commentId: T:System.ComponentModel.Component
+  parent: System.ComponentModel
+  isExternal: true
+  name: Component
+  nameWithType: Component
+  fullName: System.ComponentModel.Component
+- uid: System.Windows.Forms.Control
+  commentId: T:System.Windows.Forms.Control
+  parent: System.Windows.Forms
+  isExternal: true
+  name: Control
+  nameWithType: Control
+  fullName: System.Windows.Forms.Control
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.ComponentModel
+  commentId: N:System.ComponentModel
+  isExternal: true
+  name: System.ComponentModel
+  nameWithType: System.ComponentModel
+  fullName: System.ComponentModel
+- uid: System.Windows.Forms
+  commentId: N:System.Windows.Forms
+  isExternal: true
+  name: System.Windows.Forms
+  nameWithType: System.Windows.Forms
+  fullName: System.Windows.Forms
+- uid: System.Windows.Forms.Message
+  commentId: T:System.Windows.Forms.Message
+  parent: System.Windows.Forms
+  isExternal: true
+  name: Message
+  nameWithType: Message
+  fullName: System.Windows.Forms.Message
+- uid: System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)
+  commentId: M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)
+  parent: System.Windows.Forms.Control
+  isExternal: true
+  name: WndProc(Message)
+  nameWithType: Control.WndProc(Message)
+  fullName: System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message)
+  spec.csharp:
+  - uid: System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)
+    name: WndProc
+    nameWithType: Control.WndProc
+    fullName: System.Windows.Forms.Control.WndProc
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Forms.Message
+    name: Message
+    nameWithType: Message
+    fullName: System.Windows.Forms.Message
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)
+    name: WndProc
+    nameWithType: Control.WndProc
+    fullName: System.Windows.Forms.Control.WndProc
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Windows.Forms.Message
+    name: Message
+    nameWithType: Message
+    fullName: System.Windows.Forms.Message
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SumatraPDF.SumatraPDFControl.WndProc*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.WndProc
+  name: WndProc
+  nameWithType: SumatraPDFControl.WndProc
+  fullName: SumatraPDF.SumatraPDFControl.WndProc
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.SumatraMessageEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.SumatraMessageEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.SumatraMessageEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.SumatraMessageEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs
+    name: SumatraPDFControl.SumatraMessageEventArgs
+    nameWithType: SumatraPDFControl.SumatraMessageEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs
+    name: SumatraPDFControl.SumatraMessageEventArgs
+    nameWithType: SumatraPDFControl.SumatraMessageEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullName.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.PageChangedEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.PageChangedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.PageChangedEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.PageChangedEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.PageChangedEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.PageChangedEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.PageChangedEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.PageChangedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+    name: SumatraPDFControl.PageChangedEventArgs
+    nameWithType: SumatraPDFControl.PageChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+    name: SumatraPDFControl.PageChangedEventArgs
+    nameWithType: SumatraPDFControl.PageChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.ContextMenuOpeningEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.ContextMenuOpeningEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.ContextMenuOpeningEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.ContextMenuOpeningEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+    name: SumatraPDFControl.ContextMenuOpeningEventArgs
+    nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+    name: SumatraPDFControl.ContextMenuOpeningEventArgs
+    nameWithType: SumatraPDFControl.ContextMenuOpeningEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.ZoomChangedEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.ZoomChangedEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.ZoomChangedEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.ZoomChangedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs
+    name: SumatraPDFControl.ZoomChangedEventArgs
+    nameWithType: SumatraPDFControl.ZoomChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs
+    name: SumatraPDFControl.ZoomChangedEventArgs
+    nameWithType: SumatraPDFControl.ZoomChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.LinkClickedEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.LinkClickedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.LinkClickedEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.LinkClickedEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.LinkClickedEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.LinkClickedEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.LinkClickedEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.LinkClickedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+    name: SumatraPDFControl.LinkClickedEventArgs
+    nameWithType: SumatraPDFControl.LinkClickedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+    name: SumatraPDFControl.LinkClickedEventArgs
+    nameWithType: SumatraPDFControl.LinkClickedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.LinkClickedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.DisplayModeChangedEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.DisplayModeChangedEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.DisplayModeChangedEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.DisplayModeChangedEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+    name: SumatraPDFControl.DisplayModeChangedEventArgs
+    nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+    name: SumatraPDFControl.DisplayModeChangedEventArgs
+    nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{SumatraPDF.SumatraPDFControl.ScrollStateEventArgs}
+  commentId: T:System.EventHandler{SumatraPDF.SumatraPDFControl.ScrollStateEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<SumatraPDFControl.ScrollStateEventArgs>
+  nameWithType: EventHandler<SumatraPDFControl.ScrollStateEventArgs>
+  fullName: System.EventHandler<SumatraPDF.SumatraPDFControl.ScrollStateEventArgs>
+  nameWithType.vb: EventHandler(Of SumatraPDFControl.ScrollStateEventArgs)
+  fullName.vb: System.EventHandler(Of SumatraPDF.SumatraPDFControl.ScrollStateEventArgs)
+  name.vb: EventHandler(Of SumatraPDFControl.ScrollStateEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+    name: SumatraPDFControl.ScrollStateEventArgs
+    nameWithType: SumatraPDFControl.ScrollStateEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+    name: SumatraPDFControl.ScrollStateEventArgs
+    nameWithType: SumatraPDFControl.ScrollStateEventArgs
+    fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler{System.Windows.Forms.KeyPressEventArgs}
+  commentId: T:System.EventHandler{System.Windows.Forms.KeyPressEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<KeyPressEventArgs>
+  nameWithType: EventHandler<KeyPressEventArgs>
+  fullName: System.EventHandler<System.Windows.Forms.KeyPressEventArgs>
+  nameWithType.vb: EventHandler(Of KeyPressEventArgs)
+  fullName.vb: System.EventHandler(Of System.Windows.Forms.KeyPressEventArgs)
+  name.vb: EventHandler(Of KeyPressEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: System.Windows.Forms.KeyPressEventArgs
+    name: KeyPressEventArgs
+    nameWithType: KeyPressEventArgs
+    fullName: System.Windows.Forms.KeyPressEventArgs
+    isExternal: true
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: System.Windows.Forms.KeyPressEventArgs
+    name: KeyPressEventArgs
+    nameWithType: KeyPressEventArgs
+    fullName: System.Windows.Forms.KeyPressEventArgs
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Windows.Forms.KeyEventHandler
+  commentId: T:System.Windows.Forms.KeyEventHandler
+  parent: System.Windows.Forms
+  isExternal: true
+  name: KeyEventHandler
+  nameWithType: KeyEventHandler
+  fullName: System.Windows.Forms.KeyEventHandler
+- uid: SumatraPDF.SumatraPDFControl.ContextMenuStrip*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ContextMenuStrip
+  name: ContextMenuStrip
+  nameWithType: SumatraPDFControl.ContextMenuStrip
+  fullName: SumatraPDF.SumatraPDFControl.ContextMenuStrip
+- uid: System.Windows.Forms.ContextMenuStrip
+  commentId: T:System.Windows.Forms.ContextMenuStrip
+  parent: System.Windows.Forms
+  isExternal: true
+  name: ContextMenuStrip
+  nameWithType: ContextMenuStrip
+  fullName: System.Windows.Forms.ContextMenuStrip
+- uid: SumatraPDF.SumatraPDFControl.SumatraPDFPath*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.SumatraPDFPath
+  name: SumatraPDFPath
+  nameWithType: SumatraPDFControl.SumatraPDFPath
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFPath
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: SumatraPDF.SumatraPDFControl.SumatraPDFExe*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.SumatraPDFExe
+  name: SumatraPDFExe
+  nameWithType: SumatraPDFControl.SumatraPDFExe
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFExe
+- uid: SumatraPDF.SumatraPDFControl.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.#ctor
+  name: SumatraPDFControl
+  nameWithType: SumatraPDFControl.SumatraPDFControl
+  fullName: SumatraPDF.SumatraPDFControl.SumatraPDFControl
+- uid: SumatraPDF.SumatraPDFControl.LoadFile*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.LoadFile
+  name: LoadFile
+  nameWithType: SumatraPDFControl.LoadFile
+  fullName: SumatraPDF.SumatraPDFControl.LoadFile
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: SumatraPDF.SumatraPDFControl.CopySelection*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.CopySelection
+  name: CopySelection
+  nameWithType: SumatraPDFControl.CopySelection
+  fullName: SumatraPDF.SumatraPDFControl.CopySelection
+- uid: SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.TextSearchNext(System.Boolean)
+  isExternal: true
+- uid: SumatraPDF.SumatraPDFControl.TextSearch*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.TextSearch
+  name: TextSearch
+  nameWithType: SumatraPDFControl.TextSearch
+  fullName: SumatraPDF.SumatraPDFControl.TextSearch
+- uid: SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  commentId: M:SumatraPDF.SumatraPDFControl.TextSearch(System.String,System.Boolean)
+  isExternal: true
+- uid: SumatraPDF.SumatraPDFControl.TextSearchNext*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.TextSearchNext
+  name: TextSearchNext
+  nameWithType: SumatraPDFControl.TextSearchNext
+  fullName: SumatraPDF.SumatraPDFControl.TextSearchNext
+- uid: SumatraPDF.SumatraPDFControl.OpenPrintDialog*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.OpenPrintDialog
+  name: OpenPrintDialog
+  nameWithType: SumatraPDFControl.OpenPrintDialog
+  fullName: SumatraPDF.SumatraPDFControl.OpenPrintDialog
+- uid: SumatraPDF.SumatraPDFControl.RotateBy*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.RotateBy
+  name: RotateBy
+  nameWithType: SumatraPDFControl.RotateBy
+  fullName: SumatraPDF.SumatraPDFControl.RotateBy
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.RotationEnum
+  parent: SumatraPDF
+  name: SumatraPDFControl.RotationEnum
+  nameWithType: SumatraPDFControl.RotationEnum
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum
+- uid: System.Windows.Forms.Control.Dispose(System.Boolean)
+  commentId: M:System.Windows.Forms.Control.Dispose(System.Boolean)
+  parent: System.Windows.Forms.Control
+  isExternal: true
+  name: Dispose(Boolean)
+  nameWithType: Control.Dispose(Boolean)
+  fullName: System.Windows.Forms.Control.Dispose(System.Boolean)
+  spec.csharp:
+  - uid: System.Windows.Forms.Control.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: Control.Dispose
+    fullName: System.Windows.Forms.Control.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Windows.Forms.Control.Dispose(System.Boolean)
+    name: Dispose
+    nameWithType: Control.Dispose
+    fullName: System.Windows.Forms.Control.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Boolean
+    name: Boolean
+    nameWithType: Boolean
+    fullName: System.Boolean
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: SumatraPDF.SumatraPDFControl.Dispose*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.Dispose
+  name: Dispose
+  nameWithType: SumatraPDFControl.Dispose
+  fullName: SumatraPDF.SumatraPDFControl.Dispose

@@ -1,0 +1,160 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  commentId: T:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  id: SumatraPDFControl.DisplayModeChangedEventArgs
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor(SumatraPDF.SumatraPDFControl.DisplayModeEnum)
+  - SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.DisplayModeChangedEventArgs
+  nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: DisplayModeChangedEventArgs
+    path: SumatraPDFControl.cs
+    startLine: 715
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nArgument class received by <xref href=\"SumatraPDF.SumatraPDFControl.DisplayModeChanged\" data-throw-if-not-resolved=\"false\"></xref> event\n"
+  example: []
+  syntax:
+    content: 'public class DisplayModeChangedEventArgs : EventArgs'
+    content.vb: >-
+      Public Class DisplayModeChangedEventArgs
+          Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor(SumatraPDF.SumatraPDFControl.DisplayModeEnum)
+  commentId: M:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor(SumatraPDF.SumatraPDFControl.DisplayModeEnum)
+  id: '#ctor(SumatraPDF.SumatraPDFControl.DisplayModeEnum)'
+  parent: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: DisplayModeChangedEventArgs(SumatraPDFControl.DisplayModeEnum)
+  nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs.DisplayModeChangedEventArgs(SumatraPDFControl.DisplayModeEnum)
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayModeChangedEventArgs(SumatraPDF.SumatraPDFControl.DisplayModeEnum)
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 720
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDisplayModeChangedEventArgs constructor\n"
+  example: []
+  syntax:
+    content: public DisplayModeChangedEventArgs(SumatraPDFControl.DisplayModeEnum DisplayMode)
+    parameters:
+    - id: DisplayMode
+      type: SumatraPDF.SumatraPDFControl.DisplayModeEnum
+    content.vb: Public Sub New(DisplayMode As SumatraPDFControl.DisplayModeEnum)
+  overload: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  commentId: P:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  id: DisplayMode
+  parent: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs
+  langs:
+  - csharp
+  - vb
+  name: DisplayMode
+  nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: DisplayMode
+    path: SumatraPDFControl.cs
+    startLine: 727
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument display mode\n"
+  example: []
+  syntax:
+    content: public SumatraPDFControl.DisplayModeEnum DisplayMode { get; }
+    parameters: []
+    return:
+      type: SumatraPDF.SumatraPDFControl.DisplayModeEnum
+    content.vb: Public ReadOnly Property DisplayMode As SumatraPDFControl.DisplayModeEnum
+  overload: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+references:
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.DisplayModeChanged
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.#ctor
+  name: DisplayModeChangedEventArgs
+  nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs.DisplayModeChangedEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayModeChangedEventArgs
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.DisplayModeEnum
+  parent: SumatraPDF
+  name: SumatraPDFControl.DisplayModeEnum
+  nameWithType: SumatraPDFControl.DisplayModeEnum
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeEnum
+- uid: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  name: DisplayMode
+  nameWithType: SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode
+  fullName: SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.DisplayMode

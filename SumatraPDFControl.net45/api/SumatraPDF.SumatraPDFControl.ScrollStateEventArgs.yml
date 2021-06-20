@@ -1,0 +1,160 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  commentId: T:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  id: SumatraPDFControl.ScrollStateEventArgs
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)
+  - SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.ScrollStateEventArgs
+  nameWithType: SumatraPDFControl.ScrollStateEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  type: Class
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ScrollStateEventArgs
+    path: SumatraPDFControl.cs
+    startLine: 733
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nArgument class received by <xref href=\"SumatraPDF.SumatraPDFControl.ScrollStateChanged\" data-throw-if-not-resolved=\"false\"></xref> event\n"
+  example: []
+  syntax:
+    content: 'public class ScrollStateEventArgs : EventArgs'
+    content.vb: >-
+      Public Class ScrollStateEventArgs
+          Inherits EventArgs
+  inheritance:
+  - System.Object
+  - System.EventArgs
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)
+  commentId: M:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)
+  id: '#ctor(SumatraPDF.SumatraPDFControl.ScrollStateStruct)'
+  parent: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  langs:
+  - csharp
+  - vb
+  name: ScrollStateEventArgs(SumatraPDFControl.ScrollStateStruct)
+  nameWithType: SumatraPDFControl.ScrollStateEventArgs.ScrollStateEventArgs(SumatraPDFControl.ScrollStateStruct)
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollStateEventArgs(SumatraPDF.SumatraPDFControl.ScrollStateStruct)
+  type: Constructor
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: .ctor
+    path: SumatraPDFControl.cs
+    startLine: 738
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nScrollStateEventArgs constructor\n"
+  example: []
+  syntax:
+    content: public ScrollStateEventArgs(SumatraPDFControl.ScrollStateStruct ScrollState)
+    parameters:
+    - id: ScrollState
+      type: SumatraPDF.SumatraPDFControl.ScrollStateStruct
+    content.vb: Public Sub New(ScrollState As SumatraPDFControl.ScrollStateStruct)
+  overload: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  commentId: P:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  id: ScrollState
+  parent: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs
+  langs:
+  - csharp
+  - vb
+  name: ScrollState
+  nameWithType: SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  type: Property
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ScrollState
+    path: SumatraPDFControl.cs
+    startLine: 745
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument scroll state \n"
+  example: []
+  syntax:
+    content: public SumatraPDFControl.ScrollStateStruct ScrollState { get; }
+    parameters: []
+    return:
+      type: SumatraPDF.SumatraPDFControl.ScrollStateStruct
+    content.vb: Public ReadOnly Property ScrollState As SumatraPDFControl.ScrollStateStruct
+  overload: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState*
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+references:
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  commentId: E:SumatraPDF.SumatraPDFControl.ScrollStateChanged
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.EventArgs
+  commentId: T:System.EventArgs
+  parent: System
+  isExternal: true
+  name: EventArgs
+  nameWithType: EventArgs
+  fullName: System.EventArgs
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.#ctor
+  name: ScrollStateEventArgs
+  nameWithType: SumatraPDFControl.ScrollStateEventArgs.ScrollStateEventArgs
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollStateEventArgs
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateStruct
+  commentId: T:SumatraPDF.SumatraPDFControl.ScrollStateStruct
+  parent: SumatraPDF
+  name: SumatraPDFControl.ScrollStateStruct
+  nameWithType: SumatraPDFControl.ScrollStateStruct
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateStruct
+- uid: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState*
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  name: ScrollState
+  nameWithType: SumatraPDFControl.ScrollStateEventArgs.ScrollState
+  fullName: SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.ScrollState

@@ -1,0 +1,188 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  id: SumatraPDFControl.ZoomVirtualEnum
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent
+  - SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage
+  - SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth
+  - SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.ZoomVirtualEnum
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  type: Enum
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: ZoomVirtualEnum
+    path: SumatraPDFControl.cs
+    startLine: 542
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument zoom virtual enum display constants (fit page, fit width, etc) represented by real zoom factor\n"
+  example: []
+  syntax:
+    content: public enum ZoomVirtualEnum
+    content.vb: Public Enum ZoomVirtualEnum
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None
+  commentId: F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None
+  id: None
+  parent: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  langs:
+  - csharp
+  - vb
+  name: None
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum.None
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: None
+    path: SumatraPDFControl.cs
+    startLine: 547
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nConstant expressing that no other constants represents the real zoom factor\n"
+  example: []
+  syntax:
+    content: None = 0
+    return:
+      type: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage
+  commentId: F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage
+  id: FitPage
+  parent: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  langs:
+  - csharp
+  - vb
+  name: FitPage
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum.FitPage
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitPage
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: FitPage
+    path: SumatraPDFControl.cs
+    startLine: 551
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nConstant to express a real zoom factor representing a complete page display\n"
+  example: []
+  syntax:
+    content: FitPage = -1
+    return:
+      type: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth
+  commentId: F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth
+  id: FitWidth
+  parent: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  langs:
+  - csharp
+  - vb
+  name: FitWidth
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum.FitWidth
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitWidth
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: FitWidth
+    path: SumatraPDFControl.cs
+    startLine: 555
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nConstant to express a real zoom factor representing a complete horizontal page display\n"
+  example: []
+  syntax:
+    content: FitWidth = -2
+    return:
+      type: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent
+  commentId: F:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent
+  id: FitContent
+  parent: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  langs:
+  - csharp
+  - vb
+  name: FitContent
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum.FitContent
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.FitContent
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: FitContent
+    path: SumatraPDFControl.cs
+    startLine: 559
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nConstant to express a real zoom factor representing a complete content page display\n"
+  example: []
+  syntax:
+    content: FitContent = -3
+    return:
+      type: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
+  parent: SumatraPDF
+  name: SumatraPDFControl.ZoomVirtualEnum
+  nameWithType: SumatraPDFControl.ZoomVirtualEnum
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum

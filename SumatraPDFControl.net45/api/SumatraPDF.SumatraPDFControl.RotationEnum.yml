@@ -1,0 +1,199 @@
+### YamlMime:ManagedReference
+items:
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.RotationEnum
+  id: SumatraPDFControl.RotationEnum
+  parent: SumatraPDF
+  children:
+  - SumatraPDF.SumatraPDFControl.RotationEnum.Rot180
+  - SumatraPDF.SumatraPDFControl.RotationEnum.Rot270
+  - SumatraPDF.SumatraPDFControl.RotationEnum.Rot90
+  - SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
+  langs:
+  - csharp
+  - vb
+  name: SumatraPDFControl.RotationEnum
+  nameWithType: SumatraPDFControl.RotationEnum
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum
+  type: Enum
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: RotationEnum
+    path: SumatraPDFControl.cs
+    startLine: 567
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nDocument rotation enum constants\n"
+  example: []
+  syntax:
+    content: public enum RotationEnum
+    content.vb: Public Enum RotationEnum
+  seealso:
+  - linkId: SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+    commentId: M:SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  - linkId: SumatraPDF.SumatraPDFControl.Rotation
+    commentId: P:SumatraPDF.SumatraPDFControl.Rotation
+  modifiers.csharp:
+  - public
+  - enum
+  modifiers.vb:
+  - Public
+  - Enum
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
+  commentId: F:SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
+  id: RotNone
+  parent: SumatraPDF.SumatraPDFControl.RotationEnum
+  langs:
+  - csharp
+  - vb
+  name: RotNone
+  nameWithType: SumatraPDFControl.RotationEnum.RotNone
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: RotNone
+    path: SumatraPDFControl.cs
+    startLine: 572
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\nNo rotation\n"
+  example: []
+  syntax:
+    content: RotNone = 0
+    return:
+      type: SumatraPDF.SumatraPDFControl.RotationEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum.Rot90
+  commentId: F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot90
+  id: Rot90
+  parent: SumatraPDF.SumatraPDFControl.RotationEnum
+  langs:
+  - csharp
+  - vb
+  name: Rot90
+  nameWithType: SumatraPDFControl.RotationEnum.Rot90
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum.Rot90
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Rot90
+    path: SumatraPDFControl.cs
+    startLine: 576
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\n90 degrees clockwise rotation\n"
+  example: []
+  syntax:
+    content: Rot90 = 90
+    return:
+      type: SumatraPDF.SumatraPDFControl.RotationEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum.Rot180
+  commentId: F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot180
+  id: Rot180
+  parent: SumatraPDF.SumatraPDFControl.RotationEnum
+  langs:
+  - csharp
+  - vb
+  name: Rot180
+  nameWithType: SumatraPDFControl.RotationEnum.Rot180
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum.Rot180
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Rot180
+    path: SumatraPDFControl.cs
+    startLine: 580
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\n180 degrees rotation\n"
+  example: []
+  syntax:
+    content: Rot180 = 180
+    return:
+      type: SumatraPDF.SumatraPDFControl.RotationEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum.Rot270
+  commentId: F:SumatraPDF.SumatraPDFControl.RotationEnum.Rot270
+  id: Rot270
+  parent: SumatraPDF.SumatraPDFControl.RotationEnum
+  langs:
+  - csharp
+  - vb
+  name: Rot270
+  nameWithType: SumatraPDFControl.RotationEnum.Rot270
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum.Rot270
+  type: Field
+  source:
+    remote:
+      path: SumatraPDFControl/SumatraPDFControl.cs
+      branch: master
+      repo: https://github.com/marcoscmonteiro/SumatraPDFControl.git
+    id: Rot270
+    path: SumatraPDFControl.cs
+    startLine: 584
+  assemblies:
+  - SumatraPDFControl
+  namespace: SumatraPDF
+  summary: "\n270 degrees clockwise rotation\n"
+  example: []
+  syntax:
+    content: Rot270 = 270
+    return:
+      type: SumatraPDF.SumatraPDFControl.RotationEnum
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+references:
+- uid: SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  commentId: M:SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
+  isExternal: true
+- uid: SumatraPDF.SumatraPDFControl.Rotation
+  commentId: P:SumatraPDF.SumatraPDFControl.Rotation
+  isExternal: true
+- uid: SumatraPDF
+  commentId: N:SumatraPDF
+  name: SumatraPDF
+  nameWithType: SumatraPDF
+  fullName: SumatraPDF
+- uid: SumatraPDF.SumatraPDFControl.RotationEnum
+  commentId: T:SumatraPDF.SumatraPDFControl.RotationEnum
+  parent: SumatraPDF
+  name: SumatraPDFControl.RotationEnum
+  nameWithType: SumatraPDFControl.RotationEnum
+  fullName: SumatraPDF.SumatraPDFControl.RotationEnum
