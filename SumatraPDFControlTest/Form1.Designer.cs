@@ -558,6 +558,7 @@
             this.SumatraPDFControl.Zoom = 0F;
             this.SumatraPDFControl.ZoomVirtual = SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.None;
             this.SumatraPDFControl.SumatraMessage += new System.EventHandler<SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs>(this.SumatraPDFControl_SumatraMessage);
+            this.SumatraPDFControl.FileOpened += new System.EventHandler<System.EventArgs>(this.SumatraPDFControl_FileOpened);
             this.SumatraPDFControl.PageChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.PageChangedEventArgs>(this.SumatraPDFControl_PageChangedMessage);
             this.SumatraPDFControl.ContextMenuOpening += new System.EventHandler<SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs>(this.SumatraPDFControl_ContextMenuMessage);
             this.SumatraPDFControl.ZoomChanged += new System.EventHandler<SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs>(this.SumatraPDFControl_ZoomChangedMessage);

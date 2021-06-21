@@ -247,10 +247,15 @@ namespace SumatraPDF
 						eDisplayMode = (DisplayModeEnum)int.Parse(m.Result("${args}"));
 						if (mmsg.Contains("Changed")) DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
 						break;
+
 					case "StartupFinished":
+						StartupFinished?.Invoke(this, new EventArgs());
+						break;
+
 					case "FileOpened":
 						GetPage();
-						CallBackReturn = RaiseDefaultSumatraEvent(sMsg0, dwData);
+						SumatraPDFCopyDataMsg("SetProperty", "AllowEditAnnotations", "0");
+						FileOpened?.Invoke(this, new EventArgs());
 						break;
 
 					case "ToolbarVisible":
@@ -395,6 +400,8 @@ namespace SumatraPDF
 			this.KeyPress?.Invoke(this, e);
 			// Do not allow SumatraPDF close current window when pressing 'q' key
 			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
+			// Do not allow SumatraPDF reload current document when pressing 'r' key
+			if (e.KeyChar == 'r' || e.KeyChar == 'R') e.Handled = true;
 			LastKeyPressEventArgs = e;
 		}
 
@@ -474,6 +481,7 @@ namespace SumatraPDF
 
 			};
 			SumatraProcess = Process.Start(PSInfo);
+			
 		}
 
 		private void OpenFile()
@@ -774,6 +782,38 @@ namespace SumatraPDF
 		/// </summary>
 		[Description("A generic SumatraPDF message not managed by other events"), Category("SumatraPDF")]
 		public event EventHandler<SumatraMessageEventArgs> SumatraMessage;
+
+		/// <summary>
+		/// Occurs after SumatraPDF.exe terminates startup process.
+		/// </summary>
+		/// <remarks>
+		/// <para>
+		/// This event occurs only after a new SumatraPDF.exe execution. So, simply loading a new document reutilizing SumatraPDF.exe instance 
+		/// do not fire this event, but only <see cref="FileOpened"/> event.
+		/// </para>
+		/// <para>		
+		/// Because SumatraPDF load documents asyncronously, some methods and properties requires end of startup process in order to function: 
+		/// eg.: <see cref="PageCount"/> or <see cref="Page"/>. So, use these methods or properties only after <see cref="StartupFinished"/> event or either <see cref="FileOpened"/>.
+		/// </para>
+		/// <para>
+		/// It is only recommended to carry out the initialization procedures when handling the <see cref="FileOpened"/> event because the <see cref="StartupFinished"/> 
+		/// event is only fired when a new instance of SumatraPDF.exe is executed.
+		/// </para>
+		/// </remarks>
+		/// <seealso cref="FileOpened"/>
+		[Description("Occurs after SumatraPDF.exe terminates startup process"), Category("SumatraPDF")]
+		public event EventHandler<EventArgs> StartupFinished;
+
+		/// <summary>
+		/// Occurs after a new document load by SumatraPDFControl
+		/// </summary>
+		/// <remarks>
+		/// It's recomended to initilize application variables on this event because some properties and methods does not respond correctly during SumatraPDF.exe startup process. This
+		/// event garantees that startup process was ended. See <see cref="StartupFinished"/> event for more details.
+		/// </remarks>
+		/// <seealso cref="StartupFinished"/>
+		[Description("Occurs after a new document load by SumatraPDFControl"), Category("SumatraPDF")]
+		public event EventHandler<EventArgs> FileOpened;
 
 		/// <summary>
 		/// Occurs after changing current visible page

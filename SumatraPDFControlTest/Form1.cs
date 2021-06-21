@@ -49,12 +49,6 @@ namespace SumatraPDFControlTest
         private void SumatraPDFControl_SumatraMessage(object sender, SumatraMessageEventArgs e)
         {
             AddText(e.Msg + " - " + e.CallBackReturn);
-            if (e.Msg == "[StartupFinished()]" || e.Msg == "[FileOpened()]")
-            {
-                toolPage.Text = SumatraPDFControl.Page.ToString() + " - " + SumatraPDFControl.NamedDest;
-                lblCurrPage.Text = SumatraPDFControl.Page.ToString();
-                lblPageCount.Text = SumatraPDFControl.PageCount.ToString();
-            }
         }
 
         private void SumatraPDFControl_PageChangedMessage(object sender, PageChangedEventArgs e)
@@ -171,7 +165,6 @@ namespace SumatraPDFControlTest
             toolDisplayMode.Text = e.DisplayMode.ToString();
         }
 
-
         private void toolGetRotation_Click(object sender, EventArgs e)
         {
             toolText.Text = SumatraPDFControl.Rotation.ToString();
@@ -281,6 +274,13 @@ namespace SumatraPDFControlTest
         private void buttonGotoLast_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.GoToLastPage();
+        }
+
+        private void SumatraPDFControl_FileOpened(object sender, EventArgs e)
+        {
+            toolPage.Text = SumatraPDFControl.Page.ToString() + " - " + SumatraPDFControl.NamedDest;
+            lblCurrPage.Text = SumatraPDFControl.Page.ToString();
+            lblPageCount.Text = SumatraPDFControl.PageCount.ToString();
         }
     }
 }

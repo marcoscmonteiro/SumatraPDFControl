@@ -327,6 +327,37 @@
             A generic SumatraPDF message not managed by other events.
             </summary>
         </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.StartupFinished">
+            <summary>
+            Occurs after SumatraPDF.exe terminates startup process.
+            </summary>
+            <remarks>
+            <para>
+            This event occurs only after a new SumatraPDF.exe execution. So, simply loading a new document reutilizing SumatraPDF.exe instance 
+            do not fire this event, but only <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> event.
+            </para>
+            <para>		
+            Because SumatraPDF load documents asyncronously, some methods and properties requires end of startup process in order to function: 
+            eg.: <see cref="P:SumatraPDF.SumatraPDFControl.PageCount"/> or <see cref="P:SumatraPDF.SumatraPDFControl.Page"/>. So, use these methods or properties only after <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event or either <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/>.
+            </para>
+            <para>
+            After <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event has been fired, a <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> event occurs in sequence. 
+            So, it's recomended to do initialization procedures within <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> 
+            event because <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event it's only fired on a new SumatraPDF.exe execution.
+            </para>
+            </remarks>
+            <seealso cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/>
+        </member>
+        <member name="E:SumatraPDF.SumatraPDFControl.FileOpened">
+            <summary>
+            Occurs after a new document load by SumatraPDFControl
+            </summary>
+            <remarks>
+            It's recomended to initilize application variables on this event because some properties and methods does not respond correctly during SumatraPDF.exe startup process. This
+            event garantees that startup process was ended. See <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event for more details.
+            </remarks>
+            <seealso cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/>
+        </member>
         <member name="E:SumatraPDF.SumatraPDFControl.PageChanged">
             <summary>
             Occurs after changing current visible page

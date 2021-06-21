@@ -1,4 +1,4 @@
-﻿TODO (Version 1.3.1):
+﻿TODO (Version 1.4.0):
 
 Review SumatraPDFControle Nuget pack and push
 SumatraPDF automate pack and push
@@ -9,13 +9,10 @@ Analyze and implement possible to send other messages from SumatraPDF Canvas Wnd
 Special keys events 
   - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
   - Treat ALT key
-Create events for LoadDocument and StartupFinished 
-Raise LoadDocument afaer StartupFinished
 Global Config 
     - Investigate SetupPluginMode (SumatraStartup.cpp) to:
     - Disable Sumatra update
     - Disable Internet access
-    - Disable annotation edit
     - Property to Enable/Disable auto reload document when external change occurs 
     - Method to reload document - CmdRefresh - 210 - ("R" key is doing that)
 Documentation
