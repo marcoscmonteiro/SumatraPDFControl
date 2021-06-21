@@ -25,7 +25,7 @@ namespace SumatraPDFControlTest
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SumatraPDFControl.LoadFile(openFileDialog.FileName, int.Parse(toolText.Text == "" ? "1" : toolText.Text));
+                LoadFile(openFileDialog.FileName, int.Parse(toolText.Text == "" ? "1" : toolText.Text), false);
             }
 
         }
@@ -42,7 +42,6 @@ namespace SumatraPDFControlTest
 
         private void toolStripToogleToolbar_Click(object sender, EventArgs e)
         {
-            //SumatraPDFControl.ToogleToolBar();
             SumatraPDFControl.ToolBarVisible = !SumatraPDFControl.ToolBarVisible;
         }
 
@@ -133,10 +132,36 @@ namespace SumatraPDFControlTest
             toolZoomVirtualSet.Text = SumatraPDFControl.ZoomVirtual.ToString();
         }
 
-        private void Form1_Shown(object sender, EventArgs e)
+        System.IO.FileSystemWatcher fw;
+        private void LoadFile(string Filename, int Page, bool NewSumatraInstance)
         {
-            SumatraPDFControl.LoadFile(Filename, NewSumatraInstance: NewSumatraPDFProcess);
+            if (fw != null) 
+            { 
+                fw.EnableRaisingEvents = false;
+                fw.Dispose();
+            }
+            SumatraPDFControl.LoadFile(Filename, Page, NewSumatraInstance);
+            fw = new System.IO.FileSystemWatcher(System.IO.Path.GetDirectoryName(Filename))
+            {
+                NotifyFilter = System.IO.NotifyFilters.LastWrite,
+                Filter = System.IO.Path.GetFileName(Filename),
+                IncludeSubdirectories = true
+            };
+            fw.Changed += Fw_Changed;
+            fw.EnableRaisingEvents = true;
+
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {            
+            LoadFile(Filename, 1, NewSumatraInstance: NewSumatraPDFProcess);
+
             Filename = string.Empty;
+        }
+
+        private void Fw_Changed(object sender, System.IO.FileSystemEventArgs e)
+        {
+            SumatraPDFControl.ReloadCurrentFile();
         }
 
         private void SumatraPDFControl_ScrollStateChanged(object sender, ScrollStateEventArgs e)
@@ -281,6 +306,11 @@ namespace SumatraPDFControlTest
             toolPage.Text = SumatraPDFControl.Page.ToString() + " - " + SumatraPDFControl.NamedDest;
             lblCurrPage.Text = SumatraPDFControl.Page.ToString();
             lblPageCount.Text = SumatraPDFControl.PageCount.ToString();
+        }
+
+        private void btnReload_Click(object sender, EventArgs e)
+        {
+            SumatraPDFControl.ReloadCurrentFile();
         }
     }
 }

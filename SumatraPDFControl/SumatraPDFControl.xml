@@ -341,9 +341,8 @@
             eg.: <see cref="P:SumatraPDF.SumatraPDFControl.PageCount"/> or <see cref="P:SumatraPDF.SumatraPDFControl.Page"/>. So, use these methods or properties only after <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event or either <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/>.
             </para>
             <para>
-            After <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event has been fired, a <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> event occurs in sequence. 
-            So, it's recomended to do initialization procedures within <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> 
-            event because <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> event it's only fired on a new SumatraPDF.exe execution.
+            It is only recommended to carry out the initialization procedures when handling the <see cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/> event because the <see cref="E:SumatraPDF.SumatraPDFControl.StartupFinished"/> 
+            event is only fired when a new instance of SumatraPDF.exe is executed.
             </para>
             </remarks>
             <seealso cref="E:SumatraPDF.SumatraPDFControl.FileOpened"/>
@@ -480,6 +479,11 @@
         <member name="M:SumatraPDF.SumatraPDFControl.#ctor">
             <summary>
             Default constructor
+            </summary>
+        </member>
+        <member name="M:SumatraPDF.SumatraPDFControl.ReloadCurrentFile">
+            <summary>
+            Reload current loaded document in order to reflect external changes made in it
             </summary>
         </member>
         <member name="M:SumatraPDF.SumatraPDFControl.LoadFile(System.String,System.Int32,System.Boolean)">

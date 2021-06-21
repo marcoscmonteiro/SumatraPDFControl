@@ -86,6 +86,7 @@
             this.lblCurrPage = new System.Windows.Forms.Label();
             this.lblOf = new System.Windows.Forms.Label();
             this.lblPageCount = new System.Windows.Forms.Label();
+            this.btnReload = new System.Windows.Forms.Button();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -641,11 +642,22 @@
             this.lblPageCount.Text = "00000";
             this.lblPageCount.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnReload
+            // 
+            this.btnReload.Location = new System.Drawing.Point(645, 1);
+            this.btnReload.Name = "btnReload";
+            this.btnReload.Size = new System.Drawing.Size(51, 21);
+            this.btnReload.TabIndex = 12;
+            this.btnReload.Text = "Reload";
+            this.btnReload.UseVisualStyleBackColor = true;
+            this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 741);
+            this.Controls.Add(this.btnReload);
             this.Controls.Add(this.lblPageCount);
             this.Controls.Add(this.lblOf);
             this.Controls.Add(this.lblCurrPage);
@@ -728,6 +740,7 @@
         private System.Windows.Forms.Label lblCurrPage;
         private System.Windows.Forms.Label lblOf;
         private System.Windows.Forms.Label lblPageCount;
+        private System.Windows.Forms.Button btnReload;
     }
 }
 

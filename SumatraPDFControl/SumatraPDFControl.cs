@@ -81,13 +81,14 @@ namespace SumatraPDF
 
 		// Sumatra Commands (get and update them from sumatra Commands.h)		
 		//private readonly int SumatraCmdClose = 204;
-		private readonly int SumatraCmdPrint = 206;
-		private readonly int SumatraCmdCopySelection = 228;
+		private readonly int CmdPrint = 206;
+		private readonly int CmdCopySelection = 228;
 		private readonly int CmdSelectAll = 229;
 		private readonly int CmdGoToNextPage = 235;
 		private readonly int CmdGoToPrevPage = 236;
 		private readonly int CmdGoToFirstPage = 237;
 		private readonly int CmdGoToLastPage = 238;
+		private readonly int CmdRefresh = 210;
 
 		private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
@@ -1122,6 +1123,14 @@ namespace SumatraPDF
 		}
 
 		/// <summary>
+		/// Reload current loaded document in order to reflect external changes made in it
+		/// </summary>
+		public void ReloadCurrentFile()
+        {
+			SumatraPDFFrameCmd(CmdRefresh);
+		}
+
+		/// <summary>
 		/// Load sumatra supported file. Current file will be closed.
 		/// </summary>
 		/// <param name="PDFFile">File name with complete path</param>
@@ -1156,7 +1165,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void CopySelection()
 		{
-			SumatraPDFFrameCmd(SumatraCmdCopySelection);
+			SumatraPDFFrameCmd(CmdCopySelection);
 		}
 
 		/// <summary>
@@ -1199,7 +1208,7 @@ namespace SumatraPDF
 		/// </remarks>
 		public void OpenPrintDialog()
         {
-			SumatraPDFFrameCmd(SumatraCmdPrint, true);
+			SumatraPDFFrameCmd(CmdPrint, true);
 		}
 
 		/// <summary>
