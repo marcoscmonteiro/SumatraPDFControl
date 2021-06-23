@@ -11,16 +11,18 @@ made by [Krzysztof Kowalczyk](https://blog.kowalczyk.info/).
 * Go to [SumatraPDFControl site](https://sumatrapdfcontrol.mcmonteiro.net) to view documentation 
 and [SumatraPDFControl API](https://sumatrapdfcontrol.mcmonteiro.net/api/SumatraPDF.html)
 
-* [Source code in GitHub](https://github.com/marcoscmonteiro/sumatrapdfcontrol) licenced under [GPLv3](https://licenses.nuget.org/GPL-3.0-only)
+* [Source code in GitHub](https://github.com/marcoscmonteiro/sumatrapdfcontrol) licenced under [GPLv3](https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/LICENSE)
 
-* Works with [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) version 4.5 or greater
+* GIT Clone C# Project from [GitHub](https://github.com/marcoscmonteiro/sumatrapdfcontrol) and open SumatraPDFControl.sln with Visual Studio 2019 (works with community version).
+Execute SumatraPDFControlTest project included in solution It shows SumatraPDFControl in action.
 
-* Works with [.NET Core](https://dotnet.microsoft.com/download/dotnet) version 5 or greater
+* Works with [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) version 2.0 or greater
 
-* It uses a specific compiled [SumatraPDF forked code](https://github.com/marcoscmonteiro/sumatrapdf) 
-which enables SumatraPDF working in an enhanced plugin mode. 
-Compiled versions of it (32 and 64 bits) are distributed inside the [nuget.org package](https://www.nuget.org/packages/SumatraPDFControl/)
+* Works with [.NET Core](https://dotnet.microsoft.com/download/dotnet) version 3.1 or greater
+
+* SumatraPDFControl uses a specific compiled [SumatraPDF forked code](https://github.com/marcoscmonteiro/sumatrapdf) 
+which enables SumatraPDF working in an enhanced plugin mode. Compiled versions are distributed like NuGet packages:
+[x86 - 32 bits](https://www.nuget.org/packages/SumatraPDF.PluginMode.x86) [x64 - 64 bits]((https://www.nuget.org/packages/SumatraPDF.PluginMode.x64) versions. 
+At least 1 of these packages have to be referenced by Windows Forms project using SumatraPDFControl.
 
 * Bugs, issues or improvements? Report them in [GitHub Project Issues](https://github.com/marcoscmonteiro/SumatraPDFControl/issues)
-
-
