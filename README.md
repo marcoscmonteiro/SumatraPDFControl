@@ -27,5 +27,5 @@ SumatraPDFControl uses a specific compiled [SumatraPDF forked code](https://gith
 which enables SumatraPDF working in an enhanced plugin mode. Compiled versions are distributed like NuGet packages:
 
 * [x86 - 32 bits](https://www.nuget.org/packages/SumatraPDF.PluginMode.x86) for Windows 32bit archicheture (works also with 64 bits Windows architecture)
-* [x64 - 64 bits]((https://www.nuget.org/packages/SumatraPDF.PluginMode.x64) for Windows 64bit archicheture
+* [x64 - 64 bits](https://www.nuget.org/packages/SumatraPDF.PluginMode.x64) for Windows 64bit archicheture
 * At least 1 of these packages have to be referenced by Windows Forms project using SumatraPDFControl.
