@@ -29,6 +29,8 @@ Remove-Item -Recurse -Force $CurrentDir\nupkg
 
 mkdir $CurrentDir\nupkg
 
+Remove-Item ..\SumatraPDFControl\bin\Release\*.nupkg
+
 # Build SumatraPDFControl component
 msbuild ..\SumatraPDFControl\SumatraPDFControl.csproj -t:pack -p:Configuration=Release
 
