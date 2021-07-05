@@ -457,8 +457,8 @@ namespace SumatraPDF
 				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
 				if (!File.Exists(SumatraComplete) && arch == "AMD64") 
 				{
-					SumatraComplete = assemblyPath + @"\x86";
-				}
+					SumatraComplete = Path.Combine(assemblyPath + @"\x86", SumatraPDFExe);
+                }
 			}
 			else
 			{
