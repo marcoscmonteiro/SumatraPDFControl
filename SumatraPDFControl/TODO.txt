@@ -1,22 +1,18 @@
-﻿TODO (Version 1.4.0):
+﻿TODO (Version 1.5.0):
 
-Review SumatraPDFControle Nuget pack and push
-SumatraPDF automate pack and push
 Throw exception on error loading document
-Review control inherited properties / events to hide those are not used and implement others* 
+Review control inherited properties / events to hide those are not used and implement others
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
   - ?
 Special keys events 
   - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
   - Treat ALT key
 Global Config 
-    - Investigate SetupPluginMode (SumatraStartup.cpp) to:
-        - Disable Sumatra update
-        - Disable Internet access
+  - Investigate SetupPluginMode (SumatraStartup.cpp) to:
+     - Disable Sumatra update
+     - Disable Internet access
 Documentation
-  - Include reference to SumatraPDFControlTest in documentation
-  - Include reference to SumatraPDF.PluginMode.x86/64 nuget packages
-  - Include GPLv3 licence file and comments in source code
+  - Put TODO.TXT as MarkDown Article in Documentation
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):
