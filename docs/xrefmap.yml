@@ -215,6 +215,64 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.Dispose
   nameWithType: SumatraPDFControl.Dispose
+- uid: SumatraPDF.SumatraPDFControl.FileOpened
+  name: FileOpened
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_FileOpened
+  commentId: E:SumatraPDF.SumatraPDFControl.FileOpened
+  fullName: SumatraPDF.SumatraPDFControl.FileOpened
+  nameWithType: SumatraPDFControl.FileOpened
+- uid: SumatraPDF.SumatraPDFControl.GoToFirstPage
+  name: GoToFirstPage()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToFirstPage
+  commentId: M:SumatraPDF.SumatraPDFControl.GoToFirstPage
+  fullName: SumatraPDF.SumatraPDFControl.GoToFirstPage()
+  nameWithType: SumatraPDFControl.GoToFirstPage()
+- uid: SumatraPDF.SumatraPDFControl.GoToFirstPage*
+  name: GoToFirstPage
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToFirstPage_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.GoToFirstPage
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.GoToFirstPage
+  nameWithType: SumatraPDFControl.GoToFirstPage
+- uid: SumatraPDF.SumatraPDFControl.GoToLastPage
+  name: GoToLastPage()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToLastPage
+  commentId: M:SumatraPDF.SumatraPDFControl.GoToLastPage
+  fullName: SumatraPDF.SumatraPDFControl.GoToLastPage()
+  nameWithType: SumatraPDFControl.GoToLastPage()
+- uid: SumatraPDF.SumatraPDFControl.GoToLastPage*
+  name: GoToLastPage
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToLastPage_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.GoToLastPage
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.GoToLastPage
+  nameWithType: SumatraPDFControl.GoToLastPage
+- uid: SumatraPDF.SumatraPDFControl.GoToNextPage
+  name: GoToNextPage()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToNextPage
+  commentId: M:SumatraPDF.SumatraPDFControl.GoToNextPage
+  fullName: SumatraPDF.SumatraPDFControl.GoToNextPage()
+  nameWithType: SumatraPDFControl.GoToNextPage()
+- uid: SumatraPDF.SumatraPDFControl.GoToNextPage*
+  name: GoToNextPage
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToNextPage_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.GoToNextPage
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.GoToNextPage
+  nameWithType: SumatraPDFControl.GoToNextPage
+- uid: SumatraPDF.SumatraPDFControl.GoToPrevPage
+  name: GoToPrevPage()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToPrevPage
+  commentId: M:SumatraPDF.SumatraPDFControl.GoToPrevPage
+  fullName: SumatraPDF.SumatraPDFControl.GoToPrevPage()
+  nameWithType: SumatraPDFControl.GoToPrevPage()
+- uid: SumatraPDF.SumatraPDFControl.GoToPrevPage*
+  name: GoToPrevPage
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_GoToPrevPage_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.GoToPrevPage
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.GoToPrevPage
+  nameWithType: SumatraPDFControl.GoToPrevPage
 - uid: SumatraPDF.SumatraPDFControl.KeyDown
   name: KeyDown
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_KeyDown
@@ -348,6 +406,32 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.PageChangedEventArgs.Page
   nameWithType: SumatraPDFControl.PageChangedEventArgs.Page
+- uid: SumatraPDF.SumatraPDFControl.PageCount
+  name: PageCount
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_PageCount
+  commentId: P:SumatraPDF.SumatraPDFControl.PageCount
+  fullName: SumatraPDF.SumatraPDFControl.PageCount
+  nameWithType: SumatraPDFControl.PageCount
+- uid: SumatraPDF.SumatraPDFControl.PageCount*
+  name: PageCount
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_PageCount_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.PageCount
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.PageCount
+  nameWithType: SumatraPDFControl.PageCount
+- uid: SumatraPDF.SumatraPDFControl.ReloadCurrentFile
+  name: ReloadCurrentFile()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ReloadCurrentFile
+  commentId: M:SumatraPDF.SumatraPDFControl.ReloadCurrentFile
+  fullName: SumatraPDF.SumatraPDFControl.ReloadCurrentFile()
+  nameWithType: SumatraPDFControl.ReloadCurrentFile()
+- uid: SumatraPDF.SumatraPDFControl.ReloadCurrentFile*
+  name: ReloadCurrentFile
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ReloadCurrentFile_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ReloadCurrentFile
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.ReloadCurrentFile
+  nameWithType: SumatraPDFControl.ReloadCurrentFile
 - uid: SumatraPDF.SumatraPDFControl.RotateBy(SumatraPDF.SumatraPDFControl.RotationEnum)
   name: RotateBy(SumatraPDFControl.RotationEnum)
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_RotateBy_SumatraPDF_SumatraPDFControl_RotationEnum_
@@ -500,6 +584,25 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.ScrollStateStruct.Y
   nameWithType: SumatraPDFControl.ScrollStateStruct.Y
+- uid: SumatraPDF.SumatraPDFControl.SelectAll
+  name: SelectAll()
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_SelectAll
+  commentId: M:SumatraPDF.SumatraPDFControl.SelectAll
+  fullName: SumatraPDF.SumatraPDFControl.SelectAll()
+  nameWithType: SumatraPDFControl.SelectAll()
+- uid: SumatraPDF.SumatraPDFControl.SelectAll*
+  name: SelectAll
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_SelectAll_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.SelectAll
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.SelectAll
+  nameWithType: SumatraPDFControl.SelectAll
+- uid: SumatraPDF.SumatraPDFControl.StartupFinished
+  name: StartupFinished
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_StartupFinished
+  commentId: E:SumatraPDF.SumatraPDFControl.StartupFinished
+  fullName: SumatraPDF.SumatraPDFControl.StartupFinished
+  nameWithType: SumatraPDFControl.StartupFinished
 - uid: SumatraPDF.SumatraPDFControl.SumatraMessage
   name: SumatraMessage
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_SumatraMessage

@@ -62,28 +62,37 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="sumatrapdfcontrol">SumatraPDFControl</h1>
 
-<h3 id="windows-forms-control-based-on-sumatrapdfreader-to-view-and-read-portable-document-files-pdf">Windows Forms Control based on <a href="https://www.sumatrapdfreader.org/">SumatraPDFReader</a> to view and read Portable Document Files (PDF)</h3>
-<p>It allows you to construct Windows Forms application capable to view and read Portable Document Files (PDF)
-with all features present in great <a href="https://www.sumatrapdfreader.org/">SumatraPDFReader</a>
-made by <a href="https://blog.kowalczyk.info/">Krzysztof Kowalczyk</a>.</p>
+<h2 id="windows-forms-control-based-on-sumatrapdfreader-to-view-and-read-portable-document-files-pdf">Windows Forms Control based on <a href="https://www.sumatrapdfreader.org/">SumatraPDFReader</a> to view and read Portable Document Files (PDF)</h2>
+<p>It allows you to construct Windows Forms application capable to view and read Portable Document Files (PDF) with all features present in great <a href="https://www.sumatrapdfreader.org/">SumatraPDFReader</a> made by <a href="https://blog.kowalczyk.info/">Krzysztof Kowalczyk</a>.</p>
 <ul>
 <li><p>Download compiled version from <a href="https://www.nuget.org/packages/SumatraPDFControl/">NuGet.org</a></p>
 </li>
 <li><p>Go to <a href="https://sumatrapdfcontrol.mcmonteiro.net">SumatraPDFControl site</a> to view documentation
 and <a href="https://sumatrapdfcontrol.mcmonteiro.net/api/SumatraPDF.html">SumatraPDFControl API</a></p>
 </li>
-<li><p><a href="https://github.com/marcoscmonteiro/sumatrapdfcontrol">Source code in GitHub</a> licenced under <a href="https://licenses.nuget.org/GPL-3.0-only">GPLv3</a></p>
+<li><p><a href="https://github.com/marcoscmonteiro/sumatrapdfcontrol">Source code in GitHub</a> licenced under <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/LICENSE">GPLv3</a></p>
 </li>
-<li><p>Works with <a href="https://dotnet.microsoft.com/download/dotnet-framework">.NET Framework</a> version 4.5 or greater</p>
+<li><p>GIT Clone C# Project from <a href="https://github.com/marcoscmonteiro/sumatrapdfcontrol">GitHub</a> and open SumatraPDFControl.sln with Visual Studio 2019 (works with community version).</p>
 </li>
-<li><p>Works with <a href="https://dotnet.microsoft.com/download/dotnet">.NET Core</a> version 5 or greater</p>
-</li>
-<li><p>It uses a specific compiled <a href="https://github.com/marcoscmonteiro/sumatrapdf">SumatraPDF forked code</a>
-which enables SumatraPDF working in an enhanced plugin mode.
-Compiled versions of it (32 and 64 bits) are distributed inside the <a href="https://www.nuget.org/packages/SumatraPDFControl/">nuget.org package</a></p>
+<li><p>SumatraPDFControlTest included in soluction shows SumatraPDFControl in action.</p>
 </li>
 <li><p>Bugs, issues or improvements? Report them in <a href="https://github.com/marcoscmonteiro/SumatraPDFControl/issues">GitHub Project Issues</a></p>
 </li>
+</ul>
+<h2 id="supported-net-framework--core">Supported .NET Framework / Core</h2>
+<ul>
+<li><p>Works with <a href="https://dotnet.microsoft.com/download/dotnet-framework">.NET Framework</a> version 2.0 or greater</p>
+</li>
+<li><p>Works with <a href="https://dotnet.microsoft.com/download/dotnet">.NET Core</a> version 3.1 or greater</p>
+</li>
+</ul>
+<h2 id="dependent-nugetorg-packages">Dependent NuGet.org packages</h2>
+<p>SumatraPDFControl uses a specific compiled <a href="https://github.com/marcoscmonteiro/sumatrapdf">SumatraPDF forked code</a>
+which enables SumatraPDF working in an enhanced plugin mode. Compiled versions are distributed like NuGet packages:</p>
+<ul>
+<li><a href="https://www.nuget.org/packages/SumatraPDF.PluginMode.x86">x86 - 32 bits</a> for Windows 32bit archicheture (works also with 64 bits Windows architecture)</li>
+<li>[x64 - 64 bits]((<a href="https://www.nuget.org/packages/SumatraPDF.PluginMode.x64">https://www.nuget.org/packages/SumatraPDF.PluginMode.x64</a>) for Windows 64bit archicheture</li>
+<li>At least 1 of these packages have to be referenced by Windows Forms project using SumatraPDFControl.</li>
 </ul>
 </article>
           </div>
