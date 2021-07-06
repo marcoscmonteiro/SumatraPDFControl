@@ -9,7 +9,6 @@ Special keys events
   - Treat ALT key
 Global Config 
   - Investigate SetupPluginMode (SumatraStartup.cpp) to:
-     - Disable Sumatra update
      - Disable Internet access
 Documentation
   - Put TODO.TXT as MarkDown Article in Documentation
