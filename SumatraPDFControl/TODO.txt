@@ -7,14 +7,12 @@ Analyze and implement possible to send other messages from SumatraPDF Canvas Wnd
 Special keys events 
   - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
   - Treat ALT key
-Global Config 
-  - Investigate SetupPluginMode (SumatraStartup.cpp) to:
-     - Disable Internet access
-Documentation
-  - Put TODO.TXT as MarkDown Article in Documentation
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):
+
+Documentation
+  - Put TODO.TXT as MarkDown Article in Documentation
 
 Print:
  - Events: onPrint, onPrintEnd

@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="SumatraPDF.PluginMode.x64" Version="1.0.2" />
-    <PackageReference Include="SumatraPDF.PluginMode.x86" Version="1.0.2" />
+    <PackageReference Include="SumatraPDF.PluginMode.x64" Version="1.0.3" />
+    <PackageReference Include="SumatraPDF.PluginMode.x86" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>
