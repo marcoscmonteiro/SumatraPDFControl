@@ -186,7 +186,8 @@ function NugetPush {
         $RepoURL = $Repositories[$repo][0]
         $ApiKey = $Repositories[$repo][1]
         Write-Output "Publishing projects in $RepoURL (note: if version already exists an error will be logged)" | Tee-Object log\NugetPush.log -Append
-        nuget push -Source "$RepoURL" -ApiKey $ApiKey -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
+        # nuget push -Source "$RepoURL" -ApiKey $ApiKey -SkipDuplicate nupkg\*.nupkg >> log\NugetPush.log
+        dotnet nuget push ".\nupkg\*.nupkg" --api-key $ApiKey --skip-duplicate --source "$RepoURL" >> log\NugetPush.log
       }  
       Write-Output "Published" | Tee-Object log\NugetPush.log -Append
       Get-Content .\log\NugetPush.log 

@@ -19,10 +19,12 @@ Set-Location $CurrentDir
 
 # Get ApiKey from secret file (not versioned on GIT)
 $NugetOrgApiKey = Get-Content ~/Onedrive/Documentos/nuget/NUGET.ORG.APIKEY.TXT
+$GitHubPAT = Get-Content ~/Onedrive/Documentos/nuget/GITHUB.PAT.TXT
 
 # HashTable containing the repositories with URL and ApiKey for publishing the components
 $Repositories = @{
     "Nuget.Org" = @( "https://api.nuget.org/v3/index.json", $NugetOrgApiKey )
+    "GitHub" = @( "https://nuget.pkg.github.com/marcoscmonteiro/index.json", $GitHubPAT )
 }
 
 Remove-Item -Recurse -Force $CurrentDir\nupkg
