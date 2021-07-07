@@ -5,7 +5,14 @@ Review control inherited properties / events to hide those are not used and impl
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
   - ?
 Special keys events 
-  - Block WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
+  - Block 
+    - WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
+    - CTRL + N - Open new SumatraPDF Window
+    - CTRL + W - Close current document
+    - F8 - Hide/Show Toolbar
+    - F12 - Hide/Show Bookmarks
+    - Analyze disable all Accelerators (see SumatraPDF Accelerators.cpp) in plugin mode. They are been translated in WM_COMMAND event instead WM_KEYDOWN
+
   - Treat ALT key
 Do a revision in GEDVISA PDFXChange used properties
    
