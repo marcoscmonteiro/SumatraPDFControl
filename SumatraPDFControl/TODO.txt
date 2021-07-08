@@ -4,16 +4,6 @@ Throw exception on error loading document
 Review control inherited properties / events to hide those are not used and implement others
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
   - ?
-Special keys events 
-  - Block 
-    - WM_SYSCHAR message (handled by FrameOnSysChar on SumatraPDF.cpp) because ALT+Space can give user control of current plugin window 
-    - CTRL + N - Open new SumatraPDF Window
-    - CTRL + W - Close current document
-    - F8 - Hide/Show Toolbar
-    - F12 - Hide/Show Bookmarks
-    - Analyze disable all Accelerators (see SumatraPDF Accelerators.cpp) in plugin mode. They are been translated in WM_COMMAND event instead WM_KEYDOWN
-
-  - Treat ALT key
 Do a revision in GEDVISA PDFXChange used properties
    
 TODO (Future versions):
@@ -25,6 +15,8 @@ Print:
  - Events: onPrint, onPrintEnd
  - Methods: AbortPrint, MayCloseWindow
  - Direct Print method
+
+Enabled / Disable Keyboard Accelarators (Change RunMessageLoop in SumatraStartup.cpp disable call of TranslateAccelerator)
  
 Toc:
   - ContextMenu SumatraPDFControl for toc - Create a property for tocContextMenu
