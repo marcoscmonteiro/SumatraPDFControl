@@ -249,7 +249,13 @@ namespace SumatraPDF
 						if (mmsg.Contains("Changed")) DisplayModeChanged?.Invoke(this, new DisplayModeChangedEventArgs(eDisplayMode));
 						break;
 
-					case "StartupFinished":
+                    case "EnableAccelerators":
+                        bKeyAccelerators = (int.Parse(m.Result("${args}")) == 1);
+                        break;
+
+                    case "StartupFinished":
+						StartupFinished?.Invoke(this, new EventArgs());
+						StartupFinished?.Invoke(this, new EventArgs());
 						StartupFinished?.Invoke(this, new EventArgs());
 						break;
 
@@ -300,11 +306,6 @@ namespace SumatraPDF
 		/// <param name="m">The Windows <see cref="Message"/> to process.</param>
 		protected override void WndProc(ref Message m)
 		{
-			if (m.Msg == WM_CHAR && LastKeyDownEventArgs.SuppressKeyPress) {
-				m.Result = (IntPtr)0;
-				return;
-			}
-
 			base.WndProc(ref m);
 
 			if (m.Msg == WM_SETFOCUS)
@@ -904,7 +905,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set current PDF scroll state (X and Y units from visible PDF page)
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public ScrollStateStruct ScrollState
 		{
 			get
@@ -935,7 +936,7 @@ namespace SumatraPDF
 		/// <remarks>
 		/// <see cref="ZoomVirtual"/> property to get or set zoom mode like fit width, fit page etc.
 		/// </remarks>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public float Zoom
 		{
 			get
@@ -956,7 +957,7 @@ namespace SumatraPDF
 		/// <remarks>
 		/// <see cref="Zoom"/> property to get or set numeric scale
 		/// </remarks>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public ZoomVirtualEnum ZoomVirtual
 		{
 			get
@@ -980,7 +981,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set mode to display PDF pages (SinglePage, Facing, BookView, Continuous, ContinuousFacing, ContinuousBookView, Automatic)
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public DisplayModeEnum DisplayMode
 		{
 			get
@@ -1008,7 +1009,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set current PDF page viewing position
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public int Page
 		{
 			get
@@ -1038,7 +1039,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get current PDF rotation (see RotateBy method to change rotation state)
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public RotationEnum Rotation
 		{
 			get
@@ -1052,7 +1053,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set current PDF NamedDest viewing position
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public string NamedDest
 		{
 			get
@@ -1070,7 +1071,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set if SumatraPDF default toolbar is visible
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public Boolean ToolBarVisible
 		{
 			get
@@ -1088,7 +1089,7 @@ namespace SumatraPDF
 		/// <summary>
 		/// Get or set if SumatraPDF Table of contents (Toc) sidebar is visible (if document doesn't have Toc it always will be false)
 		/// </summary>
-		[Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
+		[Browsable(false)]
 		public Boolean TocVisible
 		{
 			get
@@ -1101,6 +1102,60 @@ namespace SumatraPDF
 				SumatraPDFCopyDataMsg("SetProperty", "TocVisible", value ? "1" : "0");
 			}
 		}
+
+        private Boolean bKeyAccelerators;
+
+        /// <summary>
+        /// Get or set if Keyboard accelerators (like CTRL+A, CTRL+P, etc.) are enable or not;
+        /// </summary>
+        /// <remarks>
+        /// If keyboard accelerators are enable pressing keys will perform the following actions:
+        /// <list type="table">
+        /// <listheader>
+        ///     <term>Key</term>
+        ///     <description>Action</description>
+        /// </listheader>
+        /// <item><term>CTRL+A</term><description>Select All</description></item>
+        /// <item><term>CTRL+C</term><description>Copy Selection</description></item>
+        /// <item><term>CTRL+F</term><description>Find</description></item>
+        /// <item><term>CTRL+G</term><description>Goto Page</description></item>
+        /// <item><term>CTRL+P</term><description>Print Document</description></item>
+        /// <item><term>CTRL+Y</term><description>Zoom: Custom</description></item>
+        /// <item><term>CTRL+0</term><description>Zoom: Fit Page</description></item>
+        /// <item><term>CTRL+1</term><description>Zoom: Actual Size</description></item>
+        /// <item><term>CTRL+2</term><description>Zoom: Fit Width</description></item>
+        /// <item><term>CTRL+3</term><description>Zoom: Fit Content</description></item>
+        /// <item><term>CTRL+6</term><description>View: Single Page</description></item>
+        /// <item><term>CTRL+7</term><description>View: Facing</description></item>
+        /// <item><term>CTRL+8</term><description>View: Book</description></item>
+        /// <item><term>CTRL+PlusKey</term><description>Zoom In</description></item>
+        /// <item><term>CTRL+SHIFT+PlusKey</term><description>View: Rotate Right</description></item>
+        /// <item><term>CTRL+InsertKey</term><description>Copy Selection</description></item>
+        /// <item><term>F3</term><description>Find: Next</description></item>
+        /// <item><term>SHIFT+F3</term><description>Find: Previous</description></item>
+        /// <item><term>CTRL+F3</term><description>Find: Next Selection</description></item>
+        /// <item><term>CTRL+SHIFT+F3</term><description>Find: Previous Selection</description></item>
+        /// <item><term>CTRL+MinusKey</term><description>Zoom Out</description></item>
+        /// <item><term>CTRL+SHIFT+MinusKey</term><description>View: Rotate Left</description></item>
+        /// <item><term>ALT+LeftArrow</term><description>Navigate: Back</description></item>
+        /// <item><term>ALT+RightArrow</term><description>Navigate: Forward</description></item>
+        /// </list>
+        /// Disabling these accelerators allow <see cref="KeyDown"/> raise event of these keys.
+        /// </remarks>
+        [Browsable(false)]
+        public Boolean KeyAccelerators
+        {
+            get
+            {
+                SumatraPDFCopyDataMsg("GetProperty", "EnableAccelerators");
+                return bKeyAccelerators;
+            }
+
+            set
+            {
+                SumatraPDFCopyDataMsg("SetProperty", "EnableAccelerators", value ? "1" : "0");
+            }
+        }
 
 
 		#endregion

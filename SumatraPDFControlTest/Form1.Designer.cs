@@ -87,6 +87,7 @@
             this.lblOf = new System.Windows.Forms.Label();
             this.lblPageCount = new System.Windows.Forms.Label();
             this.btnReload = new System.Windows.Forms.Button();
+            this.cbKeyAccel = new System.Windows.Forms.CheckBox();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -652,11 +653,23 @@
             this.btnReload.UseVisualStyleBackColor = true;
             this.btnReload.Click += new System.EventHandler(this.btnReload_Click);
             // 
+            // cbKeyAccel
+            // 
+            this.cbKeyAccel.AutoSize = true;
+            this.cbKeyAccel.Location = new System.Drawing.Point(708, 4);
+            this.cbKeyAccel.Name = "cbKeyAccel";
+            this.cbKeyAccel.Size = new System.Drawing.Size(77, 17);
+            this.cbKeyAccel.TabIndex = 13;
+            this.cbKeyAccel.Text = "Key Accel.";
+            this.cbKeyAccel.UseVisualStyleBackColor = true;
+            this.cbKeyAccel.CheckedChanged += new System.EventHandler(this.cbKeyAccel_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 741);
+            this.Controls.Add(this.cbKeyAccel);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.lblPageCount);
             this.Controls.Add(this.lblOf);
@@ -741,6 +754,7 @@
         private System.Windows.Forms.Label lblOf;
         private System.Windows.Forms.Label lblPageCount;
         private System.Windows.Forms.Button btnReload;
+        private System.Windows.Forms.CheckBox cbKeyAccel;
     }
 }
 

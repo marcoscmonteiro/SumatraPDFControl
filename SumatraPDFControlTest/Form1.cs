@@ -306,11 +306,17 @@ namespace SumatraPDFControlTest
             toolPage.Text = SumatraPDFControl.Page.ToString() + " - " + SumatraPDFControl.NamedDest;
             lblCurrPage.Text = SumatraPDFControl.Page.ToString();
             lblPageCount.Text = SumatraPDFControl.PageCount.ToString();
+            cbKeyAccel.Checked = SumatraPDFControl.KeyAccelerators;
         }
 
         private void btnReload_Click(object sender, EventArgs e)
         {
             SumatraPDFControl.ReloadCurrentFile();
+        }
+
+        private void cbKeyAccel_CheckedChanged(object sender, EventArgs e)
+        {
+            SumatraPDFControl.KeyAccelerators = cbKeyAccel.Checked;
         }
     }
 }

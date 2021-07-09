@@ -15,8 +15,6 @@ Print:
  - Events: onPrint, onPrintEnd
  - Methods: AbortPrint, MayCloseWindow
  - Direct Print method
-
-Enabled / Disable Keyboard Accelarators (Change RunMessageLoop in SumatraStartup.cpp disable call of TranslateAccelerator)
  
 Toc:
   - ContextMenu SumatraPDFControl for toc - Create a property for tocContextMenu

@@ -476,6 +476,45 @@
             Get or set if SumatraPDF Table of contents (Toc) sidebar is visible (if document doesn't have Toc it always will be false)
             </summary>
         </member>
+        <member name="P:SumatraPDF.SumatraPDFControl.KeyAccelerators">
+            <summary>
+            Get or set if Keyboard accelerators (like CTRL+A, CTRL+P, etc.) are enable or not;
+            </summary>
+            <remarks>
+            If keyboard accelerators are enable pressing keys will perform the following actions:
+            <list type="table">
+            <listheader>
+                <term>Key</term>
+                <description>Action</description>
+            </listheader>
+            <item><term>CTRL+A</term><description>Select All</description></item>
+            <item><term>CTRL+C</term><description>Copy Selection</description></item>
+            <item><term>CTRL+F</term><description>Find</description></item>
+            <item><term>CTRL+G</term><description>Goto Page</description></item>
+            <item><term>CTRL+P</term><description>Print Document</description></item>
+            <item><term>CTRL+Y</term><description>Zoom: Custom</description></item>
+            <item><term>CTRL+0</term><description>Zoom: Fit Page</description></item>
+            <item><term>CTRL+1</term><description>Zoom: Actual Size</description></item>
+            <item><term>CTRL+2</term><description>Zoom: Fit Width</description></item>
+            <item><term>CTRL+3</term><description>Zoom: Fit Content</description></item>
+            <item><term>CTRL+6</term><description>View: Single Page</description></item>
+            <item><term>CTRL+7</term><description>View: Facing</description></item>
+            <item><term>CTRL+8</term><description>View: Book</description></item>
+            <item><term>CTRL+PlusKey</term><description>Zoom In</description></item>
+            <item><term>CTRL+SHIFT+PlusKey</term><description>View: Rotate Right</description></item>
+            <item><term>CTRL+InsertKey</term><description>Copy Selection</description></item>
+            <item><term>F3</term><description>Find: Next</description></item>
+            <item><term>SHIFT+F3</term><description>Find: Previous</description></item>
+            <item><term>CTRL+F3</term><description>Find: Next Selection</description></item>
+            <item><term>CTRL+SHIFT+F3</term><description>Find: Previous Selection</description></item>
+            <item><term>CTRL+MinusKey</term><description>Zoom Out</description></item>
+            <item><term>CTRL+SHIFT+MinusKey</term><description>View: Rotate Left</description></item>
+            <item><term>ALT+LeftArrow</term><description>Navigate: Back</description></item>
+            <item><term>ALT+RightArrow</term><description>Navigate: Forward</description></item>
+            </list>
+            Disabling these accelerators allow <see cref="E:SumatraPDF.SumatraPDFControl.KeyDown"/> raise event of these keys.
+            </remarks>
+        </member>
         <member name="M:SumatraPDF.SumatraPDFControl.#ctor">
             <summary>
             Default constructor

@@ -116,6 +116,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.CopySelection
   nameWithType: SumatraPDFControl.CopySelection
+- uid: SumatraPDF.SumatraPDFControl.DisplayMode
+  name: DisplayMode
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_DisplayMode
+  commentId: P:SumatraPDF.SumatraPDFControl.DisplayMode
+  fullName: SumatraPDF.SumatraPDFControl.DisplayMode
+  nameWithType: SumatraPDFControl.DisplayMode
+- uid: SumatraPDF.SumatraPDFControl.DisplayMode*
+  name: DisplayMode
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_DisplayMode_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.DisplayMode
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.DisplayMode
+  nameWithType: SumatraPDFControl.DisplayMode
 - uid: SumatraPDF.SumatraPDFControl.DisplayModeChanged
   name: DisplayModeChanged
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_DisplayModeChanged
@@ -273,6 +286,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.GoToPrevPage
   nameWithType: SumatraPDFControl.GoToPrevPage
+- uid: SumatraPDF.SumatraPDFControl.KeyAccelerators
+  name: KeyAccelerators
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_KeyAccelerators
+  commentId: P:SumatraPDF.SumatraPDFControl.KeyAccelerators
+  fullName: SumatraPDF.SumatraPDFControl.KeyAccelerators
+  nameWithType: SumatraPDFControl.KeyAccelerators
+- uid: SumatraPDF.SumatraPDFControl.KeyAccelerators*
+  name: KeyAccelerators
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_KeyAccelerators_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.KeyAccelerators
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.KeyAccelerators
+  nameWithType: SumatraPDFControl.KeyAccelerators
 - uid: SumatraPDF.SumatraPDFControl.KeyDown
   name: KeyDown
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_KeyDown
@@ -342,6 +368,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.LoadFile
   nameWithType: SumatraPDFControl.LoadFile
+- uid: SumatraPDF.SumatraPDFControl.NamedDest
+  name: NamedDest
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_NamedDest
+  commentId: P:SumatraPDF.SumatraPDFControl.NamedDest
+  fullName: SumatraPDF.SumatraPDFControl.NamedDest
+  nameWithType: SumatraPDFControl.NamedDest
+- uid: SumatraPDF.SumatraPDFControl.NamedDest*
+  name: NamedDest
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_NamedDest_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.NamedDest
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.NamedDest
+  nameWithType: SumatraPDFControl.NamedDest
 - uid: SumatraPDF.SumatraPDFControl.OpenPrintDialog
   name: OpenPrintDialog()
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_OpenPrintDialog
@@ -355,6 +394,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.OpenPrintDialog
   nameWithType: SumatraPDFControl.OpenPrintDialog
+- uid: SumatraPDF.SumatraPDFControl.Page
+  name: Page
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Page
+  commentId: P:SumatraPDF.SumatraPDFControl.Page
+  fullName: SumatraPDF.SumatraPDFControl.Page
+  nameWithType: SumatraPDFControl.Page
+- uid: SumatraPDF.SumatraPDFControl.Page*
+  name: Page
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Page_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.Page
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.Page
+  nameWithType: SumatraPDFControl.Page
 - uid: SumatraPDF.SumatraPDFControl.PageChanged
   name: PageChanged
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_PageChanged
@@ -445,6 +497,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.RotateBy
   nameWithType: SumatraPDFControl.RotateBy
+- uid: SumatraPDF.SumatraPDFControl.Rotation
+  name: Rotation
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Rotation
+  commentId: P:SumatraPDF.SumatraPDFControl.Rotation
+  fullName: SumatraPDF.SumatraPDFControl.Rotation
+  nameWithType: SumatraPDFControl.Rotation
+- uid: SumatraPDF.SumatraPDFControl.Rotation*
+  name: Rotation
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Rotation_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.Rotation
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.Rotation
+  nameWithType: SumatraPDFControl.Rotation
 - uid: SumatraPDF.SumatraPDFControl.RotationEnum
   name: SumatraPDFControl.RotationEnum
   href: api/SumatraPDF.SumatraPDFControl.RotationEnum.html
@@ -475,6 +540,19 @@ references:
   commentId: F:SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
   fullName: SumatraPDF.SumatraPDFControl.RotationEnum.RotNone
   nameWithType: SumatraPDFControl.RotationEnum.RotNone
+- uid: SumatraPDF.SumatraPDFControl.ScrollState
+  name: ScrollState
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ScrollState
+  commentId: P:SumatraPDF.SumatraPDFControl.ScrollState
+  fullName: SumatraPDF.SumatraPDFControl.ScrollState
+  nameWithType: SumatraPDFControl.ScrollState
+- uid: SumatraPDF.SumatraPDFControl.ScrollState*
+  name: ScrollState
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ScrollState_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ScrollState
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.ScrollState
+  nameWithType: SumatraPDFControl.ScrollState
 - uid: SumatraPDF.SumatraPDFControl.ScrollStateChanged
   name: ScrollStateChanged
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ScrollStateChanged
@@ -706,6 +784,32 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.TextSearchNext
   nameWithType: SumatraPDFControl.TextSearchNext
+- uid: SumatraPDF.SumatraPDFControl.TocVisible
+  name: TocVisible
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_TocVisible
+  commentId: P:SumatraPDF.SumatraPDFControl.TocVisible
+  fullName: SumatraPDF.SumatraPDFControl.TocVisible
+  nameWithType: SumatraPDFControl.TocVisible
+- uid: SumatraPDF.SumatraPDFControl.TocVisible*
+  name: TocVisible
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_TocVisible_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.TocVisible
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.TocVisible
+  nameWithType: SumatraPDFControl.TocVisible
+- uid: SumatraPDF.SumatraPDFControl.ToolBarVisible
+  name: ToolBarVisible
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ToolBarVisible
+  commentId: P:SumatraPDF.SumatraPDFControl.ToolBarVisible
+  fullName: SumatraPDF.SumatraPDFControl.ToolBarVisible
+  nameWithType: SumatraPDFControl.ToolBarVisible
+- uid: SumatraPDF.SumatraPDFControl.ToolBarVisible*
+  name: ToolBarVisible
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ToolBarVisible_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ToolBarVisible
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.ToolBarVisible
+  nameWithType: SumatraPDFControl.ToolBarVisible
 - uid: SumatraPDF.SumatraPDFControl.WndProc(System.Windows.Forms.Message@)
   name: WndProc(ref Message)
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_WndProc_System_Windows_Forms_Message__
@@ -722,6 +826,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.WndProc
   nameWithType: SumatraPDFControl.WndProc
+- uid: SumatraPDF.SumatraPDFControl.Zoom
+  name: Zoom
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Zoom
+  commentId: P:SumatraPDF.SumatraPDFControl.Zoom
+  fullName: SumatraPDF.SumatraPDFControl.Zoom
+  nameWithType: SumatraPDFControl.Zoom
+- uid: SumatraPDF.SumatraPDFControl.Zoom*
+  name: Zoom
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_Zoom_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.Zoom
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.Zoom
+  nameWithType: SumatraPDFControl.Zoom
 - uid: SumatraPDF.SumatraPDFControl.ZoomChanged
   name: ZoomChanged
   href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ZoomChanged
@@ -786,6 +903,19 @@ references:
   isSpec: "True"
   fullName: SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.ZoomVirtual
   nameWithType: SumatraPDFControl.ZoomChangedEventArgs.ZoomVirtual
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtual
+  name: ZoomVirtual
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ZoomVirtual
+  commentId: P:SumatraPDF.SumatraPDFControl.ZoomVirtual
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtual
+  nameWithType: SumatraPDFControl.ZoomVirtual
+- uid: SumatraPDF.SumatraPDFControl.ZoomVirtual*
+  name: ZoomVirtual
+  href: api/SumatraPDF.SumatraPDFControl.html#SumatraPDF_SumatraPDFControl_ZoomVirtual_
+  commentId: Overload:SumatraPDF.SumatraPDFControl.ZoomVirtual
+  isSpec: "True"
+  fullName: SumatraPDF.SumatraPDFControl.ZoomVirtual
+  nameWithType: SumatraPDFControl.ZoomVirtual
 - uid: SumatraPDF.SumatraPDFControl.ZoomVirtualEnum
   name: SumatraPDFControl.ZoomVirtualEnum
   href: api/SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.html

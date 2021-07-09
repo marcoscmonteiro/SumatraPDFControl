@@ -31,7 +31,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ContextMenuOpeningEventArgs.html",
-          "hash": "aUPjKmvwRBHRygHHe/+4u4sG83wy2fzkFufbTnaPUlE="
+          "hash": "H7nfpZUcEX86nETQ+QGbr2KeJdzpB9z/lyPFZIBc224="
         }
       },
       "is_incremental": false,
@@ -43,7 +43,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeChangedEventArgs.html",
-          "hash": "xLav5vxZ2CYfnAy2Utd8mKRjIQC9MRFA0PE0wec4zRQ="
+          "hash": "Us5Y8jL2g8U/AUelZkMRYItArncfAHUGvgML2TjA/K0="
         }
       },
       "is_incremental": false,
@@ -55,10 +55,10 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.DisplayModeEnum.html",
-          "hash": "bosFakYdmiR+ABVfZO17Bk4LrKit03psy6jRytQ+K2A="
+          "hash": "ijO1Cec0cTI0Gr8jEaYnvlznkrTeS533kCRA3ulBtjU="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -67,7 +67,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.LinkClickedEventArgs.html",
-          "hash": "Tua0Jc58tvLB17qDpRwM+IrhdeptrAxlwvGKjUkzCwI="
+          "hash": "M/KcMg7YzAOOFVv/nTUMWvqxrXkfg4Vz2yiq2DXY5Ak="
         }
       },
       "is_incremental": false,
@@ -79,7 +79,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.PageChangedEventArgs.html",
-          "hash": "95N/HZUeDgO6GqTFHWJYPY9QO5ZOPyULfO+kSeIBddg="
+          "hash": "Kw7rU190AvASKl7Gczoeii6l0T7Zmk9zS9IvXfziwis="
         }
       },
       "is_incremental": false,
@@ -91,7 +91,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.RotationEnum.html",
-          "hash": "zax+eUZ/zEw2jGqpxCtEDQrIX8rgJh4gg6zoL8Lsko0="
+          "hash": "6xKw6Dt3x7ZC9Ppvjd/9xNkE8accUsH70GntwQaqEv0="
         }
       },
       "is_incremental": false,
@@ -103,7 +103,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateEventArgs.html",
-          "hash": "bIfhlDl6Uc95Z8VPAEDxU9PCiAkpqaCc2TBxYUl7zP4="
+          "hash": "y55m3TRy86lzELzkceBoMGPWjjDZ87CMhYz3rcAkaCw="
         }
       },
       "is_incremental": false,
@@ -115,10 +115,10 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ScrollStateStruct.html",
-          "hash": "BlvU1MsMC4ed3MYRGFI7CR4dLlPAsdKp527jxFL7V5w="
+          "hash": "SygP95DJv2lwb/Z+d/Xe6/6JUAYIy6poijwW4wF2CaQ="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -127,7 +127,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.SumatraMessageEventArgs.html",
-          "hash": "TLaOqywLVFfG1gLN3aG6ZM8EAQOsY5KaKkfb37bm+1M="
+          "hash": "d6lCX2aQqOFhCkBEbBbv81o+nTDIIdQiGXFDHvlPtag="
         }
       },
       "is_incremental": false,
@@ -139,7 +139,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomChangedEventArgs.html",
-          "hash": "QEeSQxr8QjvgiVQA6QsuU1ojQZNJwvyj9ykdcque/gM="
+          "hash": "t0oIkZz19Gp6HHdLWa7hfwSo/IilhwxUMZsdBGY0AVI="
         }
       },
       "is_incremental": false,
@@ -151,10 +151,10 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.ZoomVirtualEnum.html",
-          "hash": "v3pQROCdkshuUfNEWYzybex9P3/iSZ625276O8G/rI0="
+          "hash": "pPVR61bcXz8wyamMG+OH9lPFIRml497qjdLNDQBqYuc="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -163,7 +163,7 @@
       "output": {
         ".html": {
           "relative_path": "api/SumatraPDF.SumatraPDFControl.html",
-          "hash": "wDNSwfmwwKTozo7JWZZ1k1z2sSIWYTt10G1sRwt0f+g="
+          "hash": "0DGtsxgEkpqXZCUi6g1TU5GdTLIMX4LA4XnwFcLuvOc="
         }
       },
       "is_incremental": false,
@@ -279,7 +279,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 13,
-          "skipped_file_count": 1
+          "skipped_file_count": 12
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
