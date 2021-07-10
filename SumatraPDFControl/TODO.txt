@@ -1,15 +1,16 @@
-﻿TODO (Version 1.5.0):
+TODO (Future versions):
 
 Throw exception on error loading document
 Review control inherited properties / events to hide those are not used and implement others
 Analyze and implement possible to send other messages from SumatraPDF Canvas WndProc to SumatraPDFControl 		 
-  - ?
-Do a revision in GEDVISA PDFXChange used properties
-   
-TODO (Future versions):
+
+Methods
+  - Show Document properties
+  - Hide/Show ScrollBars
 
 Documentation
   - Put TODO.TXT as MarkDown Article in Documentation
+  - Create Version History Article in Documentation
 
 Print:
  - Events: onPrint, onPrintEnd
