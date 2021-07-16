@@ -10,8 +10,10 @@ env:
   # Path to the solution file relative to the root of the project.
   SOLUTION_FILE_PATH: .\SumatraPDFControl\SumatraPDFControl.csproj
   NUPKG_PATH: .\SumatraPDFControl\bin\Release
-  NUGET_SOURCE: https://api.nuget.org/v3/index.json
-  NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}
+  NUGET_SOURCE: https://api.nuget.org/v3/index.json  
+  NUGET_API_KEY: ${{secrets.NUGET_API_KEY}}  
+  GITHUB_NUGET_SOURCE: https://nuget.pkg.github.com/marcoscmonteiro/index.json
+  PKG_GITHUB: ${{secrets.PKG_GITHUB}}
 
   # Configuration type to build.
   # You can convert this to a build matrix if you need coverage of multiple configuration types.
@@ -42,3 +44,8 @@ jobs:
       shell: cmd
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: nuget push -Source ${{env.NUGET_SOURCE}} -ApiKey "%NUGET_API_KEY%" -SkipDuplicate ${{env.NUPKG_PATH}}\*.nupkg  
+    
+    - name: GitHub Packages Push
+      shell: cmd
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: nuget push -Source ${{env.GITHUB_NUGET_SOURCE}} -ApiKey "%PKG_GITHUB%" -SkipDuplicate ${{env.NUPKG_PATH}}\*.nupkg
