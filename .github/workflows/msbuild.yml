@@ -48,4 +48,4 @@ jobs:
     - name: GitHub Packages Push
       shell: cmd
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget push -Source ${{env.GITHUB_NUGET_SOURCE}} -ApiKey "%PKG_GITHUB%" -SkipDuplicate ${{env.NUPKG_PATH}}\*.nupkg
+      run: dotnet nuget push ${{env.NUPKG_PATH}}\*.nupkg --source ${{env.GITHUB_NUGET_SOURCE}} --api-key "%PKG_GITHUB%" --skip-duplicate 
