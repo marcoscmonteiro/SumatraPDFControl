@@ -38,6 +38,7 @@ jobs:
       # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
       run: msbuild ${{env.SOLUTION_FILE_PATH}} -t:pack -p:Configuration=${{env.BUILD_CONFIGURATION}} 
       
-    - shell: cmd
+    - name: Nuget Push
+      shell: cmd
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: nuget push ${{env.NUPKG_PATH}}\*.nupkg --api-key "%NUGET_API_KEY%" --skip-duplicate --source ${{env.NUGET_SOURCE}} 
+      run: nuget push -Source ${{env.NUGET_SOURCE}} -ApiKey "%NUGET_API_KEY%" -SkipDuplicate ${{env.NUPKG_PATH}}\*.nupkg  
