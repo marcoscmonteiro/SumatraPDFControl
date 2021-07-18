@@ -1,3 +1,7 @@
+TODO 1.4.4
+
+Disable "a" keypress making highlight annotation
+
 TODO (Future versions):
 
 Throw exception on error loading document

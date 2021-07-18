@@ -404,7 +404,10 @@ namespace SumatraPDF
 			if (e.KeyChar == 'q' || e.KeyChar == 'Q') e.Handled = true;
 			// Do not allow SumatraPDF reload current document when pressing 'r' key
 			if (e.KeyChar == 'r' || e.KeyChar == 'R') e.Handled = true;
-			LastKeyPressEventArgs = e;
+            // Do not allow SumatraPDF make an annotation when pressing 'a' key
+            if (e.KeyChar == 'a' || e.KeyChar == 'A') e.Handled = true;
+
+            LastKeyPressEventArgs = e;
 		}
 
 		private void SumatraPDFControl_Resize(object sender, EventArgs e)
