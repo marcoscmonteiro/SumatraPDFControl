@@ -1,6 +1,8 @@
-TODO 1.4.4
+TODO 1.4.5
 
-Disable "a" keypress making highlight annotation
+Validate SumatraPDF.exe version for use by SumatraPDFControl version
+
+https://stackoverflow.com/questions/11350008/how-to-get-exe-file-version-number-from-file-path
 
 TODO (Future versions):
 

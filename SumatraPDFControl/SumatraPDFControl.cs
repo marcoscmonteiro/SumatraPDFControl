@@ -79,18 +79,39 @@ namespace SumatraPDF
 		private readonly IntPtr DDEW = (IntPtr)0x44646557;
 		private readonly IntPtr SUMATRAPLUGIN = (IntPtr)0x44646558;
 
-		// Sumatra Commands (get and update them from sumatra Commands.h)		
-		//private readonly int SumatraCmdClose = 204;
-		private readonly int CmdPrint = 206;
-		private readonly int CmdCopySelection = 228;
-		private readonly int CmdSelectAll = 229;
-		private readonly int CmdGoToNextPage = 235;
-		private readonly int CmdGoToPrevPage = 236;
-		private readonly int CmdGoToFirstPage = 237;
-		private readonly int CmdGoToLastPage = 238;
-		private readonly int CmdRefresh = 210;
+        // Sumatra Commands (get and update them from sumatra Commands.h)	
+        // Do not use these Commands values directly because they could change through SumatraPDF versions
+        // Instead map to string required commands in SumatraPDF.exe like plugin.cpp did in InitializePlugin function.
+        // Then modify SumatraPDFCommandEnum with these command names
+        //
+        //private readonly int CmdClose = 204;
+        //private readonly int CmdPrint = 206;
+        //private readonly int CmdCopySelection = 228;
+        //private readonly int CmdSelectAll = 229;
+        //private readonly int CmdGoToNextPage = 235;
+        //private readonly int CmdGoToPrevPage = 236;
+        //private readonly int CmdGoToFirstPage = 237;
+        //private readonly int CmdGoToLastPage = 238;
+        //private readonly int CmdRefresh = 210;
+        //
+        //private void SumatraPDFFrameCmd(int Cmd, Boolean Async = false)
+        //{
+        //    SumatraPDFMsg(WM_COMMAND, Cmd, Async);
+        //}
 
-		private Process SumatraProcess;
+        private enum SumatraPDFCommandEmum
+        {
+            CmdPrint,
+            CmdCopySelection,
+            CmdSelectAll,
+            CmdGoToNextPage,
+            CmdGoToPrevPage,
+            CmdGoToFirstPage,
+            CmdGoToLastPage,
+            CmdRefresh
+        }
+
+        private Process SumatraProcess;
 		private string sCurrentFile = string.Empty;
 		private IntPtr pSumatraWindowHandle;
 		private IntPtr SUMATRAMESSAGETYPE;
@@ -101,7 +122,7 @@ namespace SumatraPDF
 
 		static private List<IntPtr> pSumatraWindowHandleList = new List<IntPtr> { };
 
-		private void SumatraPDFCopyDataMsg(string strMessage, params Object[] parr)
+        private void SumatraPDFCopyDataMsg(string strMessage, params Object[] parr)
 		{
 			// Without define current file commands cannot be send to sumatra
 			if (sCurrentFile == string.Empty) return;
@@ -146,21 +167,21 @@ namespace SumatraPDF
 			Marshal.FreeHGlobal(pDataStruct);
 		}
 
-		private void SumatraPDFMsg(uint Msg, int Cmd = 0, Boolean Async = false)
+        private void SumatraPDFMsg(uint Msg, int Cmd = 0, Boolean Async = false)
         {
-			if (SumatraWindowHandle != (IntPtr)0)
-			{
-				if (!Async) SendMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
-				else SendNotifyMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
-			}
-		}
+            if (SumatraWindowHandle != (IntPtr)0)
+            {
+                if (!Async) SendMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
+                else SendNotifyMessage(SumatraWindowHandle, Msg, (IntPtr)Cmd, (IntPtr)0);
+            }
+        }
 
-		private void SumatraPDFFrameCmd(int Cmd, Boolean Async = false)
-		{
-			SumatraPDFMsg(WM_COMMAND, Cmd, Async);
-		}
+        private void SumatraPDFFrameCmd(SumatraPDFCommandEmum cmd, Boolean Async = false)
+        {
+            SumatraPDFCopyDataMsg("SetProperty", "SendCommand" + (Async ? "Async" : string.Empty), cmd.ToString());
+        }
 
-		private IntPtr SumatraWindowHandle
+        private IntPtr SumatraWindowHandle
 		{
 			get
 			{
@@ -1185,7 +1206,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void ReloadCurrentFile()
         {
-			SumatraPDFFrameCmd(CmdRefresh);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdRefresh);
 		}
 
 		/// <summary>
@@ -1223,7 +1244,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void CopySelection()
 		{
-			SumatraPDFFrameCmd(CmdCopySelection);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdCopySelection);
 		}
 
 		/// <summary>
@@ -1231,7 +1252,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void SelectAll()
 		{
-			SumatraPDFFrameCmd(CmdSelectAll);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdSelectAll);
 		}
 
 		/// <summary>
@@ -1266,7 +1287,7 @@ namespace SumatraPDF
 		/// </remarks>
 		public void OpenPrintDialog()
         {
-			SumatraPDFFrameCmd(CmdPrint, true);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdPrint, true);
 		}
 
 		/// <summary>
@@ -1283,7 +1304,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void GoToNextPage()
         {
-			SumatraPDFFrameCmd(CmdGoToNextPage, true);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdGoToNextPage);
 		}
 
 		/// <summary>
@@ -1291,7 +1312,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void GoToPrevPage()
 		{
-			SumatraPDFFrameCmd(CmdGoToPrevPage, true);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdGoToPrevPage);
 		}
 
 		/// <summary>
@@ -1299,7 +1320,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void GoToFirstPage()
 		{
-			SumatraPDFFrameCmd(CmdGoToFirstPage, true);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdGoToFirstPage);
 		}
 
 		/// <summary>
@@ -1307,7 +1328,7 @@ namespace SumatraPDF
 		/// </summary>
 		public void GoToLastPage()
 		{
-			SumatraPDFFrameCmd(CmdGoToLastPage, true);
+			SumatraPDFFrameCmd(SumatraPDFCommandEmum.CmdGoToLastPage);
 		}
 
 		#endregion
