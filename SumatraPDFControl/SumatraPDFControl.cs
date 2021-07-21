@@ -27,6 +27,9 @@ namespace SumatraPDF
     public partial class SumatraPDFControl : Control
 	{
 
+        // Mininum SumatraPDF version to work with SumatraPDFControl
+        private string SumatraPDFMinVersion = "1.0.8";
+
 		#region Interop
 
 		private struct COPYDATASTRUCT
@@ -490,12 +493,26 @@ namespace SumatraPDF
 				SumatraComplete = Path.Combine(SumatraPDFPath, SumatraPDFExe);
 			}
 
-			if (!File.Exists(SumatraComplete))
+            string commomErrMsg = "Download or reference the latest package version from NuGet.org site in https://www.nuget.org/packages/SumatraPDF.PluginMode." + platform.Substring(1);
+
+            // Verify if SumatraPDF.exe is available
+            if (!File.Exists(SumatraComplete))
 			{
-				throw new Exception(@"SumatraPDF executable not found. Download or reference it using NuGet package https://www.nuget.org/packages/SumatraPDF.PluginMode." + platform.Substring(1));
+				throw new Exception(@"SumatraPDF executable not found. " + commomErrMsg);
 			}
 
-			var PSInfo = new ProcessStartInfo
+            // Verify if SumatraPDF.exe version is the minimum required
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(SumatraComplete);
+            Match sPdfVer = Regex.Match(versionInfo.ProductVersion, @"-plugin-(?<p1>\d+)\.(?<p2>\d+)\.(?<p3>\d+)");
+            Match sPdfVerMin = Regex.Match(SumatraPDFMinVersion, @"(?<p1>\d+)\.(?<p2>\d+)\.(?<p3>\d+)");
+
+            if (!sPdfVer.Success || (
+                int.Parse(sPdfVer.Result("${p1}")) <= int.Parse(sPdfVerMin.Result("${p1}")) &&
+                int.Parse(sPdfVer.Result("${p2}")) <= int.Parse(sPdfVerMin.Result("${p2}")) &&
+                int.Parse(sPdfVer.Result("${p3}")) < int.Parse(sPdfVerMin.Result("${p3}")))
+               ) throw new Exception(@"SumatraPDF executable version (" + versionInfo.ProductVersion + ") is not supported. " + commomErrMsg);            
+
+            var PSInfo = new ProcessStartInfo
 			{
 				FileName = SumatraComplete,
 				Arguments =

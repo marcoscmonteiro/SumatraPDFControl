@@ -4,7 +4,7 @@
     <TargetFrameworks>net20;net40;net45;net48;netcoreapp3.1;net5.0-windows</TargetFrameworks>
     <UseWindowsForms>true</UseWindowsForms>
     <Nullable>disable</Nullable>
-    <Version>1.4.4</Version>
+    <Version>1.4.5</Version>
     <AssemblyName>SumatraPDFControl</AssemblyName>
     <RootNamespace>SumatraPDF</RootNamespace>
     <Company>mcmonteiro</Company>    
@@ -19,7 +19,7 @@
     <PackageLicenseExpression>GPL-3.0-only</PackageLicenseExpression>
     <PackageProjectUrl>https://sumatrapdfcontrol.mcmonteiro.net/</PackageProjectUrl>
     <Description>Windows Forms Control which embeds modifed version of SumatraPDF to read and view Portable Document Files (PDF)</Description>
-    <PackageReleaseNotes>Do not allow SumatraPDF make an annotation when pressing 'a' key</PackageReleaseNotes>
+    <PackageReleaseNotes>Validate SumatraPDF.exe version for use by SumatraPDFControl version</PackageReleaseNotes>
     <Copyright>Copyright  Marcos C. Monteiro© 2021</Copyright>
     <PackageTags>SumatraPDF PDF viewer windows forms windowsforms winforms GPL</PackageTags>
     <RepositoryType>Master</RepositoryType>
