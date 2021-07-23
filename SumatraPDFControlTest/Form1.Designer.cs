@@ -77,7 +77,6 @@
             this.toolStripToogleToc = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSelectAllText = new System.Windows.Forms.ToolStripMenuItem();
             this.cbShowScrollState = new System.Windows.Forms.CheckBox();
-            this.cbHandleContextMenu = new System.Windows.Forms.CheckBox();
             this.SumatraPDFControl = new SumatraPDF.SumatraPDFControl();
             this.buttonGotoFirst = new System.Windows.Forms.Button();
             this.buttonGotoPrev = new System.Windows.Forms.Button();
@@ -88,6 +87,8 @@
             this.lblPageCount = new System.Windows.Forms.Label();
             this.btnReload = new System.Windows.Forms.Button();
             this.cbKeyAccel = new System.Windows.Forms.CheckBox();
+            this.cbContextMenuType = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.toolSumatraControl.SuspendLayout();
             this.contextMenuSumatraPDF.SuspendLayout();
             this.SuspendLayout();
@@ -518,22 +519,12 @@
             // cbShowScrollState
             // 
             this.cbShowScrollState.AutoSize = true;
-            this.cbShowScrollState.Location = new System.Drawing.Point(130, 6);
+            this.cbShowScrollState.Location = new System.Drawing.Point(538, 3);
             this.cbShowScrollState.Name = "cbShowScrollState";
             this.cbShowScrollState.Size = new System.Drawing.Size(110, 17);
             this.cbShowScrollState.TabIndex = 3;
             this.cbShowScrollState.Text = "Show Scroll State";
             this.cbShowScrollState.UseVisualStyleBackColor = true;
-            // 
-            // cbHandleContextMenu
-            // 
-            this.cbHandleContextMenu.AutoSize = true;
-            this.cbHandleContextMenu.Location = new System.Drawing.Point(246, 6);
-            this.cbHandleContextMenu.Name = "cbHandleContextMenu";
-            this.cbHandleContextMenu.Size = new System.Drawing.Size(129, 17);
-            this.cbHandleContextMenu.TabIndex = 4;
-            this.cbHandleContextMenu.Text = "Handle Context Menu";
-            this.cbHandleContextMenu.UseVisualStyleBackColor = true;
             // 
             // SumatraPDFControl
             // 
@@ -546,6 +537,7 @@
             this.SumatraPDFControl.ContextMenuStrip = this.contextMenuSumatraPDF;
             this.SumatraPDFControl.Cursor = System.Windows.Forms.Cursors.Default;
             this.SumatraPDFControl.DisplayMode = SumatraPDF.SumatraPDFControl.DisplayModeEnum.Automatic;
+            this.SumatraPDFControl.KeyAccelerators = false;
             this.SumatraPDFControl.Location = new System.Drawing.Point(127, 88);
             this.SumatraPDFControl.Name = "SumatraPDFControl";
             this.SumatraPDFControl.NamedDest = null;
@@ -576,7 +568,7 @@
             // 
             // buttonGotoFirst
             // 
-            this.buttonGotoFirst.Location = new System.Drawing.Point(382, 1);
+            this.buttonGotoFirst.Location = new System.Drawing.Point(129, 0);
             this.buttonGotoFirst.Name = "buttonGotoFirst";
             this.buttonGotoFirst.Size = new System.Drawing.Size(34, 21);
             this.buttonGotoFirst.TabIndex = 5;
@@ -586,7 +578,7 @@
             // 
             // buttonGotoPrev
             // 
-            this.buttonGotoPrev.Location = new System.Drawing.Point(422, 1);
+            this.buttonGotoPrev.Location = new System.Drawing.Point(169, 0);
             this.buttonGotoPrev.Name = "buttonGotoPrev";
             this.buttonGotoPrev.Size = new System.Drawing.Size(34, 21);
             this.buttonGotoPrev.TabIndex = 6;
@@ -596,7 +588,7 @@
             // 
             // buttonGotoNext
             // 
-            this.buttonGotoNext.Location = new System.Drawing.Point(565, 1);
+            this.buttonGotoNext.Location = new System.Drawing.Point(312, 0);
             this.buttonGotoNext.Name = "buttonGotoNext";
             this.buttonGotoNext.Size = new System.Drawing.Size(34, 21);
             this.buttonGotoNext.TabIndex = 7;
@@ -606,7 +598,7 @@
             // 
             // buttonGotoLast
             // 
-            this.buttonGotoLast.Location = new System.Drawing.Point(605, 1);
+            this.buttonGotoLast.Location = new System.Drawing.Point(352, 0);
             this.buttonGotoLast.Name = "buttonGotoLast";
             this.buttonGotoLast.Size = new System.Drawing.Size(34, 21);
             this.buttonGotoLast.TabIndex = 8;
@@ -617,7 +609,7 @@
             // lblCurrPage
             // 
             this.lblCurrPage.AutoSize = true;
-            this.lblCurrPage.Location = new System.Drawing.Point(462, 5);
+            this.lblCurrPage.Location = new System.Drawing.Point(209, 4);
             this.lblCurrPage.Name = "lblCurrPage";
             this.lblCurrPage.Size = new System.Drawing.Size(37, 13);
             this.lblCurrPage.TabIndex = 9;
@@ -627,7 +619,7 @@
             // lblOf
             // 
             this.lblOf.AutoSize = true;
-            this.lblOf.Location = new System.Drawing.Point(500, 5);
+            this.lblOf.Location = new System.Drawing.Point(247, 4);
             this.lblOf.Name = "lblOf";
             this.lblOf.Size = new System.Drawing.Size(16, 13);
             this.lblOf.TabIndex = 10;
@@ -636,7 +628,7 @@
             // lblPageCount
             // 
             this.lblPageCount.AutoSize = true;
-            this.lblPageCount.Location = new System.Drawing.Point(522, 5);
+            this.lblPageCount.Location = new System.Drawing.Point(269, 4);
             this.lblPageCount.Name = "lblPageCount";
             this.lblPageCount.Size = new System.Drawing.Size(37, 13);
             this.lblPageCount.TabIndex = 11;
@@ -645,7 +637,7 @@
             // 
             // btnReload
             // 
-            this.btnReload.Location = new System.Drawing.Point(645, 1);
+            this.btnReload.Location = new System.Drawing.Point(392, 0);
             this.btnReload.Name = "btnReload";
             this.btnReload.Size = new System.Drawing.Size(51, 21);
             this.btnReload.TabIndex = 12;
@@ -656,7 +648,7 @@
             // cbKeyAccel
             // 
             this.cbKeyAccel.AutoSize = true;
-            this.cbKeyAccel.Location = new System.Drawing.Point(708, 4);
+            this.cbKeyAccel.Location = new System.Drawing.Point(455, 3);
             this.cbKeyAccel.Name = "cbKeyAccel";
             this.cbKeyAccel.Size = new System.Drawing.Size(77, 17);
             this.cbKeyAccel.TabIndex = 13;
@@ -664,11 +656,35 @@
             this.cbKeyAccel.UseVisualStyleBackColor = true;
             this.cbKeyAccel.CheckedChanged += new System.EventHandler(this.cbKeyAccel_CheckedChanged);
             // 
+            // cbContextMenuType
+            // 
+            this.cbContextMenuType.FormattingEnabled = true;
+            this.cbContextMenuType.Items.AddRange(new object[] {
+            "SumatraPDF",
+            "Custom menu",
+            "Disabled"});
+            this.cbContextMenuType.Location = new System.Drawing.Point(731, 1);
+            this.cbContextMenuType.Name = "cbContextMenuType";
+            this.cbContextMenuType.Size = new System.Drawing.Size(122, 21);
+            this.cbContextMenuType.TabIndex = 14;
+            this.cbContextMenuType.SelectedIndexChanged += new System.EventHandler(this.cbContextMenuType_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(654, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "ContextMenu: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1418, 741);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbContextMenuType);
             this.Controls.Add(this.cbKeyAccel);
             this.Controls.Add(this.btnReload);
             this.Controls.Add(this.lblPageCount);
@@ -678,7 +694,6 @@
             this.Controls.Add(this.buttonGotoNext);
             this.Controls.Add(this.buttonGotoPrev);
             this.Controls.Add(this.buttonGotoFirst);
-            this.Controls.Add(this.cbHandleContextMenu);
             this.Controls.Add(this.cbShowScrollState);
             this.Controls.Add(this.SumatraPDFControl);
             this.Controls.Add(this.textBox1);
@@ -744,7 +759,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripToogleToc;
         private System.Windows.Forms.CheckBox cbShowScrollState;
         private System.Windows.Forms.ToolStripButton toolOpenPrintDialog;
-        private System.Windows.Forms.CheckBox cbHandleContextMenu;
         private System.Windows.Forms.ToolStripMenuItem toolStripSelectAllText;
         private System.Windows.Forms.Button buttonGotoFirst;
         private System.Windows.Forms.Button buttonGotoPrev;
@@ -755,6 +769,8 @@
         private System.Windows.Forms.Label lblPageCount;
         private System.Windows.Forms.Button btnReload;
         private System.Windows.Forms.CheckBox cbKeyAccel;
+        private System.Windows.Forms.ComboBox cbContextMenuType;
+        private System.Windows.Forms.Label label1;
     }
 }
 

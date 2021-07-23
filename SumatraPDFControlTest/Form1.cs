@@ -59,7 +59,7 @@ namespace SumatraPDFControlTest
         private void SumatraPDFControl_ContextMenuMessage(object sender, ContextMenuOpeningEventArgs e)
         {
             AddText("ContextMenu - X: " + e.X.ToString() + " - Y: " + e.Y.ToString());
-            e.Handled = cbHandleContextMenu.Checked;
+            e.Handled = (cbContextMenuType.SelectedIndex == 2);
         }
 
         private void SumatraPDFControl_ZoomChangedMessage(object sender, ZoomChangedEventArgs e)
@@ -155,7 +155,7 @@ namespace SumatraPDFControlTest
         private void Form1_Shown(object sender, EventArgs e)
         {            
             LoadFile(Filename, 1, NewSumatraInstance: NewSumatraPDFProcess);
-
+            cbContextMenuType.SelectedIndex = 1;
             Filename = string.Empty;
         }
 
@@ -317,6 +317,19 @@ namespace SumatraPDFControlTest
         private void cbKeyAccel_CheckedChanged(object sender, EventArgs e)
         {
             SumatraPDFControl.KeyAccelerators = cbKeyAccel.Checked;
+        }
+
+        private void cbContextMenuType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (cbContextMenuType.SelectedIndex) {
+                case 1:
+                    SumatraPDFControl.ContextMenuStrip = contextMenuSumatraPDF;
+                    break;
+                default:
+                    SumatraPDFControl.ContextMenuStrip = null;
+                    break;                
+            }
+
         }
     }
 }
