@@ -59,7 +59,9 @@ namespace SumatraPDFControlTest
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.preferencesMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.openNewSumatraPDFProcessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.useLocalSumatraPDFIfAvailable = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -72,6 +74,7 @@ namespace SumatraPDFControlTest
             this.editMenu,
             this.viewMenu,
             this.windowsMenu,
+            this.preferencesMenu,
             this.helpMenu});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
@@ -98,7 +101,7 @@ namespace SumatraPDFControlTest
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenFile);
             // 
@@ -108,7 +111,7 @@ namespace SumatraPDFControlTest
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.printToolStripMenuItem.Text = "&Print";
             this.printToolStripMenuItem.Click += new System.EventHandler(this.printToolStripMenuItem_Click);
             // 
@@ -138,7 +141,7 @@ namespace SumatraPDFControlTest
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(161, 6);
             // 
             // copyToolStripMenuItem
             // 
@@ -146,20 +149,20 @@ namespace SumatraPDFControlTest
             this.copyToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Black;
             this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
             this.copyToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.copyToolStripMenuItem.Text = "&Copy";
             this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(161, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
             this.selectAllToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.selectAllToolStripMenuItem.Text = "Select &All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
@@ -304,16 +307,30 @@ namespace SumatraPDFControlTest
             this.toolStripStatusLabel.Size = new System.Drawing.Size(39, 17);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // checkBox1
+            // preferencesMenu
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.checkBox1.Location = new System.Drawing.Point(93, 27);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(180, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Open New SumatraPDF process";
-            this.checkBox1.UseVisualStyleBackColor = false;
+            this.preferencesMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openNewSumatraPDFProcessToolStripMenuItem,
+            this.useLocalSumatraPDFIfAvailable});
+            this.preferencesMenu.Name = "preferencesMenu";
+            this.preferencesMenu.Size = new System.Drawing.Size(80, 20);
+            this.preferencesMenu.Text = "&Preferences";
+            // 
+            // openNewSumatraPDFProcessToolStripMenuItem
+            // 
+            this.openNewSumatraPDFProcessToolStripMenuItem.CheckOnClick = true;
+            this.openNewSumatraPDFProcessToolStripMenuItem.Name = "openNewSumatraPDFProcessToolStripMenuItem";
+            this.openNewSumatraPDFProcessToolStripMenuItem.Size = new System.Drawing.Size(269, 22);
+            this.openNewSumatraPDFProcessToolStripMenuItem.Text = "Open new SumatraPDF Process";
+            // 
+            // useLocalSumatraPDFIfAvailable
+            // 
+            this.useLocalSumatraPDFIfAvailable.Checked = true;
+            this.useLocalSumatraPDFIfAvailable.CheckOnClick = true;
+            this.useLocalSumatraPDFIfAvailable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.useLocalSumatraPDFIfAvailable.Name = "useLocalSumatraPDFIfAvailable";
+            this.useLocalSumatraPDFIfAvailable.Size = new System.Drawing.Size(269, 22);
+            this.useLocalSumatraPDFIfAvailable.Text = "Use local SumatraPDF.exe if available";
             // 
             // MDIParent1
             // 
@@ -321,10 +338,10 @@ namespace SumatraPDFControlTest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.ClientSize = new System.Drawing.Size(1311, 576);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.menuStrip);
+            this.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MDIParent1";
@@ -370,7 +387,9 @@ namespace SumatraPDFControlTest
         private System.Windows.Forms.ToolStripButton openToolStripButton;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
         private System.Windows.Forms.ToolTip toolTip;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem preferencesMenu;
+        private System.Windows.Forms.ToolStripMenuItem openNewSumatraPDFProcessToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem useLocalSumatraPDFIfAvailable;
     }
 }
 

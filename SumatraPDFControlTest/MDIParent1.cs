@@ -15,6 +15,7 @@ namespace SumatraPDFControlTest
         public MDIParent1()
         {
             InitializeComponent();
+            useLocalSumatraPDFIfAvailable.Checked = true;
         }
 
         private void ShowNewForm(object sender, EventArgs e)
@@ -34,7 +35,11 @@ namespace SumatraPDFControlTest
             if (openFileDialog.ShowDialog(this) == DialogResult.OK)
             {
                 string FileName = openFileDialog.FileName;
-                var form = new Form1 { Filename = FileName, NewSumatraPDFProcess = checkBox1.Checked };
+                var form = new Form1 { 
+                    Filename = FileName, 
+                    NewSumatraPDFProcess = openNewSumatraPDFProcessToolStripMenuItem.Checked,
+                    UseLocalSumatraPDF = useLocalSumatraPDFIfAvailable.Checked
+                };
                 form.MdiParent = this;
                 form.Show();
             }
@@ -119,5 +124,6 @@ namespace SumatraPDFControlTest
         {
             ((Form1)this.ActiveMdiChild)?.OpenPrintDialog();
         }
+
     }
 }

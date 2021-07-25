@@ -15,6 +15,7 @@ namespace SumatraPDFControlTest
     {
         public string Filename = string.Empty;
         public Boolean NewSumatraPDFProcess = false;
+        public Boolean UseLocalSumatraPDF = true;
 
         public Form1()
         {
@@ -250,7 +251,7 @@ namespace SumatraPDFControlTest
         private void FormTest_Load(object sender, EventArgs e)
         {
             // If SumatraPDFPath was not filled try to use SumatraPDF.exe from SumatraPDF compiled source (if available in same SumatraPDFControl solution dir level).
-            if (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty) {
+            if (UseLocalSumatraPDF && (SumatraPDFControl.SumatraPDFPath == null || SumatraPDFControl.SumatraPDFPath == string.Empty)) {
                 string arch = System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE", EnvironmentVariableTarget.Machine);
                 string SumatraDir = string.Empty, SumatraDir2 = string.Empty, SumatraDir3 = string.Empty, SumatraPDFSubdir = string.Empty;
 

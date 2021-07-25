@@ -658,6 +658,7 @@
             // 
             // cbContextMenuType
             // 
+            this.cbContextMenuType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbContextMenuType.FormattingEnabled = true;
             this.cbContextMenuType.Items.AddRange(new object[] {
             "SumatraPDF",
