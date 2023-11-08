@@ -6,8 +6,8 @@ It allows you to construct Windows Forms application capable to view and read Po
 
 * Download compiled version from [NuGet.org](https://www.nuget.org/packages/SumatraPDFControl/)
 
-* Go to [SumatraPDFControl site](https://sumatrapdfcontrol.mcmonteiro.net) to view documentation 
-and [SumatraPDFControl API](https://sumatrapdfcontrol.mcmonteiro.net/api/SumatraPDF.html)
+* Go to [SumatraPDFControl site](https://sumatrapdfcontrol.mcmonteiro.com) to view documentation 
+and [SumatraPDFControl API](https://sumatrapdfcontrol.mcmonteiro.com/api/SumatraPDF.html)
 
 * [Source code in GitHub](https://github.com/marcoscmonteiro/sumatrapdfcontrol) licenced under [GPLv3](https://github.com/marcoscmonteiro/SumatraPDFControl/blob/master/LICENSE)
 
